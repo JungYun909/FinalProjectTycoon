@@ -1,21 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum SceneType
+{
+    MainScene,
+    Kitchen
+}
 public class SceneHandler : MonoBehaviour
 {
-    public void ToStartMenu()
+    private SceneType _type;
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene("");
-    }
-    public void ToKitchen()
-    {
-        SceneManager.LoadScene("");
-    }
+        try
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("SceneError");
+            throw;
+        }
 
-    public void ToShop()
-    {
-        SceneManager.LoadScene("");
     }
 }
