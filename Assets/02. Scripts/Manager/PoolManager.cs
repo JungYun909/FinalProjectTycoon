@@ -30,7 +30,7 @@ public class PoolManager : MonoBehaviour
             poolDictionary.Add(pool.tag, objectPool);
         }
     }
-
+    
     public GameObject SpawnFromPool(string tag)
     {
         if (!poolDictionary.ContainsKey(tag))

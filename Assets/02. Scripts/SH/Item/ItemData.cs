@@ -5,11 +5,10 @@ using UnityEngine;
 public enum ItemType
 {
     Resource,
-    Goods
+    Goods,
+    Installation
 }
-
-[CreateAssetMenu(fileName = "Item", menuName = "new Item")]
-public class ItemData : ScriptableObject
+public abstract class ItemData : MonoBehaviour
 {
     [Header("Info")]
     public string displayName;
