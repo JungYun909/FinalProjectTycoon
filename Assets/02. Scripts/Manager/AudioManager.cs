@@ -17,25 +17,12 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     public Audio[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource;
+    public AudioSource musicSource, sfxSource; //TODO 여러개 만 오브젝트 풀링
 
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        PlayMusic("BGM");
-    }
+    // public void Start() //TODO 오디오 컨트롤러로
+    // {
+    //     PlayMusic("BGM");
+    // }
     public void PlayMusic(string name)
     {
         Audio s = Array.Find(musicSounds, x => x.name == name);
@@ -65,33 +52,33 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ToggleMusic()
-    {
-        musicSource.mute = !musicSource.mute;
-    }
-
-    public void ToggleSFX()
-    {
-        sfxSource.mute = !sfxSource.mute;
-    }
+    // public void ToggleMusic() //TODO 오디오 컨트롤러로 if 문으로 켜져있는지 확인
+    // {
+    //     musicSource.mute = !musicSource.mute;
+    // }
+    //
+    // public void ToggleSFX()
+    // {
+    //     sfxSource.mute = !sfxSource.mute;
+    // }
 
     public void MusicVolume(float volume)
     {
         musicSource.volume = volume * 0.5f;
     }
-
+    
     public void SFXVolume(float volume)
     {
         sfxSource.volume = volume;
     }
-
-    public void ClickBtnSound()
-    {
-        PlaySFX("Select");
-    }
-
-    public void StartBtnSound()
-    {
-        PlaySFX("StartBtn");
-    }
+    //
+    // public void ClickBtnSound()
+    // {
+    //     PlaySFX("Select");
+    // }
+    //
+    // public void StartBtnSound()
+    // {
+    //     PlaySFX("StartBtn");
+    // }
 }

@@ -9,14 +9,14 @@ public enum SceneType
     MainScene,
     Kitchen
 }
-public class SceneHandler : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
     private SceneType _type;
     public void ChangeScene(string sceneName)
     {
         try
         {
-            SceneManager.LoadScene(sceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
         catch (Exception e)
         {

@@ -1,6 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+
+public abstract class Manager : MonoBehaviour
+{
+    public void Start()
+    {
+        throw new NotImplementedException();
+    }
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +28,12 @@ public class GameManager : MonoBehaviour
     private StatHandler statHandler;
     private PlayerInputController playerInputController;
 
-    private void Awake()
+    // private void Awake()
+    // {
+    //TODO 매니저들의 경유지로서 역할을 해주자
+    // }
+
+    private void Start()
     {
         if(instance = null)
         {

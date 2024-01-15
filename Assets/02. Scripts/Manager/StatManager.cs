@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatHandler : MonoBehaviour
+public class StatManager : MonoBehaviour
 {
     public int shopLevel = 1;     //가게 레벨. 가게 레벨에 따라 레시피/시설 해금 등이 필요하다면. 명성치, 재정현황 등의 지표가 특정 수준 이상일 때 ++ // 수식으로 관리
     public int shopFame = 0;    //명성치, 가게 수준.
