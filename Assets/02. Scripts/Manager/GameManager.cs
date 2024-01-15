@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class Manager : MonoBehaviour
 {
@@ -18,15 +19,15 @@ public class GameManager : MonoBehaviour
 
     private AudioManager audioManager;
     private DataManager dataManager;
-    private InterActionManager interactionManager;
+    private InteractionManager interactionManager;
     private ItemManager itemManager;
     private LogicManager logicManager;
     private PoolManager poolManager;
     private TimeManager timeManager;
     private UIManager uiManager;
-    private SceneHandler sceneHandler;
-    private StatHandler statHandler;
-    private PlayerInputController playerInputController;
+    private SceneManager sceneManager;
+    private StatManager statManager;
+    private PlayerInputManager playerInputControlleManager;
 
     // private void Awake()
     // {
