@@ -14,17 +14,17 @@ public class NPCSpawnController : MonoBehaviour
     void Start()
     {
         poolManager = GetComponent<PoolManager>();
-        StartCoroutine(NPCSpawnCorutine());
+        //StartCoroutine(NPCSpawnCorutine());
 
     }
 
 
     void Update()
     {
-        if (NPCNum==20)
-        {
-            StopCoroutine(NPCSpawnCorutine());
-        }
+        //if (NPCNum==20)
+        //{
+        //    StopCoroutine(NPCSpawnCorutine());
+        //}
     }
 
     IEnumerator NPCSpawnCorutine()
