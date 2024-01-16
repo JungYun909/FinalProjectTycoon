@@ -7,7 +7,7 @@ public class Foods : MovementObject
 {
     public override void InitSetting()
     {
-        moveData.speed = 0.002f;
+        moveData.speed = 0.005f;
     }
 
     public override void Spawn(GameObject food, GameObject startGameObject)

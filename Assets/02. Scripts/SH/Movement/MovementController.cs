@@ -7,9 +7,9 @@ using UnityEngine.Serialization;
 
 public class MovementController : MonoBehaviour
 {
-    public GameObject tempStartGameObject;
+    public GameObject tempStartGameObject;//TODO 나중에 수정
     private GameObject curGameObject;
-    public GameObject tempEndGameObject;
+    public GameObject tempEndGameObject;//TODO 나중에 수정
     
     public MovementObject movementObject;
     private void Awake()
