@@ -10,8 +10,11 @@ public class Installation : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private GameObject prefab;
     private GameObject test;
+    private GameObject @object;
+    private Vector2 mousePosition = Vector2.zero;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private LayerMask targetLayer;
+    
 
     private void Awake()
     {
@@ -20,7 +23,7 @@ public class Installation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InputManager.instance.OnClickEvent += Sooah;
     }
 
     // Update is called once per frame
@@ -30,36 +33,64 @@ public class Installation : MonoBehaviour
         {
             return;
         }
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
         test.transform.position = tilemap.WorldToCell(mousePosition);
         
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 마우스 위치로 레이를 발사
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    // 마우스 위치로 레이를 발사
             
-            Debug.Log("1");
+        //    Debug.Log("1");
 
-            // 레이캐스트를 통해 충돌 정보 가져오기
-            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
-            Debug.Log("2");
-            //충돌한 오브젝트의 정보 출력
+        //    // 레이캐스트를 통해 충돌 정보 가져오기
+        //    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
+        //    Debug.Log("2");
+        //    //충돌한 오브젝트의 정보 출력
             
-            Debug.Log("4");
-            if (hit.collider != null)
-            {
-                Debug.Log("3");
-                return;
-            }
-            test.transform.position = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //    Debug.Log("4");
+        //    if (hit.collider != null)
+        //    {
+        //        Debug.Log("3");
+        //        Delete(hit.collider.gameObject);
+        //        return;
+        //    }
+        //    test.transform.position = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        //    Instantiate(prefab, test.transform.position, Quaternion.identity);
 
-            Instantiate(prefab, test.transform.position, Quaternion.identity);
-        }
+        //}
     }
 
     public void Install()
     {
         test = Instantiate(prefab);
         test.layer = 0;
+        
+    }
+
+    public void Delete(GameObject gameObject)
+    {
+        Destroy(gameObject);
+    }
+
+    public void Sooah()
+    {
+        if (test == null)
+        {
+            return;
+        }
+        // 레이캐스트를 통해 충돌 정보 가져오기
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
+        Debug.Log("5");
+        if (hit.collider != null)
+        {
+            Debug.Log("3");
+            Delete(hit.collider.gameObject);
+            return;
+        }
+        test.transform.position = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Instantiate(prefab, test.transform.position, Quaternion.identity);
+        Debug.Log("8");
+        
     }
 }

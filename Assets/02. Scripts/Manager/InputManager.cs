@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public class InputManager : TopDownPlayerController
 {
+    public static InputManager instance;
     private Camera _camera;
 
     private void Awake()
     {
         _camera = Camera.main;
+        instance = this;
     }
 
     public void OnLook(InputValue value)
@@ -20,8 +22,12 @@ public class InputManager : TopDownPlayerController
         CallLookEvent(mouseDirection);
     }
 
-    public void OnClick(InputValue value)
+    public void OnClick(InputAction.CallbackContext value)
     {
-        IsClicking = value.isPressed;
+        if(value.performed && !IsClicking)
+        {
+            IsClicking = true;
+        }
+        else IsClicking = false;
     }
 }

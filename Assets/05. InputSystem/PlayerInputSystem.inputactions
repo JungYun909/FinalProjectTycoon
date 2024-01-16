@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Click",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "5641e2f7-4855-44b9-9a19-dc76002616b7",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
