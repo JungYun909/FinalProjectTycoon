@@ -22,12 +22,8 @@ public class InputManager : TopDownPlayerController
         CallLookEvent(mouseDirection);
     }
 
-    public void OnClick(InputAction.CallbackContext value)
+    public void OnClick(InputValue value)
     {
-        if(value.performed && !IsClicking)
-        {
-            IsClicking = true;
-        }
-        else IsClicking = false;
+        IsClicking = value.isPressed;
     }
 }

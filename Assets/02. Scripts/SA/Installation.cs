@@ -3,94 +3,95 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Installation : MonoBehaviour
 {
-    //설치할 설치물을 클릭했을때 놓을수 있는 영역 표시, 놓을수 있는 영역에 클릭하면 설치되게하기
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private GameObject prefab;
-    private GameObject test;
-    private GameObject @object;
-    private Vector2 mousePosition = Vector2.zero;
-    private SpriteRenderer spriteRenderer;
-    [SerializeField] private LayerMask targetLayer;
     
+    [SerializeField] private GameObject prefab;
+    public GameObject test;
+    //private Vector2 mousePosition = Vector2.zero;
+    //private bool isBuild;
 
     private void Awake()
     {
         
     }
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        InputManager.instance.OnClickEvent += Sooah;
+        //InputManager.instance.OnClickEvent += Sooah;
+        //InputManager.instance.OffClickEvent += IsBuildToggle;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (test == null)
-        {
-            return;
-        }
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
-        test.transform.position = tilemap.WorldToCell(mousePosition);
-        
-        //if (Input.GetMouseButtonDown(0))
+        //if (test == null)
         //{
-        //    // 마우스 위치로 레이를 발사
-            
-        //    Debug.Log("1");
-
-        //    // 레이캐스트를 통해 충돌 정보 가져오기
-        //    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
-        //    Debug.Log("2");
-        //    //충돌한 오브젝트의 정보 출력
-            
-        //    Debug.Log("4");
-        //    if (hit.collider != null)
-        //    {
-        //        Debug.Log("3");
-        //        Delete(hit.collider.gameObject);
-        //        return;
-        //    }
-        //    test.transform.position = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //    Instantiate(prefab, test.transform.position, Quaternion.identity);
-
+        //    return;
         //}
+        //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
+        //test.transform.position = tilemap.WorldToCell(mousePosition);
     }
 
     public void Install()
     {
         test = Instantiate(prefab);
+        test.transform.position = new Vector3(0, 0);
         test.layer = 0;
+        test.GetComponent<ObjectInstallation>().tilemap = tilemap;
         
     }
 
-    public void Delete(GameObject gameObject)
-    {
-        Destroy(gameObject);
-    }
+    
 
-    public void Sooah()
-    {
-        if (test == null)
-        {
-            return;
-        }
-        // 레이캐스트를 통해 충돌 정보 가져오기
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
-        Debug.Log("5");
-        if (hit.collider != null)
-        {
-            Debug.Log("3");
-            Delete(hit.collider.gameObject);
-            return;
-        }
-        test.transform.position = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        Instantiate(prefab, test.transform.position, Quaternion.identity);
-        Debug.Log("8");
-        
-    }
+    //public void Delete(GameObject gameObject)
+    //{
+    //    Destroy(gameObject);
+    //}
+
+    //public void Sooah()
+    //{
+    //    if(isBuild == false)
+    //    {
+    //        isBuild = true;
+    //        if (test == null)
+    //        {
+    //            return;
+    //        }
+    //        //// 레이캐스트를 통해 충돌 정보 가져오기
+    //        //RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
+    //        //if (hit.collider != null)
+    //        //{
+    //        //    Delete(hit.collider.gameObject);
+    //        //    return;
+    //        //}
+    //        test.transform.position = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    //        Instantiate(prefab, test.transform.position, Quaternion.identity);
+    //    }
+    //}
+
+    //public void IsBuildToggle()
+    //{
+    //    if(isBuild)
+    //    {
+    //        isBuild = false;
+    //    }
+    //}
+
+    //public void Delete2()
+    //{
+    //    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero, Mathf.Infinity, targetLayer);
+    //    if (hit.collider != null)
+    //    {
+    //        Delete(hit.collider.gameObject);
+    //        return;
+    //    }
+    //    Delete(prefab);
+    //}
+
+    
 }
