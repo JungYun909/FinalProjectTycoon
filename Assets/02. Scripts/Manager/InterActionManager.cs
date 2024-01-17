@@ -49,19 +49,10 @@ public class InteractionManager : MonoBehaviour
     {
         Debug.Log($"WorkOnClick in InteractionManager called with position: {worldPosition}");
 
-        // 레이캐스트 방향 및 거리 설정
-        Vector2 rayDirection = Vector2.down; // 예시로 아래 방향을 설정
-        float rayLength = 10f; // 레이캐스트 길이 설정
-
-        // 레이캐스트 디버깅
-        Debug.DrawRay(worldPosition, rayDirection * rayLength, Color.red, 2f);
-
-        // 레이캐스트 수행
-        RaycastHit2D hit = Physics2D.Raycast(worldPosition, rayDirection, rayLength, targetLayer);
+        RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.down, Mathf.Infinity);
 
         if (hit.collider != null)
         {
-            Debug.Log($"Hit object: {hit.collider.gameObject.name}");
             curInteractable = hit.collider.gameObject.GetComponent<IInteractable>();
 
             if (curInteractable != null)
@@ -71,7 +62,7 @@ public class InteractionManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("No IInteractable component found on hit object");
+                Debug.Log("Hit object is not IInteractable");
             }
         }
         else
