@@ -5,33 +5,32 @@ using TMPro;
 
 public class DailyResultWindow : UIBase
 {
-    public TextMeshPro shopFameResultText;
-    public TextMeshPro financeScoreResultText;
-    public TextMeshPro totalScore;
+    public TextMeshProUGUI shopFameResultText;
+    public TextMeshProUGUI financeScoreResultText;
+    public TextMeshProUGUI goldOwned;
+    public TextMeshProUGUI goldUsed;
+    //public TextMeshProUGUI curGold;
+    //public TextMeshProUGUI totalScore;
 
     public UIManager uiManager;
+    public TemporaryStat shopStat;
 
-    private void Awake()
-    {
-        uiManager = new UIManager();
-    }
     public override void Initialize()
     {
-        //shopFameResultText =  // TODO; 저장/계산된 점수 불러오기 
-    }
-
-    public override void Show()
-    {
-        
+        shopStat = FindObjectOfType<TemporaryStat>(); 
+	    shopFameResultText.text = shopStat.fame.ToString();
+        financeScoreResultText.text = shopStat.financialScore.ToString();
+        goldOwned.text = shopStat.gold.ToString();
+        goldUsed.text = shopStat.goldUsed.ToString();
     }
 
     public override void UpdateUI()
     {
-        throw new System.NotImplementedException();
+        shopStat = FindObjectOfType<TemporaryStat>();
+        shopFameResultText.text = shopStat.fame.ToString();
+        financeScoreResultText.text = shopStat.financialScore.ToString();
+        goldOwned.text = shopStat.gold.ToString();
+        goldUsed.text = shopStat.goldUsed.ToString();
     }
 
-        public override void Hide()
-    {
-        throw new System.NotImplementedException();
-    }
 }
