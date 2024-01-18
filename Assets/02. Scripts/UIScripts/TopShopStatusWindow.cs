@@ -23,8 +23,7 @@ public class TopShopStatusWindow : UIBase
 
     public override void UpdateUI()
     {
-        shopStat.gold -= shopStat.gold - shopStat.goldUsed;
         goldOwned = shopStat.gold;
-        curGold.text = goldOwned.ToString();
+	    curGold.text = goldOwned.ToString();
     }
 }

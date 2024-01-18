@@ -17,6 +17,11 @@ public class StatManager : MonoBehaviour
 
     public int modGold;
 
+
+    public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
+    public event OnStatChanged onStatChanged;   //이벤트 선언
+
+
     private void Awake()
     {
         Initialize();
@@ -72,25 +77,29 @@ public class StatManager : MonoBehaviour
         shopFame += modFame;
         shopStat.fame = shopFame;
         return shopFame;
+
     }
 
     private int CalculateFinanceScore(int modFinance)  // 재정점수 계산기. 재정점수는 
     {
         financeScore += modFinance;
         shopStat.financialScore = financeScore;
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return financeScore;
     }
-    private int EarnGold(int modGold)  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
+    public int EarnGold(int modGold)  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
         currentGold += modGold;
         shopStat.gold = currentGold;
-	    return currentGold;
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        return currentGold;
     }
 
-    private int SpendGold(int modGold)  // 돈을 쓸 때 호출한 메서드. 매개변수는 구매하는 아이템의 가격, 일 영업비용, 파견을 위한 종업원의 일급, 등. 
+    public int SpendGold(int modGold)  // 돈을 쓸 때 호출한 메서드. 매개변수는 구매하는 아이템의 가격, 일 영업비용, 파견을 위한 종업원의 일급, 등. 
     {
         currentGold -= modGold;
         shopStat.gold = currentGold;
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
 

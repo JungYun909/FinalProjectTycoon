@@ -23,8 +23,16 @@ public class UIManager : MonoBehaviour
     {
         InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행
         StartCoroutine(DailyResultWindowRoutine());
+        OpenPermanentWindows(uiAlwaysOn);
     }
 
+    public void OpenPermanentWindows(List<UIBase> permaUI)
+    {
+        foreach (UIBase uiWindow in permaUI)
+        {
+            Instantiate(uiWindow, transform);
+        }
+    }
 
     public void OpenWindow(UIBase uiPrefab)   //UI창을 열기 위한 메서드. 버튼에 스크립트로 이벤트리스너를 부여하는 방식으로 사용해야 할듯함. 
     {
@@ -37,7 +45,15 @@ public class UIManager : MonoBehaviour
         uiStack.Push(uiInstance);  //ui프리팹을 열어줌
     }
 
-
+    public void CloseAll() // 스택으로 관리되는 창 전체 닫기 위한 로지
+    {
+        while (uiStack.Count > 0)
+        {
+            UIBase currentUI = uiStack.Pop();
+            Destroy(currentUI.gameObject); 
+        }
+    }
+    
     public void GoBack()     //뒤로가기 버튼용
     {
         if (uiStack.Count > 1)
@@ -47,6 +63,11 @@ public class UIManager : MonoBehaviour
             uiStack.Peek().gameObject.SetActive(true); //이전에 Stack에 저장된 ui창을 true로 돌림
         }
     }
+
+    public void DestroyUIObject()
+    {
+        Destroy(gameObject);
+    } 
 
     private void InitUIList()    // 매니저로 관리할 모든 UI요소들의 초기화 일제 실행. 추후 UI매닉저가 싱글톤이 아니어도 InitUIList를 통해 전체 UI에게 초기화 명령을 내릴 수 있.
     {
