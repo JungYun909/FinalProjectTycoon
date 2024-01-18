@@ -15,9 +15,17 @@ public class DailyResultWindow : UIBase
     public UIManager uiManager;
     public TemporaryStat shopStat;
 
+    
+    
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
+	
     public override void Initialize()
     {
-        shopStat = FindObjectOfType<TemporaryStat>(); 
+        uiManager = FindObjectOfType<UIManager>();
+	     shopStat = FindObjectOfType<TemporaryStat>(); 
 	    shopFameResultText.text = shopStat.fame.ToString();
         financeScoreResultText.text = shopStat.financialScore.ToString();
         goldOwned.text = shopStat.gold.ToString();
@@ -32,5 +40,9 @@ public class DailyResultWindow : UIBase
         goldOwned.text = shopStat.gold.ToString();
         goldUsed.text = shopStat.goldUsed.ToString();
     }
-
+    
+    public void CloseWindow()
+    {
+        uiManager.DestroyUIObject(gameObject);
+    }
 }

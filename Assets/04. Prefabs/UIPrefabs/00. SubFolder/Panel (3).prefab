@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 2895909800243662815}
   - component: {fileID: 5410249626022706403}
   - component: {fileID: -1168413638970251960}
+  - component: {fileID: 6407293934780579456}
   m_Layer: 5
   m_Name: Panel (3)
   m_TagString: Untagged
@@ -227,6 +228,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50b1332eb52c4aab9a5144a0eaa02c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6407293934780579456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950719346728340488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5f4f3a6a4474de18a535e3f8becdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstWindow: {fileID: 0}
+  secondWindow: {fileID: 0}
+  thirdWindow: {fileID: 0}
+  fourthWindow: {fileID: 0}
+  uiManager: {fileID: 0}
 --- !u!1 &5652884000232900374
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +636,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1993792254587089802}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6407293934780579456}
+        m_TargetAssemblyTypeName: TemporaryPluralUIWindows, Assembly-CSharp
+        m_MethodName: CloseAllWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8693321190904177582
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,4 +770,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662797326856830760}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6407293934780579456}
+        m_TargetAssemblyTypeName: TemporaryPluralUIWindows, Assembly-CSharp
+        m_MethodName: Back
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

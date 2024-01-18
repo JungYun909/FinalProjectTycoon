@@ -64,9 +64,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void DestroyUIObject()
+    public void DestroyUIObject(GameObject objectToDestroy)
     {
-        Destroy(gameObject);
+        Destroy(objectToDestroy);
     } 
 
     private void InitUIList()    // 매니저로 관리할 모든 UI요소들의 초기화 일제 실행. 추후 UI매닉저가 싱글톤이 아니어도 InitUIList를 통해 전체 UI에게 초기화 명령을 내릴 수 있.
@@ -102,4 +102,12 @@ public class UIManager : MonoBehaviour
         currentDailyResultWindow.Initialize();  // 
         OnDailyWindowOpen?.Invoke();    // 일일정산창 열리면 이벤트를 발생시킴. 여기서는 
     }
+   
 }
+
+
+// TODO : UI 목록을 리스트가 아닌 딕셔너리로 바꾸는 것 고려
+// 또한 동일한 UI는 한번에 한 개의 오브젝트만 생성되도록 바꿀 필요가 있음. 현재 OpenWindow는 이전에 열렸던 모든 UI를 
+// 동일한 UI창이 열렸던 만큼 SetActive = false인 상태로 씬에 존재하므로 메모리 사용 측면에서 손해가 생길 수밖에 없는 구조로 사료됨
+// 덧붙여 현재는 UI창이 통채로 프리팹으로 만들어지므로 (화면마다 공통되는 요소가 반복됨) 반복되는 요소를 줄이기 위해 가장 처음에 발생하는 
+// 1번 스택에 위치한 UI창은 SetActive = false로 되지 않도록 바꾸고 이후 열리는 하위 UI창이 1번 스택인 최상위 창 안에서 생성되도록 바꿀 예정

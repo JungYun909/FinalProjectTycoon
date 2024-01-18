@@ -49,7 +49,8 @@ public class TemporaryPluralUIWindows : UIBase
 
     public void Back()
     {
-        uiManager.GoBack();
+        Debug.Log("GO BACK!");
+	    uiManager.GoBack();
     }
 
     public void CloseAllWindow()

@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5969377318730122020}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005398135330955411}
+        m_TargetAssemblyTypeName: TemporaryPluralUIWindows, Assembly-CSharp
+        m_MethodName: Back
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1570645163869741890
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1303217981997902478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1005398135330955411}
+        m_TargetAssemblyTypeName: TemporaryPluralUIWindows, Assembly-CSharp
+        m_MethodName: CloseAllWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3102519954855452102
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +280,7 @@ GameObject:
   - component: {fileID: 7994561642760337963}
   - component: {fileID: 2826740154949793985}
   - component: {fileID: -2250432140480880359}
+  - component: {fileID: 1005398135330955411}
   m_Layer: 5
   m_Name: Panel (1)
   m_TagString: Untagged
@@ -336,6 +361,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50b1332eb52c4aab9a5144a0eaa02c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1005398135330955411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102519954855452102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5f4f3a6a4474de18a535e3f8becdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstWindow: {fileID: 0}
+  secondWindow: {fileID: 0}
+  thirdWindow: {fileID: 0}
+  fourthWindow: {fileID: 0}
+  uiManager: {fileID: 0}
 --- !u!1 &3178372812315371348
 GameObject:
   m_ObjectHideFlags: 0
