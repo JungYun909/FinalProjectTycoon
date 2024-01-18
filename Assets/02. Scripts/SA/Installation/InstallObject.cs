@@ -14,9 +14,10 @@ public abstract class InstallObject : MonoBehaviour
     public InstallationData data;
 
     public abstract void InitSetting();
-    public virtual void Install()
+    public virtual void Install(GameObject spawnObj, GameObject gameObject1)
     {
-        Instantiate(data.curGameObject);
+        //Instantiate(data.curGameObject);
+        Instantiate(spawnObj, gameObject.transform.position, Quaternion.identity);
     }
 
     public virtual void Delete()

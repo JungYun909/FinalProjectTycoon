@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Tilemaps;
 
 public class MachineController : MonoBehaviour
 {
     private InstallObject installObject;
-    // Start is called before the first frame update
+    [SerializeField] private Tilemap tilemap;
+    public GameObject prefab;
 
     private void Awake()
     {
@@ -15,8 +17,6 @@ public class MachineController : MonoBehaviour
     void Start()
     {
         installObject.InitSetting();
-        //installObject.Delete();
-        //installObject = GetComponent<InstallObject>();
     }
 
     public void OnDeleteBtn()
@@ -26,7 +26,17 @@ public class MachineController : MonoBehaviour
 
     public void OnInstallBtn()
     {
-        installObject.Install();
+        installObject.Install(prefab, gameObject);
+    }
+
+    public void OnClickMachine()
+    {
+        SpriteRenderer curSpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        if(UIManagerTemp.instance.canvas.gameObject.activeSelf)
+        {
+            UIManagerTemp.instance.canvas.gameObject.transform.position = gameObject.transform.position;
+            UIManagerTemp.instance.UIImageChange(curSpriteRenderer.sprite);
+        }
     }
 
     

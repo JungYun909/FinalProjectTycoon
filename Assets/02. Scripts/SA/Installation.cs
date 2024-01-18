@@ -10,7 +10,7 @@ public class Installation : MonoBehaviour
     [SerializeField] private Tilemap tilemap;
     
     [SerializeField] private GameObject prefab;
-    public GameObject test;
+    GameObject test;
     //private Vector2 mousePosition = Vector2.zero;
     //private bool isBuild;
 
@@ -42,7 +42,7 @@ public class Installation : MonoBehaviour
         test = Instantiate(prefab);
         test.transform.position = new Vector3(0, 0);
         test.layer = 0;
-        test.GetComponent<ObjectInstallation>().tilemap = tilemap;
+        //test.GetComponent<ObjectInstallation>().tilemap = tilemap;
         
     }
 
