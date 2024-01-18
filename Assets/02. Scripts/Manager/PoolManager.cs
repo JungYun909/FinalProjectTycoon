@@ -1,44 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct Pool
-    {
-        public string tag;
-        public GameObject prefab;
-        public int size;
-    }
 
-    public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<string, Queue<GameObject>> poolDictionary;
+    public static PoolManager instacne;
 
     private void Awake()
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-        foreach (var pool in pools)
-        {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-            for (int i = 0; i < pool.size; i++)
-            {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-            }
-            poolDictionary.Add(pool.tag, objectPool);
-        }
+        instacne = this;
     }
-    
-    public GameObject SpawnFromPool(string tag)
+
+    private void Start()
     {
-        if (!poolDictionary.ContainsKey(tag))
-            return null;
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+    }
 
-        GameObject obj = poolDictionary[tag].Dequeue();
-        poolDictionary[tag].Enqueue(obj);
+    private GameObject AddTagToDictionary(GameObject addGameObject)
+    {
+        if (!poolDictionary.ContainsKey(addGameObject.tag))
+        {
+            poolDictionary.Add(addGameObject.tag, new Queue<GameObject>());
+        }
 
+        GameObject obj = Instantiate(addGameObject);
+        return obj;
+    }
+
+    public void DeSpawnFromPool(GameObject addGameObject)
+    {
+        addGameObject.SetActive(false);
+        poolDictionary[addGameObject.tag].Enqueue(addGameObject);
+    }
+    public GameObject SpawnFromPool(GameObject addGameObject)
+    {
+        if (!poolDictionary.ContainsKey(addGameObject.tag) || poolDictionary[addGameObject.tag].All(o => o.activeSelf))
+        {
+            return AddTagToDictionary(addGameObject);
+        }
+        GameObject obj = poolDictionary[addGameObject.tag].Dequeue();
+        obj.SetActive(true);
         return obj;
     }
 }

@@ -1,24 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public enum ItemType
 {
-    Resource,
+    Ingredient,
     Goods,
     Installation
 }
-public abstract class ItemData : MonoBehaviour
+
+public struct ItemStat
 {
     [Header("Info")]
-    public string displayName;
+    public string name;
     public string description;
-    public int price;
     public ItemType type;
     public Sprite icon;
 
-    [Header("Stacking")]
-    public bool canStack;
-    public int maxStackAmount;
+    [Header("Celling")]
+    public bool canCell;
+    public int price;
+
+    [Header("Moving")] 
+    public bool canMove;
+    public float speed;
+    public GameObject destinationGameObject;
 }
+
+public abstract class ItemData: MonoBehaviour, IInteractable
+{
+    public ItemStat itemStat;
+    
+    public abstract void InitSetting();
+    public virtual void OnInteract()
+    {
+        throw new System.NotImplementedException();
+    }
+}
+
 
