@@ -102,7 +102,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         currentDailyResultWindow.Initialize();  // 
         OnDailyWindowOpen?.Invoke();    // 일일정산창 열리면 이벤트를 발생시킴. 여기서는 
     }
-   
 }
 
 

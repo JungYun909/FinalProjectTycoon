@@ -22,16 +22,16 @@ public class InteractionManager : MonoBehaviour    	// TODO 정확히 무슨 일
     private IInteractable curInteractable;
 
 
-    private void OnEnable()
-    {
-        InputManager.OnClicked += WorkOnClick;
-    }
-    //상호작용 상속받아 사용 가능한 오브젝트의 기능을 실행하고 초기화
+    //private void OnEnable()
+    //{
+    //    InputManager.OnClicked += WorkOnClick;
+    //}
+    ////상호작용 상속받아 사용 가능한 오브젝트의 기능을 실행하고 초기화
 
-    private void OnDisable()
-    {
-        InputManager.OnClicked -= WorkOnClick;
-    }
+    //private void OnDisable()
+    //{
+    //    InputManager.OnClicked -= WorkOnClick;
+    //}
 
     private void InteractionWithItem()
     {

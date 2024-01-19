@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour           //TODO 인벤토리 딕셔너리 가지고 아이템을 인벤토리에 넣어주고 교환하는 메서드. 추가, 사라진 오브젝트의 인벤토리 관리 로직 작성 필.
+                                                        //풀매니저가 string 값 가짐 
 {
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
