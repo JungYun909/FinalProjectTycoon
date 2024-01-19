@@ -8,7 +8,7 @@ public class MachineMoveController : MonoBehaviour, IPointerDownHandler, IPointe
 {
     private bool isButtonPressed = false;
     public Tilemap tilemap;
-    private void Awake()
+    private void Start()
     {
         InputManager.instance.OnLookEvent += MousePositionUpdate;
         
@@ -18,10 +18,8 @@ public class MachineMoveController : MonoBehaviour, IPointerDownHandler, IPointe
     {
         if (isButtonPressed)
         {
-
-            Debug.Log(isButtonPressed);
-            transform.position = tilemap.WorldToCell(direction);
-            transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 0.3f);
+            transform.root.position = tilemap.WorldToCell(direction);
+            transform.root.position = new Vector2(transform.position.x + 0.5f, transform.position.y + 0.3f);
         }
     }
 

@@ -16,11 +16,11 @@ public class InputManager : TopDownPlayerController
 
     public void OnLook(InputValue value)
     {
-        //Vector2 newAim = value.Get<Vector2>();
-        //Vector2 mouseDirection = _camera.ScreenToWorldPoint(newAim);
-        Vector2 newAim = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //CallLookEvent(mouseDirection);
-        CallLookEvent(newAim);
+        Vector2 newAim = value.Get<Vector2>();
+        Vector2 mouseDirection = _camera.ScreenToWorldPoint(newAim);
+        //Vector2 newAim = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        CallLookEvent(mouseDirection);
+        //CallLookEvent(newAim);
     }
 
     public void OnClick(InputValue value)

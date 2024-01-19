@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 5e2585cb510e13742b663b78f453476b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4006fe3e2f75ae44804ed039d6ea472, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9145928692231001125}
   - component: {fileID: 3303244550348626397}
-  - component: {fileID: 5332551877652789594}
+  - component: {fileID: 1053841761247079874}
   m_Layer: 10
-  m_Name: DaskPosition
+  m_Name: Oven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5332551877652789594
+--- !u!114 &1053841761247079874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,6 +172,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7804203704853716585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d718ea498796b43a93d0355baa08dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ff711bb634b5fc41acc9fef3ed2392f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -22,7 +22,7 @@ public abstract class InstallObject : MonoBehaviour
 
     public virtual void Delete()
     {
-        Destroy(data.curGameObject);
+        UIManagerTemp.instance.canvas.gameObject.SetActive(false);
     }
 
     public virtual void Move(Vector2 direction)
