@@ -52,15 +52,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // public void ToggleMusic() //TODO 오디오 컨트롤러로 if 문으로 켜져있는지 확인
-    // {
-    //     musicSource.mute = !musicSource.mute;
-    // }
-    //
-    // public void ToggleSFX()
-    // {
-    //     sfxSource.mute = !sfxSource.mute;
-    // }
+    public void ToggleMusic()
+    {
+        musicSource.mute = !musicSource.mute;
+    }
+
+    public void ToggleSFX()
+    {
+        sfxSource.mute = !sfxSource.mute;
+    }
 
     public void MusicVolume(float volume)
     {
@@ -80,5 +80,5 @@ public class AudioManager : MonoBehaviour
     // public void StartBtnSound()
     // {
     //     PlaySFX("StartBtn");
-    // }
+    // 
 }

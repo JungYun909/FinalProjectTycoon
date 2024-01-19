@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour                      //TODO Update까지? > 마찬가지로 delegate> 전달받아서 바꾼? UI창 요소들을 어떻게 받아올 것인가 고민 필요
 {
     [Header("UI Classification")]
     [SerializeField] private UIBase dailyResultWindow;    // 일일정산창 - 모든 UI중 유일하게 플레이어의 명령이나 상호작용이 아닌 특별한 로직(시간 기반)으로 제어해야 하므로 별도로 할당[

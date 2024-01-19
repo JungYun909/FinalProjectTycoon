@@ -7,7 +7,11 @@ public interface IInteractable
 {
     void OnInteract();
 }
-public class InteractionManager : MonoBehaviour
+
+public class InteractionManager : MonoBehaviour    	// TODO 정확히 무슨 일을 관리할 것인가? 상호작용이 무엇? 어떤 오브젝트를 클릭했는지를 판별?
+                                                    // TODO 발생 시점을 관리하도록 함?
+                                                    // Function : 어떤 것을 OnInteract할 지 판별해주기 위한 매니저
+                                                    // 클릭했을 때나 부딪혔을 때의 OnInteract 분리 가능하도록?
 {
     public event Action collisionEnter; //TODO 부딧혔을때 받아야할 정보 수정
     public event Action click; 
@@ -39,13 +43,13 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)   // MonoBehaviour가 아닐 떄?
     {
         curInteractGameobject = other.collider.gameObject;
         curInteractable = other.collider.gameObject.GetComponent<IInteractable>(); 
     }
 
-    public void WorkOnClick(Vector2 worldPosition)
+    public void WorkOnClick(Vector2 worldPosition)    // TODO 아래 객체의 LayerMask가 무엇인지 판단하도	?
     {
         Debug.Log($"WorkOnClick in InteractionManager called with position: {worldPosition}");
 

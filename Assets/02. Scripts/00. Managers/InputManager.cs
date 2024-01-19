@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour  // TODO : FSM 강의 이후 다시 확인할 필요 있음. FSM 사용하고 이 스크립트를 사용할, 아니면 다른 SM 사용할지 
 {
     public delegate void ClickAction(Vector2 position);  // 클릭 위치를 받는 클릭 액션 대리자를 정의합니다.
     public static event ClickAction OnClicked; // 클릭 이벤트를 다른 스크립트에서 구독할 수 있게 합니다.
@@ -53,5 +53,6 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke(worldPosition); // 클릭 위치를 이벤트를 통해 전달.
             Debug.Log($"Clicked at: {worldPosition}"); // 클릭 위치를 로그로 찍어.
         }
-    }
+    }   //InputAction에서 뻗어나가는게 delegate 필요가 없 ?
+        //온클릭 필요하다면 달아주는게 아니라  
 }

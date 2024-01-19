@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class PoolManager : MonoBehaviour
+public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해제 등과 관련된 업무 전체 관	
 {
 
     private Dictionary<string, Queue<GameObject>> poolDictionary;
@@ -15,7 +15,7 @@ public class PoolManager : MonoBehaviour
         instacne = this;
     }
 
-    private void Start()
+    private void Start()                //TODO MonoBehaviour 제거시 Start > Init으로 변경
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
     }
