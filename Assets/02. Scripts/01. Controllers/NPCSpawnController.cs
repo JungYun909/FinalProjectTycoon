@@ -42,18 +42,18 @@ public class NPCSpawnController : MonoBehaviour
     //기본 평판에 따른 리스폰 로직
     void NPCSpawn()
     {
-        string npcNameTag = NPCSelection();
-        float visitProbability = reputation * 0.1f;
-        int rand = UnityEngine.Random.Range(1, 100);
+        //string npcNameTag = NPCSelection();
+        //float visitProbability = reputation * 0.1f;
+        //int rand = UnityEngine.Random.Range(1, 100);
 
-        if (rand <= visitProbability)
-        {
-            GameObject npc = poolManager.SpawnFromPool(npcNameTag);
-            npc.SetActive(true);
-            Debug.Log(npcNameTag + "손님이 왕이다");
-            NPCNum += 1;
+        //if (rand <= visitProbability)
+        //{
+        //    GameObject npc = poolManager.SpawnFromPool(); //필요한 게임오브젝트 매개변수 처리
+        //    npc.SetActive(true);
+        //    Debug.Log(npcNameTag + "손님이 왕이다");
+        //    NPCNum += 1;
 
-        }
+        //}
     }
 
     string NPCSelection()
