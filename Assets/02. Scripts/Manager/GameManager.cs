@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
     private StatManager statManager;
     private PlayerInputManager playerInputControlleManager;
 
-    // private void Awake()
-    // {
-    //TODO 매니저들의 경유지로서 역할을 해주자
-    // }
+    private void Awake()
+    {
+        //suiManager = new UIManager(); 
+    }
 
     private void Start()
     {
@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         DontDestroyOnLoad(gameObject);
     }
 }
