@@ -8,7 +8,7 @@ public class TopDownPlayerController : MonoBehaviour
 {
     public event Action OnClickEvent;
     public event Action<Vector2> OnLookEvent;
-    
+    public event Action OffClickEvent;
     protected bool IsClicking { get; set; }
 
     protected virtual void Update()
@@ -22,6 +22,10 @@ public class TopDownPlayerController : MonoBehaviour
         {
             CallClickEvent();
         }
+        else
+        {
+            CallOffClickEvent();
+        }
     }
 
     public void CallClickEvent()
@@ -34,5 +38,8 @@ public class TopDownPlayerController : MonoBehaviour
         OnLookEvent?.Invoke(direction);
     }
 
-
+    public void CallOffClickEvent()
+    {
+        OffClickEvent?.Invoke();
+    }
 }
