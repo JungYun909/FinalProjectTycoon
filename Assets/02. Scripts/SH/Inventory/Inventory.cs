@@ -85,16 +85,16 @@ public class Inventory : MonoBehaviour
     //인벤토리 아이템 추가 기능
     public void AddItem(ItemData item)
     {
-        if(item.canStack)
-        {
-            ItemSlot slotToStackTo = GetItemStack(item);
-            if(slotToStackTo != null)
-            {
-                slotToStackTo.quantity++;
-                UpdateUIDater();
-                return;
-            }
-        }
+        // if(item.canStack)
+        // {
+        //     ItemSlot slotToStackTo = GetItemStack(item);
+        //     if(slotToStackTo != null)
+        //     {
+        //         slotToStackTo.quantity++;
+        //         UpdateUIDater();
+        //         return;
+        //     }
+        // }
 
         ItemSlot emptySlot = GetEmptySlot();
 
@@ -102,23 +102,23 @@ public class Inventory : MonoBehaviour
         {
             emptySlot.item = item;
             emptySlot.quantity = 1;
-            emptySlot.name = item.displayName;
+            emptySlot.name = item.itemStat.name;
             UpdateUIDater();
             return;
         }
     }
     
     //인벤토리 아이템 바꾸기 기능
-    public void ChangeItem(ItemData item, ItemData changeItem)
-    {
-        ItemSlot slotToStackTo = GetItemStack(item);
-        if (slotToStackTo != null)
-        {
-            slotToStackTo.item = changeItem;
-            UpdateUIDater();
-            return;
-        }
-    }
+    // public void ChangeItem(ItemData item, ItemData changeItem)
+    // {
+    //     ItemSlot slotToStackTo = GetItemStack(item);
+    //     if (slotToStackTo != null)
+    //     {
+    //         slotToStackTo.item = changeItem;
+    //         UpdateUIDater();
+    //         return;
+    //     }
+    // }
     //UI의 ItemData값 최신화
     void UpdateUIDater()
     {
@@ -131,16 +131,16 @@ public class Inventory : MonoBehaviour
         }
     }
     //인벤토리에 있는 아이템 위치 찾기
-    ItemSlot GetItemStack(ItemData item)
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item == item && slots[i].quantity < item.maxStackAmount)
-                return slots[i];
-        }
-
-        return null;
-    }
+    // ItemSlot GetItemStack(ItemData item)
+    // {
+    //     for (int i = 0; i < slots.Length; i++)
+    //     {
+    //         if (slots[i].item == item && slots[i].quantity < item.maxStackAmount)
+    //             return slots[i];
+    //     }
+    //
+    //     return null;
+    // }
     //인벤토리 빈칸 찾기
     ItemSlot GetEmptySlot()
     {

@@ -16,7 +16,7 @@ public class ItemSlotUI : MonoBehaviour //TODO UIManager가 관리할 수 있게
     {
         curSlot = slot;
         icon.gameObject.SetActive(true);
-        icon.sprite = slot.item.icon;
+        icon.sprite = slot.item.itemStat.icon;
         quatityText.text = slot.quantity > 1 ? slot.quantity.ToString() : string.Empty;
         nameText.text = slot.quantity >= 1 ? slot.name.ToString() : string.Empty;
     }
