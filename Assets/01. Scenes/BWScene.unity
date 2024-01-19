@@ -714,9 +714,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 229741151}
-        m_TargetAssemblyTypeName: TemporaryTestButtons, Assembly-CSharp
-        m_MethodName: ClickButtonAndSpendMoney
+      - m_Target: {fileID: 80846067}
+        m_TargetAssemblyTypeName: ShopInventory, Assembly-CSharp
+        m_MethodName: AddTestItem4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -954,7 +954,7 @@ MonoBehaviour:
   - {fileID: 4658393590689258178, guid: 032f9730bd6a843059da562e7f611cd1, type: 3}
   - {fileID: 6337446825451603917, guid: 7d7b9bbbfb54e4b70a40f2b857ed268e, type: 3}
   - {fileID: 9166289740894465828, guid: 5feb542b3053149cbb76840a0a67ae11, type: 3}
-  dailyResultOpenInterval: 5
+  dailyResultOpenInterval: 15
 --- !u!4 &656924650
 Transform:
   m_ObjectHideFlags: 0
@@ -1109,9 +1109,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 780052786}
-        m_TargetAssemblyTypeName: TemporaryTestButtons, Assembly-CSharp
-        m_MethodName: ClickButtonAndSpendMoney
+      - m_Target: {fileID: 80846067}
+        m_TargetAssemblyTypeName: ShopInventory, Assembly-CSharp
+        m_MethodName: AddTestItem3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1485,9 +1485,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1484373663}
-        m_TargetAssemblyTypeName: TemporaryTestButtons, Assembly-CSharp
-        m_MethodName: ClickButtonAndSpendMoney
+      - m_Target: {fileID: 80846067}
+        m_TargetAssemblyTypeName: ShopInventory, Assembly-CSharp
+        m_MethodName: AddTestItem1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1769,9 +1769,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1541906864}
-        m_TargetAssemblyTypeName: TemporaryTestButtons, Assembly-CSharp
-        m_MethodName: ClickButtonAndSpendMoney
+      - m_Target: {fileID: 80846067}
+        m_TargetAssemblyTypeName: ShopInventory, Assembly-CSharp
+        m_MethodName: AddTestItem2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
