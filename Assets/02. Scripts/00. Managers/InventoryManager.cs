@@ -8,6 +8,13 @@ public class InventoryManager : MonoBehaviour
     private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1000;   // 인덱스용 아이디를 부여하기 위한 필드
 
+    private TemporaryUIElementsUpdator inventoryUIUpdator;
+
+    private void Awake()
+    {
+        inventoryUIUpdator = FindObjectOfType<TemporaryUIElementsUpdator>();
+    }
+
     public int RegisterInventory(AbstractInventory inventory)    // 새로 생기는 인벤토리를 딕셔너리에 등재하기 위한 메서드. 모든 인벤토리 생성시
     {
         int inventoryID = nextInventoryID++;
@@ -15,24 +22,69 @@ public class InventoryManager : MonoBehaviour
         return inventoryID;
     }
 
-    public void AddItemToInventory(int inventoryID, ItemSO item, int quantity)     //아이템을 인벤토리에 저장하기 위한 메서드.
+    public void AddItemToInventory(int inventoryID, ItemSO item, int quantity)
     {
         if (inventories.ContainsKey(inventoryID))
         {
-            inventories[inventoryID].AddItem(item, quantity);
+            var inventory = inventories[inventoryID];
+            if (!inventory.Items.ContainsKey(item))
+            {
+                inventory.Items[item] = 0;
+            }
+            inventory.Items[item] += quantity;
+
+            // 인벤토리 UI 업데이트를 위한 items 딕셔너리 전달
+            inventoryUIUpdator.UpdateUI(inventory.Items);
         }
     }
 
-    public void TransferItem(int fromInventoryID, int toInventoryID, ItemSO item, int quantity)   // 인벤토리간 아이템 교환
+    public bool RemoveItemFromInventory(int inventoryID, ItemSO item, int quantity)
+    {
+        if (inventories.ContainsKey(inventoryID))
+        {
+            var inventory = inventories[inventoryID];
+            if (inventory.Items.ContainsKey(item) && inventory.Items[item] >= quantity)
+            {
+                inventory.Items[item] -= quantity;
+                if (inventory.Items[item] == 0)
+                {
+                    inventory.Items.Remove(item);
+                }
+
+                inventoryUIUpdator.UpdateUI(inventory.Items);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void TransferItem(int fromInventoryID, int toInventoryID, ItemSO item, int quantity)
     {
         if (inventories.ContainsKey(fromInventoryID) && inventories.ContainsKey(toInventoryID))
         {
-            if (inventories[fromInventoryID].RemoveItem(item, quantity))
+            var fromInventory = inventories[fromInventoryID].Items;
+            var toInventory = inventories[toInventoryID].Items;
+
+            // 아이템을 이동시킬 수 있는지 확인
+            if (fromInventory.ContainsKey(item) && fromInventory[item] >= quantity)
             {
-                inventories[toInventoryID].AddItem(item, quantity);
+                // 아이템을 기존 인벤토리에서 제거
+                fromInventory[item] -= quantity;
+                if (fromInventory[item] == 0)
+                {
+                    fromInventory.Remove(item);
+                }
+
+                // 아이템을 새 인벤토리에 추가
+                if (!toInventory.ContainsKey(item))
+                {
+                    toInventory[item] = 0;
+                }
+                toInventory[item] += quantity;
+
+                // 인벤토리 UI 업데이트
             }
         }
     }
-
-    // 기타 메서드...
+    // 추가로 필요한 Method?
 }
