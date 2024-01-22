@@ -61,8 +61,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curIcon: {fileID: 21300000, guid: c64723caa1fa244a6b71633093852c2a, type: 3}
+  destinationObj: {fileID: 0}
   installationUI: {fileID: 0}
   installUI: {fileID: 0}
+  SpawnPrefab: {fileID: 7910195704630170424, guid: 85e1ae48ccf0a474cab40b529bfee4f8, type: 3}
+  isSpawn: 0
 --- !u!61 &7513508259764349477
 BoxCollider2D:
   m_ObjectHideFlags: 0

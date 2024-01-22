@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System.Threading;
 
 public class Kneader : InteractionData
 {
@@ -9,6 +10,8 @@ public class Kneader : InteractionData
     public GameObject destinationObj;
     public GameObject installationUI;
     public GameObject installUI;
+    public GameObject SpawnPrefab;
+    public bool isSpawn;
     
     public override void InitSetting()
     {
@@ -49,6 +52,15 @@ public class Kneader : InteractionData
         else
         {
             InteractionManager.instance.targetGameObject = gameObject;
+        }
+        if(isSpawn == false && destinationObj != null)
+        {
+            isSpawn = true;
+            while (destinationObj != null)
+            {
+                PoolManager.instacne.SpawnFromPool(SpawnPrefab);
+                Thread.Sleep(2000);
+            }
         }
     }
 }
