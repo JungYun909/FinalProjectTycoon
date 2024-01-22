@@ -6,6 +6,11 @@ public class TemporaryIInteractable : MonoBehaviour, IInteractable
 {
 
     [SerializeField] UIBase uiToOpen;
+    public bool Continuous()
+    {
+        return false;
+    }
+
     public void OnInteract()
     {
 

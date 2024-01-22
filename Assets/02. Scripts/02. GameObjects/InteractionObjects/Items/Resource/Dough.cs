@@ -18,6 +18,11 @@ public class Dough : InteractionData
         _interactionStat.speed = 0.005f;
     }
 
+    public override bool Continuous()
+    {
+        return false;
+    }
+
     public override void OnInteract()
     {
         PoolManager.instacne.DeSpawnFromPool(gameObject);

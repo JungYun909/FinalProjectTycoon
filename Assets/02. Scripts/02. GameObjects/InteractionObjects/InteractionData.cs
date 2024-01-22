@@ -31,7 +31,6 @@ public struct InteractionStat
 
     [Header("UI")]
     public GameObject curGameObject;
-    public bool isClick;
 }
 
 public abstract class InteractionData: MonoBehaviour, IInteractable
@@ -39,6 +38,8 @@ public abstract class InteractionData: MonoBehaviour, IInteractable
     public InteractionStat _interactionStat;
     
     public abstract void InitSetting();
+    public abstract bool Continuous();
+
     public abstract void OnInteract();
 }
 

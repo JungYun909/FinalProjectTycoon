@@ -1,77 +1,95 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public interface IInteractable
 {
+    bool Continuous();
     void OnInteract();
 }
-
-public class InteractionManager : MonoBehaviour    	// TODO 정확히 무슨 일을 관리할 것인가? 상호작용이 무엇? 어떤 오브젝트를 클릭했는지를 판별?
-                                                    // TODO 발생 시점을 관리하도록 함?
-                                                    // Function : 어떤 것을 OnInteract할 지 판별해주기 위한 매니저
-                                                    // 클릭했을 때나 부딪혔을 때의 OnInteract 분리 가능하도록?
+public class InteractionManager : MonoBehaviour
 {
-    public event Action collisionEnter; //TODO 부딧혔을때 받아야할 정보 수정
-    public event Action click; 
-    public LayerMask targetLayer;
-    
-    [Header("InteractionOBJ")]
-    private GameObject curInteractGameobject;
-    private IInteractable curInteractable;
+    public static InteractionManager instance;
 
+    public GameObject curGameObject;
+    public GameObject targetGameObject;
 
-    //private void OnEnable()
-    //{
-    //    InputManager.OnClicked += WorkOnClick;
-    //}
-    ////상호작용 상속받아 사용 가능한 오브젝트의 기능을 실행하고 초기화
+    private IInteractable interactionObject;
+    private Vector2 curMouseDirection;
+    private Coroutine interactionCoroutine;
+    private bool IsClick;
 
-    //private void OnDisable()
-    //{
-    //    InputManager.OnClicked -= WorkOnClick;
-    //}
-
-    private void InteractionWithItem()
+    private void Awake()
     {
-        if (curInteractable != null)
+        instance = this;
+    }
+
+    public void OnLook(InputValue value)
+    {
+        curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public void OnClick(InputValue value)
+    {
+        RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
+        
+        bool isCurClick = false;
+        
+        if(!ray.collider)
+            return;
+
+        interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
+        
+        if(interactionObject == null)
+            return;
+        
+        if (value.isPressed && interactionObject.Continuous())
         {
-            curInteractable.OnInteract();
-            curInteractGameobject = null;
-            curInteractable = null;
+            // 코루틴 시작
+            interactionCoroutine = StartCoroutine(InteractionCoroutine());
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)   // MonoBehaviour가 아닐 떄?
-    {
-        curInteractGameobject = other.collider.gameObject;
-        curInteractable = other.collider.gameObject.GetComponent<IInteractable>(); 
-    }
-
-    public void WorkOnClick(Vector2 worldPosition)    // TODO 아래 객체의 LayerMask가 무엇인지 판단하도	?
-    {
-        Debug.Log($"WorkOnClick in InteractionManager called with position: {worldPosition}");
-
-        RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.down, Mathf.Infinity);
-
-        if (hit.collider != null)
+        else if(!value.isPressed && interactionObject.Continuous())
         {
-            curInteractable = hit.collider.gameObject.GetComponent<IInteractable>();
-
-            if (curInteractable != null)
+            // 마우스 클릭이 끝날 때 코루틴 중지
+            if (interactionCoroutine != null)
             {
-                Debug.Log("Found IInteractable component, calling OnInteract");
-                curInteractable.OnInteract();
+                StopCoroutine(interactionCoroutine);
+                
+            }
+            return;
+        }
+        
+        if (value.isPressed && isCurClick == false)
+        {
+            isCurClick = true;
+            if (!curGameObject)
+            {
+                curGameObject = ray.collider.gameObject;
+                interactionObject.OnInteract();
             }
             else
             {
-                Debug.Log("Hit object is not IInteractable");
+                interactionObject.OnInteract();
+                curGameObject.GetComponent<IInteractable>().OnInteract();
             }
         }
-        else
+        else if (!value.isPressed && isCurClick)
         {
-            Debug.Log("No object hit by Raycast");
+            isCurClick = false;
+        }
+    }
+    
+    IEnumerator InteractionCoroutine()
+    {
+        // 마우스 클릭이 끝날 때까지 반복
+        while (true)
+        {
+            interactionObject.OnInteract();
+
+            // 한 프레임 대기
+            yield return null;
         }
     }
 }
