@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemObject : MonoBehaviour, IInteractable
+public class UIObject : MonoBehaviour, IInteractable
 {
-    public ItemData item;
+    private UIData _uIData;
 
     private void Start()
     {
-        item.InitSetting();
+        _uIData.InitSetting();
     }
 
     public void OnInteract()
     {
-        PoolManager.instacne.DeSpawnFromPool(gameObject);
+        _uIData.OnInteract();
     }
 }

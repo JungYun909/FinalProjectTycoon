@@ -17,4 +17,9 @@ public class Dough : ItemData
         itemStat.canMove = true;
         itemStat.speed = 0.005f;
     }
+
+    public override void OnInteract()
+    {
+        PoolManager.instacne.DeSpawnFromPool(gameObject);
+    }
 }

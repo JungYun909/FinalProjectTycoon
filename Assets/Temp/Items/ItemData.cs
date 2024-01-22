@@ -34,10 +34,7 @@ public abstract class ItemData: MonoBehaviour, IInteractable
     public ItemStat itemStat;
     
     public abstract void InitSetting();
-    public virtual void OnInteract()
-    {
-        throw new System.NotImplementedException();
-    }
+    public abstract void OnInteract();
 }
 
 
