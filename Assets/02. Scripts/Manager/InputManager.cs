@@ -7,6 +7,7 @@ public class InputManager : TopDownPlayerController
 {
     public static InputManager instance;
     private Camera _camera;
+    private Vector2 curMouseDirection;
 
     private void Awake()
     {
@@ -16,15 +17,19 @@ public class InputManager : TopDownPlayerController
 
     public void OnLook(InputValue value)
     {
-        Vector2 newAim = value.Get<Vector2>();
-        Vector2 mouseDirection = _camera.ScreenToWorldPoint(newAim);
-        //Vector2 newAim = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        CallLookEvent(mouseDirection);
-        //CallLookEvent(newAim);
+        curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
-
+    
     public void OnClick(InputValue value)
     {
         IsClicking = value.isPressed;
+        RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
+        
+        if(!ray.collider)
+            return;
+
+        InteractionObject curUIObject = ray.collider.gameObject.GetComponent<InteractionObject>();
+        curUIObject._interactionData.InitSetting();
+        curUIObject._interactionData.OnInteract();
     }
 }

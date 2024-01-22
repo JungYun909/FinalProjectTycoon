@@ -4,19 +4,20 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-public enum ItemType
+public enum InteractionType
 {
     Ingredient,
     Goods,
-    Installation
+    Installation,
+    UI
 }
 
-public struct ItemStat
+public struct InteractionStat
 {
     [Header("Info")]
     public string name;
     public string description;
-    public ItemType type;
+    public InteractionType type;
     public Sprite icon;
 
     [Header("Celling")]
@@ -27,11 +28,15 @@ public struct ItemStat
     public bool canMove;
     public float speed;
     public GameObject destinationGameObject;
+
+    [Header("UI")]
+    public GameObject curGameObject;
+    public bool isClick;
 }
 
-public abstract class ItemData: MonoBehaviour, IInteractable
+public abstract class InteractionData: MonoBehaviour, IInteractable
 {
-    public ItemStat itemStat;
+    public InteractionStat _interactionStat;
     
     public abstract void InitSetting();
     public abstract void OnInteract();
