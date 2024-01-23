@@ -26,6 +26,21 @@ public class InteractionManager : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(Vector2.zero, new Vector2(Screen.width, Screen.height));
+
+        foreach (Collider2D collider in colliders)
+        {
+            // 원하는 태그를 가진 객체와 충돌 감지
+            if (collider.CompareTag("Resource"))
+            {
+                if(collider.gameObject.GetComponent<IInteractable>() != null)
+                    collider.gameObject.GetComponent<IInteractable>().OnInteract();
+            }
+        }
+    }
+
     public void OnLook(InputValue value)
     {
         curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -45,14 +60,13 @@ public class InteractionManager : MonoBehaviour
         if(interactionObject == null)
             return;
         
+        //interactable 중 지속성이 있는지 여부를 검사하여 코루틴실행
         if (value.isPressed && interactionObject.Continuous())
         {
-            // 코루틴 시작
             interactionCoroutine = StartCoroutine(InteractionCoroutine());
         }
         else if(!value.isPressed && interactionObject.Continuous())
         {
-            // 마우스 클릭이 끝날 때 코루틴 중지
             if (interactionCoroutine != null)
             {
                 StopCoroutine(interactionCoroutine);
@@ -61,6 +75,7 @@ public class InteractionManager : MonoBehaviour
             return;
         }
         
+        //한번클릭 한번실행
         if (value.isPressed && isCurClick == false)
         {
             isCurClick = true;

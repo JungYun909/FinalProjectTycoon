@@ -72,6 +72,7 @@ public class Kneader : InteractionData
 
             GameObject newSpawnObject = PoolManager.instacne.SpawnFromPool(SpawnPrefab);
             newSpawnObject.transform.position = gameObject.transform.position;
+            newSpawnObject.GetComponent<InteractionData>().InitSetting();
             newSpawnObject.GetComponent<MovementController>().Move(destinationObj);
         }
 
