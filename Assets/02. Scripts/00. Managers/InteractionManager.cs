@@ -7,103 +7,81 @@ using UnityEngine.InputSystem;
 public interface IInteractable
 {
     bool Continuous();
-    void OnInteract();
+    void OnClickInteract();
+    void OnColliderInteract();
 }
 public class InteractionManager : MonoBehaviour
 {
-    public static InteractionManager instance;
-
+    //상호작용 오브젝트 정보저장
     public GameObject curGameObject;
-    public GameObject targetGameObject;
-
+    public GameObject targetGameObject; 
     private IInteractable interactionObject;
+    
+    //상호작용에 필요한 변수저장
     private Vector2 curMouseDirection;
     private Coroutine interactionCoroutine;
-    private bool IsClick;
-
+    
+    //임시 싱글톤
+    public static InteractionManager instance;
     private void Awake()
     {
         instance = this;
     }
 
-    private void Update()
-    {
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(Vector2.zero, new Vector2(Screen.width, Screen.height));
-
-        foreach (Collider2D collider in colliders)
-        {
-            // 원하는 태그를 가진 객체와 충돌 감지
-            if (collider.CompareTag("Resource"))
-            {
-                if(collider.gameObject.GetComponent<IInteractable>() != null)
-                    collider.gameObject.GetComponent<IInteractable>().OnInteract();
-            }
-        }
-    }
-
+    //마우스 포지션 바뀔때마다 정보갱신
     public void OnLook(InputValue value)
     {
         curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
+    //마우스 눌렀을때 상호작용 관리
     public void OnClick(InputValue value)
     {
-        RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
-        
+        //정보 초기화
         bool isCurClick = false;
         
-        if(!ray.collider)
+        //레이로 상호작용 객체 감지시도
+        RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
+        
+        //레이가 상호작용 하지 않는 객체 감지시 리턴
+        if( !ray.collider || ray.collider.gameObject.GetComponent<IInteractable>() == null)
             return;
-
+        //레이가 감지한 객체의 상호작용 정보 저장
         interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
         
-        if(interactionObject == null)
-            return;
-        
-        //interactable 중 지속성이 있는지 여부를 검사하여 코루틴실행
-        if (value.isPressed && interactionObject.Continuous())
+        //클릭 중일떄 발생
+        if (value.isPressed)
         {
-            interactionCoroutine = StartCoroutine(InteractionCoroutine());
+            if (interactionObject.Continuous()) //오브젝트의 상호작용이 누르는 동안 반복돠야한다면
+            {
+                interactionCoroutine = StartCoroutine(InteractionCoroutine());
+            }
+            else if(isCurClick == false) //오브젝트의 상호작용이 한번만 발동한다면
+            {
+                interactionObject.OnClickInteract();
+                isCurClick = true;
+            }
         }
-        else if(!value.isPressed && interactionObject.Continuous())
+        else if(!value.isPressed) //클릭에서 땟을때 발생
         {
-            if (interactionCoroutine != null)
+            if (interactionObject.Continuous()) //반복 상호작용 끝내기
             {
                 StopCoroutine(interactionCoroutine);
-                
             }
-            return;
-        }
-        
-        //한번클릭 한번실행
-        if (value.isPressed && isCurClick == false)
-        {
-            isCurClick = true;
-            if (!curGameObject)
+            else if(isCurClick) //다시 한번 발동할 준비
             {
-                curGameObject = ray.collider.gameObject;
-                interactionObject.OnInteract();
+                isCurClick = false;
             }
-            else
-            {
-                interactionObject.OnInteract();
-                curGameObject.GetComponent<IInteractable>().OnInteract();
-            }
-        }
-        else if (!value.isPressed && isCurClick)
-        {
-            isCurClick = false;
         }
     }
     
+    //반복 상호작용
     IEnumerator InteractionCoroutine()
     {
-        // 마우스 클릭이 끝날 때까지 반복
         while (true)
         {
-            interactionObject.OnInteract();
+            interactionObject.OnClickInteract();
 
-            // 한 프레임 대기
             yield return null;
         }
     }

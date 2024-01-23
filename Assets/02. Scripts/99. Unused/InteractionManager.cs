@@ -29,7 +29,7 @@ public class InteractionManager1 : MonoBehaviour
     {
         if (curInteractable != null)
         {
-            curInteractable.OnInteract();
+            curInteractable.OnClickInteract();
             curInteractGameobject = null;
             curInteractable = null;
         }
@@ -54,7 +54,7 @@ public class InteractionManager1 : MonoBehaviour
             if (curInteractable != null)
             {
                 Debug.Log("Found IInteractable component, calling OnInteract");
-                curInteractable.OnInteract();
+                curInteractable.OnClickInteract();
             }
             else
             {

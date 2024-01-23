@@ -16,6 +16,11 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
     {
         if (isClick)
         {
+            //현재 상호작용중인 객체 업데이트
+            if(InteractionManager.instance.curGameObject)
+                curGameObject = InteractionManager.instance.curGameObject;
+            
+            //UI, 상호작용중 객체 움직임 처리
             Vector2 curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             curGameObject.transform.position = tilemap.WorldToCell(curMouseDirection);
             curGameObject.transform.position = new Vector2(curGameObject.transform.position.x + 0.5f, curGameObject.transform.position.y + 1.5f);
@@ -23,7 +28,10 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
         }
         else
         {
+            //놓았을 때 타일맵에 맞게 UI 정리
             transform.root.position = curGameObject.transform.position;
+            //움직일 객체 초기화
+            curGameObject = null;
         }
     }
 

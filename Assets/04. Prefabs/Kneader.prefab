@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 923941911270015104}
-  - component: {fileID: 7089658895046674891}
-  - component: {fileID: 5323281926226118185}
   - component: {fileID: 8438063390184062536}
+  - component: {fileID: 2869735788086101820}
+  - component: {fileID: 7814624931745556135}
   m_Layer: 0
   m_Name: Kneader
   m_TagString: Untagged
@@ -35,37 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7089658895046674891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710201426206524097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ef4aafe4ebe47119639a525356fd1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactionData: {fileID: 5323281926226118185}
---- !u!114 &5323281926226118185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710201426206524097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee1b2e61cff98426788585ed0bef7761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curIcon: {fileID: 21300000, guid: 0c6dcb87482ac4f3ea08dee5eecd94d8, type: 3}
-  destinationObj: {fileID: 0}
-  installationUI: {fileID: 0}
-  installUI: {fileID: 0}
-  SpawnPrefab: {fileID: 7910195704630170424, guid: 85e1ae48ccf0a474cab40b529bfee4f8, type: 3}
-  isSpawn: 0
 --- !u!61 &8438063390184062536
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -111,6 +80,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2869735788086101820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710201426206524097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd58b2a503964f40904a0c062e8abf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _installationData: {fileID: 7814624931745556135}
+--- !u!114 &7814624931745556135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710201426206524097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2587869cb96ef45d6b0084e438114f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curSpawnPrefab: {fileID: 7910195704630170424, guid: 85e1ae48ccf0a474cab40b529bfee4f8, type: 3}
 --- !u!1 &6863908189260288236
 GameObject:
   m_ObjectHideFlags: 0
