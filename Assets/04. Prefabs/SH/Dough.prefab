@@ -95,9 +95,8 @@ GameObject:
   - component: {fileID: 5604001314771347732}
   - component: {fileID: -6035408046690244030}
   - component: {fileID: -3509603714079849047}
-  - component: {fileID: 3547449971250775926}
-  - component: {fileID: 1800362639206804999}
-  - component: {fileID: -711852678610414528}
+  - component: {fileID: 519946254982639360}
+  - component: {fileID: -3411962121132529617}
   m_Layer: 0
   m_Name: Dough
   m_TagString: Resource
@@ -183,20 +182,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3547449971250775926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7910195704630170424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6cb8d867b5f4e0ab248fdbdf2e8ee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 1800362639206804999}
---- !u!114 &1800362639206804999
+--- !u!114 &519946254982639360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c045c27c1e7064456a11c505bcb9e06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curIcon: {fileID: 21300000, guid: 0c6dcb87482ac4f3ea08dee5eecd94d8, type: 3}
---- !u!114 &-711852678610414528
+  curIcon: {fileID: 0}
+--- !u!114 &-3411962121132529617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,3 +207,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f82251bdcbc4f75b864111a5cf51a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionData: {fileID: 0}

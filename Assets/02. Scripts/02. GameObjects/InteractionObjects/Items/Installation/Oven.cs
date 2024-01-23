@@ -11,7 +11,6 @@ public class Oven : InteractionData
     public GameObject installationUI;
     public GameObject installUI;
     public GameObject SpawnPrefab;
-    public bool isSpawn;
     public override void InitSetting()
     {
         _interactionStat.name = "Oven";
@@ -37,8 +36,10 @@ public class Oven : InteractionData
         if (InteractionManager.instance.curGameObject == gameObject)
         {
             InteractionManager.instance.curGameObject = gameObject;
+            
             installationUI.SetActive(true);
             installUI.gameObject.GetComponentInChildren<InstallationMoveController>().curGameObject = gameObject;
+            
             InstallationBtnController[] installationBtnControllers = installUI.gameObject.GetComponentsInChildren<InstallationBtnController>();
             foreach (var btns in installationBtnControllers)
             {
@@ -46,20 +47,26 @@ public class Oven : InteractionData
             }
 
             if (InteractionManager.instance.targetGameObject)
+            {
                 destinationObj = InteractionManager.instance.targetGameObject;
+                StartCoroutine("SpawnPrefabContinuously");
+            }
         }
         else
         {
             InteractionManager.instance.targetGameObject = gameObject;
         }
-        if(isSpawn == false && destinationObj != null)
+    }
+    
+    
+    private IEnumerator SpawnPrefabContinuously()
+    {
+        while (destinationObj != null)
         {
-            isSpawn = true;
-            while (destinationObj != null)
-            {
-                PoolManager.instacne.SpawnFromPool(SpawnPrefab);
-                Thread.Sleep(2000);
-            }
+            yield return new WaitForSeconds(1f); // 적절한 시간 간격을 설정할 수 있음
+
+            GameObject newSpawnObject = PoolManager.instacne.SpawnFromPool(SpawnPrefab);
+            newSpawnObject.transform.position = gameObject.transform.position;
         }
     }
 }

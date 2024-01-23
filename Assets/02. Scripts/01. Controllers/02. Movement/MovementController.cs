@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class MovementController : MonoBehaviour
 {
-    [FormerlySerializedAs("_itemData")] public InteractionObject interactionData;
+    public InteractionObject interactionData;
     
     private void Awake()
     {
