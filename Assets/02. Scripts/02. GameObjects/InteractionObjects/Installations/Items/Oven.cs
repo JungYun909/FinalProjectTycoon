@@ -14,6 +14,10 @@ public class Oven : InstallationData
 
         stat.haveInventory = true;
         stat.installationInventory = new Queue<GameObject>();
+
+        stat.haveMinigame = true;
+        stat.maxGauge = 100f;
+        stat.decreaseTime = 1f;
     }
 
     public override bool Continuous()

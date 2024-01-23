@@ -21,6 +21,11 @@ public struct InstallationStat
     public bool haveInventory;
     public GameObject curInventoryItem;
     public Queue<GameObject> installationInventory;
+
+    [Header("Minigame")]
+    public bool haveMinigame;
+    public float maxGauge;
+    public float decreaseTime;
 }
 public abstract class InstallationData : MonoBehaviour, IInteractable
 {
