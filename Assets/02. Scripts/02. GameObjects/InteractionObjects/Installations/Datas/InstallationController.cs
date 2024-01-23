@@ -29,6 +29,7 @@ public class InstallationController : MonoBehaviour
                 if (curSpawnObject.GetComponent<MovementController>())
                 {
                     curSpawnObject.GetComponent<MovementController>().Move(_installationData.stat.destinationInstallation, _installationData.stat.moveSpeed);
+                    Debug.Log("afafaf");
                 }
             }
         }

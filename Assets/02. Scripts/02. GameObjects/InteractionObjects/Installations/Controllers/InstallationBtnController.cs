@@ -4,37 +4,39 @@ using UnityEngine;
 
 public class InstallationBtnController : MonoBehaviour
 {
-    public GameObject installationGameObject;
-    public GameObject installationUI;
     
     public void OnDeleteBtn()
     {
-        transform.root.gameObject.SetActive(false);
-        Destroy(installationGameObject);
+        UIManagerTemp.instance.installationSetUI.SetActive(false);
+        Destroy(InteractionManager.instance.curGameObject);
+        InteractionManager.instance.curGameObject = null;
+        InteractionManager.instance.targetGameObject = null;
         //인벤토리에 추가
 
     }
 
     public void OnInstallBtn()
     {
-        transform.root.gameObject.SetActive(false);
-        installationUI.SetActive(true);
+        UIManagerTemp.instance.installationSetUI.SetActive(true);
+        UIManagerTemp.instance.installUI.SetActive(false);
     }
     
     public void DestinationSetBtn()
     {
-        transform.root.gameObject.SetActive(false);
+        UIManagerTemp.instance.installationSetUI.SetActive(false);
     }
 
     public void InstallationSetBtn(GameObject InstallationSetUI)
     {
-        transform.root.gameObject.SetActive(false);
-        InstallationSetUI.SetActive(true);
+        UIManagerTemp.instance.installationSetUI.SetActive(false);
+        UIManagerTemp.instance.installUI.SetActive(true);
+        UIManagerTemp.instance.installUI.transform.position = InteractionManager.instance.curGameObject.transform.position;
+
     }
 
     public void BackBtn()
     {
-        transform.root.gameObject.SetActive(false);
+        UIManagerTemp.instance.installationSetUI.SetActive(false);
         InteractionManager.instance.curGameObject = null;
         InteractionManager.instance.targetGameObject = null;
     }

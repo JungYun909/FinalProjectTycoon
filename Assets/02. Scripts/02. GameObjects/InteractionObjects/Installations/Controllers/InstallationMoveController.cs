@@ -26,7 +26,7 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
             curGameObject.transform.position = new Vector2(curGameObject.transform.position.x + 0.5f, curGameObject.transform.position.y + 1.5f);
             transform.root.position = new Vector2(curMouseDirection.x, curMouseDirection.y + (transform.root.position.y - gameObject.transform.position.y));
         }
-        else
+        else if(curGameObject)
         {
             //놓았을 때 타일맵에 맞게 UI 정리
             transform.root.position = curGameObject.transform.position;

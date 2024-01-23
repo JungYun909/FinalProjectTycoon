@@ -32,6 +32,10 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
             InteractionManager.instance.curGameObject = gameObject; //상호작용 매니저에게 상호작용 중임을 선언
             UIManagerTemp.instance.installationSetUI.SetActive(true); //유아이 매니저가 관리하고 있는 설치물 관리 UI 사용 선언
         }
+        else if(InteractionManager.instance.curGameObject != gameObject)
+        {
+            InteractionManager.instance.curGameObject.GetComponent<InstallationData>().stat.destinationInstallation = gameObject;
+        }
         //상호작용중인 객체가 있을때 설정
     }
 

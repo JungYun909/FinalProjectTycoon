@@ -11,6 +11,6 @@ public class MovementController : MonoBehaviour
     {
         Vector2 moveDirection = (destinationObject.transform.position - gameObject.transform.position).normalized;
         Vector2 moveAmount = moveDirection * moveSpeed * Time.deltaTime;
-        transform.position += new Vector3(transform.position.x + moveAmount.x, transform.position.y + moveAmount.y, transform.position.z);
+        transform.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
     }
 }
