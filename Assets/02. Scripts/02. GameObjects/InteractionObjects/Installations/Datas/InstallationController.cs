@@ -6,6 +6,7 @@ using UnityEngine;
 public class InstallationController : MonoBehaviour
 {
     public InstallationData _installationData;
+    public GameObject curSpawnObject;
     private float spawnTimer;
 
     private void Start()
@@ -23,7 +24,7 @@ public class InstallationController : MonoBehaviour
 
             if (_installationData.stat.destinationInstallation)
             {
-                GameObject curSpawnObject = new GameObject();
+                
                 //인벤토리가 없다면 설치물중 소환물이고 인벤토리가 있다면 제조물이다
                 if (!_installationData.stat.haveInventory)
                 {
