@@ -41,16 +41,22 @@ public class InstallationController : MonoBehaviour
                     curSpawnObject = PoolManager.instacne.SpawnFromPool(_installationData.stat.installationInventory.Dequeue());
                     curSpawnObject.transform.position = gameObject.transform.position + ((_installationData.stat.destinationInstallation.transform.position - gameObject.transform.position).normalized);
                     
-                    _installationData.stat.inventory.RemoveItem();
+                    //현제 오브젝트의 인벤토리를 열고 있다면 유아이를 업데이트 한다
                     if (_installationData.stat.inventory.uiSlots ==
                         UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>())
                     {
                         _installationData.stat.inventory.UpdateUI();
+                        _installationData.stat.inventory.RemoveItem();
+                    }
+                    else //현제 오브젝트의 인벤토리가 아니라면 유아이 업데이트 하지 않는다
+                    {
+                        _installationData.stat.inventory.RemoveItem();
                     }
                 }
 
                 if (curSpawnObject.GetComponent<IngredientData>())
                 {
+                    curSpawnObject.GetComponent<IngredientData>().InitSetting();
                     curSpawnObject.GetComponent<IngredientData>().stat.VisitGameObjects.Add(gameObject);
                 }
 

@@ -7,7 +7,7 @@ public class IngredientController : MonoBehaviour
 {
     public IngredientData _ingredientData;
 
-    private void Start()
+    private void Awake()
     {
         _ingredientData.InitSetting();
     }

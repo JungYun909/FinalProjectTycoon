@@ -50,9 +50,11 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
             else
             {
                 UIManagerTemp.instance.inventoryUI.SetActive(true);
-                stat.inventory.StartSet();
+                if (stat.haveInventory)
+                {
+                    stat.inventory.StartSet();
+                }
             }
-            Debug.Log(stat.haveMinigame);
             //미니게임 가지고 있을경우 세팅
             if (!stat.haveMinigame)
             {
@@ -60,7 +62,6 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
             }
             else
             {
-                Debug.Log("ON");
                 UIManagerTemp.instance.minigameUI.SetActive(true);
             }
         }
@@ -77,11 +78,15 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
         if (stat.curInventoryItem != null)
         {
             stat.installationInventory.Enqueue(stat.curInventoryItem);
-            stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
             if (stat.inventory.uiSlots ==
                 UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>())
             {
+                stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
                 stat.inventory.UpdateUI();
+            }
+            else
+            {
+                stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
             }
             
             stat.curInventoryItem = null;
