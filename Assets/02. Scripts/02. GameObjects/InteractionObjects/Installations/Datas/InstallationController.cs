@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,8 +43,7 @@ public class InstallationController : MonoBehaviour
                     curSpawnObject.transform.position = gameObject.transform.position + ((_installationData.stat.destinationInstallation.transform.position - gameObject.transform.position).normalized);
                     
                     //현제 오브젝트의 인벤토리를 열고 있다면 유아이를 업데이트 한다
-                    if (_installationData.stat.inventory.uiSlots ==
-                        UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>())
+                    if (_installationData.stat.inventory.uiSlots.SequenceEqual(UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>()))
                     {
                         _installationData.stat.inventory.UpdateUI();
                         _installationData.stat.inventory.RemoveItem();

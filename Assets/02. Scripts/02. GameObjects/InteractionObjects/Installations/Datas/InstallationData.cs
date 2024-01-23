@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public struct InstallationStat
@@ -78,8 +79,7 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
         if (stat.curInventoryItem != null)
         {
             stat.installationInventory.Enqueue(stat.curInventoryItem);
-            if (stat.inventory.uiSlots ==
-                UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>())
+            if (stat.inventory.uiSlots.SequenceEqual(UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>()))
             {
                 stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
                 stat.inventory.UpdateUI();
