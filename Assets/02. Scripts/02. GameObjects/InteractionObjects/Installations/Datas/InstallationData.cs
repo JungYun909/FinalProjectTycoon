@@ -16,7 +16,11 @@ public struct InstallationStat
     public bool canSpawn;
     public GameObject spawnPrefab;
     public float spawnDelay;
-    public float moveSpeed;
+
+    [Header("Inventory")] 
+    public bool haveInventory;
+    public GameObject curInventoryItem;
+    public Queue<GameObject> installationInventory;
 }
 public abstract class InstallationData : MonoBehaviour, IInteractable
 {
@@ -42,6 +46,10 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
 
     public virtual void OnColliderInteract()
     {
-        Debug.Log("대상 오브젝트 인벤토리에");
+        if (stat.curInventoryItem != null)
+        {
+            stat.installationInventory.Enqueue(stat.curInventoryItem);
+            stat.curInventoryItem = null;
+        }
     }
 }

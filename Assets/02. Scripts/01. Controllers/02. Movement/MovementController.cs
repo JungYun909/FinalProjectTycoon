@@ -9,10 +9,10 @@ public class MovementController : MonoBehaviour
 {
     private GameObject curDestinationObject;
     private float curMoveSpeed;
-    public void Move(GameObject destinationObject, float moveSpeed)
+    public void Move(GameObject destinationObject)
     {
         curDestinationObject = destinationObject;
-        curMoveSpeed = moveSpeed;
+        curMoveSpeed = gameObject.GetComponent<IngredientData>().stat.moveSpeed;
         StartCoroutine("Movement");
     }
 

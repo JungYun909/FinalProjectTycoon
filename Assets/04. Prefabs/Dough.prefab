@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: -6035408046690244030}
   - component: {fileID: -3509603714079849047}
   - component: {fileID: -3411962121132529617}
+  - component: {fileID: -6148232513356144171}
+  - component: {fileID: 1710482555497272006}
   m_Layer: 0
   m_Name: Dough
   m_TagString: Resource
@@ -191,5 +193,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74f82251bdcbc4f75b864111a5cf51a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6148232513356144171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910195704630170424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0a0854732fb45af91e42b00387331d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ingredientData: {fileID: 1710482555497272006}
+--- !u!114 &1710482555497272006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910195704630170424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7fc8a022dd943bf908c919ae4a486d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
