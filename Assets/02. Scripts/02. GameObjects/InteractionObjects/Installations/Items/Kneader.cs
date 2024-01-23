@@ -13,7 +13,7 @@ public class Kneader : InstallationData
         stat.canSpawn = true;
         stat.spawnPrefab = curSpawnPrefab;
         stat.spawnDelay = 3f;
-        stat.moveSpeed = 0.05f;
+        stat.moveSpeed = 2f;
     }
 
     public override bool Continuous()
