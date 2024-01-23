@@ -7,12 +7,17 @@ public struct IngredientStat
     [Header("Info")] 
     public string name;
     public string discription;
+    public Sprite icon;
 
     [Header("Movement")]
     public float moveSpeed;
 
     [Header("VisitInformation")]
     public List<GameObject> VisitGameObjects;
+
+    [Header("Stacking")]
+    public bool canStack;
+    public int maxStackAmount;
 }
 public abstract class IngredientData : MonoBehaviour, IInteractable
 {

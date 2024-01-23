@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIManagerTemp : MonoBehaviour
@@ -9,6 +10,10 @@ public class UIManagerTemp : MonoBehaviour
     
     public GameObject installationSetUI;
     public GameObject installUI;
+    public GameObject inventoryUI;
+    public GameObject minigameUI;
+    public Slider minigameSlider;
+    [FormerlySerializedAs("SpawnSlider")] public Slider spawnSlider;
 
     private void Awake()
     {
@@ -19,6 +24,8 @@ public class UIManagerTemp : MonoBehaviour
     {
         installationSetUI.gameObject.SetActive(false);
         installUI.gameObject.SetActive(false);
+        inventoryUI.gameObject.SetActive(false);
+        minigameUI.gameObject.SetActive(false);
     }
 
     public void UIToggle(string uiName)

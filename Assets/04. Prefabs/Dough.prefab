@@ -220,3 +220,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7fc8a022dd943bf908c919ae4a486d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doughIcon: {fileID: 21300000, guid: 0c6dcb87482ac4f3ea08dee5eecd94d8, type: 3}
