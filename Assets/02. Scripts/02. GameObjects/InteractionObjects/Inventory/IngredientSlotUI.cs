@@ -16,7 +16,7 @@ public class IngredientSlotUI : MonoBehaviour
     {
         curSlot = slot;
         icon.gameObject.SetActive(true);
-        icon.sprite = slot.item.stat.icon;
+        // icon.sprite = slot.item.stat.icon;
         quatityText.text = slot.quantity > 1 ? slot.quantity.ToString() : string.Empty;
         nameText.text = slot.quantity >= 1 ? slot.name.ToString() : string.Empty;
     }

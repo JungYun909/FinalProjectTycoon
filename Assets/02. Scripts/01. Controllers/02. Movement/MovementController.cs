@@ -12,7 +12,7 @@ public class MovementController : MonoBehaviour
     public void Move(GameObject destinationObject)
     {
         curDestinationObject = destinationObject;
-        curMoveSpeed = gameObject.GetComponent<IngredientData>().stat.moveSpeed;
+        // curMoveSpeed = gameObject.GetComponent<IngredientData>().stat.moveSpeed;
         StartCoroutine("Movement");
     }
 

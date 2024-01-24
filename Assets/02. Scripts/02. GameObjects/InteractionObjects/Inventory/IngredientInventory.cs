@@ -67,25 +67,25 @@ public class IngredientInventory : MonoBehaviour
 
     public void AddItem(IngredientData item)
     {
-        if (item.stat.canStack)
-        {
-            IngredientSlot slotToStackTo = GetItemStack(item);
-            if (slotToStackTo != null)
-            {
-                slotToStackTo.quantity++;
-                return;
-            }
-        }
-
-        IngredientSlot emptySlot = GetEmptySlot();
-
-        if (emptySlot != null)
-        {
-            emptySlot.item = item;
-            emptySlot.quantity = 1;
-            emptySlot.name = item.stat.name;
-            return;
-        }
+        // if (item.stat.canStack)
+        // {
+        //     IngredientSlot slotToStackTo = GetItemStack(item);
+        //     if (slotToStackTo != null)
+        //     {
+        //         slotToStackTo.quantity++;
+        //         return;
+        //     }
+        // }
+        //
+        // IngredientSlot emptySlot = GetEmptySlot();
+        //
+        // if (emptySlot != null)
+        // {
+        //     emptySlot.item = item;
+        //     emptySlot.quantity = 1;
+        //     emptySlot.name = item.stat.name;
+        //     return;
+        // }
 
         Debug.Log("칸이 없어요");
     }
@@ -101,16 +101,16 @@ public class IngredientInventory : MonoBehaviour
         }
     }
 
-    IngredientSlot GetItemStack(IngredientData item)
-    {
-        for (int i = 0; i < ingredientSlots.Length; i++)
-        {
-            if (ingredientSlots[i].item == item && ingredientSlots[i].quantity < item.stat.maxStackAmount)
-                return ingredientSlots[i];
-        }
-
-        return null;
-    }
+    // IngredientSlot GetItemStack(IngredientData item)
+    // {
+    //     for (int i = 0; i < ingredientSlots.Length; i++)
+    //     {
+    //         if (ingredientSlots[i].item == item && ingredientSlots[i].quantity < item.stat.maxStackAmount)
+    //             return ingredientSlots[i];
+    //     }
+    //
+    //     return null;
+    // }
 
     IngredientSlot GetEmptySlot()
     {

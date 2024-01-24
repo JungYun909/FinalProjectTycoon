@@ -12,14 +12,11 @@ public interface IInteractable
 }
 public class InteractionManager : MonoBehaviour
 {
-    //상호작용 오브젝트 정보저장
-    public GameObject curGameObject;
-    public GameObject targetGameObject; 
-    private IInteractable interactionObject;
-    
     //상호작용에 필요한 변수저장
+    private IInteractable interactionObject;
     private Vector2 curMouseDirection;
     private Coroutine interactionCoroutine;
+    private bool isCurClick = false;
     
     //임시 싱글톤
     public static InteractionManager instance;
@@ -37,9 +34,6 @@ public class InteractionManager : MonoBehaviour
     //마우스 눌렀을때 상호작용 관리
     public void OnClick(InputValue value)
     {
-        //정보 초기화
-        bool isCurClick = false;
-        
         //레이로 상호작용 객체 감지시도
         RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
         
@@ -72,6 +66,8 @@ public class InteractionManager : MonoBehaviour
             {
                 isCurClick = false;
             }
+
+            interactionObject = null;
         }
     }
     

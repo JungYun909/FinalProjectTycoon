@@ -68,30 +68,30 @@ public class Inventory : MonoBehaviour
         return UIManagerTemp.instance.installationSetUI.activeInHierarchy;
     }
 
-    public void AddItem(IngredientData item)
-    {
-        if(item.stat.canStack)
-        {
-            ItemSlot slotToStackTo = GetItemStack(item);
-            if(slotToStackTo != null)
-            {
-                slotToStackTo.quantity++;
-                return;
-            }
-        }
-
-        ItemSlot emptySlot = GetEmptySlot();
-
-        if(emptySlot != null)
-        {
-            emptySlot.item = item;
-            emptySlot.quantity = 1;
-            emptySlot.name = item.stat.name;
-            return;
-        }
-        
-        Debug.Log("칸이 없어요");
-    }
+    // public void AddItem(IngredientData item)
+    // {
+    //     if(item.stat.canStack)
+    //     {
+    //         ItemSlot slotToStackTo = GetItemStack(item);
+    //         if(slotToStackTo != null)
+    //         {
+    //             slotToStackTo.quantity++;
+    //             return;
+    //         }
+    //     }
+    //
+    //     ItemSlot emptySlot = GetEmptySlot();
+    //
+    //     if(emptySlot != null)
+    //     {
+    //         emptySlot.item = item;
+    //         emptySlot.quantity = 1;
+    //         emptySlot.name = item.stat.name;
+    //         return;
+    //     }
+    //     
+    //     Debug.Log("칸이 없어요");
+    // }
 
     public void UpdateUI()
     {
@@ -104,16 +104,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    ItemSlot GetItemStack(IngredientData item)
-    {
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            if (itemSlots[i].item == item && itemSlots[i].quantity < item.stat.maxStackAmount)
-                return itemSlots[i];
-        }
-
-        return null;
-    }
+    // ItemSlot GetItemStack(IngredientData item)
+    // {
+    //     for (int i = 0; i < itemSlots.Length; i++)
+    //     {
+    //         if (itemSlots[i].item == item && itemSlots[i].quantity < item.stat.maxStackAmount)
+    //             return itemSlots[i];
+    //     }
+    //
+    //     return null;
+    // }
 
     ItemSlot GetEmptySlot()
     {
