@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 public class MovementController : MonoBehaviour
 {
     private GameObject curDestinationObject;
-    private float curMoveSpeed;
     public void Move(GameObject destinationObject)
     {
         curDestinationObject = destinationObject;
@@ -21,7 +20,7 @@ public class MovementController : MonoBehaviour
         while (Vector2.Distance(curDestinationObject.transform.position, gameObject.transform.position) > 0.1f)
         {
             Vector2 moveDirection = (curDestinationObject.transform.position - gameObject.transform.position).normalized;
-            Vector2 moveAmount = moveDirection * curMoveSpeed * Time.deltaTime;
+            Vector2 moveAmount = moveDirection * gameObject.GetComponent<IngredientController>()._ingredientData.moveSpeed * Time.deltaTime;
             transform.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
 
             yield return null;

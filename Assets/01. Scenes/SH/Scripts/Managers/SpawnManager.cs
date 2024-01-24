@@ -60,9 +60,10 @@ public class SpawnManager : MonoBehaviour
                 break;
         }
 
-        if (curSpawnObj.GetComponent<IngredientData>().canMove)
+        if (spawningInstallationObj.GetComponent<InstallationController>() != null && curSpawnObj.GetComponent<IngredientController>()._ingredientData.canMove)
         {
-            curSpawnObj.AddComponent<MovementController>().Move(spawningInstallationObj.GetComponent<InstallationData>().destinationInstallation);
+            MovementController movementController = curSpawnObj.AddComponent<MovementController>();
+            movementController.Move(spawningInstallationObj.GetComponent<InstallationController>()._installationData.destinationInstallation);
         }
 
     }
