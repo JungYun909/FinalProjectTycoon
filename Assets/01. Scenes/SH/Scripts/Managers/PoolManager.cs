@@ -38,12 +38,22 @@ public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해
     }
     public GameObject SpawnFromPool(GameObject addGameObject)
     {
-        if (!poolDictionary.ContainsKey(addGameObject.tag) || poolDictionary[addGameObject.tag].All(o => o.activeSelf))
+        if (IsMakeNew(addGameObject))
         {
             return AddTagToDictionary(addGameObject);
         }
         GameObject obj = poolDictionary[addGameObject.tag].Dequeue();
         obj.SetActive(true);
         return obj;
+    }
+
+    public bool IsMakeNew(GameObject addGameObject)
+    {
+        if (!poolDictionary.ContainsKey(addGameObject.tag) || poolDictionary[addGameObject.tag].All(o => o.activeSelf))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

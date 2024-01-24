@@ -36,29 +36,7 @@ public class SpawnManager : MonoBehaviour
         spawnInstallationObj.AddComponent<InstallationController>()._installationData = installationData;
         InstallationAddCompornant(spawnInstallationObj);
     }
-    // public void SpawnKneader()
-    // {
-    //     GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
-    //     spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
-    //     spawnInstallationObj.AddComponent<InstallationController>()._installationData = kneader;
-    //     InstallationAddCompornant(spawnInstallationObj);
-    // }
-    //
-    // public void SpawnOven()
-    // {
-    //     GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
-    //     spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
-    //     spawnInstallationObj.AddComponent<InstallationController>()._installationData = oven;
-    //     InstallationAddCompornant(spawnInstallationObj);
-    // }
-    //
-    // public void SpawnConbinator()
-    // {
-    //     GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
-    //     spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
-    //     spawnInstallationObj.AddComponent<InstallationController>()._installationData = conbinator;
-    //     InstallationAddCompornant(spawnInstallationObj);
-    // }
+
 
     private void InstallationAddCompornant(GameObject curObject)
     {
@@ -79,31 +57,70 @@ public class SpawnManager : MonoBehaviour
 
     public void Spawn(GameObject spawningInstallationObj, string spawnObjName)
     {
-        //풀매니저에서 소환하고 
+        UpdateObjTag(spawnObjName);
+        
         GameObject curSpawnObj = PoolManager.instacne.SpawnFromPool(ingredientObj);
-        curSpawnObj.transform.position = spawningInstallationObj.transform.position + ((spawningInstallationObj.GetComponent<InstallationController>()._installationData.destinationInstallation.transform.position - spawningInstallationObj.transform.position).normalized);
+        
+        if (PoolManager.instacne.IsMakeNew(curSpawnObj))
+            IngredientAddCompornant(curSpawnObj, spawnObjName);
+        
+        SpawnObjPositionSet(spawningInstallationObj, curSpawnObj);
+
+        SpawnObjMovementSet(spawningInstallationObj, curSpawnObj);
+        
+        UpdateObjTag(spawnObjName);
+    }
+
+    private void IngredientAddCompornant(GameObject curSpawnObj, string spawnObjName)
+    {
         curSpawnObj.AddComponent<IngredientOnColliderController>();
         
         switch (spawnObjName)
         {
             case "Kneader":
                 curSpawnObj.AddComponent<IngredientController>()._ingredientData = dough;
-                curSpawnObj.tag = "Dough";
                 break;
             case "ChocolateMachine":
                 curSpawnObj.AddComponent<IngredientController>()._ingredientData = chocolate;
-                curSpawnObj.tag = "Ingredient";
                 break;
             default:
                 Debug.Log("Does not exist");
                 break;
         }
+    }
 
+    public void SpawnObjPositionSet(GameObject spawningInstallationObj, GameObject curSpawnObj)
+    {
+        curSpawnObj.transform.position = spawningInstallationObj.transform.position + ((spawningInstallationObj.GetComponent<InstallationController>()._installationData.destinationInstallation.transform.position - spawningInstallationObj.transform.position).normalized);
+
+    }
+
+    public void SpawnObjMovementSet(GameObject spawningInstallationObj,GameObject curSpawnObj)
+    {
         if (spawningInstallationObj.GetComponent<InstallationController>() != null && curSpawnObj.GetComponent<IngredientController>()._ingredientData.canMove)
         {
             MovementController movementController = curSpawnObj.AddComponent<MovementController>();
             movementController.Move(spawningInstallationObj.GetComponent<InstallationController>()._installationData.destinationInstallation);
         }
+    }
 
+    private void UpdateObjTag(string spawnObjName)
+    {
+        if (ingredientObj.tag == "Untagged")
+        {
+            switch (spawnObjName)
+            {
+                case "Kneader":
+                    ingredientObj.tag = "Dough";
+                    break;
+                default:
+                    ingredientObj.tag = "Ingredient";
+                    break;
+            }
+        }
+        else
+        {
+            ingredientObj.tag = "Untagged";
+        }
     }
 }
