@@ -11,9 +11,11 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // 일반적인 UI창 - uiStack으로 관리할 대상들
     private Stack<UIBase> uiStack = new Stack<UIBase>();   // UI창 스택
 
-
     [SerializeField] private float dailyResultOpenInterval = 60f; // 정산창을 띄우기 위한 주기. 서버사용 없을 땐 약 5분 / 서버일 땐 하루단위 (86400초)로 설6
 
+    [Header("For Inventory UI Update")]
+    [SerializeField] private GameObject itemSlotPrefab;
+    [SerializeField] private GameObject itemLinePrefab;
 
     //UI오픈에 반응하는 델리게이트 / 이벤트 선언하기 위한 필드
     public delegate void DailyResultWindowOn();
@@ -36,7 +38,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
 
     public void OpenWindow(UIBase uiPrefab)   //UI창을 열기 위한 메서드. 버튼에 스크립트로 이벤트리스너를 부여하는 방식으로 사용해야 할듯함. 
     {
-        Debug.Log($"OpenWindow called in UIManager with prefab: {uiPrefab.name}");
         UIBase uiInstance = Instantiate(uiPrefab, transform).GetComponent<UIBase>();
         if (uiStack.Count > 0)    //처음 열리는 창이 아닐 때에는 
         {
@@ -102,7 +103,35 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         currentDailyResultWindow.Initialize();  // 
         OnDailyWindowOpen?.Invoke();    // 일일정산창 열리면 이벤트를 발생시킴. 여기서는 
     }
-   
+
+    public void UpdateInventoryUI(Dictionary<ItemSO, int> items, GameObject gameObject)
+    {
+        UIToChange uiToChange = gameObject.GetComponentInChildren<UIToChange>();
+        Transform contentPanel = uiToChange.transform; 
+        foreach (Transform child in contentPanel)
+        {
+            Destroy(child.gameObject);
+        }
+
+        GameObject currentLine = null;
+        int slotIndex = 0;
+
+        foreach (var entry in items)
+        {
+            // 새로운 라인이 필요한 경우 생성
+            if (slotIndex % 5 == 0)
+            {
+                currentLine = Instantiate(itemLinePrefab, contentPanel);
+            }
+
+            // 아이템 슬롯 생성 및 설정
+            GameObject slotObject = Instantiate(itemSlotPrefab, currentLine.transform);
+            ItemSlotInfo slotInfo = slotObject.GetComponent<ItemSlotInfo>();
+            slotInfo.Setup(entry.Key, entry.Value);
+
+            slotIndex++;
+        }
+    }
 }
 
 

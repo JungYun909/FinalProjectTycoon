@@ -8,7 +8,7 @@ public class TemporaryIInteractable : MonoBehaviour, IInteractable
     [SerializeField] UIBase uiToOpen;
     public void OnInteract()
     {
-
+        
         Debug.Log("Interacted with this object"); // 상호작용 로깅
 	    UIManager uiManager = FindObjectOfType<UIManager>();
         if (uiManager != null)
