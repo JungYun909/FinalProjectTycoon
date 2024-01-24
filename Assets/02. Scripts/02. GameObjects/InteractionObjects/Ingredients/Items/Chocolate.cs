@@ -15,8 +15,8 @@ public class Chocolate : IngredientData
 
         stat.VisitGameObjects = new List<GameObject>();
 
-        stat.canStack = false;
-        stat.maxStackAmount = 1;
+        stat.canStack = true;
+        stat.maxStackAmount = 100;
     }
 
     public override bool Continuous()

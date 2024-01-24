@@ -34,6 +34,13 @@ public abstract class IngredientData : MonoBehaviour, IInteractable
 
     public void OnColliderInteract()
     {
-        PoolManager.instacne.DeSpawnFromPool(gameObject);
+        if(gameObject.tag == "Dough")
+        {
+            gameObject.SetActive(false);
+        }
+        else if(gameObject.tag == "Resource")
+        {
+            PoolManager.instacne.DeSpawnFromPool(gameObject);
+        }
     }
 }

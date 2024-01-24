@@ -24,6 +24,12 @@ public struct InstallationStat
     public Inventory inventory;
     public Queue<GameObject> installationInventory;
 
+    [Header("IngredientInventory")]
+    public bool haveIngredientInventory;
+    public GameObject curIngredientInventoryItem;
+    public IngredientInventory ingredientInventory;
+    public Queue<GameObject> installationIngredientInventory;
+
     [Header("Minigame")]
     public bool haveMinigame;
     public float curGauge;
@@ -56,6 +62,19 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
                     stat.inventory.StartSet();
                 }
             }
+            //재료인벤토리를 가지고 있을경우 세팅
+            if (!stat.haveIngredientInventory)
+            {
+                UIManagerTemp.instance.ingredientInventoryUI.SetActive(false);
+            }
+            else
+            {
+                UIManagerTemp.instance.ingredientInventoryUI.SetActive(true);
+                if (stat.haveIngredientInventory)
+                {
+                    stat.ingredientInventory.StartSet();
+                }
+            }
             //미니게임 가지고 있을경우 세팅
             if (!stat.haveMinigame)
             {
@@ -76,20 +95,32 @@ public abstract class InstallationData : MonoBehaviour, IInteractable
 
     public virtual void OnColliderInteract()
     {
-        if (stat.curInventoryItem != null)
+        if (stat.haveInventory)
         {
-            stat.installationInventory.Enqueue(stat.curInventoryItem);
-            if (stat.inventory.uiSlots.SequenceEqual(UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>()))
+            if(stat.curInventoryItem != null)
             {
-                stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
-                stat.inventory.UpdateUI();
+                if (stat.installationInventory.Count < 5)
+                {
+                    stat.installationInventory.Enqueue(stat.curInventoryItem);
+                    stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
+                    if (InteractionManager.instance.curGameObject == gameObject)
+                    {
+                        stat.inventory.UpdateUI();
+                    }
+                }
+                stat.curInventoryItem = null;
             }
-            else
+
+            if(stat.curIngredientInventoryItem != null && stat.haveIngredientInventory)
             {
-                stat.inventory.AddItem(stat.curInventoryItem.GetComponent<IngredientData>());
+                stat.installationIngredientInventory.Enqueue(stat.curIngredientInventoryItem);
+                stat.ingredientInventory.AddItem(stat.curIngredientInventoryItem.GetComponent<IngredientData>());
+                if (InteractionManager.instance.curGameObject == gameObject)
+                {
+                    stat.ingredientInventory.UpdateUI();
+                }
+                stat.curIngredientInventoryItem = null;
             }
-            
-            stat.curInventoryItem = null;
         }
     }
 }

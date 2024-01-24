@@ -18,6 +18,13 @@ public class InstallationController : MonoBehaviour
         {
             UIManagerTemp.instance.minigameSlider.value = UIManagerTemp.instance.minigameSlider.maxValue;
         }
+        if(_installationData.stat.haveInventory)
+        {
+            _installationData.OnClickInteract();
+            UIManagerTemp.instance.installationSetUI.SetActive(false);
+            InteractionManager.instance.curGameObject = null;
+            InteractionManager.instance.targetGameObject = null;
+        }
     }
 
     private void Update()
@@ -39,31 +46,57 @@ public class InstallationController : MonoBehaviour
                 }
                 else if(_installationData.stat.installationInventory.Count > 0)
                 {
-                    curSpawnObject = PoolManager.instacne.SpawnFromPool(_installationData.stat.installationInventory.Dequeue());
-                    curSpawnObject.transform.position = gameObject.transform.position + ((_installationData.stat.destinationInstallation.transform.position - gameObject.transform.position).normalized);
+                    if(!_installationData.stat.haveIngredientInventory)
+                    {
+                        curSpawnObject = _installationData.stat.installationInventory.Dequeue();
+                        curSpawnObject.SetActive(true);
+                        curSpawnObject.transform.position = gameObject.transform.position + ((_installationData.stat.destinationInstallation.transform.position - gameObject.transform.position).normalized);
+
+                        //현제 오브젝트의 인벤토리를 열고 있다면 유아이를 업데이트 한다
+                        _installationData.stat.inventory.RemoveItem();
+                        if (InteractionManager.instance.curGameObject == gameObject)
+                        {
+                            _installationData.stat.inventory.UpdateUI();
+                        }
+                    }
+                    else if(_installationData.stat.installationIngredientInventory.Count > 0)
+                    {
+                        curSpawnObject = _installationData.stat.installationInventory.Dequeue();
+                        curSpawnObject.SetActive(true);
+                        // 반죽에 재료이미지 추가
+                        curSpawnObject.transform.position = gameObject.transform.position + ((_installationData.stat.destinationInstallation.transform.position - gameObject.transform.position).normalized);
+
+                        //현제 오브젝트의 인벤토리를 열고 있다면 유아이를 업데이트 한다
+                        _installationData.stat.inventory.RemoveItem();
+                        _installationData.stat.ingredientInventory.RemoveItem();
+                        if(InteractionManager.instance.curGameObject == gameObject)
+                        {
+                            _installationData.stat.inventory.UpdateUI();
+                            _installationData.stat.ingredientInventory.UpdateUI();
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("재료가 부족합니다");
+                        return;
+                    }
+
                     
-                    //현제 오브젝트의 인벤토리를 열고 있다면 유아이를 업데이트 한다
-                    if (_installationData.stat.inventory.uiSlots.SequenceEqual(UIManagerTemp.instance.installationSetUI.GetComponentsInChildren<ItemSlotUI>()))
-                    {
-                        _installationData.stat.inventory.UpdateUI();
-                        _installationData.stat.inventory.RemoveItem();
-                    }
-                    else //현제 오브젝트의 인벤토리가 아니라면 유아이 업데이트 하지 않는다
-                    {
-                        _installationData.stat.inventory.RemoveItem();
-                    }
+
                 }
 
-                if (curSpawnObject.GetComponent<IngredientData>())
+                if (curSpawnObject.GetComponent<IngredientData>() != null)
                 {
                     curSpawnObject.GetComponent<IngredientData>().InitSetting();
                     curSpawnObject.GetComponent<IngredientData>().stat.VisitGameObjects.Add(gameObject);
                 }
 
-                if (curSpawnObject.GetComponent<MovementController>())
+                if (curSpawnObject.GetComponent<MovementController>() != null)
                 {
                     curSpawnObject.GetComponent<MovementController>().Move(_installationData.stat.destinationInstallation);
                 }
+
+
             }
         }
         //스폰하는 게이지 업데이트

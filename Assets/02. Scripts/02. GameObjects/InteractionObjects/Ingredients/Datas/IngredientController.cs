@@ -22,8 +22,22 @@ public class IngredientController : MonoBehaviour
 
         if (other.gameObject.GetComponent<IInteractable>() != null && other.gameObject.GetComponent<InstallationData>() != null)
         {
-            other.gameObject.GetComponent<InstallationData>().stat.curInventoryItem = gameObject;
-            other.gameObject.GetComponent<IInteractable>().OnColliderInteract();
+            if(gameObject.tag == "Dough")
+            {
+                if(other.gameObject.GetComponent<InstallationData>().stat.curInventoryItem == null)
+                {
+                    other.gameObject.GetComponent<InstallationData>().stat.curInventoryItem = gameObject;
+                    other.gameObject.GetComponent<IInteractable>().OnColliderInteract();
+                }
+            }
+            else if(gameObject.tag == "Resource")
+            {
+                if(other.gameObject.GetComponent<InstallationData>().stat.curIngredientInventoryItem == null)
+                {
+                    other.gameObject.GetComponent<InstallationData>().stat.curIngredientInventoryItem = gameObject;
+                    other.gameObject.GetComponent<IInteractable>().OnColliderInteract();
+                }
+            }
         }
     }
 }

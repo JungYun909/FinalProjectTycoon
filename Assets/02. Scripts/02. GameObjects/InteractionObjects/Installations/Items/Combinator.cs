@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Oven : InstallationData
+public class Combinator : InstallationData
 {
     public Inventory curInventory;
     public IngredientInventory curIngredientInventory;
     public override void InitSetting()
     {
-        stat.name = "Oven";
-        stat.discription = "Cook until golden brown";
+        stat.name = "Combinator";
+        stat.discription = "Combine the ingredients";
 
         stat.destinationInstallation = null;
 
@@ -22,14 +22,14 @@ public class Oven : InstallationData
         stat.inventory = curInventory;
         stat.installationInventory = new Queue<GameObject>();
 
-        stat.haveIngredientInventory = false;
+        stat.haveIngredientInventory = true;
         stat.curIngredientInventoryItem = null;
         stat.ingredientInventory = curIngredientInventory;
         stat.installationIngredientInventory = new Queue<GameObject>();
 
-        stat.haveMinigame = true;
+        stat.haveMinigame = false;
         stat.curGauge = 100f;
-        stat.decreaseTime = 1f;
+        stat.decreaseTime = 0f;
     }
 
     public override bool Continuous()
