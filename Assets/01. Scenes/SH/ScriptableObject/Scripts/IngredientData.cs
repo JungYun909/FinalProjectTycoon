@@ -30,14 +30,14 @@ public class IngredientData : ScriptableObject
     [Header("Movement")]
     public bool canMove;
     public float moveSpeed;
+    
+    [Header("Stacking")]
+    public bool canStack;
+    public int maxStackAmount;
 
     // [Header("VisitInformation")]
     // public List<GameObject> VisitGameObjects;
-    //
-    // [Header("Stacking")]
-    // public bool canStack;
-    // public int maxStackAmount;
-
+    
     // public void OnClickInteract()
     // {
     //     //음식을 클릭했을때 뭔가가 일어난다면

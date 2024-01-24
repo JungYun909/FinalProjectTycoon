@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour
     [Header("InstallationSO")]
     public InstallationData kneader;
     public InstallationData oven;
+    public InstallationData conbinator;
+    public InstallationData ChocolateMachine;
 
     [Header("IngredientSO")]
     public IngredientData dough;
@@ -27,33 +29,70 @@ public class SpawnManager : MonoBehaviour
         instance = this;
     }
 
-    public void SpawnKneader()
+    public void SpawnInstallaion(InstallationData installationData)
     {
         GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
         spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
-        spawnInstallationObj.AddComponent<InstallationController>()._installationData = kneader;
-        spawnInstallationObj.AddComponent<InstallationSpawnController>();
+        spawnInstallationObj.AddComponent<InstallationController>()._installationData = installationData;
+        InstallationAddCompornant(spawnInstallationObj);
     }
-    
-    public void SpawnOven()
+    // public void SpawnKneader()
+    // {
+    //     GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
+    //     spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
+    //     spawnInstallationObj.AddComponent<InstallationController>()._installationData = kneader;
+    //     InstallationAddCompornant(spawnInstallationObj);
+    // }
+    //
+    // public void SpawnOven()
+    // {
+    //     GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
+    //     spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
+    //     spawnInstallationObj.AddComponent<InstallationController>()._installationData = oven;
+    //     InstallationAddCompornant(spawnInstallationObj);
+    // }
+    //
+    // public void SpawnConbinator()
+    // {
+    //     GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
+    //     spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
+    //     spawnInstallationObj.AddComponent<InstallationController>()._installationData = conbinator;
+    //     InstallationAddCompornant(spawnInstallationObj);
+    // }
+
+    private void InstallationAddCompornant(GameObject curObject)
     {
-        GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
-        spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
-        spawnInstallationObj.AddComponent<InstallationController>()._installationData = oven;
+        if(curObject.GetComponent<InstallationController>() == null)
+            return;
+
+        InstallationController installationController = curObject.GetComponent<InstallationController>();
+        
+        if(installationController._installationData.canSpawn)
+            curObject.AddComponent<InstallationSpawnController>();
+
+        if (installationController._installationData.haveDoughInventory)
+        {
+            curObject.AddComponent<Inventory>();
+            curObject.AddComponent<InventoryController>();
+        }
     }
 
     public void Spawn(GameObject spawningInstallationObj, string spawnObjName)
     {
+        //풀매니저에서 소환하고 
         GameObject curSpawnObj = PoolManager.instacne.SpawnFromPool(ingredientObj);
         curSpawnObj.transform.position = spawningInstallationObj.transform.position + ((spawningInstallationObj.GetComponent<InstallationController>()._installationData.destinationInstallation.transform.position - spawningInstallationObj.transform.position).normalized);
-
+        curSpawnObj.AddComponent<IngredientOnColliderController>();
+        
         switch (spawnObjName)
         {
             case "Kneader":
                 curSpawnObj.AddComponent<IngredientController>()._ingredientData = dough;
+                curSpawnObj.tag = "Dough";
                 break;
             case "ChocolateMachine":
                 curSpawnObj.AddComponent<IngredientController>()._ingredientData = chocolate;
+                curSpawnObj.tag = "Ingredient";
                 break;
             default:
                 Debug.Log("Does not exist");

@@ -6,12 +6,13 @@ using UnityEngine.Serialization;
 
 public class InstallationManager : MonoBehaviour
 {
-    private InstallationData _installationData;
-    
     public GameObject installationSetUI;
     public GameObject installationManageController;
+    public GameObject doughInventoryUI;
+    public GameObject ingredientInventoryUI;
 
     public GameObject curInstallation;
+    private InstallationController curInstallationController;
 
     public static InstallationManager instance;
 
@@ -24,6 +25,28 @@ public class InstallationManager : MonoBehaviour
     {
         installationSetUI.SetActive(false);
         installationManageController.SetActive(false);
+        doughInventoryUI.SetActive(false);
+        ingredientInventoryUI.SetActive(false);
+    }
+
+    public void OnInstallationSetUI()
+    {
+        if(curInstallation.GetComponent<InstallationController>() == null)
+            return;
+            
+        curInstallationController = curInstallation.GetComponent<InstallationController>();
+        
+        installationSetUI.SetActive(true);
+        
+        if(curInstallationController._installationData.haveDoughInventory)
+            doughInventoryUI.SetActive(true);
+        else
+            doughInventoryUI.SetActive(false);
+        
+        if(curInstallationController._installationData.haveIngredientInventory)
+            ingredientInventoryUI.SetActive(true);
+        else
+            ingredientInventoryUI.SetActive(false);
     }
 
     public void ManageInstallationBtn()

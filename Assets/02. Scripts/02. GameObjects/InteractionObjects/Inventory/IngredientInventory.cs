@@ -39,7 +39,7 @@ public class IngredientInventory : MonoBehaviour
             isSet = true;
         }
 
-        UpdateUI();
+        // UpdateUI();
     }
 
     public void OnInventoryButton()
@@ -90,16 +90,16 @@ public class IngredientInventory : MonoBehaviour
         Debug.Log("칸이 없어요");
     }
 
-    public void UpdateUI()
-    {
-        for (int i = 0; i < ingredientSlots.Length; i++)
-        {
-            if (ingredientSlots[i].item != null)
-                uiSlots[i].Set(ingredientSlots[i]);
-            else
-                uiSlots[i].Clear();
-        }
-    }
+    // public void UpdateUI()
+    // {
+    //     for (int i = 0; i < ingredientSlots.Length; i++)
+    //     {
+    //         if (ingredientSlots[i].item != null)
+    //             uiSlots[i].Set(ingredientSlots[i]);
+    //         else
+    //             uiSlots[i].Clear();
+    //     }
+    // }
 
     // IngredientSlot GetItemStack(IngredientData item)
     // {

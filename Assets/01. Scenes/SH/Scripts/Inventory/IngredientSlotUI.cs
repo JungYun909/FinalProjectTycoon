@@ -9,14 +9,14 @@ public class IngredientSlotUI : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI quatityText;
     public TextMeshProUGUI nameText;
-    private IngredientSlot curSlot;
+    private ItemSlot curSlot;
 
     public int index;
-    public void Set(IngredientSlot slot)
+    public void Set(ItemSlot slot)
     {
         curSlot = slot;
         icon.gameObject.SetActive(true);
-        // icon.sprite = slot.item.stat.icon;
+        icon.sprite = slot.item.sprite;
         quatityText.text = slot.quantity > 1 ? slot.quantity.ToString() : string.Empty;
         nameText.text = slot.quantity >= 1 ? slot.name.ToString() : string.Empty;
     }

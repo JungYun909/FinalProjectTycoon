@@ -44,6 +44,12 @@ public class InstallationData : ScriptableObject
     public bool canSpawn;
     public float spawnDelay;
 
+    [Header("Inventory")]
+    public bool haveDoughInventory;
+    public bool haveIngredientInventory;
+    public float makeDelay;
+    public Queue<GameObject> doughContainer;
+
     // public bool Continuous()
     // {
     //     return false;

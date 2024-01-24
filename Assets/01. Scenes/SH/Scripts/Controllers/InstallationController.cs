@@ -23,17 +23,17 @@ public class InstallationController : MonoBehaviour, IInteractable
         if (!curInstallationSetObj)
         {
             InstallationManager.instance.curInstallation = gameObject;
-            InstallationManager.instance.installationSetUI.SetActive(true);
+            InstallationManager.instance.OnInstallationSetUI();
         }
         else if (curInstallationSetObj == gameObject)
         {
-            InstallationManager.instance.installationSetUI.SetActive(true);
+            InstallationManager.instance.OnInstallationSetUI();
         }
         else
         {
             InstallationManager.instance.curInstallation.GetComponent<InstallationController>()._installationData.destinationInstallation =
                 gameObject; //관리중인 오브젝트의 목표지로 설정
-            InstallationManager.instance.installationSetUI.SetActive(true);
+            InstallationManager.instance.OnInstallationSetUI();
         }
     }
 
@@ -44,6 +44,9 @@ public class InstallationController : MonoBehaviour, IInteractable
     private void Start()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
+        
+        if (_installationData.haveDoughInventory)
+            _installationData.doughContainer = new Queue<GameObject>();
         // if (_installationData.stat.haveMinigame)
         // {
         //     UIManagerTemp.instance.minigameSlider.value = UIManagerTemp.instance.minigameSlider.maxValue;

@@ -18,13 +18,22 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void OnColliderInteract()
     {
-        throw new NotImplementedException();
+        switch (_ingredientData.name)
+        {
+            case "Dough":
+                gameObject.SetActive(false);
+                break;
+            default:
+                PoolManager.instacne.DeSpawnFromPool(gameObject);
+                break;
+        }
     }
     private void Start()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _ingredientData.sprite;
     }
 
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         // if (gameObject.GetComponent<IInteractable>() != null)
