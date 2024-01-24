@@ -1,77 +1,88 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public interface IInteractable
 {
-    void OnInteract();
+    bool Continuous();
+    void OnClickInteract();
+    void OnColliderInteract();
 }
-
-public class InteractionManager : MonoBehaviour    	// TODO 정확히 무슨 일을 관리할 것인가? 상호작용이 무엇? 어떤 오브젝트를 클릭했는지를 판별?
-                                                    // TODO 발생 시점을 관리하도록 함?
-                                                    // Function : 어떤 것을 OnInteract할 지 판별해주기 위한 매니저
-                                                    // 클릭했을 때나 부딪혔을 때의 OnInteract 분리 가능하도록?
+public class InteractionManager : MonoBehaviour
 {
-    public event Action collisionEnter; //TODO 부딧혔을때 받아야할 정보 수정
-    public event Action click; 
-    public LayerMask targetLayer;
+    //상호작용 오브젝트 정보저장
+    public GameObject curGameObject;
+    public GameObject targetGameObject; 
+    private IInteractable interactionObject;
     
-    [Header("InteractionOBJ")]
-    private GameObject curInteractGameobject;
-    private IInteractable curInteractable;
-
-
-    private void OnEnable()
+    //상호작용에 필요한 변수저장
+    private Vector2 curMouseDirection;
+    private Coroutine interactionCoroutine;
+    
+    //임시 싱글톤
+    public static InteractionManager instance;
+    private void Awake()
     {
-        InputManager.OnClicked += WorkOnClick;
-    }
-    //상호작용 상속받아 사용 가능한 오브젝트의 기능을 실행하고 초기화
-
-    private void OnDisable()
-    {
-        InputManager.OnClicked -= WorkOnClick;
+        instance = this;
     }
 
-    private void InteractionWithItem()
+    //마우스 포지션 바뀔때마다 정보갱신
+    public void OnLook(InputValue value)
     {
-        if (curInteractable != null)
+        curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    //마우스 눌렀을때 상호작용 관리
+    public void OnClick(InputValue value)
+    {
+        //정보 초기화
+        bool isCurClick = false;
+        
+        //레이로 상호작용 객체 감지시도
+        RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
+        
+        //레이가 상호작용 하지 않는 객체 감지시 리턴
+        if( !ray.collider || ray.collider.gameObject.GetComponent<IInteractable>() == null)
+            return;
+        //레이가 감지한 객체의 상호작용 정보 저장
+        interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
+        
+        //클릭 중일떄 발생
+        if (value.isPressed)
         {
-            curInteractable.OnInteract();
-            curInteractGameobject = null;
-            curInteractable = null;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)   // MonoBehaviour가 아닐 떄?
-    {
-        curInteractGameobject = other.collider.gameObject;
-        curInteractable = other.collider.gameObject.GetComponent<IInteractable>(); 
-    }
-
-    public void WorkOnClick(Vector2 worldPosition)    // TODO 아래 객체의 LayerMask가 무엇인지 판단하도	?
-    {
-        Debug.Log($"WorkOnClick in InteractionManager called with position: {worldPosition}");
-
-        RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.down, Mathf.Infinity);
-
-        if (hit.collider != null)
-        {
-            curInteractable = hit.collider.gameObject.GetComponent<IInteractable>();
-
-            if (curInteractable != null)
+            if (interactionObject.Continuous()) //오브젝트의 상호작용이 누르는 동안 반복돠야한다면
             {
-                Debug.Log("Found IInteractable component, calling OnInteract");
-                curInteractable.OnInteract();
+                interactionCoroutine = StartCoroutine(InteractionCoroutine());
             }
-            else
+            else if(isCurClick == false) //오브젝트의 상호작용이 한번만 발동한다면
             {
-                Debug.Log("Hit object is not IInteractable");
+                interactionObject.OnClickInteract();
+                isCurClick = true;
             }
         }
-        else
+        else if(!value.isPressed) //클릭에서 땟을때 발생
         {
-            Debug.Log("No object hit by Raycast");
+            if (interactionObject.Continuous()) //반복 상호작용 끝내기
+            {
+                StopCoroutine(interactionCoroutine);
+            }
+            else if(isCurClick) //다시 한번 발동할 준비
+            {
+                isCurClick = false;
+            }
+        }
+    }
+    
+    //반복 상호작용
+    IEnumerator InteractionCoroutine()
+    {
+        while (true)
+        {
+            interactionObject.OnClickInteract();
+
+            yield return null;
         }
     }
 }

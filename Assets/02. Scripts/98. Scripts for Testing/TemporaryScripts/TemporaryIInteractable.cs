@@ -6,7 +6,12 @@ public class TemporaryIInteractable : MonoBehaviour, IInteractable
 {
 
     [SerializeField] UIBase uiToOpen;
-    public void OnInteract()
+    public bool Continuous()
+    {
+        return false;
+    }
+
+    public void OnClickInteract()
     {
         
         Debug.Log("Interacted with this object"); // 상호작용 로깅
@@ -20,5 +25,10 @@ public class TemporaryIInteractable : MonoBehaviour, IInteractable
         {
             Debug.Log("UIManager not found");
         }
+    }
+
+    public void OnColliderInteract()
+    {
+        throw new System.NotImplementedException();
     }
 }

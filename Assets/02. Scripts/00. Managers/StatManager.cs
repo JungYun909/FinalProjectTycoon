@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatManager : MonoBehaviour
+public class StatManager : MonoBehaviour            // 플레이어 (가게) 정보의 업데이트
 {
     public TemporaryStat shopStat;
     public int shopLevel;     //가게 레벨. 가게 레벨에 따라 레시피/시설 해금 등이 필요하다면. 명성치, 재정현황 등의 지표가 특정 수준 이상일 때 ++ // 수식으로 관리
@@ -22,7 +22,7 @@ public class StatManager : MonoBehaviour
     public event OnStatChanged onStatChanged;   //이벤트 선언
 
 
-    private void Awake()
+    private void Awake()	    //TODO
     {
         Initialize();
     }
