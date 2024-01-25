@@ -9,7 +9,7 @@ public class InstallationSpawnController : MonoBehaviour
     public InstallationController _installationController;
     public float spawnTimer;
 
-    private void Awake()
+    private void Start()
     {
         _installationController = GetComponent<InstallationController>();
     }
@@ -20,11 +20,14 @@ public class InstallationSpawnController : MonoBehaviour
             return;
 
         spawnTimer += Time.deltaTime;
+        
+        _installationController._installationData.spawnData.destination =
+            _installationController._installationData.destinationInstallation;
 
         if (spawnTimer > _installationController._installationData.spawnDelay)
         {
             spawnTimer = 0f;
-                SpawnManager.instance.Spawn(gameObject, _installationController._installationData.name);
+                SpawnManager.instance.SpawnIngredient(gameObject, _installationController._installationData.spawnData);
         }
     }
 }

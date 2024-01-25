@@ -64,8 +64,7 @@ public class InventoryController : MonoBehaviour
     private void SpawnObjSetUpdate()
     {
         GameObject curDoughObj = _installationController._installationData.doughContainer.Dequeue();
-        SpawnManager.instance.SpawnObjPositionSet(gameObject, curDoughObj);
-        SpawnManager.instance.SpawnObjMovementSet(gameObject, curDoughObj);
+        SpawnManager.instance.SpawnObjPositionSet(gameObject, curDoughObj, _installationController._installationData.spawnData);
         curDoughObj.SetActive(true);
         curDoughObj.GetComponentInChildren<SpriteRenderer>().color = new Color(0.6f, 0.4f, 0.2f);
     }
