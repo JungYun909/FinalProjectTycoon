@@ -7,11 +7,15 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class NPCMovement : MonoBehaviour
 {
-    NPCSetting npcSetting;
+    private System.Random random;
+    [SerializeField] NPCSetting npcSetting;
     [SerializeField] NpcSO npcSO;
 
     [SerializeField] private List<int> favoriteFood;
+    [SerializeField] private int selectedFavoriteFoodID;
     [SerializeField] private bool buying;
+
+    [SerializeField] InventoryManager inventoryManager;
 
     [SerializeField]  List<GameObject> machineObject; // TODO 이걸 다른 곳에서 리스트 받아와야함
     [SerializeField] Vector2 machineWaypoint;
@@ -29,75 +33,68 @@ public class NPCMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        random = new System.Random();
         npcSetting = GetComponent<NPCSetting>();
         favoriteFood = npcSetting.npcSo.favoriteFood;
         buying = false;
         layerMask = LayerMask.GetMask("Interior");
         movementController = GetComponent<MovementController>();
+        SelectFaveoriteFood();
+        MachinePositionInform();
+
     }
 
     void OnEnable()
     {
         // TODO NPC가 리스폰 되었을 때 기준 매대 게임오브젝트 리스트를 불러오는 값
         // 만약 도중에 유저가 오브젝트를 삭제했다면? 도착했을때 레이에 부딪히는게 없다면 해당 게임오브젝트를 삭제
-        MachinePositionInform();
-       
+
+
     }
+
 
 
     void FixedUpdate()
     {
-        Debug.DrawRay(transform.position, new Vector3(-1, 0, 0) * 0.9f, new Color(0, 1, 0), layerMask); //TODO 레이캐스트 크기와 위치 조정 필요
+        Debug.DrawRay(transform.position, new Vector3(-1, 0, 0) , new Color(0, 1, 0), layerMask); //TODO 레이캐스트 크기와 위치 조정 필요
 
-        hit = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0) * 0.9f, layerMask); //TODO 레이캐스트 크기와 위치 조정 필요 (레이캐스트 포지션이나 크기 변수 지정)
+        hit = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0), layerMask); //TODO 레이캐스트 크기와 위치 조정 필요 (레이캐스트 포지션이나 크기 변수 지정)
 
-        if (hit.collider != null&&buying==false)
+
+        if (hit.collider != null && buying == false)
         {
             hitObject = hit.collider.gameObject; // 레이에 닿은 오브젝트 가져오기
             Debug.Log(hitObject.name);
+            if (hitObject = bestMachine)
+            {
+                Debug.Log(hitObject.name);
 
-            for (int i=0; i<= favoriteFood.Count; i++)
-            //if (hitObject.GetComponent<AbstractInventory>().Items[] == favoriteFood[i]) // 매대의 음식과 기호 음식이 같을때
-            //{
-            //    buying = true; // 구매 했다는 표기
-            //    hitObject.GetComponent<MarketStanding>().foodnum -= 1; // 매대의 음식 갯수 줄임
-            //}
-    
-            machineObject.Remove(hitObject);
+                foreach (var items in hitObject.GetComponent<AbstractInventory>().Items)
+                {
+                    ItemSO itemso = items.Key;
+                    if (selectedFavoriteFoodID == itemso.id)
+                    {
+                        inventoryManager.RemoveItemFromInventory(hitObject.GetComponent<AbstractInventory>().inventoryID, itemso, 1);
+                        buying = true;
+                    }
+
+                }
+                machineObject.Remove(hitObject);
+
+            }
+            
             MachinePositionInform();
-            NPCMovementRutine();
+          
         }
 
 
         //TODO 디스트로이 될때, 값 리셋 시켜주기
     }
-    // 테스트용
 
-    void ArriveMachine()
+    void SelectFaveoriteFood()
     {
-        //Debug.DrawRay(transform.position, new Vector3(-1, 0, 0) * 0.9f, new Color(0, 1, 0), layerMask); //TODO 레이캐스트 크기와 위치 조정 필요
-
-        //hit = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0) * 0.9f, layerMask); //TODO 레이캐스트 크기와 위치 조정 필요 (레이캐스트 포지션이나 크기 변수 지정)
-
-        //if (hit.collider == null)
-        //{
-        //    //만약 도착 후, 레이에 부딪힌게 없다면 오브젝트 삭제 (가장 가까운 순으로 도착이기에 도착한 지점이 해당 오브젝트가 있던 지점)
-        //    machineObject.RemoveAt(bestPosition_num);
-        //}
-        //else if (hit.collider != null && buying == false)
-        //{
-        //    hitObject = hit.collider.gameObject; // 레이에 닿은 오브젝트 가져오기
-        //    Debug.Log(hitObject.name);
-        //    if (hitObject.GetComponent<MarketStanding>().food == favoriteFood) // 매대의 음식과 기호 음식이 같을때
-        //    {
-        //        buying = true; // 구매 했다는 표기
-        //        hitObject.GetComponent<MarketStanding>().foodnum -= 1; // 매대의 음식 갯수 줄임
-        //    }
-
-        //    machineObject.Remove(hitObject);
-        //}
-
-        //MachinePositionInform();
+        int num = random.Next(0, favoriteFood.Count);
+        selectedFavoriteFoodID = favoriteFood[num];
 
     }
 
@@ -129,7 +126,11 @@ public class NPCMovement : MonoBehaviour
             NPCMovementRutine();
 
         }
-        
+        else
+        {
+            movementController.Move(counterMachine);
+        }
+
 
     }
 

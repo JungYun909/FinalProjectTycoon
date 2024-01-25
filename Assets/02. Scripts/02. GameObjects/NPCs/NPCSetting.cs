@@ -16,7 +16,7 @@ public class NPCSetting : MonoBehaviour
         random = new System.Random();
 
         // 이하 차후 onEnalbe()로 옮길 것
-        int num = random.Next(0, npcDatabaseSO.npcDataList.Count + 1); ;
+        int num = random.Next(0, npcDatabaseSO.npcDataList.Count); ;
         for (int i = 0; i < npcDatabaseSO.npcDataList.Count; i++)
         {
             npcDataList.Add(npcDatabaseSO.npcDataList[i]);

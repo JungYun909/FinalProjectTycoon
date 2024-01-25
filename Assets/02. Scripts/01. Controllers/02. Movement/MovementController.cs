@@ -8,11 +8,11 @@ using UnityEngine.Serialization;
 public class MovementController : MonoBehaviour
 {
     private GameObject curDestinationObject;
-    private float curMoveSpeed;
+    public float curMoveSpeed = 1f;
     public void Move(GameObject destinationObject)
     {
         curDestinationObject = destinationObject;
-        curMoveSpeed = gameObject.GetComponent<IngredientData>().stat.moveSpeed;
+        //curMoveSpeed = gameObject.GetComponent<IngredientData>().stat.moveSpeed;
         StartCoroutine("Movement");
     }
 
