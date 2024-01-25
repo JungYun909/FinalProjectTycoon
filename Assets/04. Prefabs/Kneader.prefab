@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8438063390184062536}
   - component: {fileID: 2869735788086101820}
   - component: {fileID: 7814624931745556135}
+  - component: {fileID: 1209544839101201194}
   m_Layer: 0
   m_Name: Kneader
   m_TagString: Untagged
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _installationData: {fileID: 7814624931745556135}
+  curSpawnObject: {fileID: 0}
 --- !u!114 &7814624931745556135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +108,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curSpawnPrefab: {fileID: 7910195704630170424, guid: 85e1ae48ccf0a474cab40b529bfee4f8, type: 3}
+--- !u!114 &1209544839101201194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710201426206524097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8eeef229e5a44007a02104d7da535e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsListForInspector: []
+  inventoryID: 0
 --- !u!1 &6863908189260288236
 GameObject:
   m_ObjectHideFlags: 0

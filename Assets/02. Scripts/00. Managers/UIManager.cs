@@ -51,10 +51,10 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         while (uiStack.Count > 0)
         {
             UIBase currentUI = uiStack.Pop();
-            Destroy(currentUI.gameObject); 
+            Destroy(currentUI.gameObject);
         }
     }
-    
+
     public void GoBack()     //뒤로가기 버튼용
     {
         if (uiStack.Count > 1)
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     public void DestroyUIObject(GameObject objectToDestroy)
     {
         Destroy(objectToDestroy);
-    } 
+    }
 
     private void InitUIList()    // 매니저로 관리할 모든 UI요소들의 초기화 일제 실행. 추후 UI매닉저가 싱글톤이 아니어도 InitUIList를 통해 전체 UI에게 초기화 명령을 내릴 수 있.
     {
@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
 
         foreach (UIBase uiWindow in uiList)
         {
-            uiWindow.Initialize();    
+            uiWindow.Initialize();
         }
     }
 
@@ -103,36 +103,37 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         currentDailyResultWindow.Initialize();  // 
         OnDailyWindowOpen?.Invoke();    // 일일정산창 열리면 이벤트를 발생시킴. 여기서는 
     }
-
-    public void UpdateInventoryUI(Dictionary<ItemSO, int> items, GameObject gameObject)
-    {
-        UIToChange uiToChange = gameObject.GetComponentInChildren<UIToChange>();
-        Transform contentPanel = uiToChange.transform; 
-        foreach (Transform child in contentPanel)
-        {
-            Destroy(child.gameObject);
-        }
-
-        GameObject currentLine = null;
-        int slotIndex = 0;
-
-        foreach (var entry in items)
-        {
-            // 새로운 라인이 필요한 경우 생성
-            if (slotIndex % 5 == 0)
-            {
-                currentLine = Instantiate(itemLinePrefab, contentPanel);
-            }
-
-            // 아이템 슬롯 생성 및 설정
-            GameObject slotObject = Instantiate(itemSlotPrefab, currentLine.transform);
-            ItemSlotInfo slotInfo = slotObject.GetComponent<ItemSlotInfo>();
-            slotInfo.Setup(entry.Key, entry.Value);
-
-            slotIndex++;
-        }
-    }
 }
+
+//    public void UpdateInventoryUI(Dictionary<ItemSO, int> items, GameObject gameObject)
+//    {
+//        //UIToChange uiToChange = gameObject.GetComponentInChildren<UIToChange>();
+//       // Transform contentPanel = uiToChange.transform; 
+//        foreach (Transform child in contentPanel)
+//        {
+//            Destroy(child.gameObject);
+//        }
+
+//        GameObject currentLine = null;
+//        int slotIndex = 0;
+
+//        foreach (var entry in items)
+//        {
+//            // 새로운 라인이 필요한 경우 생성
+//            if (slotIndex % 5 == 0)
+//            {
+//                currentLine = Instantiate(itemLinePrefab, contentPanel);
+//            }
+
+//            // 아이템 슬롯 생성 및 설정
+//            GameObject slotObject = Instantiate(itemSlotPrefab, currentLine.transform);
+//            ItemSlotInfo slotInfo = slotObject.GetComponent<ItemSlotInfo>();
+//            slotInfo.Setup(entry.Key, entry.Value);
+
+//            slotIndex++;
+//        }
+//    }
+//}
 
 
 // TODO : UI 목록을 리스트가 아닌 딕셔너리로 바꾸는 것 고려

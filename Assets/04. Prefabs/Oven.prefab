@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4186727955824622550}
   - component: {fileID: 8301662727301498268}
   - component: {fileID: 8171689547641417825}
+  - component: {fileID: -5212546426207229292}
   m_Layer: 0
   m_Name: Oven
   m_TagString: Untagged
@@ -121,13 +122,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiSlots: []
-  inventoryWindow: {fileID: 0}
-  onOpenInventory:
-    m_PersistentCalls:
-      m_Calls: []
-  onCloseInventory:
-    m_PersistentCalls:
-      m_Calls: []
+  isSet: 0
+--- !u!114 &-5212546426207229292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122804258436944079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8eeef229e5a44007a02104d7da535e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsListForInspector: []
+  inventoryID: 0
 --- !u!1 &9089715166469819143
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour           //TODO 인벤토리 딕셔너리 가지고 아이템을 인벤토리에 넣어주고 교환하는 메서드. 추가, 사라진 오브젝트의 인벤토리 관리 로직 작성 필.
-                                                        //풀매니저가 string 값 가짐 
+public class InventoryManager : MonoBehaviour
 {
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1000;   // 인덱스용 아이디를 부여하기 위한 필드
-
     private UIManager  inventoryUIUpdator;
 
     private void Awake()
@@ -23,7 +21,7 @@ public class InventoryManager : MonoBehaviour           //TODO 인벤토리 딕�
         return inventoryID;
     }
 
-    public void AddItemToInventory(int inventoryID, ItemSO item, int quantity, GameObject gameObject)
+    public void AddItemToInventory(int inventoryID, ItemSO item, int quantity)
     {
         if (inventories.ContainsKey(inventoryID))
         {
@@ -34,7 +32,6 @@ public class InventoryManager : MonoBehaviour           //TODO 인벤토리 딕�
             }
             inventory.Items[item] += quantity;
             // 인벤토리 UI 업데이트를 위한 items 딕셔너리 전달
-            inventoryUIUpdator.UpdateInventoryUI(inventory.Items, gameObject);
             inventory.UpdateInspectorList();
         }
     }
@@ -52,7 +49,6 @@ public class InventoryManager : MonoBehaviour           //TODO 인벤토리 딕�
                     inventory.Items.Remove(item);
                 }
 
-                inventoryUIUpdator.UpdateInventoryUI(inventory.Items, gameObject);
                 inventory.UpdateInspectorList();
 
                 return true;
@@ -89,5 +85,29 @@ public class InventoryManager : MonoBehaviour           //TODO 인벤토리 딕�
             }
         }
     }
-    // 추가로 필요한 Method?
+    public void TransformItem (int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
+    {
+        StartCoroutine(TransformAfterSomeSceonds(inventoryID, fromItem, toItem, duration));
+    }
+
+    // 지정된 시간 후에 아이템을 변환하는 코루틴
+    private IEnumerator TransformAfterSomeSceonds(int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (inventories.ContainsKey(inventoryID) && inventories[inventoryID].Items.ContainsKey(fromItem))
+        {
+            var inventory = inventories[inventoryID];
+            int fromItemQuantity = inventory.Items[fromItem];
+            inventory.Items.Remove(fromItem);
+
+            if (!inventory.Items.ContainsKey(toItem))
+            {
+                inventory.Items[toItem] = 0;
+            }
+            inventory.Items[toItem] += fromItemQuantity;
+
+            inventory.UpdateInspectorList();
+        }
+    }
 }
