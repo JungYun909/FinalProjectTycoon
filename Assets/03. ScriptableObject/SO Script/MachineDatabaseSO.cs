@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
-public class ItemDatabaseSO : ScriptableObject
+public class MachineDatabaseSO : ScriptableObject
 {
-    public List<ItemSO> itemDataList = new List<ItemSO>();
+    public List<MachineSO> machineDataList = new List<MachineSO>();
 
-    public ItemSO GetItemByID(int id)
+    public MachineSO GetItemByID(int id)
     {
-        foreach (var item in itemDataList)
+        foreach (var item in machineDataList)
         {
             if (item.id == id)
             {

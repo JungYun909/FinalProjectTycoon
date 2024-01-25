@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class ItemDatabaseSO : ScriptableObject
+public class NpcDatabaseSO : ScriptableObject
 {
-    public List<ItemSO> itemDataList = new List<ItemSO>();
+    public List<NpcSO> npcDataList = new List<NpcSO>();
 
-    public ItemSO GetItemByID(int id)
+    public NpcSO GetItemByID(int id)
     {
-        foreach (var item in itemDataList)
+        foreach (var item in npcDataList)
         {
             if (item.id == id)
             {

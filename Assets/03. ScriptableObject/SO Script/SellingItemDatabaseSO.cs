@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
-public class ItemDatabaseSO : ScriptableObject
+public class SellingItemDatabaseSO : ScriptableObject
 {
-    public List<ItemSO> itemDataList = new List<ItemSO>();
+
+    public List<ItemSO> sellingItemDataList = new List<ItemSO>();
 
     public ItemSO GetItemByID(int id)
     {
-        foreach (var item in itemDataList)
+        foreach (var item in sellingItemDataList)
         {
-            if (item.id == id)
+            if (item.id == id && item.type == 2)
             {
                 return item;
             }
