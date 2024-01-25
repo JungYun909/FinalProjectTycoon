@@ -67,7 +67,7 @@ public class Inventory : MonoBehaviour
             if(slotToStackTo != null)
             {
                 slotToStackTo.quantity++;
-                if(InstallationManager.instance.curInstallation == gameObject)
+                if(InstallationManager.instance.curInstallation == transform.root.gameObject)
                     UpdateDoughUI();
                 return;
             }
@@ -80,7 +80,7 @@ public class Inventory : MonoBehaviour
             emptySlot.item = item;
             emptySlot.quantity = 1;
             emptySlot.name = item.name;
-            if(InstallationManager.instance.curInstallation == gameObject)
+            if(InstallationManager.instance.curInstallation == transform.root.gameObject)
                 UpdateDoughUI();
             return;
         }
@@ -95,7 +95,7 @@ public class Inventory : MonoBehaviour
             if(slotToStackTo != null)
             {
                 slotToStackTo.quantity++;
-                if(InstallationManager.instance.curInstallation == gameObject)
+                if(InstallationManager.instance.curInstallation == transform.root.gameObject)
                     UpdateIngredientUI();
                 return;
             }
@@ -108,7 +108,7 @@ public class Inventory : MonoBehaviour
             emptySlot.item = item;
             emptySlot.quantity = 1;
             emptySlot.name = item.name;
-            if(InstallationManager.instance.curInstallation == gameObject)
+            if(InstallationManager.instance.curInstallation == transform.root.gameObject)
                 UpdateIngredientUI();
             return;
         }
@@ -143,7 +143,7 @@ public class Inventory : MonoBehaviour
             }
         }
         
-        if(InstallationManager.instance.curInstallation == gameObject)
+        if(InstallationManager.instance.curInstallation == transform.root.gameObject)
             UpdateDoughUI();
     }
     
@@ -183,7 +183,8 @@ public class Inventory : MonoBehaviour
                 ingredientSlots[0].quantity -= 1;
             }
         }
-        
+        if(InstallationManager.instance.curInstallation == transform.root.gameObject)
+            UpdateIngredientUI();
     }
     
     public void UpdateDoughUI()

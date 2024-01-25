@@ -7,25 +7,33 @@ using UnityEngine.Serialization;
 
 public class MovementController : MonoBehaviour
 {
-    public GameObject curDestinationObject;
-    public float moveSpeed;
+    public float speed;
+    public GameObject destinationObj;
+    private bool isMove;
 
-    public void Move(GameObject destinationObject, IngredientData data)
+    private void Update()
     {
-        curDestinationObject = destinationObject;
-        moveSpeed = data.moveSpeed;
-        StartCoroutine("Movement");
+        if(speed <= 0 && !destinationObj)
+            return;
+
+        if (!isMove)
+        {
+            StartCoroutine(Movement());
+            isMove = true;
+        }
     }
 
     private IEnumerator Movement()
     {
-        while (Vector2.Distance(curDestinationObject.transform.position, gameObject.transform.position) > 0.1f)
+        while (Vector2.Distance(destinationObj.transform.position, gameObject.transform.root.position) > 0.1f)
         {
-            Vector2 moveDirection = (curDestinationObject.transform.position - gameObject.transform.root.position).normalized;
-            Vector2 moveAmount = moveDirection * moveSpeed * Time.deltaTime;
+            Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
+            Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
             transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
 
             yield return null;
         }
+
+        isMove = false;
     }
 }

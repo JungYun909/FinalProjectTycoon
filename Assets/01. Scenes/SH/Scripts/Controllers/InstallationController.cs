@@ -11,12 +11,15 @@ public class InstallationController : MonoBehaviour, IInteractable
     public GameObject spawnFunction;
     public GameObject inventoryFunction;
     
+    public GameObject destinationObj;
+    public Queue<GameObject> doughContainer;
+    
     private void Start()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
         
         if (_installationData.haveDoughInventory)
-            _installationData.doughContainer = new Queue<GameObject>();
+            doughContainer = new Queue<GameObject>();
 
         if(_installationData.canSpawn)
             spawnFunction.SetActive(true);
@@ -45,8 +48,8 @@ public class InstallationController : MonoBehaviour, IInteractable
         }
         else
         {
-            InstallationManager.instance.curInstallation.GetComponent<InstallationController>()._installationData.destinationInstallation =
-                gameObject; //관리중인 오브젝트의 목표지로 설정
+            InstallationController controller = InstallationManager.instance.curInstallation.GetComponent<InstallationController>();
+            controller.destinationObj = gameObject;
             InstallationManager.instance.OnInstallationSetUI();
         }
     }

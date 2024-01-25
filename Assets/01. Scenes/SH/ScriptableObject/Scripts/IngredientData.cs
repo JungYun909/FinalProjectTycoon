@@ -14,7 +14,6 @@ public class IngredientData : ScriptableObject
     [Header("Movement")]
     public bool canMove;
     public float moveSpeed;
-    public GameObject destination;
     
     [Header("Stacking")]
     public bool canStack;

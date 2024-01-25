@@ -15,7 +15,9 @@ MonoBehaviour:
   name: Chocolate
   discription: Chocolate
   sprite: {fileID: 21300000, guid: c42234ccd075614418b9a7af2180cf18, type: 3}
+  tag: Ingredient
   canMove: 1
   moveSpeed: 4
+  destination: {fileID: 0}
   canStack: 1
   maxStackAmount: 20

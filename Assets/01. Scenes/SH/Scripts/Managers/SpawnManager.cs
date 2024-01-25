@@ -1,22 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("InstallationSO")]
-    public InstallationData kneader;
-    public InstallationData oven;
-    public InstallationData conbinator;
-    public InstallationData ChocolateMachine;
-
-    [Header("IngredientSO")]
-    public IngredientData dough;
-    public IngredientData chocolate;
-    
     [Header("StandardPrefab")]
     public GameObject installationObj;
     public GameObject ingredientObj;
@@ -39,23 +30,27 @@ public class SpawnManager : MonoBehaviour
         controller._installationData = installationData;
     }
 
-    public void SpawnIngredient(GameObject spawningInstallationObj, IngredientData data)
+    public void SpawnIngredient(GameObject spawningInstallationObj, InstallationController installationController, IngredientData data)
     {
         UpdateObjTag(data.tag);
         
         GameObject curSpawnObj = PoolManager.instacne.SpawnFromPool(ingredientObj);
-        SpawnObjPositionSet(spawningInstallationObj, curSpawnObj, data);
-
         IngredientController controller = curSpawnObj.GetComponent<IngredientController>();
-        controller._ingredientData = data; 
+        
+        controller._ingredientData = data;
+        controller.destination = installationController.destinationObj;
+        
+        curSpawnObj.transform.position = spawningInstallationObj.transform.position +
+                                         ((installationController.destinationObj.transform.position -
+                                           spawningInstallationObj.transform.position).normalized);
         
         UpdateObjTag(data.tag);
     }
 
-    public void SpawnObjPositionSet(GameObject installation, GameObject spawnObj, IngredientData data)
+    public void SpawnObjPositionSet(GameObject spawnObj, GameObject destinationObj)
     {
-        spawnObj.transform.position = installation.transform.position +
-                                      ((data.destination.transform.position - installation.transform.position)
+        spawnObj.transform.position = spawnObj.transform.position +
+                                      ((destinationObj.transform.position - spawnObj.transform.position)
                                           .normalized);
     }
 
