@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ObjectForTest
+  - Resource
+  - Dough
+  - Installation
+  - Ingredient
   layers:
   - Default
   - TransparentFX

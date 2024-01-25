@@ -11,6 +11,7 @@ public class UIManagerTemp : MonoBehaviour
     public GameObject installationSetUI;
     public GameObject installUI;
     public GameObject inventoryUI;
+    public GameObject ingredientInventoryUI;
     public GameObject minigameUI;
     public Slider minigameSlider;
     [FormerlySerializedAs("SpawnSlider")] public Slider spawnSlider;
