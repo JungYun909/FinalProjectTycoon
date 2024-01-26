@@ -21,9 +21,15 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     public delegate void DailyResultWindowOn();
     public event DailyResultWindowOn OnDailyWindowOpen;
 
+    public static UIManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
-        InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행
+        //InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행
         StartCoroutine(DailyResultWindowRoutine());
         OpenPermanentWindows(uiAlwaysOn);
     }
@@ -44,6 +50,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
             uiStack.Peek().gameObject.SetActive(false);   // 기존에 열려있던 창을 비활성화. Peek()이란 스택 맨 위를 확인하는 메서.
         }
         uiStack.Push(uiInstance);  //ui프리팹을 열어줌
+        uiInstance.UpdateUI();
     }
 
     public void CloseAll() // 스택으로 관리되는 창 전체 닫기 위한 로지
