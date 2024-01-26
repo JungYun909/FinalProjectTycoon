@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour
 {
     public float speed;
     public GameObject destinationObj;
-    private bool isMove;
+    public bool isMove;
 
     private void Update()
     {

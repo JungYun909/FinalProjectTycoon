@@ -8,6 +8,7 @@ TagManager:
   - Dough
   - Installation
   - Ingredient
+  - NPC
   layers:
   - Default
   - TransparentFX

@@ -11,4 +11,5 @@ public class NpcSO : ScriptableObject
     public string description; //출력할 아이템 설명
     public List<int> favoriteFood; //좋아하는 빵 (종류수 증가를 고려하여 List 선언)
 
+    public float speed = 5f;
 }

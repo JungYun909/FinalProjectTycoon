@@ -8,23 +8,25 @@ public class NPCSpawnController : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private int NPCNum;
     private PoolManager poolManager;
+    [SerializeField] private GameObject npc;
+    [SerializeField] GameObject positionNum;
 
- 
+
     // Start is called before the first frame update
     void Start()
     {
         poolManager = GetComponent<PoolManager>();
-        //StartCoroutine(NPCSpawnCorutine());
+        StartCoroutine(NPCSpawnCorutine());
 
     }
 
 
     void Update()
     {
-        //if (NPCNum==20)
-        //{
-        //    StopCoroutine(NPCSpawnCorutine());
-        //}
+        if (NPCNum==20)
+        {
+            StopCoroutine(NPCSpawnCorutine());
+        }
     }
 
     IEnumerator NPCSpawnCorutine()
@@ -42,27 +44,19 @@ public class NPCSpawnController : MonoBehaviour
     //기본 평판에 따른 리스폰 로직
     void NPCSpawn()
     {
-        //string npcNameTag = NPCSelection();
-        //float visitProbability = reputation * 0.1f;
-        //int rand = UnityEngine.Random.Range(1, 100);
+        float visitProbability = reputation * 0.1f;
+        int rand = UnityEngine.Random.Range(1, 100);
 
-        //if (rand <= visitProbability)
-        //{
-        //    GameObject npc = poolManager.SpawnFromPool(); //필요한 게임오브젝트 매개변수 처리
-        //    npc.SetActive(true);
-        //    Debug.Log(npcNameTag + "손님이 왕이다");
-        //    NPCNum += 1;
+        if (rand <= visitProbability)
+        {
+            GameObject curNPC =  PoolManager.instacne.SpawnFromPool(npc);
+            curNPC.transform.position = positionNum.transform.position;
+            npc.SetActive(true);
+            Debug.Log("손님이 왕이다");
+            NPCNum += 1;
 
-        //}
+        }
     }
 
-    string NPCSelection()
-    {
-        int rand = UnityEngine.Random.Range(1, 4);
-        string npcNameTag = "NPC"+rand;
-
-
-        return npcNameTag;
-
-    }
+  
 }
