@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4c4d2029487e54aaea9faf63824963, type: 3}
   m_Name: MachineData005
   m_EditorClassIdentifier: 
-  id: 0
-  installasionName: 
-  description: 
-  sprite: {fileID: 0}
+  id: 5
+  installasionName: "\uC9C4\uC5F4\uB300"
+  description: "\uC9C4\uC5F4\uB300\uC2A4\uB124"
+  sprite: {fileID: 21300000, guid: ccda9476388db40a3a2b173781902517, type: 3}
   canSpawn: 0
   spawnDelay: 0
   spawnData: {fileID: 0}
-  haveDoughInventory: 0
+  haveDoughInventory: 1
   haveIngredientInventory: 0
   makeDelay: 0
-  maxSlot: 0
+  maxSlot: 2

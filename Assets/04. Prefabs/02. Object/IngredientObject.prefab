@@ -120,8 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e0a0854732fb45af91e42b00387331d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ingredientData: {fileID: 0}
+  itemData: {fileID: 0}
   moveFunction: {fileID: 6668014035442186473}
+  destination: {fileID: 0}
 --- !u!1 &4762140177482073602
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,4 +251,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f82251bdcbc4f75b864111a5cf51a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 6266030464417217858}
+  speed: 0
+  destinationObj: {fileID: 0}
