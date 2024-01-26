@@ -5,6 +5,7 @@ using UnityEngine;
 public class StatManager : MonoBehaviour            // 플레이어 (가게) 정보의 업데이트
 {
     public TemporaryStat shopStat;
+    
     public int shopLevel;     //가게 레벨. 가게 레벨에 따라 레시피/시설 해금 등이 필요하다면. 명성치, 재정현황 등의 지표가 특정 수준 이상일 때 ++ // 수식으로 관리
     public int shopFame;    //명성치, 가게 수준.
     public int interiorScore;   //인테리어 점수.
@@ -14,16 +15,21 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int modFame;        //명성치의 변경값. 
     public int modInterior;     //인테리어 수치의 변경값. 가구/인테리어 요소의 점수를 받아와 합산/차감하는 식으로 이루어짐.
     public int modFinance;    //재정상태 수치의 변경값. 흑자일 때, 적자일 때 점수를 매김. 적자시에는 무조건 -1, 흑자일때는 +1을 반환하는 로직을 주고 
-
     public int modGold;
 
+    public int curNpc;
 
+    public int maxShopLevel;
+    public int maxNpc;
+    
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
 
 
+    public static StatManager instance;
     private void Awake()	    //TODO
     {
+        instance = this;
         Initialize();
     }
 
@@ -36,20 +42,20 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         modGold = shopStat.goldUsed;
     }
 
-    private void OnEnable()
-    {
-        FindObjectOfType<UIManager>().OnDailyWindowOpen += UpdateDailyResult;     //이벤트 구독. TODO 현재는 싱글톤 게임매니저가 없으므로 씬에서 UIManager 찾아서 사용하도록 하였으나 추후 수정 필요
-    }
-
-    private void OnDisable()
-    {
-        UIManager uiManager = FindObjectOfType<UIManager>();     //이벤트 해지. TODO 싱글톤 게임매니저 제작 후 FindObjectOfType 대	
-        
-	    if(uiManager!=null)
-        {
-            uiManager.OnDailyWindowOpen -= UpdateDailyResult;
-        }
-    }
+    // private void OnEnable()
+    // {
+    //     FindObjectOfType<UIManager>().OnDailyWindowOpen += UpdateDailyResult;     //이벤트 구독. TODO 현재는 싱글톤 게임매니저가 없으므로 씬에서 UIManager 찾아서 사용하도록 하였으나 추후 수정 필요
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     UIManager uiManager = FindObjectOfType<UIManager>();     //이벤트 해지. TODO 싱글톤 게임매니저 제작 후 FindObjectOfType 대	
+    //     
+	   //  if(uiManager!=null)
+    //     {
+    //         uiManager.OnDailyWindowOpen -= UpdateDailyResult;
+    //     }
+    // }
     
     
     private void SaveStat()
@@ -84,14 +90,14 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         financeScore += modFinance;
         shopStat.financialScore = financeScore;
-        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return financeScore;
     }
     public int EarnGold(int modGold)  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
         currentGold += modGold;
         shopStat.gold = currentGold;
-        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
 
@@ -99,7 +105,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         currentGold -= modGold;
         shopStat.gold = currentGold;
-        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
 
