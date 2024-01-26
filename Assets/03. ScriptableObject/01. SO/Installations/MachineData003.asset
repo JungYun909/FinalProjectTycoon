@@ -10,9 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4c4d2029487e54aaea9faf63824963, type: 3}
-  m_Name: MachineData004
+  m_Name: MachineData003
   m_EditorClassIdentifier: 
-  id: 4
-  machinename: "\uC624\uBE10"
-  description: 
-  slot: 10
+  id: 3
+  installasionName: "\uC624\uBE10"
+  description: "\uB178\uB987\uB178\uB987"
+  sprite: {fileID: 21300000, guid: 0cb71ffb3ea779a41b74c84727344e4e, type: 3}
+  canSpawn: 0
+  spawnDelay: 0
+  spawnData: {fileID: 0}
+  haveDoughInventory: 1
+  haveIngredientInventory: 0
+  makeDelay: 20
+  maxSlot: 5

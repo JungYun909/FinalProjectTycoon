@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c56c746b274e94eab93636b0aa259508, type: 3}
-  m_Name: Oven_Installation Data
+  m_Script: {fileID: 11500000, guid: aa4c4d2029487e54aaea9faf63824963, type: 3}
+  m_Name: MachineData005
   m_EditorClassIdentifier: 
-  name: Oven
-  discription: Oven
-  sprite: {fileID: 21300000, guid: c64723caa1fa244a6b71633093852c2a, type: 3}
-  destinationInstallation: {fileID: 0}
+  id: 0
+  installasionName: 
+  description: 
+  sprite: {fileID: 0}
   canSpawn: 0
   spawnDelay: 0
-  haveDoughInventory: 1
+  spawnData: {fileID: 0}
+  haveDoughInventory: 0
   haveIngredientInventory: 0
-  makeDelay: 20
+  makeDelay: 0
+  maxSlot: 0

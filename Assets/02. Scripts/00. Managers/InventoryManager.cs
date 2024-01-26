@@ -9,8 +9,10 @@ public class InventoryManager : MonoBehaviour
     private int nextInventoryID = 1000;   // 인덱스용 아이디를 부여하기 위한 필드
     private UIManager  inventoryUIUpdator;
 
+    public static InventoryManager instance;
     private void Awake()
     {
+        instance = this;
         inventoryUIUpdator = FindObjectOfType<UIManager>();
     }
 

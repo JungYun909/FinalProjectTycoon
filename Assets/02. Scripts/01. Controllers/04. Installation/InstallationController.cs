@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InstallationController : MonoBehaviour, IInteractable
 {
-    public InstallationData _installationData;
+    public MachineSO _installationData;
     public GameObject spawnFunction;
     public GameObject inventoryFunction;
     

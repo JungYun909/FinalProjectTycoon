@@ -1,12 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "MachineData00", menuName = "SO by BW/Machine", order = 2)]
 public class MachineSO : ScriptableObject
 {
+    [Header("Info")] 
     public int id; //machine ID (호출 넘버)
-    public string machinename; //출력할 기계 이름
+    public string installasionName; //출력할 기계 이름
     public string description; //출력할 기계 설명
-    public int slot; // 가지고 있는 슬롯 수
+    public Sprite sprite;
+
+    [Header("Spawning")]
+    public bool canSpawn;
+    public float spawnDelay;
+    public ItemSO spawnData;
+    
+    [Header("Inventory")]
+    public bool haveDoughInventory;
+    public bool haveIngredientInventory;
+    public float makeDelay;
+    public int maxSlot;
 }

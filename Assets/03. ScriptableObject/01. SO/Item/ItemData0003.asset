@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   type: 2
-  itemname: "\uC2DD\uBE75"
-  description: 
-  speed: 0
+  itemName: "\uC2DD\uBE75"
+  description: "\uBAA8\uB77D\uBAA8\uB77D"
   price: 80
+  sprite: {fileID: 21300000, guid: 8cfa0320427ca6245a26b67731c09b38, type: 3}
+  tag: Ingredient
+  canMove: 1
+  moveSpeed: 5
+  canStack: 1
+  maxStackAmount: 20

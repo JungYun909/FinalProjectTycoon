@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c56c746b274e94eab93636b0aa259508, type: 3}
-  m_Name: ChocolateMachine_Installation Data
+  m_Script: {fileID: 11500000, guid: aa4c4d2029487e54aaea9faf63824963, type: 3}
+  m_Name: MachineData002
   m_EditorClassIdentifier: 
-  name: ChocolateMachine
-  discription: ChocolateMachine
+  id: 2
+  installasionName: "\uCD08\uCF5C\uB9BF \uC0DD\uC0B0\uAE30"
+  description: "\uB2EC\uC544\uC694"
   sprite: {fileID: 21300000, guid: c42234ccd075614418b9a7af2180cf18, type: 3}
-  destinationInstallation: {fileID: 0}
   canSpawn: 1
-  spawnDelay: 6
-  spawnData: {fileID: 11400000, guid: a88e2a7ea0f6f4238a9fad6f3a2e5588, type: 2}
+  spawnDelay: 12
+  spawnData: {fileID: 11400000, guid: dff7e5b57aa3d456987f5c002df82298, type: 2}
   haveDoughInventory: 0
   haveIngredientInventory: 0
   makeDelay: 0
+  maxSlot: 0

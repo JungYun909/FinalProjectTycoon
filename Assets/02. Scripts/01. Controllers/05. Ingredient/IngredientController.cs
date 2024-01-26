@@ -1,23 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class IngredientController : MonoBehaviour, IInteractable
 {
-    public IngredientData _ingredientData;
+    public ItemSO itemData;
     public GameObject moveFunction;
     public GameObject destination;
     
     private void Start()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _ingredientData.sprite;
+        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = itemData.sprite;
 
-        if (_ingredientData.canMove)
+        if (itemData.canMove)
         {
             moveFunction.SetActive(true);
             MovementController controller = moveFunction.GetComponent<MovementController>();
-            controller.speed = _ingredientData.moveSpeed;
+            controller.speed = itemData.moveSpeed;
             controller.destinationObj = destination;
         }
     }
@@ -33,7 +35,7 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void OnColliderInteract()
     {
-        switch (_ingredientData.tag)
+        switch (itemData.tag)
         {
             case "Dough":
                 gameObject.SetActive(false);
@@ -56,20 +58,12 @@ public class IngredientController : MonoBehaviour, IInteractable
             other.gameObject.GetComponent<IInteractable>().OnColliderInteract();
 
         InstallationController controller = other.gameObject.GetComponent<InstallationController>();
+
+        if (other.gameObject.GetComponentInChildren<AbstractInventory>() == null)
+            return;
+
+        AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
         
-        switch (_ingredientData.tag)
-        {
-            case "Dough":
-                if (controller._installationData.haveDoughInventory)
-                {
-                    other.gameObject.GetComponentInChildren<Inventory>().AddDough(_ingredientData);
-                    controller.doughContainer.Enqueue(gameObject);
-                }
-                break;
-            default:
-                if (controller._installationData.haveIngredientInventory)
-                    other.gameObject.GetComponentInChildren<Inventory>().AddIngredient(_ingredientData);
-                break;
-        }
+        InventoryManager.instance.AddItemToInventory(inventory.inventoryID, itemData, 1);
     }
 }
