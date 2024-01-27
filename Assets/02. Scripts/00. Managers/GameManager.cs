@@ -17,33 +17,53 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private AudioManager audioManager;
-    private DataManager dataManager;
-    private InteractionManager interactionManager;
-    private ItemManager itemManager;
-    private LogicManager logicManager;
-    private PoolManager poolManager;
-    private TimeManager timeManager;
-    private UIManager uiManager;
-    private SceneManager sceneManager;
-    private StatManager statManager;
-    private PlayerInputManager playerInputControlleManager;
+    public AudioManager audioManager;
+    public ItemManager itemManager;
+    public LogicManager logicManager;
+    public TimeManager timeManager;
+    
+    public SpawnManager spawnManager;
+    public InstallationManager installationManager;
+    public InventoryManager inventoryManager;
+    public PoolManager poolManager;
+    public UIManager uiManager;
+    public InteractionManager interactionManager;
+    public StatManager statManager;
+    public DataManager dataManager;
+    public SceneManager sceneManager;
+
+
+    //private PlayerInputManager playerInputManager;
 
     private void Awake()
     {
-        //suiManager = new UIManager(); 
+        //audioManager = GetComponent<AudioManager>();
+        //itemManager = GetComponent<ItemManager>();
+        //logicManager = GetComponent<LogicManager>();
+        //timeManager = GetComponent<TimeManager>();
+
+        //spawnManager = GetComponent<SpawnManager>();
+        //installationManager = GetComponent<InstallationManager>();
+        //inventoryManager = GetComponent<InventoryManager>();
+        //poolManager = GetComponent<PoolManager>();
+        //uiManager = GetComponent<UIManager>();
+        //interactionManager = GetComponent<InteractionManager>();
+        //statManager = GetComponent<StatManager>();
+        //dataManager = GetComponent<DataManager>();
+        //sceneManager = GetComponent<SceneManager>();
     }
 
     private void Start()
     {
-        if(instance = null)
-        {
-            instance = this;
-        }
-        else if(instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+        instance = this;
+        //if(instance = null)
+        //{
+        //    instance = this;
+        //}
+        //else if(instance != this)
+        //{
+        //    Destroy(gameObject);
+        //}
+        //DontDestroyOnLoad(gameObject);
     }
 }

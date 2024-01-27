@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public enum SceneType     
 {
+    TitleScene,
     MainScene,
     Kitchen
 }
@@ -23,6 +24,7 @@ public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 �
             Debug.Log("SceneError");
             throw;
         }
-
     }
+
+    
 }
