@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip titleBgm;
+    public AudioClip bgm;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.audioManager.PlayMusic(titleBgm);
+
+        AudioManager.instance.PlayMusic(bgm);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

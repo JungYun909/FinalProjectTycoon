@@ -14,10 +14,15 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
-    
+    public static AudioManager instance;
+    [Header("#BGM")]  //배경음악
     public AudioSource musicSource; //TODO 여러개 만 오브젝트 풀링 씨디플레이어
+    public AudioClip bgmClip;
+
+    [Header("#SFX")] // 효과음
     public List<AudioSource> sfxSource = new List<AudioSource>();
+
+    [Header("#동작 여부")]
     private bool onBgm;
     private bool onSfx;
     // public void Start() //TODO 오디오 컨트롤러로
@@ -25,23 +30,42 @@ public class AudioManager : MonoBehaviour
     //     PlayMusic("BGM");
     // }
 
-    private void Start()
+    private void Awake()
     {
-        for(int i = 0; i < 10; i++)
+
+        instance = this;
+        Init();
+
+    }
+
+    private void Init()
+    {
+        musicSource.clip = bgmClip;
+        musicSource.loop = true;
+        onBgm = true;
+        onSfx = true;
+
+        for (int i = 0; i < 10; i++)
         {
             AudioSource temp = this.gameObject.AddComponent<AudioSource>();
             sfxSource.Add(temp);
         }
+
     }
-    public void PlayMusic(AudioClip bgm)
+
+
+    public void PlayMusic(AudioClip music)
     {
-        if(!onBgm)
+        musicSource.clip = music;
+        if (!onBgm)
         {
             return;
         }
-        musicSource.clip = bgm;
+   
         musicSource.Play();
     }
+
+
 
     public void PlaySFX(AudioClip effect)
     {
