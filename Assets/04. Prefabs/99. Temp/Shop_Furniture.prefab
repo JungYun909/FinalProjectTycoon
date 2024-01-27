@@ -369,7 +369,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a695c065155744cba85fbe5a2d886704, type: 2}
   slotPrefab: {fileID: 5866451594632709922, guid: 795383b0f77199b4cbab5ae202b5c20c, type: 3}
   slotParent: {fileID: 555054149231982554}
-  data: {fileID: 6676213533268660215}
+  nameText: {fileID: 6676213533268660215}
+  datas: []
 --- !u!1 &2043390557813188793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,7 +1835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790, y: 336.42114}
+  m_AnchoredPosition: {x: -790, y: 336.49997}
   m_SizeDelta: {x: 830, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3201771209004584562
