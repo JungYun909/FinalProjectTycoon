@@ -68,7 +68,7 @@ public class InteractionManager : MonoBehaviour
     //반복 상호작용
     IEnumerator InteractionCoroutine()
     {
-        while (true)
+        while (interactionObject != null)
         {
             interactionObject.OnClickInteract();
 
