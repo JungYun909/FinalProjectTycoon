@@ -25,10 +25,7 @@ public class AudioManager : MonoBehaviour
     [Header("#동작 여부")]
     private bool onBgm;
     private bool onSfx;
-    // public void Start() //TODO 오디오 컨트롤러로
-    // {
-    //     PlayMusic("BGM");
-    // }
+
 
     private void Awake()
     {
@@ -43,7 +40,6 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = bgmClip;
         musicSource.loop = true;
         onBgm = true;
-        onSfx = true;
 
         for (int i = 0; i < 10; i++)
         {
