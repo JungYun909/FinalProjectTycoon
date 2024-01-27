@@ -12,6 +12,8 @@ public class ShopUI : UIBase
     public GameObject slotPrefab;
     public Transform slotParent;
     public TMP_Text nameText;
+    public TMP_Text descriptionText;
+    public TMP_Text priceText;
     public List<ItemDataContainer> datas;
     public override void Initialize()
     {
@@ -43,5 +45,7 @@ public class ShopUI : UIBase
     private void SetInfo(MachineSO sO)
     {
         nameText.text = sO.installasionName;
+        descriptionText.text = sO.description;
+        priceText.text = sO.price.ToString() + "원";
     }
 }

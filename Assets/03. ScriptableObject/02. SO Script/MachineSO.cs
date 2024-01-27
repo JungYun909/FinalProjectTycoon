@@ -10,6 +10,7 @@ public class MachineSO : ScriptableObject
     public int id; //machine ID (호출 넘버)
     public string installasionName; //출력할 기계 이름
     public string description; //출력할 기계 설명
+    public int price;
     public Sprite sprite;
 
     [Header("Spawning")]

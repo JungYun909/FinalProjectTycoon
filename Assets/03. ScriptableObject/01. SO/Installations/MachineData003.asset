@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 3
   installasionName: "\uC624\uBE10"
   description: "\uB178\uB987\uB178\uB987"
+  price: 30
   sprite: {fileID: 21300000, guid: 0cb71ffb3ea779a41b74c84727344e4e, type: 3}
   canSpawn: 0
   spawnDelay: 0
