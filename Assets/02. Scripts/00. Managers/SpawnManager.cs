@@ -45,7 +45,7 @@ public class SpawnManager : MonoBehaviour
         controller._installationData = installationData;
     }
 
-    public void SpawnIngredient(GameObject spawningInstallationObj, InstallationController installationController, ItemSO data)
+    public void SpawnIngredient(GameObject spawningInstallationObj, GameObject destinationObj, ItemSO data)
     {
         UpdateObjTag(data.tag);
         
@@ -53,10 +53,10 @@ public class SpawnManager : MonoBehaviour
         IngredientController controller = curSpawnObj.GetComponent<IngredientController>();
         
         controller.itemData = data;
-        controller.destination = installationController.destinationObj;
+        controller.destination = destinationObj;
         
         curSpawnObj.transform.position = spawningInstallationObj.transform.position +
-                                         ((installationController.destinationObj.transform.position -
+                                         ((destinationObj.transform.position -
                                            spawningInstallationObj.transform.position).normalized);
         
         UpdateObjTag(data.tag);
