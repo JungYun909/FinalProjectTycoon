@@ -15,14 +15,7 @@ public class SpawnManager : MonoBehaviour
 
     [Header("SpawnPosition")]
     public GameObject door;
-
-
-    public static SpawnManager instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    
 
     private void Start()
     {
@@ -31,13 +24,13 @@ public class SpawnManager : MonoBehaviour
 
     private void Update()
     {
-        if(StatManager.instance.curNpc < StatManager.instance.maxNpc)
-            StopCoroutine(SpawnNPC());
+        // if(GameManager.instance.statManager.curNpc < GameManager.instance.statManager.maxNpc)
+        //     StopCoroutine(SpawnNPC());
     }
 
     public void SpawnInstallaion(MachineSO installationData)
     {
-        GameObject spawnInstallationObj = PoolManager.instacne.SpawnFromPool(installationObj);
+        GameObject spawnInstallationObj = GameManager.instance.poolManager.SpawnFromPool(installationObj);
         spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
         
         InstallationController controller = spawnInstallationObj.GetComponent<InstallationController>();
@@ -49,7 +42,7 @@ public class SpawnManager : MonoBehaviour
     {
         UpdateObjTag(data.tag);
         
-        GameObject curSpawnObj = PoolManager.instacne.SpawnFromPool(ingredientObj);
+        GameObject curSpawnObj = GameManager.instance.poolManager.SpawnFromPool(ingredientObj);
         IngredientController controller = curSpawnObj.GetComponent<IngredientController>();
         
         controller.itemData = data;
@@ -66,18 +59,18 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            float visitProbability = StatManager.instance.shopFame * 0.1f;
+            float visitProbability = GameManager.instance.statManager.shopFame * 0.1f;
         
             int rand = UnityEngine.Random.Range(1, 100);
 
             if (rand <= visitProbability)
             {
-                GameObject curNPC =  PoolManager.instacne.SpawnFromPool(npcObj);
+                GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npcObj);
                 curNPC.transform.position = door.transform.position;
-                StatManager.instance.maxNpc += 1;
+                GameManager.instance.statManager.maxNpc += 1;
             }
             
-            yield return new WaitForSeconds(6 - (StatManager.instance.shopLevel / 20));
+            yield return new WaitForSeconds(6 - (GameManager.instance.statManager.shopLevel / 20));
         }
     }
     

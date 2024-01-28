@@ -20,13 +20,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     //UI오픈에 반응하는 델리게이트 / 이벤트 선언하기 위한 필드
     public delegate void DailyResultWindowOn();
     public event DailyResultWindowOn OnDailyWindowOpen;
-
-    public static UIManager Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
+    
     private void Start()
     {
         //InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행

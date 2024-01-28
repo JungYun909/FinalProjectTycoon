@@ -24,18 +24,15 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
-
-
-    public static StatManager instance;
+    
     private void Awake()	    //TODO
     {
-        instance = this;
         Initialize();
     }
 
     private void Initialize()
     {
-        shopStat = GetComponent<TemporaryStat>();//TODO 현재는 같은 오브젝트에 붙여 사용하므로 GetComponent사용. 이후 StatManager가 MonoBehaviour가 아닐 때를 고민할 필요가 있음.   
+        shopStat = GetComponentInChildren<TemporaryStat>();//TODO 현재는 같은 오브젝트에 붙여 사용하므로 GetComponent사용. 이후 StatManager가 MonoBehaviour가 아닐 때를 고민할 필요가 있음.   
         shopFame = shopStat.fame;
         financeScore = shopStat.financialScore;
         currentGold = shopStat.gold;

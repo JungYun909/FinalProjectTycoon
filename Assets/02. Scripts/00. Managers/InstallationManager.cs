@@ -14,20 +14,13 @@ public class InstallationManager : MonoBehaviour
     public GameObject curInstallation;
     public bool onDestination;
     private InstallationController curInstallationController;
-
-    public static InstallationManager instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
     
     private void Start()
     {
-        installationSetUI.SetActive(false);
-        installationManageController.SetActive(false);
-        doughInventoryUI.SetActive(false);
-        ingredientInventoryUI.SetActive(false);
+        // installationSetUI.SetActive(false);
+        // installationManageController.SetActive(false);
+        // doughInventoryUI.SetActive(false);
+        // ingredientInventoryUI.SetActive(false);
     }
 
     public void OnInstallationSetUI()
@@ -70,7 +63,7 @@ public class InstallationManager : MonoBehaviour
     
     public void DestroyBtn()
     {
-        PoolManager.instacne.DeSpawnFromPool(curInstallation);
+        GameManager.instance.poolManager.DeSpawnFromPool(curInstallation);
         installationManageController.SetActive(false);
         curInstallation = null;
     }
