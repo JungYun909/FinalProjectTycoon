@@ -9,8 +9,8 @@ public class PlayerData
     public int level = 1;
     public int money = 0;
     public int installations = 0;
-    public Queue<int> installationSubInt = new Queue<int>();
-    public Queue<Vector2> installationsPos = new Queue<Vector2>();
+    public List<int> installationSubInt = new List<int>();
+    public List<Vector2> installationsPos = new List<Vector2>();
     public int ingredients = 0;
 }
 public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로딩 관리하기 위한 매니저. json
@@ -20,19 +20,26 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     private string jsonName = "PlayerJson";
 
     public MachineSO[] installationSub;
+    public GameObject[] curObject;
 
     private void Start()
     {
         path = Application.persistentDataPath + "/";
-        SaveData();
-
-        while (playerData.installations > 0)
+        
+        if (!File.Exists(path + jsonName))
         {
-            playerData.installations--;
-            GameObject curGameObject = GameManager.instance.spawnManager.SpawnInstallaion(installationSub[playerData.installationSubInt.Dequeue()]);
-            curGameObject.transform.position = playerData.installationsPos.Dequeue();
+            SaveData();
         }
-
+        
+        LoadData();
+        
+        for (int i = 0; i < playerData.installations; i++)
+        {
+            GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);
+            InstallationController controller = curObj.GetComponent<InstallationController>();
+            controller._installationData = installationSub[playerData.installationSubInt[i]];
+            curObj.transform.position = playerData.installationsPos[i];
+        }
     }
 
     public void SaveData()
@@ -46,22 +53,13 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public void SaveInstallation(int MachineIndex, Vector2 MachinePos)
     {
         playerData.installations++;
-        playerData.installationSubInt.Enqueue(MachineIndex);
-        playerData.installationsPos.Enqueue(MachinePos);
+        playerData.installationSubInt.Add(MachineIndex);
+        playerData.installationsPos.Add(MachinePos);
     }
 
     public void LoadData()
     {
-        string jsonPath = path + jsonName;
-        
-        if (File.Exists(jsonPath))
-        {
-            string jsonData = File.ReadAllText(jsonPath);
-            playerData = JsonUtility.FromJson<PlayerData>(jsonData);
-        }
-        else
-        {
-            Debug.LogWarning("No saved data found.");
-        }
+        string jsonData = File.ReadAllText(path + jsonName);
+        playerData = JsonUtility.FromJson<PlayerData>(jsonData);
     }
 }

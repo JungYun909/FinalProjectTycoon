@@ -45,10 +45,4 @@ public class GameManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
     }
-
-    private void Start()
-    {
-        if(dataManager.playerData != null)
-            dataManager.LoadData();
-    }
 }
