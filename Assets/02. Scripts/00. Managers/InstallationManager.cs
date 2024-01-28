@@ -12,6 +12,7 @@ public class InstallationManager : MonoBehaviour
     public GameObject ingredientInventoryUI;
 
     public GameObject curInstallation;
+    public bool onDestination;
     private InstallationController curInstallationController;
 
     public static InstallationManager instance;

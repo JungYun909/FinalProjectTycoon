@@ -10,8 +10,7 @@ public class InstallationController : MonoBehaviour, IInteractable
     public MachineSO _installationData;
     public GameObject spawnFunction;
     public GameObject inventoryFunction;
-    
-    public GameObject destinationObj;
+
     public Queue<GameObject> doughContainer;
     
     private void Start()
@@ -49,9 +48,14 @@ public class InstallationController : MonoBehaviour, IInteractable
         else
         {
             InstallationController controller = InstallationManager.instance.curInstallation.GetComponent<InstallationController>();
-            controller.destinationObj = gameObject;
+            // controller.destinationObj = gameObject;
             InstallationManager.instance.OnInstallationSetUI();
         }
+    }
+
+    public void OffClickInteract()
+    {
+        return;
     }
 
     public void OnColliderInteract()

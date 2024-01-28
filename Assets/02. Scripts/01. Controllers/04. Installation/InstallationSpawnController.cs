@@ -5,20 +5,21 @@ using UnityEngine;
 
 public class InstallationSpawnController : MonoBehaviour
 {
-    public InstallationController _installationController;
+    public InstallationDestinationController _destiantionController;
+    public InstallationController _controller;
     public float spawnTimer;
     
     private void Update()
     {
-        if(!_installationController.destinationObj || !_installationController._installationData.canSpawn)
+        if(!_destiantionController.destination[1] || !_controller._installationData.canSpawn)
             return;
 
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer > _installationController._installationData.spawnDelay)
+        if (spawnTimer > _controller._installationData.spawnDelay)
         {
             spawnTimer = 0f;
-                SpawnManager.instance.SpawnIngredient(gameObject, _installationController, _installationController._installationData.spawnData);
+                SpawnManager.instance.SpawnIngredient(gameObject, _destiantionController.destination[1], _controller._installationData.spawnData);
         }
     }
 }

@@ -253,3 +253,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   destinationObj: {fileID: 0}
+  isMove: 0
