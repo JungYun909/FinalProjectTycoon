@@ -16,27 +16,34 @@ public class InstallationDestinationController : MonoBehaviour, IInteractable
     public void OnClickInteract()
     {
         RaycastHit2D ray = Physics2D.Raycast(InteractionManager.instance.curMouseDirection, Vector2.zero, 0f);
-            
-        if(!ray.collider.gameObject)
-            return;
 
-        if (destination[0] == null)
+        Vector2 desPos0 = new Vector2();
+        Vector2 desPos1 = new Vector2();
+        
+        if (ray.collider)
         {
-            destination[0] = ray.collider.gameObject;
-            line.SetPosition(0,destination[0].transform.position);
-        }
-        else
-        {
-            destination[1] = ray.collider.gameObject;
+            if (destination[0] == null)
+            {
+                destination[0] = ray.collider.gameObject;
+                desPos0 = destination[0].transform.position;
+            }
+            else if(destination[0] != ray.collider.gameObject)
+            {
+                destination[1] = ray.collider.gameObject;
+                desPos1 = destination[1].transform.position;
+            }
         }
 
-        if (destination[1] == null || Vector2.Distance(InteractionManager.instance.curMouseDirection, new Vector2(destination[1].transform.position.x, destination[1].transform.position.y)) > 1)
+        if(!destination[0])
+            line.SetPosition(0,Vector2.zero);
+
+        if (!destination[1])
         {
-            line.SetPosition(1, InteractionManager.instance.curMouseDirection);
-        }
-        else
-        {
-            line.SetPosition(1, new Vector2(destination[1].transform.position.x, destination[1].transform.position.y));
+            if(!ray.collider)
+                line.SetPosition(1, InteractionManager.instance.curMouseDirection - desPos0);
+            else
+                line.SetPosition(1, desPos1 - desPos0);
+
         }
     }
 
