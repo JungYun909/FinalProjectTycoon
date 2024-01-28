@@ -42,9 +42,13 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
     }
 
-    public void OpenWindow(UIBase uiPrefab)   //UI창을 열기 위한 메서드. 버튼에 스크립트로 이벤트리스너를 부여하는 방식으로 사용해야 할듯함. 
+    public void OpenWindow(UIBase uiPrefab, AbstractInventory inventory = null)
     {
         UIBase uiInstance = Instantiate(uiPrefab, transform).GetComponent<UIBase>();
+        if (uiInstance is InventoryShow inventoryShow && inventory != null)
+        {
+            inventoryShow.OpenInventory(inventory);
+        }
         if (uiStack.Count > 0)    //처음 열리는 창이 아닐 때에는 
         {
             uiStack.Peek().gameObject.SetActive(false);   // 기존에 열려있던 창을 비활성화. Peek()이란 스택 맨 위를 확인하는 메서.

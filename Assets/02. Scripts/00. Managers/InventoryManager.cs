@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public event Action<int> OnInventoryUpdated; // 인벤토리 ID를 인자로 사용
+
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1000;   // 인덱스용 아이디를 부여하기 위한 필드
@@ -28,12 +31,35 @@ public class InventoryManager : MonoBehaviour
         if (inventories.ContainsKey(inventoryID))
         {
             var inventory = inventories[inventoryID];
-            if (!inventory.Items.ContainsKey(item))
+
+            // 반죽 아이템의 경우
+            if (item.id == 1)
             {
-                inventory.Items[item] = 0;
+                inventory.Items.TryGetValue(item, out int currentQuantity);
+
+                // 새로운 수량 계산
+                int newQuantity = currentQuantity + quantity;
+
+                // 최대 수량을 초과하는 경우, 최대 수량으로 제한
+                if (newQuantity > inventory.maxDoughQuantity)
+                {
+                    newQuantity = inventory.maxDoughQuantity;
+                }
+
+                // 수량 업데이트
+                inventory.Items[item] = newQuantity;
             }
-            inventory.Items[item] += quantity;
-            // 인벤토리 UI 업데이트를 위한 items 딕셔너리 전달
+            else
+            {
+                // 다른 아이템의 경우, 정상적으로 추가
+                if (!inventory.Items.ContainsKey(item))
+                {
+                    inventory.Items[item] = 0;
+                }
+                inventory.Items[item] += quantity;
+            }
+
+            OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
             inventory.UpdateInspectorList();
         }
     }

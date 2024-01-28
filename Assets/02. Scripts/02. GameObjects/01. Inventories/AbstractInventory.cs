@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
-
+using System;
 
 [System.Serializable]
 public class InventoryItemEntry
@@ -25,6 +25,10 @@ public class AbstractInventory : MonoBehaviour, IInteractable
 {
     private AbstractInventory inventory;
     public InventoryShow inventoryShow;
+    public int maxDoughQuantity = 5; // 기본값으로 5를 설정
+
+    public static event Action<AbstractInventory> OnInventoryClicked;
+
 
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
 
@@ -57,8 +61,11 @@ public class AbstractInventory : MonoBehaviour, IInteractable
 
     public void OnClickInteract()
     {
+
         Debug.Log("Clicked!");
-        inventoryShow.OpenInventory(this); // 인벤토리 UI 업데이트
+        OnInventoryClicked?.Invoke(this);
+        UIManager.Instance.OpenWindow(inventoryShow, this);
+
     }
 
     public void OffClickInteract()
