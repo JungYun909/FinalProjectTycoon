@@ -7,6 +7,10 @@ public class InstallationDestinationController : MonoBehaviour, IInteractable
 {
     public GameObject[] destination = new GameObject[2];
     public LineRenderer line;
+    public GameObject lineObj;
+    
+    private Vector2 desPos0;
+    private Vector2 desPos1;
 
     public bool Continuous()
     {
@@ -15,10 +19,9 @@ public class InstallationDestinationController : MonoBehaviour, IInteractable
 
     public void OnClickInteract()
     {
+        lineObj.SetActive(true);
+        
         RaycastHit2D ray = Physics2D.Raycast(InteractionManager.instance.curMouseDirection, Vector2.zero, 0f);
-
-        Vector2 desPos0 = new Vector2();
-        Vector2 desPos1 = new Vector2();
         
         if (ray.collider)
         {
@@ -33,18 +36,25 @@ public class InstallationDestinationController : MonoBehaviour, IInteractable
                 desPos1 = destination[1].transform.position;
             }
         }
-
-        if(!destination[0])
-            line.SetPosition(0,Vector2.zero);
-
-        if (!destination[1])
+        else
         {
+            destination[1] = null;
+        }
+
+        if (destination[0])
+        {
+            line.SetPosition(0,Vector2.zero);
+            
             if(!ray.collider)
                 line.SetPosition(1, InteractionManager.instance.curMouseDirection - desPos0);
             else
                 line.SetPosition(1, desPos1 - desPos0);
-
         }
+    }
+
+    public void OffClickInteract()
+    {
+        lineObj.SetActive(false);
     }
 
     public void OnColliderInteract()

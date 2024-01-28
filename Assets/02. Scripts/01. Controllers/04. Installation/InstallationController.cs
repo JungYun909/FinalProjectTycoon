@@ -53,6 +53,11 @@ public class InstallationController : MonoBehaviour, IInteractable
         }
     }
 
+    public void OffClickInteract()
+    {
+        return;
+    }
+
     public void OnColliderInteract()
     {
         //온콜라이더 상호작용 내용

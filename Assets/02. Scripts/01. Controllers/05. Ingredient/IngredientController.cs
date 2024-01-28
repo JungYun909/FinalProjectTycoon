@@ -32,6 +32,10 @@ public class IngredientController : MonoBehaviour, IInteractable
     {
         return;
     }
+    public void OffClickInteract()
+    {
+        return;
+    }
 
     public void OnColliderInteract()
     {

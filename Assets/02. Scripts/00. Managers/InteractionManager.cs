@@ -10,6 +10,7 @@ public interface IInteractable
 {
     bool Continuous();
     void OnClickInteract();
+    void OffClickInteract();
     void OnColliderInteract();
 }
 public class InteractionManager : MonoBehaviour
@@ -61,6 +62,7 @@ public class InteractionManager : MonoBehaviour
             {
                 StopCoroutine(interactionCoroutine);
             }
+            interactionObject.OffClickInteract();
             interactionObject = null;
         }
     }

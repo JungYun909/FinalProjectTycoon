@@ -61,7 +61,12 @@ public class AbstractInventory : MonoBehaviour, IInteractable
         inventoryShow.OpenInventory(this); // 인벤토리 UI 업데이트
     }
 
-        public void OnColliderInteract()
+    public void OffClickInteract()
+    {
+        return;
+    }
+
+    public void OnColliderInteract()
     {
         return;
     }
