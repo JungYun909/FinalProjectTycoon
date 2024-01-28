@@ -28,7 +28,7 @@ public class SpawnManager : MonoBehaviour
         //     StopCoroutine(SpawnNPC());
     }
 
-    public void SpawnInstallaion(MachineSO installationData)
+    public GameObject SpawnInstallaion(MachineSO installationData)
     {
         GameObject spawnInstallationObj = GameManager.instance.poolManager.SpawnFromPool(installationObj);
         spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
@@ -36,6 +36,11 @@ public class SpawnManager : MonoBehaviour
         InstallationController controller = spawnInstallationObj.GetComponent<InstallationController>();
         
         controller._installationData = installationData;
+        
+        GameManager.instance.dataManager.SaveInstallation(installationData.id - 1, spawnInstallationObj.transform.position);
+        GameManager.instance.dataManager.SaveData();
+
+        return spawnInstallationObj;
     }
 
     public void SpawnIngredient(GameObject spawningInstallationObj, GameObject destinationObj, ItemSO data)
@@ -51,7 +56,9 @@ public class SpawnManager : MonoBehaviour
         curSpawnObj.transform.position = spawningInstallationObj.transform.position +
                                          ((destinationObj.transform.position -
                                            spawningInstallationObj.transform.position).normalized);
-        
+
+        GameManager.instance.dataManager.playerData.ingredients++;
+        GameManager.instance.dataManager.SaveData();
         UpdateObjTag(data.tag);
     }
 
