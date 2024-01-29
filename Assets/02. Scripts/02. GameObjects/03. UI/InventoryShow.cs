@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class InventoryShow : UIBase
 {
@@ -12,6 +13,11 @@ public class InventoryShow : UIBase
     public Transform inventoryItemsParent; // 일반 인벤토리 아이템을 보여줄 부모 객체
     public Transform specialDoughItemsParent; // 반죽 아이템을 보여줄 특별한 부모 객체
     AbstractInventory inventory;
+
+
+    private AbstractInventory curInventory;
+
+    public event Action<int> DeliverInventoryID;
 
     private void OnEnable()
     {
@@ -32,6 +38,7 @@ public class InventoryShow : UIBase
         Debug.Log("Inventory info received: " + inventory.inventoryID);
         // 이벤트가 발생했을 때 UI를 업데이트합니다.
         OpenInventory(inventory);
+        curInventory = inventory;
         UpdateUI();
     }
     private void HandleInventoryUpdate(int inventoryID)
@@ -127,5 +134,7 @@ public class InventoryShow : UIBase
     public void OpenPlayerInventory()
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
+        DeliverInventoryID?.Invoke(curInventory.inventoryID);
+        Debug.Log(curInventory.inventoryID);
     }
 }

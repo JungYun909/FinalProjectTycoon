@@ -11,11 +11,15 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     public TextMeshProUGUI quantityText; // 수량을 표시할 TextMeshProUGUI 컴포넌트
 
     public event Action<ItemSO> DeliverItem;
-
     private ItemSO curItem;
+
+    private InventoryShow inventoryShow;
+    private ShopInventory shopInventory;
 
     public void Setup(ItemSO item, int quantity)
     {
+        inventoryShow = FindObjectOfType<InventoryShow>();
+        shopInventory = FindObjectOfType<ShopInventory>();
         // 아이템 아이콘 설정
         if (item != null && item.sprite != null)
         {
@@ -30,10 +34,23 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         // 수량 텍스트 설정
         quantityText.text = quantity > 0 ? quantity.ToString() : "";
     }
- 
-    public void OnButtonClicked()
+
+    private void OnEnable()
+    {
+        inventoryShow.DeliverInventoryID += OnButtonClicked;
+    }
+
+    private void OnDisable()
+    {
+        inventoryShow.DeliverInventoryID -= OnButtonClicked;
+    }
+
+    public void OnButtonClicked(int toInventoryID)
     {
         DeliverItem?.Invoke(curItem);
         Debug.Log(curItem.itemName);
+        GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
+        Debug.Log($"{curItem.itemName} is transferred to {toInventoryID}th inventory");
     }
+
 }
