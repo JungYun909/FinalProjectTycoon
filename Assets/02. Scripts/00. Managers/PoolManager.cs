@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해제 등과 관련된 업무 전체 관	
 {
-
     private Dictionary<string, Queue<GameObject>> poolDictionary;
 
     private void Start()
@@ -20,7 +19,7 @@ public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해
         {
             poolDictionary.Add(addGameObject.tag, new Queue<GameObject>());
         }
-        GameObject obj = Instantiate(addGameObject, transform);
+        GameObject obj = Instantiate(addGameObject);
         return obj;
     }
 

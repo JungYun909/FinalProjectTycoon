@@ -10,6 +10,7 @@ public class NPCSpawnController : MonoBehaviour
     private PoolManager poolManager;
     [SerializeField] private GameObject npc;
     [SerializeField] GameObject positionNum;
+    [SerializeField] GameObject machinList;
 
 
     // Start is called before the first frame update
@@ -18,15 +19,6 @@ public class NPCSpawnController : MonoBehaviour
         poolManager = GetComponent<PoolManager>();
         StartCoroutine(NPCSpawnCorutine());
 
-    }
-
-
-    void Update()
-    {
-        if (NPCNum==20)
-        {
-            StopCoroutine(NPCSpawnCorutine());
-        }
     }
 
     IEnumerator NPCSpawnCorutine()
@@ -47,13 +39,16 @@ public class NPCSpawnController : MonoBehaviour
         float visitProbability = reputation * 0.1f;
         int rand = UnityEngine.Random.Range(1, 100);
 
-        if (rand <= visitProbability)
+        if (rand <= visitProbability&& NPCNum < 1)
         {
+            NPCNum += 1;
             GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npc);
             curNPC.transform.position = positionNum.transform.position;
+            GameObject curmachineList = machinList;
+            curNPC.GetComponent<NPCMovement>().machineList = machinList;
             npc.SetActive(true);
             Debug.Log("손님이 왕이다");
-            NPCNum += 1;
+            
 
         }
     }

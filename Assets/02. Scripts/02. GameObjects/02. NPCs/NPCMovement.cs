@@ -6,42 +6,41 @@ using UnityEngine.InputSystem;
 using static UnityEditor.Progress;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class NPCMovement : MovementController
+public class NPCMovement : MonoBehaviour
 {
 
     [SerializeField] private bool buying;
-
     [SerializeField] InventoryManager inventoryManager;
-
     [SerializeField] List<GameObject> machineObject; // TODO 이걸 다른 곳에서 리스트 받아와야함
-    [SerializeField] Vector2 machineWaypoint;
     [SerializeField] float machineObjectPosition;
     [SerializeField] int bestPosition_num; // 찾아가야할 게임 오브젝트 List 인덱스
-    MovementController movementController;
+    [SerializeField] bool goCounter;
+    [SerializeField] bool arriveCounter;
 
+    public GameObject machineList;
     [SerializeField] GameObject bestMachine;
     [SerializeField] GameObject counter;
 
     private int layerMask;
     private GameObject hitObject;
     private NPCSetting npcSetting;
+    private MovementController movementController;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        machineObject = machineList.GetComponent<MaketStandingList>().maketStandingList;
+        counter = machineList.GetComponent<MaketStandingList>().counter;
+        goCounter = false;
         buying = false;
+        arriveCounter = false;
         layerMask = LayerMask.GetMask("Interior");
-        movementController = GetComponent<MovementController>();
         npcSetting = GetComponent<NPCSetting>();
-        MachinePositionInform();
+        movementController = GetComponent<MovementController>();
         movementController.speed = npcSetting.npcSo.speed;
-
-
-    }
-    private void OnEnable()
-    {
+        MachinePositionInform();
         
+
     }
 
     void arriveNomuchine()
@@ -56,19 +55,26 @@ public class NPCMovement : MovementController
             MachinePositionInform();
 
         }
+        // 도착했을 때, 부딪히는 진열대가 없을 경우 (플레이어가 중간에 삭제했을때)
 
-        if (buying == true || machineObject.Count == 0)
+
+        if (goCounter == true)
         {
-            Debug.Log("냐");
-            movementController.speed = 5f;
             movementController.destinationObj = counter;
         }
-        
+
+        if (arriveCounter == true)
+        {
+            movementController.speed = 0;
+        }
+
+
         // 만약 도중에 유저가 오브젝트를 삭제했다면? 도착했을때 레이에 부딪히는게 없다면 해당 게임오브젝트를 삭제
         // 위치에 도착하면 멈추기 때문에, is Move 펄스로 판단
         //단 머신 오브젝트로 판정함으로, 머신 오브젝트가 0일경우의 수도 상정해야함 (카운터로 간다 등)
 
     }
+
 
 
 
@@ -92,9 +98,25 @@ public class NPCMovement : MovementController
 
             }
             Debug.Log("부딪혔당");
-            machineObject.RemoveAt(bestPosition_num);
+
+            if (machineObject.Count == 1)
+            {
+                machineObject.Clear();
+                goCounter = true;
+                
+            }
+            else
+            {
+                machineObject.RemoveAt(bestPosition_num);
+            }
+            
 
 
+        }
+
+        else if (hitObject.name == "counter")
+        {
+            arriveCounter = true;
         }
         hitObject = null;
         MachinePositionInform();
@@ -111,7 +133,7 @@ public class NPCMovement : MovementController
         machineObjectPosition = 0f;
         bestPosition_num = 0;
 
-        if (machineObject.Count > 0)
+        if (machineObject.Count > 0 && goCounter == false)
         {
             if (machineObject.Count>1)
             { 
@@ -144,8 +166,8 @@ public class NPCMovement : MovementController
         else
         {
             movementController.speed = 0f;
+
         }
         movementController.destinationObj = bestMachine;
     }
-
 }

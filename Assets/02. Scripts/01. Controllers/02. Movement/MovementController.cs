@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
+        
         if(speed <= 0 && !destinationObj)
             return;
 
@@ -20,6 +21,7 @@ public class MovementController : MonoBehaviour
         {
             StartCoroutine(Movement());
             isMove = true;
+  
         }
     }
 
@@ -30,7 +32,6 @@ public class MovementController : MonoBehaviour
             Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
             Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
             transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
-
             yield return null;
         }
 
