@@ -22,6 +22,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public MachineSO[] installationSub;
     public GameObject[] curObject;
 
+    public List<GameObject> curInstallations;
+
     private void Start()
     {
         path = Application.persistentDataPath + "/";
@@ -46,8 +48,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(path + jsonName, jsonData);
-        
-        Debug.Log(Application.persistentDataPath + "/" + jsonName);
     }
 
     public void SaveInstallation(int MachineIndex, Vector2 MachinePos)
@@ -55,6 +55,17 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.installations++;
         playerData.installationSubInt.Add(MachineIndex);
         playerData.installationsPos.Add(MachinePos);
+    }
+
+    public void PosUpdate(GameObject curObj)
+    {
+        for (int i = 0; i < curInstallations.Count; i++)
+        {
+            if (curInstallations[i] == curObj)
+            {
+                playerData.installationsPos[i] = curObj.transform.position;
+            }
+        }
     }
 
     public void LoadData()

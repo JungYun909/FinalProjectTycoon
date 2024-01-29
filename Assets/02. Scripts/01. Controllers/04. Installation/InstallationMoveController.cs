@@ -31,6 +31,7 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
         {
             //놓았을 때 타일맵에 맞게 UI 정리
             transform.root.position = curGameObject.transform.position;
+            GameManager.instance.dataManager.PosUpdate(curGameObject);
             //움직일 객체 초기화
             curGameObject = null;
         }
