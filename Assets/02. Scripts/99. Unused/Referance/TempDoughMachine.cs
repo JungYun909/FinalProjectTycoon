@@ -18,7 +18,7 @@ public class TempDoughMachine : MonoBehaviour
 
     private void Spawn()
     {
-        GameObject obj = PoolManager.instacne.SpawnFromPool(dough);
+        GameObject obj = GameManager.instance.poolManager.SpawnFromPool(dough);
         obj.transform.position = gameObject.transform.position;
         
         if (obj)

@@ -5,13 +5,13 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class Manager : MonoBehaviour
-{
-    public void Start()
-    {
-        throw new NotImplementedException();
-    }
-}
+// public abstract class Manager : MonoBehaviour
+// {
+//     public void Start()
+//     {
+//         throw new NotImplementedException();
+//     }
+// }
 
 public class GameManager : MonoBehaviour
 {
@@ -32,38 +32,17 @@ public class GameManager : MonoBehaviour
     public DataManager dataManager;
     public SceneManager sceneManager;
 
-
-    //private PlayerInputManager playerInputManager;
-
     private void Awake()
     {
-        //audioManager = GetComponent<AudioManager>();
-        //itemManager = GetComponent<ItemManager>();
-        //logicManager = GetComponent<LogicManager>();
-        //timeManager = GetComponent<TimeManager>();
-
-        //spawnManager = GetComponent<SpawnManager>();
-        //installationManager = GetComponent<InstallationManager>();
-        //inventoryManager = GetComponent<InventoryManager>();
-        //poolManager = GetComponent<PoolManager>();
-        //uiManager = GetComponent<UIManager>();
-        //interactionManager = GetComponent<InteractionManager>();
-        //statManager = GetComponent<StatManager>();
-        //dataManager = GetComponent<DataManager>();
-        //sceneManager = GetComponent<SceneManager>();
-    }
-
-    private void Start()
-    {
-        instance = this;
-        //if(instance = null)
-        //{
-        //    instance = this;
-        //}
-        //else if(instance != this)
-        //{
-        //    Destroy(gameObject);
-        //}
-        //DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            if (instance != this)
+                Destroy(this.gameObject);
+        }
     }
 }

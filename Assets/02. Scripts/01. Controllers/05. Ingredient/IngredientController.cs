@@ -45,7 +45,7 @@ public class IngredientController : MonoBehaviour, IInteractable
                 gameObject.SetActive(false);
                 break;
             default:
-                PoolManager.instacne.DeSpawnFromPool(gameObject);
+                GameManager.instance.poolManager.DeSpawnFromPool(gameObject);
                 break;
         }
     }
@@ -68,6 +68,6 @@ public class IngredientController : MonoBehaviour, IInteractable
 
         AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
         
-        InventoryManager.instance.AddItemToInventory(inventory.inventoryID, itemData, 1);
+        GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
     }
 }

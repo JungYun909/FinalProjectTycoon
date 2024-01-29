@@ -19,13 +19,6 @@ public class InteractionManager : MonoBehaviour
     public IInteractable interactionObject;
     public Vector2 curMouseDirection;
     private Coroutine interactionCoroutine;
-    
-    //임시 싱글톤
-    public static InteractionManager instance;
-    private void Awake()
-    {
-        instance = this;
-    }
 
     //마우스 포지션 바뀔때마다 정보갱신
     public void OnLook(InputValue value)
@@ -42,10 +35,10 @@ public class InteractionManager : MonoBehaviour
         {
             RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f);
             
-            if( !ray.collider || ray.collider.gameObject.GetComponent<IInteractable>() == null)
+            if( !ray.collider || ray.collider.gameObject.GetComponentInChildren<IInteractable>() == null)
                 return;
         
-            interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
+            interactionObject = ray.collider.gameObject.GetComponentInChildren<IInteractable>();
             
             if (interactionObject.Continuous()) //오브젝트의 상호작용이 누르는 동안 반복돠야한다면
             {

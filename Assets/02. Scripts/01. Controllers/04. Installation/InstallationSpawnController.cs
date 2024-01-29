@@ -19,7 +19,7 @@ public class InstallationSpawnController : MonoBehaviour
         if (spawnTimer > _controller._installationData.spawnDelay)
         {
             spawnTimer = 0f;
-                SpawnManager.instance.SpawnIngredient(gameObject, _destiantionController.destination[1], _controller._installationData.spawnData);
+                GameManager.instance.spawnManager.SpawnIngredient(gameObject, _destiantionController.destination[1], _controller._installationData.spawnData);
         }
     }
 }

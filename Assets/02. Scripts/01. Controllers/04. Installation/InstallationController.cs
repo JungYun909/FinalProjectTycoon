@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InstallationController : MonoBehaviour, IInteractable
+public class InstallationController : MonoBehaviour
 {
     public MachineSO _installationData;
     public GameObject spawnFunction;
@@ -25,41 +25,5 @@ public class InstallationController : MonoBehaviour, IInteractable
         
         if(_installationData.haveDoughInventory)
             inventoryFunction.SetActive(true);
-    }
-    
-    public bool Continuous()
-    {
-        return false;
-    }
-
-    public void OnClickInteract()
-    {
-        GameObject curInstallationSetObj = InstallationManager.instance.curInstallation;
-
-        if (!curInstallationSetObj)
-        {
-            InstallationManager.instance.curInstallation = gameObject;
-            InstallationManager.instance.OnInstallationSetUI();
-        }
-        else if (curInstallationSetObj == gameObject)
-        {
-            InstallationManager.instance.OnInstallationSetUI();
-        }
-        else
-        {
-            InstallationController controller = InstallationManager.instance.curInstallation.GetComponent<InstallationController>();
-            // controller.destinationObj = gameObject;
-            InstallationManager.instance.OnInstallationSetUI();
-        }
-    }
-
-    public void OffClickInteract()
-    {
-        return;
-    }
-
-    public void OnColliderInteract()
-    {
-        //온콜라이더 상호작용 내용
     }
 }

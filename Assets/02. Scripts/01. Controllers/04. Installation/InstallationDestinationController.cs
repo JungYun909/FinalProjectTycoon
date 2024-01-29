@@ -21,7 +21,7 @@ public class InstallationDestinationController : MonoBehaviour, IInteractable
     {
         lineObj.SetActive(true);
         
-        RaycastHit2D ray = Physics2D.Raycast(InteractionManager.instance.curMouseDirection, Vector2.zero, 0f);
+        RaycastHit2D ray = Physics2D.Raycast(GameManager.instance.interactionManager.curMouseDirection, Vector2.zero, 0f);
         
         if (ray.collider)
         {
@@ -46,7 +46,7 @@ public class InstallationDestinationController : MonoBehaviour, IInteractable
             line.SetPosition(0,Vector2.zero);
             
             if(!ray.collider)
-                line.SetPosition(1, InteractionManager.instance.curMouseDirection - desPos0);
+                line.SetPosition(1, GameManager.instance.interactionManager.curMouseDirection - desPos0);
             else
                 line.SetPosition(1, desPos1 - desPos0);
         }
