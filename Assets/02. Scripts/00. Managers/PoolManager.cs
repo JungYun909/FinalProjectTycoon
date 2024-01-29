@@ -20,7 +20,7 @@ public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해
         {
             poolDictionary.Add(addGameObject.tag, new Queue<GameObject>());
         }
-        GameObject obj = Instantiate(addGameObject, transform);
+        GameObject obj = Instantiate(addGameObject);
         return obj;
     }
 

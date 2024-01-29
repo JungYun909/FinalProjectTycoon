@@ -41,6 +41,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             InstallationController controller = curObj.GetComponent<InstallationController>();
             controller._installationData = installationSub[playerData.installationSubInt[i]];
             curObj.transform.position = playerData.installationsPos[i];
+            curInstallations.Add(curObj);
         }
     }
 
@@ -50,11 +51,13 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         File.WriteAllText(path + jsonName, jsonData);
     }
 
-    public void SaveInstallation(int MachineIndex, Vector2 MachinePos)
+    public void SaveInstallation(GameObject obj)
     {
         playerData.installations++;
-        playerData.installationSubInt.Add(MachineIndex);
-        playerData.installationsPos.Add(MachinePos);
+        InstallationController controller = obj.GetComponent<InstallationController>();
+        playerData.installationSubInt.Add(controller._installationData.id - 1);
+        playerData.installationsPos.Add(obj.transform.position);
+        curInstallations.Add(obj);
     }
 
     public void PosUpdate(GameObject curObj)
