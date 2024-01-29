@@ -15,14 +15,14 @@ public class InventoryShow : UIBase
     private void OnEnable()
     {
         AbstractInventory.OnInventoryClicked += HandleInventoryOpened;
-        InventoryManager.instance.OnInventoryUpdated += HandleInventoryUpdate;
+        GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
 
     }
 
     private void OnDisable()
     {
         AbstractInventory.OnInventoryClicked -= HandleInventoryOpened;
-        InventoryManager.instance.OnInventoryUpdated -= HandleInventoryUpdate;
+        GameManager.instance.inventoryManager.OnInventoryUpdated -= HandleInventoryUpdate;
 
     }
 

@@ -49,7 +49,7 @@ public class NPCSpawnController : MonoBehaviour
 
         if (rand <= visitProbability)
         {
-            GameObject curNPC =  PoolManager.instacne.SpawnFromPool(npc);
+            GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npc);
             curNPC.transform.position = positionNum.transform.position;
             npc.SetActive(true);
             Debug.Log("손님이 왕이다");

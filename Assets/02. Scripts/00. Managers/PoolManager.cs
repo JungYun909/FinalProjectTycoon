@@ -8,14 +8,8 @@ public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해
 {
 
     private Dictionary<string, Queue<GameObject>> poolDictionary;
-    public static PoolManager instacne;
 
-    private void Awake()
-    {
-        instacne = this;
-    }
-
-    private void Start()                //TODO MonoBehaviour 제거시 Start > Init으로 변경
+    private void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
     }
@@ -26,8 +20,7 @@ public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해
         {
             poolDictionary.Add(addGameObject.tag, new Queue<GameObject>());
         }
-
-        GameObject obj = Instantiate(addGameObject);
+        GameObject obj = Instantiate(addGameObject, transform);
         return obj;
     }
 
