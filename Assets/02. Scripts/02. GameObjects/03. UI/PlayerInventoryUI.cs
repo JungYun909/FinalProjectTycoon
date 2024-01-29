@@ -3,15 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PlayerInventoryUI : MonoBehaviour
+public class PlayerInventoryUI : UIBase
 {
-    public GameObject inventoryPanelPrefab; // 인벤토리 패널 프리팹 참조
+    public UIBase inventoryPanelPrefab; // 인벤토리 패널 프리팹 참조
     private GameObject inventoryPanelInstance; // 인벤토리 패널 인스턴스
 
     public GameObject inventoryItemPrefab; // 인벤토리 아이템 프리팹 참조
     public Transform inventoryItemsParent; // 인벤토리 아이템을 보여줄 부모 객체
 
     private ShopInventory playerInventory; // 플레이어 인벤토리 데이터
+    
 
     private void Start()
     {
@@ -21,12 +22,7 @@ public class PlayerInventoryUI : MonoBehaviour
     // 인벤토리 UI를 활성화하는 메서드
     public void OpenInventory()
     {
-        if (inventoryPanelInstance == null)
-        {
-            inventoryPanelInstance = Instantiate(inventoryPanelPrefab);
-        }
-
-        inventoryPanelInstance.SetActive(true);
+        GameManager.instance.uiManager.OpenWindow(inventoryPanelPrefab, true, playerInventory);
         UpdateUI();
     }
 
@@ -36,20 +32,6 @@ public class PlayerInventoryUI : MonoBehaviour
         if (inventoryPanelInstance != null)
         {
             inventoryPanelInstance.SetActive(false);
-        }
-    }
-
-    // 인벤토리 UI를 갱신하는 메서드
-    private void UpdateUI()
-    {
-        ClearInventoryDisplay(); // 기존 UI 요소 제거
-
-        foreach (var itemEntry in playerInventory.Items)
-        {
-            var item = itemEntry.Key;
-            var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 수량 99로 제한
-
-            CreateItemSlot(item, quantity);
         }
     }
 
@@ -76,6 +58,24 @@ public class PlayerInventoryUI : MonoBehaviour
         if (itemSlotInfo != null)
         {
             itemSlotInfo.Setup(item, quantity);
+        }
+    }
+
+    public override void Initialize()
+    {
+        
+    }
+
+    public override void UpdateUI()
+    {
+        playerInventory = FindObjectOfType<ShopInventory>();
+        ClearInventoryDisplay(); // 기존 UI 요소 제거
+        foreach (var itemEntry in playerInventory.Items)
+        {
+            var item = itemEntry.Key;
+            var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 수량 99로 제한
+
+            CreateItemSlot(item, quantity);
         }
     }
 }

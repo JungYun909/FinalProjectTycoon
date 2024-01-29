@@ -36,14 +36,14 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
     }
 
-    public void OpenWindow(UIBase uiPrefab, AbstractInventory inventory = null)
+    public void OpenWindow(UIBase uiPrefab, bool keepPreviousWindow = false, AbstractInventory inventory = null)
     {
         UIBase uiInstance = Instantiate(uiPrefab, transform).GetComponent<UIBase>();
         if (uiInstance is InventoryShow inventoryShow && inventory != null)
         {
             inventoryShow.OpenInventory(inventory);
         }
-        if (uiStack.Count > 0)    //처음 열리는 창이 아닐 때에는 
+        if (uiStack.Count > 0 && !keepPreviousWindow)    //처음 열리는 창이 아닐 때에는 
         {
             uiStack.Peek().gameObject.SetActive(false);   // 기존에 열려있던 창을 비활성화. Peek()이란 스택 맨 위를 확인하는 메서.
         }

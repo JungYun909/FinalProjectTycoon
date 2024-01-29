@@ -6,6 +6,7 @@ using TMPro;
 
 public class InventoryShow : UIBase
 {
+    public UIBase playerInventory;
     public GameObject inventoryPanel; // 인벤토리 패널 UI 참조
     public GameObject inventoryItemPrefab; // 인벤토리 아이템 프리팹 참조
     public Transform inventoryItemsParent; // 일반 인벤토리 아이템을 보여줄 부모 객체
@@ -28,6 +29,7 @@ public class InventoryShow : UIBase
 
     private void HandleInventoryOpened(AbstractInventory inventory)
     {
+        Debug.Log("Inventory info received: " + inventory.inventoryID);
         // 이벤트가 발생했을 때 UI를 업데이트합니다.
         OpenInventory(inventory);
         UpdateUI();
@@ -49,7 +51,6 @@ public class InventoryShow : UIBase
 
     private void UpdateInventoryDisplay(AbstractInventory inventory)
     {
-
         ClearInventoryDisplay();
         CreateItemSlots(inventory);
     }
@@ -69,6 +70,11 @@ public class InventoryShow : UIBase
 
     private void CreateItemSlots(AbstractInventory inventory)
     {
+        if (inventory == null)
+            {
+            Debug.Log("What?") ;
+            return;
+            }
         // 인벤토리의 각 아이템에 대한 UI 생성
         foreach (var item in inventory.Items)
         {
@@ -114,9 +120,12 @@ public class InventoryShow : UIBase
 
     public override void UpdateUI()
     {
-        if (inventory != null)
-        {
+        if(inventory != null)
             UpdateInventoryDisplay(inventory);
-        }
+    }
+
+    public void OpenPlayerInventory()
+    {
+        GameManager.instance.uiManager.OpenWindow(playerInventory, true);
     }
 }
