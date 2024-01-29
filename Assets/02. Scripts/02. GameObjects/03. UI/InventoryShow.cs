@@ -43,22 +43,12 @@ public class InventoryShow : UIBase
 
     public void OpenInventory(AbstractInventory inventory)
     {
-        if (inventory == null)
-        {
-            Debug.LogError("Inventory is null when trying to open inventory UI.");
-            return;
-        }
         this.inventory = inventory;
         UpdateInventoryDisplay(inventory);
     }
 
     private void UpdateInventoryDisplay(AbstractInventory inventory)
     {
-        if (inventory == null || inventory.Items == null)
-        {
-            Debug.LogError("Inventory or its items are null.");
-            return;
-        }
 
         ClearInventoryDisplay();
         CreateItemSlots(inventory);
@@ -127,10 +117,6 @@ public class InventoryShow : UIBase
         if (inventory != null)
         {
             UpdateInventoryDisplay(inventory);
-        }
-        else
-        {
-            Debug.LogError("Inventory reference is null when trying to update UI.");
         }
     }
 }
