@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
         //     StopCoroutine(SpawnNPC());
     }
 
-    public void SpawnInstallaion(MachineSO installationData)
+    public GameObject SpawnInstallaion(MachineSO installationData)
     {
         GameObject spawnInstallationObj = GameManager.instance.poolManager.SpawnFromPool(installationObj);
         spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
@@ -40,6 +40,8 @@ public class SpawnManager : MonoBehaviour
         
         GameManager.instance.dataManager.SaveInstallation(spawnInstallationObj);//TODO 데이터 매니저의 설치물 리스트를 통해 갱신시킨다
         GameManager.instance.dataManager.SaveData();
+
+        return spawnInstallationObj;
     }
 
     public void SpawnIngredient(GameObject spawningInstallationObj, GameObject destinationObj, ItemSO data)

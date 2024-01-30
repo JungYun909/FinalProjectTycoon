@@ -21,13 +21,16 @@ public class InventoryItemEntry
 }
 
 
-public class AbstractInventory : MonoBehaviour, IInteractable
+public class AbstractInventory : MonoBehaviour
 {
     private AbstractInventory inventory;
     public InventoryShow inventoryShow;
     public int maxDoughQuantity = 5; // 기본값으로 5를 설정
 
     public static event Action<AbstractInventory> OnInventoryClicked;
+
+    public InstallationController controller;
+
 
 
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
@@ -41,7 +44,18 @@ public class AbstractInventory : MonoBehaviour, IInteractable
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
     }
 
+    private void OnEnable()
+    {
+        controller.installationFuctionSet += OpenInventoryUI;
 
+        OpenInventoryUI();
+        GameManager.instance.uiManager.CloseAll();
+    }
+
+    private void OnDisable()
+    {
+        controller.installationFuctionSet -= OpenInventoryUI;
+    }
     public void UpdateInspectorList()
     {
         itemsListForInspector.Clear();
@@ -51,30 +65,16 @@ public class AbstractInventory : MonoBehaviour, IInteractable
         }
     }
 
-    public bool Continuous()
-    {
-        return false;
-    }
 
-    public void OnClickInteract()
-    {
 
+    private void OpenInventoryUI()
+    {
         Debug.Log("Clicked!");
         Debug.Log("OnInventoryClicked, " + this.inventoryID);
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
-
     }
 
-    public void OffClickInteract()
-    {
-        return;
-    }
-
-    public void OnColliderInteract()
-    {
-        return;
-    }
     // 필요한 경우 데이터 접근 메서드 추가
 
     //public void UpdateInventoryUI(Dictionary<ItemSO, int> items)

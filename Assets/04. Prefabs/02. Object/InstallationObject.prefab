@@ -180,8 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8eeef229e5a44007a02104d7da535e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryShow: {fileID: 0}
+  inventoryShow: {fileID: 5185125149203713690, guid: 9efe868c157e2324a8b2635613f368bf, type: 3}
   maxDoughQuantity: 5
+  controller: {fileID: 1421688546873149454}
   itemsListForInspector: []
   inventoryID: 0
 --- !u!1 &3079726677750095059

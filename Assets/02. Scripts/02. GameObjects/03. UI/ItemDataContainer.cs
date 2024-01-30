@@ -8,19 +8,11 @@ public class ItemDataContainer : MonoBehaviour
     public MachineSO machineSO;
     public event Action<MachineSO> seeItemData;
     // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnItemData()
     {
         seeItemData?.Invoke(machineSO);
+        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
+        GameManager.instance.uiManager.CloseAll();
     }
 }

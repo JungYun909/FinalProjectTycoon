@@ -57,12 +57,14 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void OnButtonClicked(int toInventoryID)
     {
-        toInventoryID = FindObjectOfType<InventoryShow>().curInventory.inventoryID;
-        DeliverItem?.Invoke(curItem);
-        Debug.Log(curItem.itemName);
-
-        GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
-        Debug.Log($"{curItem.itemName} is transferred from {shopInventory.inventoryID} to {toInventoryID}th inventory");
+        if (toInventoryID != 0)
+        {
+            toInventoryID = FindObjectOfType<InventoryShow>().curInventory.inventoryID;
+            DeliverItem?.Invoke(curItem);
+            Debug.Log(curItem.itemName);
+            GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
+            Debug.Log($"{curItem.itemName} is transferred from {shopInventory.inventoryID} to {toInventoryID}th inventory");
+        }
     }
 
 }

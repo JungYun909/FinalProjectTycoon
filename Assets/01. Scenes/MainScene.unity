@@ -8868,7 +8868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC7A5\uC2DD"
+  m_text: "\uBC30\uCE58"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
   m_sharedMaterial: {fileID: 3931606681535558488, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
@@ -9997,6 +9997,8 @@ MonoBehaviour:
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
   - {fileID: 8138419921899543555, guid: 4dade5c94bc5e4f9fb62157e92d9bfd9, type: 3}
   curInstallations: []
+  curSellInstallations: []
+  counter: {fileID: 0}
 --- !u!82 &1590563969
 AudioSource:
   m_ObjectHideFlags: 0
