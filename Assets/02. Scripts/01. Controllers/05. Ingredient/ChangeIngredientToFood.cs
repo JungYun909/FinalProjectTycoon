@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstallationFoodMaker : MonoBehaviour
+public class ChangeIngredientToFood : MonoBehaviour
 {
     public IngredientController controller;
     public InstallationDestinationController desController;

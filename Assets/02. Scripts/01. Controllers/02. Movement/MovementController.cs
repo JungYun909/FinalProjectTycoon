@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour
 {
     public float speed;
     public GameObject destinationObj;
-    public bool isMove;
+    public bool isMove = false;
 
     private void Update()
     {
@@ -17,7 +17,12 @@ public class MovementController : MonoBehaviour
         if(speed <= 0 && !destinationObj)
             return;
 
-        StartCoroutine(Movement());
+        if (!isMove)
+        {
+            StartCoroutine(Movement());
+            isMove = true;
+  
+        }
     }
 
     private IEnumerator Movement()

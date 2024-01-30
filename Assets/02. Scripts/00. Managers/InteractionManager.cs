@@ -31,7 +31,6 @@ public class InteractionManager : MonoBehaviour
     //마우스 눌렀을때 상호작용 관리
     public void OnClick(InputValue value)
     {
-        Debug.Log("in");
         //클릭 중일떄 발생
         if (value.isPressed && interactionObject == null)
         {

@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     [Header("StandardPrefab")]
     public GameObject installationObj;
     public GameObject ingredientObj;
+    public GameObject foodObj;
     public GameObject npcObj;
 
     [Header("SpawnPosition")]
@@ -53,6 +54,7 @@ public class SpawnManager : MonoBehaviour
         
         controller.itemData = data;
         controller.destination = destinationObj;
+        controller.InitSet();
         
         SpawnPositionSet(spawningInstallationObj, destinationObj, curSpawnObj);
 
@@ -60,6 +62,7 @@ public class SpawnManager : MonoBehaviour
         GameManager.instance.dataManager.SaveData();
         UpdateObjTag(data.tag);
     }
+
 
     public void SpawnPositionSet(GameObject spawnObj, GameObject destinationObj,GameObject curObj)
     {

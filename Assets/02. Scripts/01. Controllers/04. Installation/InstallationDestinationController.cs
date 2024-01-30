@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InstallationDestinationController : MonoBehaviour
 {
-    public GameObject[] destination = new GameObject[2];
+    public GameObject[] destination;
     public LineRenderer line;
     public GameObject lineObj;
     
@@ -20,6 +20,8 @@ public class InstallationDestinationController : MonoBehaviour
     {
         controller.installationFuctionSet += destinationFunction;
         controller.installationFuctionOut += stopFunction;
+
+        destination = new GameObject[2];
         
         destinationFunction();
     }
