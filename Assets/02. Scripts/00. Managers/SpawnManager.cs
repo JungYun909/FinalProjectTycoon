@@ -38,9 +38,7 @@ public class SpawnManager : MonoBehaviour
         
         controller._installationData = installationData;
         
-        GameManager.instance.dataManager.curInstallations.Add(spawnInstallationObj);
-        
-        GameManager.instance.dataManager.SaveInstallation(installationData.id - 1, spawnInstallationObj.transform.position);//TODO 데이터 매니저의 설치물 리스트를 통해 갱신시킨다
+        GameManager.instance.dataManager.SaveInstallation(spawnInstallationObj);//TODO 데이터 매니저의 설치물 리스트를 통해 갱신시킨다
         GameManager.instance.dataManager.SaveData();
     }
 

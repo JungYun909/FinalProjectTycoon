@@ -8,4 +8,9 @@ public class MenuButton : MonoBehaviour
     {
         GameManager.instance.uiManager.OpenWindow(openUI);
     }
+
+    public void InstallationFunctionIndexSet(int index)
+    {
+        GameManager.instance.interactionManager.installationFunctionIndex = index;
+    }
 }
