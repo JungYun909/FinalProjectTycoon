@@ -41,16 +41,23 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     private void OnEnable()
     {
-        inventoryShow.DeliverInventoryID += OnButtonClicked;
+        if (inventoryShow != null)
+            inventoryShow.DeliverInventoryID += OnButtonClicked;
+        else
+            return;
     }
 
     private void OnDisable()
     {
-        inventoryShow.DeliverInventoryID -= OnButtonClicked;
+        if (inventoryShow != null)
+            inventoryShow.DeliverInventoryID -= OnButtonClicked;
+        else
+            return;
     }
 
     public void OnButtonClicked(int toInventoryID)
     {
+        toInventoryID = FindObjectOfType<InventoryShow>().curInventory.inventoryID;
         DeliverItem?.Invoke(curItem);
         Debug.Log(curItem.itemName);
 

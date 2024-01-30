@@ -10,12 +10,13 @@ public class InventoryShow : UIBase
     public UIBase playerInventory;
     public GameObject inventoryPanel; // 인벤토리 패널 UI 참조
     public GameObject inventoryItemPrefab; // 인벤토리 아이템 프리팹 참조
-    public Transform inventoryItemsParent; // 일반 인벤토리 아이템을 보여줄 부모 객체
-    public Transform specialDoughItemsParent; // 반죽 아이템을 보여줄 특별한 부모 객체
+    public Transform inventoryItemsParent; // 
+    public Transform doughItemsParent; // 반죽 아이템을 보여줄 부모 객체
+    public GameObject doughItemSlot;
     AbstractInventory inventory;
 
 
-    private AbstractInventory curInventory;
+    public AbstractInventory curInventory;
 
     public event Action<int> DeliverInventoryID;
 
@@ -69,7 +70,7 @@ public class InventoryShow : UIBase
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in specialDoughItemsParent)
+        foreach (Transform child in doughItemsParent)
         {
             Destroy(child.gameObject);
         }
@@ -100,7 +101,7 @@ public class InventoryShow : UIBase
     {
         for (int i = 0; i < quantity; i++)
         {
-            GameObject doughUI = Instantiate(inventoryItemPrefab, specialDoughItemsParent);
+            GameObject doughUI = Instantiate(doughItemSlot, doughItemsParent);
             SetupItemSlot(doughUI, doughItem, 1); // 각 반죽은 개별 슬롯에 들어감
         }
     }
@@ -110,6 +111,7 @@ public class InventoryShow : UIBase
         GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
         SetupItemSlot(itemUI, item, quantity);
     }
+
 
     private void SetupItemSlot(GameObject itemSlotObject, ItemSO item, int quantity)
     {
@@ -134,7 +136,7 @@ public class InventoryShow : UIBase
     public void OpenPlayerInventory()
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
-        DeliverInventoryID?.Invoke(curInventory.inventoryID);
+        //DeliverInventoryID?.Invoke(curInventory.inventoryID);
         Debug.Log(curInventory.inventoryID);
     }
 }
