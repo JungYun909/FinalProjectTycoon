@@ -34,14 +34,11 @@ public class AbstractInventory : MonoBehaviour, IInteractable
 
     [SerializeField]
     private List<InventoryItemEntry> itemsListForInspector = new List<InventoryItemEntry>();
-
-    protected InventoryManager inventoryManager;
     public int inventoryID;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
-        inventoryManager = FindObjectOfType<InventoryManager>();
-        inventoryID = inventoryManager.RegisterInventory(this);
+        inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
     }
 
 
@@ -63,8 +60,9 @@ public class AbstractInventory : MonoBehaviour, IInteractable
     {
 
         Debug.Log("Clicked!");
-        OnInventoryClicked?.Invoke(this);
+        Debug.Log("OnInventoryClicked, " + this.inventoryID);
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
+        OnInventoryClicked?.Invoke(this);
 
     }
 

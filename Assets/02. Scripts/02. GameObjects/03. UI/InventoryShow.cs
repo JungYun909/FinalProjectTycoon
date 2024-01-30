@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class InventoryShow : UIBase
 {
+    public UIBase playerInventory;
     public GameObject inventoryPanel; // 인벤토리 패널 UI 참조
     public GameObject inventoryItemPrefab; // 인벤토리 아이템 프리팹 참조
-    public Transform inventoryItemsParent; // 일반 인벤토리 아이템을 보여줄 부모 객체
-    public Transform specialDoughItemsParent; // 반죽 아이템을 보여줄 특별한 부모 객체
+    public Transform inventoryItemsParent; // 
+    public Transform doughItemsParent; // 반죽 아이템을 보여줄 부모 객체
+    public GameObject doughItemSlot;
     AbstractInventory inventory;
+
+
+    public AbstractInventory curInventory;
+
+    public event Action<int> DeliverInventoryID;
 
     private void OnEnable()
     {
@@ -28,8 +36,10 @@ public class InventoryShow : UIBase
 
     private void HandleInventoryOpened(AbstractInventory inventory)
     {
+        Debug.Log("Inventory info received: " + inventory.inventoryID);
         // 이벤트가 발생했을 때 UI를 업데이트합니다.
         OpenInventory(inventory);
+        curInventory = inventory;
         UpdateUI();
     }
     private void HandleInventoryUpdate(int inventoryID)
@@ -43,23 +53,12 @@ public class InventoryShow : UIBase
 
     public void OpenInventory(AbstractInventory inventory)
     {
-        if (inventory == null)
-        {
-            Debug.LogError("Inventory is null when trying to open inventory UI.");
-            return;
-        }
         this.inventory = inventory;
         UpdateInventoryDisplay(inventory);
     }
 
     private void UpdateInventoryDisplay(AbstractInventory inventory)
     {
-        if (inventory == null || inventory.Items == null)
-        {
-            Debug.LogError("Inventory or its items are null.");
-            return;
-        }
-
         ClearInventoryDisplay();
         CreateItemSlots(inventory);
     }
@@ -71,7 +70,7 @@ public class InventoryShow : UIBase
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in specialDoughItemsParent)
+        foreach (Transform child in doughItemsParent)
         {
             Destroy(child.gameObject);
         }
@@ -79,6 +78,11 @@ public class InventoryShow : UIBase
 
     private void CreateItemSlots(AbstractInventory inventory)
     {
+        if (inventory == null)
+            {
+            Debug.Log("What?") ;
+            return;
+            }
         // 인벤토리의 각 아이템에 대한 UI 생성
         foreach (var item in inventory.Items)
         {
@@ -97,7 +101,7 @@ public class InventoryShow : UIBase
     {
         for (int i = 0; i < quantity; i++)
         {
-            GameObject doughUI = Instantiate(inventoryItemPrefab, specialDoughItemsParent);
+            GameObject doughUI = Instantiate(doughItemSlot, doughItemsParent);
             SetupItemSlot(doughUI, doughItem, 1); // 각 반죽은 개별 슬롯에 들어감
         }
     }
@@ -107,6 +111,7 @@ public class InventoryShow : UIBase
         GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
         SetupItemSlot(itemUI, item, quantity);
     }
+
 
     private void SetupItemSlot(GameObject itemSlotObject, ItemSO item, int quantity)
     {
@@ -124,13 +129,14 @@ public class InventoryShow : UIBase
 
     public override void UpdateUI()
     {
-        if (inventory != null)
-        {
+        if(inventory != null)
             UpdateInventoryDisplay(inventory);
-        }
-        else
-        {
-            Debug.LogError("Inventory reference is null when trying to update UI.");
-        }
+    }
+
+    public void OpenPlayerInventory()
+    {
+        GameManager.instance.uiManager.OpenWindow(playerInventory, true);
+        //DeliverInventoryID?.Invoke(curInventory.inventoryID);
+        Debug.Log(curInventory.inventoryID);
     }
 }

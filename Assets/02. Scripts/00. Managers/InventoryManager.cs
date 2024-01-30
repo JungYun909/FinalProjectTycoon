@@ -10,12 +10,6 @@ public class InventoryManager : MonoBehaviour
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1000;   // 인덱스용 아이디를 부여하기 위한 필드
-    private UIManager  inventoryUIUpdator;
-
-    private void Awake()
-    {
-        inventoryUIUpdator = FindObjectOfType<UIManager>();
-    }
 
     public int RegisterInventory(AbstractInventory inventory)    // 새로 생기는 인벤토리를 딕셔너리에 등재하기 위한 메서드. 모든 인벤토리 생성시
     {
@@ -74,7 +68,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     inventory.Items.Remove(item);
                 }
-
+                OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
                 inventory.UpdateInspectorList();
 
                 return true;
@@ -106,6 +100,9 @@ public class InventoryManager : MonoBehaviour
                     toInventory[item] = 0;
                 }
                 toInventory[item] += quantity;
+
+                OnInventoryUpdated?.Invoke(fromInventoryID); // 이벤트 발생
+                OnInventoryUpdated?.Invoke(toInventoryID); // 이벤트 발생
 
                 // 인벤토리 UI 업데이트
             }
