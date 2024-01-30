@@ -32,9 +32,6 @@ public class InstallationController : MonoBehaviour, IInteractable
 
         if(_installationData.canSpawn)
             spawnFunction.SetActive(true);
-        
-        if(_installationData.haveDoughInventory)
-            inventoryFunction.SetActive(true);
     }
     
 
@@ -67,6 +64,8 @@ public class InstallationController : MonoBehaviour, IInteractable
                     destinationFunction.SetActive(true);
                     break;
             }
+
+            index = GameManager.instance.interactionManager.installationFunctionIndex;
         }
         installationFuctionSet?.Invoke();
     }

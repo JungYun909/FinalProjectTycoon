@@ -51,11 +51,7 @@ public class AbstractInventory : MonoBehaviour
         OpenInventoryUI();
         GameManager.instance.uiManager.CloseAll();
     }
-
-    private void OnDisable()
-    {
-        controller.installationFuctionSet -= OpenInventoryUI;
-    }
+    
     public void UpdateInspectorList()
     {
         itemsListForInspector.Clear();
