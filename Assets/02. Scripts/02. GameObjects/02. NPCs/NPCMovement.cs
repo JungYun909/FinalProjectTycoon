@@ -120,7 +120,6 @@ public class NPCMovement : MonoBehaviour
                     GameManager.instance.inventoryManager.RemoveItemFromInventory(hitObject.GetComponentInChildren<AbstractInventory>().inventoryID, itemso, 1);
                     buying = true;
                 }
-
             }
 
             if (installationList.Count == 1)
