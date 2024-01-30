@@ -9,17 +9,20 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class NPCMovement : MonoBehaviour
 {
 
-    [SerializeField] private bool buying;
+    
     [SerializeField] InventoryManager inventoryManager;
-    [SerializeField] List<GameObject> machineObject; // TODO 이걸 다른 곳에서 리스트 받아와야함
-    [SerializeField] float machineObjectPosition;
+    // TODO 이걸 다른 곳에서 리스트 받아와야함
+    [SerializeField] List<GameObject> installationList;
+    GameObject counter;
+
+    [SerializeField] float installationListPosition;
     [SerializeField] int bestPosition_num; // 찾아가야할 게임 오브젝트 List 인덱스
+
+    [SerializeField] private bool buying;
     [SerializeField] bool goCounter;
-    [SerializeField] bool arriveCounter;
 
     public GameObject machineList;
     [SerializeField] GameObject bestMachine;
-    [SerializeField] GameObject counter;
 
     private int layerMask;
     private GameObject hitObject;
@@ -29,12 +32,13 @@ public class NPCMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        machineObject = machineList.GetComponent<MaketStandingList>().maketStandingList;
-        counter = machineList.GetComponent<MaketStandingList>().counter;
+
+        //SettingInstallations(); // 카운터와 NPC 소환 기준으로 현재 진열대 게임 오브젝트의 리스트
+        // 여기서 진열대만 찾게 설정 (ID로)
         goCounter = false;
         buying = false;
-        arriveCounter = false;
         layerMask = LayerMask.GetMask("Interior");
+        
         npcSetting = GetComponent<NPCSetting>();
         movementController = GetComponent<MovementController>();
         movementController.speed = npcSetting.npcSo.speed;
@@ -43,15 +47,27 @@ public class NPCMovement : MonoBehaviour
 
     }
 
+    //private void SettingInstallations()
+    //{
+    //    counter = GameManager.instance.dataManager.counter;
+    //    foreach (var num in GameManager.instance.dataManager.curInstallations)
+    //    {
+    //        if (num._installationData.id)
+    //        {
+    //            installationList.Add(num);
+    //        }
+    //    }
+    //} 인스톨레이션 데이터에서 진열장만 가져오는 코드였으나 데이터 메니저에서 진열장만 따로 빼내게
+
     void arriveNomuchine()
     {
         // TODO NPC가 리스폰 되었을 때 기준 매대 게임오브젝트 리스트를 불러오는 값
 
 
-        if (movementController.speed == 0 && machineObject != null)
+        if (movementController.speed == 0 && installationList != null)
         {
 
-            machineObject.Remove(bestMachine);
+            installationList.Remove(bestMachine);
             MachinePositionInform();
 
         }
@@ -61,11 +77,6 @@ public class NPCMovement : MonoBehaviour
         if (goCounter == true)
         {
             movementController.destinationObj = counter;
-        }
-
-        if (arriveCounter == true)
-        {
-            movementController.speed = 0;
         }
 
 
@@ -99,15 +110,15 @@ public class NPCMovement : MonoBehaviour
             }
             Debug.Log("부딪혔당");
 
-            if (machineObject.Count == 1)
+            if (installationList.Count == 1)
             {
-                machineObject.Clear();
+                installationList.Clear();
                 goCounter = true;
                 
             }
             else
             {
-                machineObject.RemoveAt(bestPosition_num);
+                installationList.RemoveAt(bestPosition_num);
             }
             
 
@@ -116,7 +127,7 @@ public class NPCMovement : MonoBehaviour
 
         else if (hitObject.name == "counter")
         {
-            arriveCounter = true;
+            movementController.speed = 0;
         }
         hitObject = null;
         MachinePositionInform();
@@ -130,26 +141,26 @@ public class NPCMovement : MonoBehaviour
     void MachinePositionInform()
     {
        
-        machineObjectPosition = 0f;
+        installationListPosition = 0f;
         bestPosition_num = 0;
 
-        if (machineObject.Count > 0 && goCounter == false)
+        if (installationList.Count > 0 && goCounter == false)
         {
-            if (machineObject.Count>1)
+            if (installationList.Count>1)
             { 
-                for (int i = 0; i < machineObject.Count; i++)
+                for (int i = 0; i < installationList.Count; i++)
                 {
-                    Vector2 pos = this.transform.position - machineObject[i].transform.position; // 해당 게임 오브젝트 - 기계간의 거리 계산 값
+                    Vector2 pos = this.transform.position - installationList[i].transform.position; // 해당 게임 오브젝트 - 기계간의 거리 계산 값
                     float positionNum = Mathf.Abs(pos.y) + Mathf.Abs(pos.x);
-                    if (machineObjectPosition == 0)
+                    if (installationListPosition == 0)
                     {
-                        machineObjectPosition = positionNum;
+                        installationListPosition = positionNum;
                         bestPosition_num = i;
 
                     }
-                    else if (machineObjectPosition > positionNum)
+                    else if (installationListPosition > positionNum)
                     {
-                        machineObjectPosition = positionNum;
+                        installationListPosition = positionNum;
                         bestPosition_num = i;
                     }
 
@@ -159,7 +170,7 @@ public class NPCMovement : MonoBehaviour
             {
                 bestPosition_num = 0;
             }
-            bestMachine = machineObject[bestPosition_num];
+            bestMachine = installationList[bestPosition_num];
             
 
         }

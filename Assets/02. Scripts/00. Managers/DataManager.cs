@@ -23,6 +23,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject[] curObject;
 
     public List<GameObject> curInstallations;
+    public List<GameObject> curSellInstallations;
+    public GameObject counter;
 
     private void Start()
     {

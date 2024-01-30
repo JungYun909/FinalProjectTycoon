@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8780971169892884077}
   - component: {fileID: 5067048929176711184}
   - component: {fileID: 8832446666227578149}
+  - component: {fileID: 6750678186853212973}
   m_Layer: 0
   m_Name: NPCObject
   m_TagString: NPC
@@ -64,15 +65,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0df15325622a147807bf7bc535558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buying: 0
   inventoryManager: {fileID: 0}
-  machineObject:
-  - {fileID: 0}
-  machineObjectPosition: 0
+  installationList: []
+  installationListPosition: 0
   bestPosition_num: 0
+  buying: 0
+  goCounter: 0
   machineList: {fileID: 0}
   bestMachine: {fileID: 0}
-  counter: {fileID: 0}
 --- !u!212 &5203631563759980877
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -203,4 +203,17 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &6750678186853212973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8138419921899543555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843e3f38a0ab4c0459ce0bd8e35907b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  machineObject: []
