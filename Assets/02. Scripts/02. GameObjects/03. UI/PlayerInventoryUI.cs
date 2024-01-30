@@ -27,13 +27,19 @@ public class PlayerInventoryUI : UIBase
     private void OnEnable()
     {
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
-        itemSlot.DeliverItem += UpdateItemData;
+        if (itemSlot != null)
+        {
+            itemSlot.DeliverItem += UpdateItemData;
+        }
     }
 
     private void OnDisable()
     {
         GameManager.instance.inventoryManager.OnInventoryUpdated -= HandleInventoryUpdate;
-
+        if (itemSlot != null)
+        {
+            itemSlot.DeliverItem -= UpdateItemData;
+        }
     }
 
     private void HandleInventoryUpdate(int inventoryID)
