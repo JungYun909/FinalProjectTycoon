@@ -16,10 +16,14 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     private InventoryShow inventoryShow;
     private ShopInventory shopInventory;
 
-    public void Setup(ItemSO item, int quantity)
+    private void Awake()
     {
         inventoryShow = FindObjectOfType<InventoryShow>();
         shopInventory = FindObjectOfType<ShopInventory>();
+    }
+    public void Setup(ItemSO item, int quantity)
+    {
+
         // 아이템 아이콘 설정
         if (item != null && item.sprite != null)
         {
@@ -49,8 +53,9 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     {
         DeliverItem?.Invoke(curItem);
         Debug.Log(curItem.itemName);
+
         GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
-        Debug.Log($"{curItem.itemName} is transferred to {toInventoryID}th inventory");
+        Debug.Log($"{curItem.itemName} is transferred from {shopInventory.inventoryID} to {toInventoryID}th inventory");
     }
 
 }

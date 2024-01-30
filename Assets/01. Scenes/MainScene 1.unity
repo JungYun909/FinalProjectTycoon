@@ -672,7 +672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190697726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1.85, z: 0}
+  m_LocalPosition: {x: -3, y: 1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -905,6 +905,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203949843}
   m_CullTransparentMesh: 1
+--- !u!1 &247929826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247929827}
+  - component: {fileID: 247929828}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &247929827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247929826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1590563966}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &247929828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247929826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46238c233b97143b5bc157d2bbd52dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryShow: {fileID: 0}
+  maxDoughQuantity: 5
+  itemsListForInspector: []
+  inventoryID: 0
+  inventoryUI: {fileID: 0}
+  debugItemList: []
 --- !u!1 &258367724
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,7 +7165,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 685471855}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 737512723}
+        m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
+        m_MethodName: OpenUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6030296239426582888, guid: 0f05209c4212e4ad792611000379bdbb, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UIBase, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &685471855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9206,7 +9268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357884703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -1, z: 0}
+  m_LocalPosition: {x: -3, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10059,6 +10121,7 @@ MonoBehaviour:
   - {fileID: 8308437243358786327, guid: 8916f53d72a3b436d93af644dadb7be2, type: 3}
   uiList:
   - {fileID: -1866514570573395851, guid: 743394cb060d36b42abdfaae72f05d3f, type: 3}
+  - {fileID: 0}
   dailyResultOpenInterval: 60
   itemSlotPrefab: {fileID: 0}
   itemLinePrefab: {fileID: 0}
@@ -10196,6 +10259,7 @@ Transform:
   m_Children:
   - {fileID: 1750634140}
   - {fileID: 1891069125}
+  - {fileID: 247929827}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
