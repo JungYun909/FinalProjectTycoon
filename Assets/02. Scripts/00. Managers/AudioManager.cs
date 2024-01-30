@@ -14,7 +14,6 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
     [Header("#BGM")]  //배경음악
     public AudioSource musicSource; //TODO 여러개 만 오브젝트 풀링 씨디플레이어
     public AudioClip bgmClip;
@@ -29,10 +28,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-
-        instance = this;
         Init();
-
     }
 
     private void Init()
@@ -40,6 +36,7 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = bgmClip;
         musicSource.loop = true;
         onBgm = true;
+        onSfx = true;
 
         for (int i = 0; i < 10; i++)
         {

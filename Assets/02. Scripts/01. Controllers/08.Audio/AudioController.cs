@@ -9,8 +9,7 @@ public class AudioController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        AudioManager.instance.PlayMusic(bgm);
+        GameManager.instance.audioManager.PlayMusic(bgm);
     }
 
 }

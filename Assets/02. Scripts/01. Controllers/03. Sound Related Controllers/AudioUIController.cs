@@ -19,11 +19,11 @@ public class AudioUIController : MonoBehaviour //TODO 오디오 매니저가 아
 
     public void MusicVolume()
     {
-        AudioManager.instance.MusicVolume(_musicSlider.value);
+        GameManager.instance.audioManager.MusicVolume(_musicSlider.value);
     }
 
     public void SFXVolume()
     {
-        AudioManager.instance.SFXVolume(_sfxSlider.value);
+        GameManager.instance.audioManager.SFXVolume(_sfxSlider.value);
     }
 }
