@@ -4,13 +4,11 @@ using UnityEngine;
 
 public abstract class UIBase : MonoBehaviour
 {
-    public UIManager uiManager; 
     public abstract void Initialize();
     public abstract void UpdateUI();
 
     private void OnEnable()
     {
-        uiManager = FindObjectOfType<UIManager>();
         StatManager statManager = FindObjectOfType<StatManager>();   // TODO > FindObjectOfType무은 모두 수정 필요
         if(statManager != null)
         {

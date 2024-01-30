@@ -20,15 +20,6 @@ public class NPCSpawnController : MonoBehaviour
 
     }
 
-
-    void Update()
-    {
-        if (NPCNum==20)
-        {
-            StopCoroutine(NPCSpawnCorutine());
-        }
-    }
-
     IEnumerator NPCSpawnCorutine()
     {
         
@@ -47,13 +38,14 @@ public class NPCSpawnController : MonoBehaviour
         float visitProbability = reputation * 0.1f;
         int rand = UnityEngine.Random.Range(1, 100);
 
-        if (rand <= visitProbability)
+        if (rand <= visitProbability&& NPCNum < 1)
         {
+            NPCNum += 1;
             GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npc);
             curNPC.transform.position = positionNum.transform.position;
             npc.SetActive(true);
             Debug.Log("손님이 왕이다");
-            NPCNum += 1;
+            
 
         }
     }

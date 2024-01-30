@@ -11,6 +11,15 @@ public class ItemEntry
 
 public class ShopInventory : AbstractInventory
 {
+    public UIBase inventoryUI;
+    protected override void Start()
+    {
+        base.Start();
+        AddTestItem1();
+        AddTestItem2();
+        AddTestItem3();
+        AddTestItem4();
+    }
     private Dictionary<ItemSO, int> items = new Dictionary<ItemSO, int>();
 
     [SerializeField]
@@ -39,10 +48,10 @@ public class ShopInventory : AbstractInventory
 
     private void AddItemThroughManager(int itemID)
     {
-        ItemSO item = inventoryManager.itemDatabase.GetItemByID(itemID);
+        ItemSO item = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(itemID);
         if (item != null)
         {
-            inventoryManager.AddItemToInventory(inventoryID, item, 1);
+            GameManager.instance.inventoryManager.AddItemToInventory(inventoryID, item, 5);
         }
         UpdateDebugItemList();
     }
