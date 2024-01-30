@@ -11,9 +11,9 @@ public class NPCMovement : MonoBehaviour
 {
 
     [Header("Script")]
-    [SerializeField] InventoryManager inventoryManager;
     private NPCSetting npcSetting;
     private MovementController movementController;
+    
 
     [Header("installation")]
     [SerializeField] List<GameObject> installationList;
@@ -21,17 +21,18 @@ public class NPCMovement : MonoBehaviour
 
     [SerializeField] private bool buying; // 구매여부
     [SerializeField] bool goCounter; // 카운터를 목적지로 정하는 여부
+    [SerializeField] bool goDoor;//문으로 갈지 여부
 
     [SerializeField] GameObject bestMachine; // 가장 가까운 진열대
     [SerializeField] float installationListPosition; // NPC와 게임 오브젝트 간의 거리 절대값
     [SerializeField] int bestPosition_num; // 찾아가야할 게임 오브젝트 List 인덱스
 
     private GameObject hitObject; // 콜라이더로 부딪힌 진열대
+    private ItemSO itemToBuy;
 
 
     void Start()
     {
-
         SettingInstallations(); // 카운터와 NPC 소환 기준으로 현재 진열대 게임 오브젝트의 리스트
         InintSetting(); // 변수 초기화
         MachinePositionInform(); //가장 가까운 진열대 찾기
@@ -52,6 +53,7 @@ public class NPCMovement : MonoBehaviour
 
         goCounter = false;
         buying = false;
+        goDoor = false;
 
         npcSetting = GetComponent<NPCSetting>();
         movementController = GetComponent<MovementController>();
@@ -68,9 +70,12 @@ public class NPCMovement : MonoBehaviour
 
         foreach(var item in GameManager.instance.dataManager.curInstallations)
         {
+            Debug.Log("넣는당1");
             if (item.GetComponent<InstallationController>()._installationData.id == 5)
             {
+                Debug.Log("넣는당");
                 installationList.Add(item);
+                Debug.Log("넣었당");
             }
         }
 
@@ -85,8 +90,14 @@ public class NPCMovement : MonoBehaviour
             installationList.Remove(bestMachine);
             MachinePositionInform();
 
-
         }
+
+        if (goDoor == true)
+        {
+            bestMachine = GameManager.instance.spawnManager.door;
+            movementController.destinationObj = bestMachine;
+        }
+        
 
     }
 
@@ -117,10 +128,11 @@ public class NPCMovement : MonoBehaviour
                 if (npcSetting.selectedFavoriteFoodID == itemso.id)
                 {
                     Debug.Log(hitObject.GetComponentInChildren<AbstractInventory>().inventoryID);
-                    GameManager.instance.inventoryManager.RemoveItemFromInventory(hitObject.GetComponentInChildren<AbstractInventory>().inventoryID, itemso, 1);
                     buying = true;
+                    itemToBuy = itemso;
                 }
             }
+            GameManager.instance.inventoryManager.RemoveItemFromInventory(hitObject.GetComponentInChildren<AbstractInventory>().inventoryID, itemToBuy, 1);
 
             if (installationList.Count == 1)
             {
@@ -151,6 +163,8 @@ public class NPCMovement : MonoBehaviour
             {
                 Debug.Log("안삼");
             }
+            movementController.speed = npcSetting.npcSo.speed;
+            goDoor = true;
 
         }
 
