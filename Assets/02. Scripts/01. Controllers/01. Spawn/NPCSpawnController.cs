@@ -10,7 +10,6 @@ public class NPCSpawnController : MonoBehaviour
     private PoolManager poolManager;
     [SerializeField] private GameObject npc;
     [SerializeField] GameObject positionNum;
-    [SerializeField] GameObject machinList;
 
 
     // Start is called before the first frame update
@@ -44,8 +43,6 @@ public class NPCSpawnController : MonoBehaviour
             NPCNum += 1;
             GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npc);
             curNPC.transform.position = positionNum.transform.position;
-            GameObject curmachineList = machinList;
-            curNPC.GetComponent<NPCMovement>().machineList = machinList;
             npc.SetActive(true);
             Debug.Log("손님이 왕이다");
             

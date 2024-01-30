@@ -23,8 +23,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject[] curObject;
 
     public List<GameObject> curInstallations;
-    public List<GameObject> curSellInstallations;
-    public GameObject counter;
+    public List<GameObject> curSellInstallations; //판매씬에 배치된 진열대
+    public GameObject counter; // 카운터 등록
 
     private void Start()
     {
