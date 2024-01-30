@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public StatManager statManager;
     public DataManager dataManager;
     public SceneManager sceneManager;
+    public RecipeManager recipeManager;
 
     private void Awake()
     {

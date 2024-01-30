@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 public class IngredientController : MonoBehaviour, IInteractable
 {
     public ItemSO itemData;
+    public Queue<int> interactInstallation = new Queue<int>();
+    
     public GameObject moveFunction;
     public GameObject destination;
     
@@ -57,11 +59,13 @@ public class IngredientController : MonoBehaviour, IInteractable
         
         if(gameObject.GetComponent<IInteractable>() != null)
             gameObject.GetComponent<IInteractable>().OnColliderInteract();
-        
-        if(other.gameObject.GetComponent<IInteractable>() != null)
-            other.gameObject.GetComponent<IInteractable>().OnColliderInteract();
 
-        InstallationController controller = other.gameObject.GetComponent<InstallationController>();
+        if (other.gameObject.GetComponent<IInteractable>() != null)
+        {
+            InstallationController controller = other.gameObject.GetComponent<InstallationController>();
+            controller.OnColliderInteract();
+            interactInstallation.Enqueue(controller._installationData.id);
+        }
 
         if (other.gameObject.GetComponentInChildren<AbstractInventory>() == null)
             return;

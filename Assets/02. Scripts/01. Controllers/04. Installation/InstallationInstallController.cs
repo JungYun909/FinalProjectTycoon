@@ -20,8 +20,6 @@ public class InstallationInstallController : MonoBehaviour
         GameManager.instance.installationManager.installationManageController.SetActive(true);
         GameManager.instance.installationManager.installationManageController.transform.position = gameObject.transform.position;
         GameManager.instance.installationManager.installationManageController
-            .GetComponentInChildren<InstallationMoveController>().curGameObject = transform.root.gameObject;
-        GameManager.instance.installationManager.installationManageController
             .GetComponentInChildren<InstallationSetController>().curGameObject = transform.root.gameObject;
     }
 }

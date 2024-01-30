@@ -18,6 +18,8 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public Queue<GameObject> doughContainer;
 
+    private int index = -1;
+
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;
     
@@ -43,25 +45,29 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public void OnClickInteract()
     {
-        switch (GameManager.instance.interactionManager.installationFunctionIndex)
+        if (index != GameManager.instance.interactionManager.installationFunctionIndex)
         {
-            case 0:
-                inventoryFunction.SetActive(true);
-                moveFunction.SetActive(false);
-                destinationFunction.SetActive(false);
-                break;
-            case 1:
-                inventoryFunction.SetActive(false);
-                moveFunction.SetActive(true);
-                destinationFunction.SetActive(false);
-                break;
-            case 2:
-                inventoryFunction.SetActive(false);
-                moveFunction.SetActive(false);
-                destinationFunction.SetActive(true);
-                break;
+            installationFuctionSet = null;
+            
+            switch (GameManager.instance.interactionManager.installationFunctionIndex)
+            {
+                case 0:
+                    inventoryFunction.SetActive(true);
+                    moveFunction.SetActive(false);
+                    destinationFunction.SetActive(false);
+                    break;
+                case 1:
+                    inventoryFunction.SetActive(false);
+                    moveFunction.SetActive(true);
+                    destinationFunction.SetActive(false);
+                    break;
+                case 2:
+                    inventoryFunction.SetActive(false);
+                    moveFunction.SetActive(false);
+                    destinationFunction.SetActive(true);
+                    break;
+            }
         }
-        
         installationFuctionSet?.Invoke();
     }
 

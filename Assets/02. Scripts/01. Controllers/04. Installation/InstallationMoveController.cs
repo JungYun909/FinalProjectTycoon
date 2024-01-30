@@ -9,19 +9,23 @@ using UnityEngine.Tilemaps;
 public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Tilemap tilemap;
-    public GameObject curGameObject;
+    public InstallationSetController controller;
     private Coroutine movementCoroutine;
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        movementCoroutine = StartCoroutine(StartMovement());
+        if(controller.curGameObject)
+            movementCoroutine = StartCoroutine(StartMovement());
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        StopCoroutine(movementCoroutine);
-        transform.root.position = curGameObject.transform.position;
-        GameManager.instance.dataManager.PosUpdate(curGameObject);
+        if (controller.curGameObject)
+        {
+            StopCoroutine(movementCoroutine);
+            transform.root.position = controller.curGameObject.transform.position;
+            GameManager.instance.dataManager.PosUpdate(controller.curGameObject);
+        }
     }
 
     IEnumerator StartMovement()
@@ -29,8 +33,8 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
         while (true)
         {
             Vector2 curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            curGameObject.transform.position = tilemap.WorldToCell(curMouseDirection);
-            curGameObject.transform.position = new Vector2(curGameObject.transform.position.x + 0.5f, curGameObject.transform.position.y + 1.5f);
+            controller.curGameObject.transform.position = tilemap.WorldToCell(curMouseDirection);
+            controller.curGameObject.transform.position = new Vector2(controller.curGameObject.transform.position.x + 0.5f, controller.curGameObject.transform.position.y + 1.5f);
             transform.root.position = new Vector2(curMouseDirection.x, curMouseDirection.y + (transform.root.position.y - gameObject.transform.position.y));
 
             yield return null;

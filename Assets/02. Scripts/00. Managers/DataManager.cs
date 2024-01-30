@@ -20,6 +20,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     private string jsonName = "PlayerJson";
 
     public MachineSO[] installationSub;
+    public ItemSO[] ingredientSub;
     public GameObject[] curObject;
 
     public List<GameObject> curInstallations;

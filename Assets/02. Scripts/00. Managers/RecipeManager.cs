@@ -16,18 +16,17 @@ public class RecipeManager : MonoBehaviour
     {
         data_Resipe = CSVReader.Read("Recipe");
     }
-
-    // public int CompareWithResipe()
-    // {
-    //     
-    // }
-
-    // private int SearchResipe(int resipe)
-    // {
-    //     for (int i = 0; i < data_Resipe.Count; i++)
-    //     {
-    //         if(data_Resipe[i][resipeType.CombinationType.ToString().Split(',').])
-    //     }
-    // }
     
+    public int CompareWithResipe(int resipe)
+    {
+        for (int i = 0; i < data_Resipe.Count; i++)
+        {
+            if ((int)data_Resipe[i][resipeType.ID.ToString()] == resipe)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
