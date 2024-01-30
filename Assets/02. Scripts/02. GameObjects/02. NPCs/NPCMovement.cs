@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.Progress;
@@ -26,7 +27,7 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] int bestPosition_num; // 찾아가야할 게임 오브젝트 List 인덱스
 
     private GameObject hitObject; // 콜라이더로 부딪힌 진열대
-    
+
 
     void Start()
     {
@@ -63,30 +64,45 @@ public class NPCMovement : MonoBehaviour
         // 카운터와 현재 진열대 리스트 가져오기
 
         counter = GameManager.instance.dataManager.counter;
-        installationList = GameManager.instance.dataManager.curSellInstallations;
-    
+        //installationList = GameManager.instance.dataManager.curSellInstallations;
+
+        foreach(var item in GameManager.instance.dataManager.curInstallations)
+        {
+            if (item.GetComponent<InstallationController>()._installationData.id == 5)
+            {
+                installationList.Add(item);
+            }
+        }
+
     }
 
     void arriveNomuchine()
     {
         MachinePositionInform();
-        if (movementController.isMove==false && installationList != null)
+        if (movementController.isMove == false && installationList != null)
         {
             // 도착했을 때, 부딪히는 진열대가 없을 경우 (플레이어가 중간에 삭제했을때)
             installationList.Remove(bestMachine);
             MachinePositionInform();
-           
+
 
         }
 
     }
 
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (goCounter == true)
+        {
+            GameManager.instance.poolManager.DeSpawnFromPool(this.gameObject);
+        }
+    }
 
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         hitObject = collision.gameObject; // 부딪힌 게임 오브젝트
 
         if (goCounter == false && buying == false && hitObject == bestMachine)
@@ -94,30 +110,31 @@ public class NPCMovement : MonoBehaviour
             // 진열대에 부딪혔을 때
             Debug.Log(hitObject.name);
 
-            //foreach (var items in hitObject.GetComponent<AbstractInventory>().Items)
-            //{
-            //    // npc가 구매하고 싶은 빵이 진열대에 있을 때, 1개 빼내기
-            //    ItemSO itemso = items.Key;
-            //    if (npcSetting.selectedFavoriteFoodID == itemso.id)
-            //    {
-            //        inventoryManager.RemoveItemFromInventory(hitObject.GetComponent<AbstractInventory>().inventoryID, itemso, 1);
-            //        buying = true;
-            //    }
+            foreach (var items in hitObject.GetComponentInChildren<AbstractInventory>().Items)
+            {
+                // npc가 구매하고 싶은 빵이 진열대에 있을 때, 1개 빼내기
+                ItemSO itemso = items.Key;
+                if (npcSetting.selectedFavoriteFoodID == itemso.id)
+                {
+                    Debug.Log(hitObject.GetComponentInChildren<AbstractInventory>().inventoryID);
+                    GameManager.instance.inventoryManager.RemoveItemFromInventory(hitObject.GetComponentInChildren<AbstractInventory>().inventoryID, itemso, 1);
+                    buying = true;
+                }
 
-            //}
+            }
 
             if (installationList.Count == 1)
             {
                 // 마지막 진열대를 들렀을 때
                 installationList.Clear();
                 goCounter = true;
-                
+
             }
             else
             {
                 installationList.RemoveAt(bestPosition_num);
             }
-            
+
 
 
         }
@@ -128,12 +145,15 @@ public class NPCMovement : MonoBehaviour
             movementController.speed = 0;
             if (buying == true)
             {
-
+                Debug.Log("삼");
+                GameManager.instance.statManager.EarnGold(npcSetting.selectedFavoriteFood.price);
+            }
+            else
+            {
+                Debug.Log("안삼");
             }
 
         }
-
-        
 
         hitObject = null;
         arriveNomuchine(); //도착했을 때, 부딪힌 게임 오브젝트가 있는지 다시 목적지 설정 (하지만 오브젝트가 사라지면 부딪힌걸 판단 못하지 않나?)
@@ -143,7 +163,7 @@ public class NPCMovement : MonoBehaviour
 
     void MachinePositionInform()
     {
-       
+
         installationListPosition = 0f;
         bestPosition_num = 0;
 
@@ -151,8 +171,8 @@ public class NPCMovement : MonoBehaviour
         {
             // 카운터로 간다는 값이 없을 때
 
-            if (installationList.Count>1)
-            { 
+            if (installationList.Count > 1)
+            {
                 // 현재 들리지 않은 진열대가 2개 이상일때 작동
 
                 for (int i = 0; i < installationList.Count; i++)
@@ -175,7 +195,7 @@ public class NPCMovement : MonoBehaviour
                         bestPosition_num = i;
                         // 만약 그 앞전것 보다 현재 인덱스가 가깝다면 그것으로 갱신
                     }
-                    
+
                 }
 
             }
@@ -187,7 +207,7 @@ public class NPCMovement : MonoBehaviour
 
             bestMachine = installationList[bestPosition_num];
             // 들려야하는 진열대는 위에서 정한 인덱스 넘버
-            
+
 
         }
         else

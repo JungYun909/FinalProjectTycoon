@@ -11,6 +11,7 @@ public class NPCSetting : MonoBehaviour
     [SerializeField] int npcDatanum;
     [SerializeField] private List<int> favoriteFood;
     public int selectedFavoriteFoodID; // 최종으로 결정된 선택 음식
+    public ItemSO selectedFavoriteFood;
 
     void Awake()
     {
@@ -40,6 +41,7 @@ public class NPCSetting : MonoBehaviour
         }
 
         selectedFavoriteFoodID = favoriteFood[num];
+        selectedFavoriteFood = GameManager.instance.inventoryManager.itemDatabase.itemDataList[selectedFavoriteFoodID];
 
     }
 
