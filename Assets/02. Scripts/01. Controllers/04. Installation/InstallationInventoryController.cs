@@ -1,42 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstallationInventoryController : MonoBehaviour,IInteractable
+public class InstallationInventoryController : MonoBehaviour
 {
-    public bool Continuous()
+    public InstallationController controller;
+    public InstallationDestinationController destinationController;
+    public AbstractInventory inventory;
+    
+    private float spawnTimer = 0;
+    private void Update()
     {
-        return false;
-    }
+        if(controller.doughContainer.Count == 0 || !destinationController.destination[1])
+            return;
 
-    public void OnClickInteract()
-    {
-        GameObject curInstallationSetObj = GameManager.instance.installationManager.curInstallation;
+        spawnTimer += Time.deltaTime;
 
-        if (!curInstallationSetObj)
+        if (spawnTimer > controller._installationData.makeDelay)
         {
-            GameManager.instance.installationManager.curInstallation = gameObject;
-            GameManager.instance.installationManager.OnInstallationSetUI();
-        }
-        else if (curInstallationSetObj == gameObject)
-        {
-            GameManager.instance.installationManager.OnInstallationSetUI();
-        }
-        else
-        {
-            InstallationController controller = GameManager.instance.installationManager.curInstallation.GetComponent<InstallationController>();
-            // controller.destinationObj = gameObject;
-            GameManager.instance.installationManager.OnInstallationSetUI();
+            spawnTimer = 0;
+            DoughSetController();
         }
     }
 
-    public void OffClickInteract()
+    public void DoughSetController()
     {
-        return;
-    }
-
-    public void OnColliderInteract()
-    {
-        //온콜라이더 상호작용 내용
+        GameObject curObj = controller.doughContainer.Dequeue();
+        curObj.SetActive(true);
+        
+        IngredientController curController = curObj.GetComponent<IngredientController>();
+        curController.destination = destinationController.destination[1];
+        GameManager.instance.spawnManager.SpawnPositionSet(transform.root.gameObject, curController.destination, curObj);
+        GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, curController.itemData, 1);
     }
 }

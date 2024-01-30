@@ -12,6 +12,8 @@ public class IngredientController : MonoBehaviour, IInteractable
     
     public GameObject moveFunction;
     public GameObject destination;
+
+    public MovementController movementController;
     
     private void Start()
     {
@@ -20,9 +22,8 @@ public class IngredientController : MonoBehaviour, IInteractable
         if (itemData.canMove)
         {
             moveFunction.SetActive(true);
-            MovementController controller = moveFunction.GetComponent<MovementController>();
-            controller.speed = itemData.moveSpeed;
-            controller.destinationObj = destination;
+            movementController.speed = itemData.moveSpeed;
+            movementController.destinationObj = destination;
         }
     }
     
@@ -71,7 +72,7 @@ public class IngredientController : MonoBehaviour, IInteractable
             return;
 
         AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-        
+        other.gameObject.GetComponent<InstallationController>().doughContainer.Enqueue(gameObject);
         GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
     }
 }

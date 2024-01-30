@@ -17,28 +17,17 @@ public class MovementController : MonoBehaviour
         if(speed <= 0 && !destinationObj)
             return;
 
-        if (!isMove)
-        {
-            StartCoroutine(Movement());
-            isMove = true;
-  
-        }
+        StartCoroutine(Movement());
     }
 
     private IEnumerator Movement()
     {
-        if (destinationObj != null)
+        while (Vector2.Distance(destinationObj.transform.position, gameObject.transform.root.position) > 0.1f)
         {
-            while (Vector2.Distance(destinationObj.transform.position, gameObject.transform.root.position) > 0.1f)
-            {
-                Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
-                Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
-                transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
-                yield return null;
-            }
+            Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
+            Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
+            transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
+            yield return null;
         }
-        
-
-        isMove = false;
     }
 }
