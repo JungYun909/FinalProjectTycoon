@@ -27,9 +27,13 @@ public class InstallationController : MonoBehaviour, IInteractable
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
         
+        
         if (_installationData.haveDoughInventory)
+        {
             doughContainer = new Queue<GameObject>();
-
+            inventoryFunction.SetActive(true);
+        }
+            
         if(_installationData.canSpawn)
             spawnFunction.SetActive(true);
     }
@@ -48,18 +52,15 @@ public class InstallationController : MonoBehaviour, IInteractable
             
             switch (GameManager.instance.interactionManager.installationFunctionIndex)
             {
-                case 0:
-                    inventoryFunction.SetActive(true);
+                case 0:    
                     moveFunction.SetActive(false);
                     destinationFunction.SetActive(false);
                     break;
                 case 1:
-                    inventoryFunction.SetActive(false);
                     moveFunction.SetActive(true);
                     destinationFunction.SetActive(false);
                     break;
                 case 2:
-                    inventoryFunction.SetActive(false);
                     moveFunction.SetActive(false);
                     destinationFunction.SetActive(true);
                     break;
