@@ -13,9 +13,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject installationObj;
     public GameObject ingredientObj;
     public GameObject npcObj;
-
-    [Header("SpawnPosition")]
-    public GameObject door;
     
 
     private void Start()
@@ -82,7 +79,6 @@ public class SpawnManager : MonoBehaviour
             if (rand <= visitProbability)
             {
                 GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npcObj);
-                curNPC.transform.position = door.transform.position;
                 GameManager.instance.statManager.maxNpc += 1;
             }
             

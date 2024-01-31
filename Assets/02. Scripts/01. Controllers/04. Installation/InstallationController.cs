@@ -16,6 +16,8 @@ public class InstallationController : MonoBehaviour, IInteractable
     public GameObject moveFunction;
     public GameObject destinationFunction;
 
+    public AbstractInventory inventoryController;
+
     public Queue<GameObject> doughContainer;
 
     private int index = 0;
@@ -53,6 +55,7 @@ public class InstallationController : MonoBehaviour, IInteractable
             switch (GameManager.instance.interactionManager.installationFunctionIndex)
             {
                 case 0:    
+                    inventoryController.InitSet();
                     moveFunction.SetActive(false);
                     destinationFunction.SetActive(false);
                     break;
