@@ -22,12 +22,12 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;
-    public event Action<int> deliverInventoryTypeInfo;
+    public event Action<AbstractInventory> deliverInventoryInfo;
 
     private void Start()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
-        deliverInventoryTypeInfo?.Invoke(_installationData.id);
+        deliverInventoryInfo?.Invoke(GetComponentInChildren<AbstractInventory>());
         
         if (_installationData.haveDoughInventory)
         {
@@ -70,7 +70,6 @@ public class InstallationController : MonoBehaviour, IInteractable
             index = GameManager.instance.interactionManager.installationFunctionIndex;
         }
         installationFuctionSet?.Invoke();
-        deliverInventoryTypeInfo?.Invoke(_installationData.id);
     }
 
     public void OffClickInteract()
