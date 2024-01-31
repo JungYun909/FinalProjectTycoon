@@ -31,7 +31,6 @@ public class InteractionManager : MonoBehaviour
     //마우스 눌렀을때 상호작용 관리
     public void OnClick(InputValue value)
     {
-        Debug.Log("in");
         //클릭 중일떄 발생
         if (value.isPressed && interactionObject == null)
         {
@@ -41,7 +40,6 @@ public class InteractionManager : MonoBehaviour
                 return;
         
             interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
-            Debug.Log("inin");
             if (interactionObject.Continuous()) //오브젝트의 상호작용이 누르는 동안 반복돠야한다면
             {
                 interactionCoroutine = StartCoroutine(InteractionCoroutine());

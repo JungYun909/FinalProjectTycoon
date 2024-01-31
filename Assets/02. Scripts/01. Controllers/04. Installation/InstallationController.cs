@@ -18,15 +18,16 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public Queue<GameObject> doughContainer;
 
-    private int index = -1;
+    private int index = 0;
 
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;
-    
+    public event Action<int> deliverInventoryTypeInfo;
+
     private void Start()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
-        
+        deliverInventoryTypeInfo?.Invoke(_installationData.id);
         
         if (_installationData.haveDoughInventory)
         {
