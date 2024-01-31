@@ -13,6 +13,7 @@ public class NPCMovement : MonoBehaviour
     [Header("Script")]
     public NPCSetting npcSetting;
     public MovementController movementController;
+    public NPCSpawnController spawnController;
     
 
     [Header("installation")]
@@ -88,7 +89,7 @@ public class NPCMovement : MonoBehaviour
         if (goDoor == true)
         {
             //카운터 들린 이후, 문에 가야할 때
-            bestMachine = GameManager.instance.spawnManager.door;
+            bestMachine = spawnController.positionNum;
             movementController.destinationObj = bestMachine;
         }
 

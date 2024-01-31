@@ -12,7 +12,7 @@ public class NPCSpawnController : MonoBehaviour
     [SerializeField] private GameObject npc;
     [SerializeField] private int maxNpc;
     private Coroutine coroutine;
-    [SerializeField] GameObject positionNum;
+    [SerializeField] public GameObject positionNum;
 
 
     // Start is called before the first frame update
@@ -22,8 +22,6 @@ public class NPCSpawnController : MonoBehaviour
         maxNpc = 1;
         //maxNpc = GameManager.instance.statManager.maxNpc;
         coroutine = StartCoroutine(NPCSpawnCorutine());
-
-
     }
 
     private void Update()

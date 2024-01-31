@@ -53,6 +53,11 @@ public class AbstractInventory : MonoBehaviour
             GameManager.instance.uiManager.CloseAll();
         }
     }
+
+    public void InitSet()
+    {
+        controller.installationFuctionSet += OpenInventoryUI;
+    }
     
     public void UpdateInspectorList()
     {
@@ -63,42 +68,10 @@ public class AbstractInventory : MonoBehaviour
         }
     }
 
-
-
     private void OpenInventoryUI()
     {
-        Debug.Log("Clicked!");
-        Debug.Log("OnInventoryClicked, " + this.inventoryID);
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
     }
 
-    // 필요한 경우 데이터 접근 메서드 추가
-
-    //public void UpdateInventoryUI(Dictionary<ItemSO, int> items)
-    //{
-    //    foreach (Transform slots in contentPanel)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-
-    //    GameObject currentLine = null;
-    //    int slotIndex = 0;
-
-    //    foreach (var entry in items)
-    //    {
-    //        // 새로운 라인이 필요한 경우 생성
-    //        if (slotIndex % 5 == 0)
-    //        {
-    //            currentLine = Instantiate(itemLinePrefab, contentPanel);
-    //        }
-
-    //        // 아이템 슬롯 생성 및 설정
-    //        GameObject slotObject = Instantiate(itemSlotPrefab, currentLine.transform);
-    //        ItemSlotInfo slotInfo = slotObject.GetComponent<ItemSlotInfo>();
-    //        slotInfo.Setup(entry.Key, entry.Value);
-
-    //        slotIndex++;
-    //    }
-    //}
 }

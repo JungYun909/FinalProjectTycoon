@@ -397,6 +397,7 @@ MonoBehaviour:
   inventoryFunction: {fileID: 3076810668820568480}
   moveFunction: {fileID: 3079726677750095059}
   destinationFunction: {fileID: 3953372189924795112}
+  inventoryController: {fileID: 7668016188072440741}
 --- !u!1 &5145622365234100751
 GameObject:
   m_ObjectHideFlags: 0

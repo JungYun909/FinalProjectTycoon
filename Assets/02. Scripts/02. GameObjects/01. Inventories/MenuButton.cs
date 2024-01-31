@@ -13,4 +13,9 @@ public class MenuButton : MonoBehaviour
     {
         GameManager.instance.interactionManager.installationFunctionIndex = index;
     }
+
+    public void BackBtn()
+    {
+        GameManager.instance.uiManager.CloseAll();
+    }
 }
