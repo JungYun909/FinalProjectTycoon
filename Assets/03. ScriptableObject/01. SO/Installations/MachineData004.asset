@@ -16,7 +16,7 @@ MonoBehaviour:
   installasionName: "\uC870\uD569\uAE30"
   description: "\uC870\uD569\uAE30\uAC00 \uB9DE\uC544?"
   price: 40
-  sprite: {fileID: 21300000, guid: b4e8036c963f4d741a69a189d03b1ff4, type: 3}
+  sprite: {fileID: 21300000, guid: 5bdf46dfc38f9b149b16e2f878e40409, type: 3}
   canSpawn: 0
   spawnDelay: 0
   spawnData: {fileID: 0}
@@ -24,3 +24,4 @@ MonoBehaviour:
   haveIngredientInventory: 1
   makeDelay: 30
   maxSlot: 5
+  completeMake: 0
