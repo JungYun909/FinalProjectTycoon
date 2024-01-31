@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 2
   npcname: "\uACE0\uC591\uC774 \uC190\uB2D82"
   description: 
-  favoriteFood: 01000000
+  favoriteFood: e9030000
   speed: 5

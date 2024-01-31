@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NPCSpawnController : MonoBehaviour
@@ -26,6 +28,9 @@ public class NPCSpawnController : MonoBehaviour
 
     private void Update()
     {
+        if(GameManager.instance.poolManager.poolDictionary.ContainsKey("NPC"))
+            NPCNum = GameManager.instance.poolManager.poolDictionary["NPC"].Where(o => o.activeSelf).Count();
+        
         if (NPCNum > maxNpc)
         {
             StopCoroutine(coroutine);
@@ -53,9 +58,9 @@ public class NPCSpawnController : MonoBehaviour
 
         if (rand <= visitProbability)
         {
-            NPCNum += 1;
             GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npc);
             curNPC.transform.position = positionNum.transform.position;
+            curNPC.GetComponent<NPCMovement>().InintSetting();
             
             npc.SetActive(true);
             Debug.Log("손님이 왕이다");

@@ -12,7 +12,6 @@ public class SpawnManager : MonoBehaviour
     [Header("StandardPrefab")]
     public GameObject installationObj;
     public GameObject ingredientObj;
-    public GameObject foodObj;
     public GameObject npcObj;
 
     [Header("SpawnPosition")]
@@ -33,7 +32,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject SpawnInstallaion(MachineSO installationData)
     {
         GameObject spawnInstallationObj = GameManager.instance.poolManager.SpawnFromPool(installationObj);
-        spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
+        spawnInstallationObj.transform.position =
+            new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0f);
         
         InstallationController controller = spawnInstallationObj.GetComponent<InstallationController>();
         

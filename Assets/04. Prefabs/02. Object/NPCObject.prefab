@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0df15325622a147807bf7bc535558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcSetting: {fileID: 8780971169892884077}
+  movementController: {fileID: 4660136104070691429}
   installationList: []
   buying: 0
   goCounter: 0
@@ -71,8 +73,7 @@ MonoBehaviour:
   bestMachine: {fileID: 0}
   installationListPosition: 0
   bestPosition_num: 0
-  DelayTime: 0
-  deSpawnTime: 0
+  delayTime: 0
 --- !u!212 &5203631563759980877
 SpriteRenderer:
   m_ObjectHideFlags: 0

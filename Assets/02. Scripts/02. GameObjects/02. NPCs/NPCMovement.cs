@@ -11,8 +11,8 @@ public class NPCMovement : MonoBehaviour
 {
 
     [Header("Script")]
-    private NPCSetting npcSetting;
-    private MovementController movementController;
+    public NPCSetting npcSetting;
+    public MovementController movementController;
     
 
     [Header("installation")]
@@ -26,24 +26,12 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] GameObject bestMachine; // 가장 가까운 진열대
     [SerializeField] float installationListPosition; // NPC와 게임 오브젝트 간의 거리 절대값
     [SerializeField] int bestPosition_num; // 찾아가야할 게임 오브젝트 List 인덱스
-    [SerializeField] float delayTime;
+    [SerializeField] float delayTime = 1.0f;
 
     private GameObject hitObject; // 콜라이더로 부딪힌 진열대
 
     private ItemSO itemToBuy;
-
-
-    void Start()
-    {
-        npcSetting = GetComponent<NPCSetting>();
-        movementController = GetComponent<MovementController>();
-        movementController.speed = npcSetting.npcSo.speed;
-        
-        delayTime = 1.0f; //사라지기 전 문 앞에 머무는 시간
-
-        InintSetting(); // 변수 초기화
-
-    }
+    
 
     private void Update()
     {
@@ -53,12 +41,15 @@ public class NPCMovement : MonoBehaviour
         }
     }
 
-    private void InintSetting()
+    public void InintSetting()
     {
 
         goCounter = false;
         buying = false;
         goDoor = false;
+        movementController.isMove = false;
+        
+        movementController.speed = npcSetting.npcSo.speed;
 
         SettingInstallations(); // 카운터와 NPC 소환 기준으로 현재 진열대 게임 오브젝트의 리스트
         MachinePositionInform(); //가장 가까운 진열대 찾기
@@ -118,8 +109,11 @@ public class NPCMovement : MonoBehaviour
     {
 
         hitObject = collision.gameObject; // 부딪힌 게임 오브젝트
+        
+        if(hitObject != movementController.destinationObj)
+            return;
 
-        if (goCounter == false && buying == false && hitObject == bestMachine)
+        if (goCounter == false && buying == false)
         {
 
             if (hitObject.GetComponentInChildren<AbstractInventory>().Items.Count > 0)
