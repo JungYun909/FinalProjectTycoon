@@ -601,7 +601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &190758198
 Transform:
   m_ObjectHideFlags: 0
@@ -10224,6 +10224,7 @@ GameObject:
   - component: {fileID: 1590563967}
   - component: {fileID: 1590563970}
   - component: {fileID: 1590563969}
+  - component: {fileID: 1590563971}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -10359,6 +10360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   installationObj: {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   ingredientObj: {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
+  foodObj: {fileID: 0}
   npcObj: {fileID: 8138419921899543555, guid: 4dade5c94bc5e4f9fb62157e92d9bfd9, type: 3}
   door: {fileID: 765176787}
 --- !u!114 &1590563962
@@ -10422,7 +10424,7 @@ MonoBehaviour:
   statManager: {fileID: 1590563955}
   dataManager: {fileID: 1590563968}
   sceneManager: {fileID: 1590563953}
-  recipeManager: {fileID: 0}
+  recipeManager: {fileID: 1590563971}
 --- !u!4 &1590563966
 Transform:
   m_ObjectHideFlags: 0
@@ -10487,7 +10489,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1864d2ce384f042488362cbb9e7c5198, type: 2}
   - {fileID: 11400000, guid: 2aaae783fd6e0ca49a27040541cd5615, type: 2}
   - {fileID: 11400000, guid: a695c065155744cba85fbe5a2d886704, type: 2}
-  ingredientSub: []
+  ingredientSub:
+  - {fileID: 11400000, guid: 68ae17f6ccd0f462b9072368b1341dcd, type: 2}
+  - {fileID: 11400000, guid: dff7e5b57aa3d456987f5c002df82298, type: 2}
+  foodSub:
+  - {fileID: 11400000, guid: a8aa8a5e8b67048df92528442255afb3, type: 2}
+  - {fileID: 11400000, guid: 6860bf9eacac344efa9166cf7280a258, type: 2}
   curObject:
   - {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
@@ -10606,6 +10613,18 @@ MonoBehaviour:
   musicSource: {fileID: 1590563969}
   bgmClip: {fileID: 0}
   sfxSource: []
+--- !u!114 &1590563971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590563952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf7a197874f1480d9d13e726b6a324a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1591901236
 GameObject:
   m_ObjectHideFlags: 0

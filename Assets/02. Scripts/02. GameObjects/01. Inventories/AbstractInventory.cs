@@ -49,7 +49,6 @@ public class AbstractInventory : MonoBehaviour
         if (controller != null)
         {
             controller.installationFuctionSet += OpenInventoryUI;
-
             OpenInventoryUI();
             GameManager.instance.uiManager.CloseAll();
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2386579164947609782}
   - component: {fileID: -167259849018109708}
   - component: {fileID: 6266030464417217858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IngredientObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,6 +123,7 @@ MonoBehaviour:
   itemData: {fileID: 0}
   moveFunction: {fileID: 6668014035442186473}
   destination: {fileID: 0}
+  movementController: {fileID: 6212524447202923208}
 --- !u!1 &4762140177482073602
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1610748782184778722}
   - component: {fileID: 7912612407498330863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7385622260608586095}
   - component: {fileID: 6212524447202923208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MoveFunction
   m_TagString: Untagged
   m_Icon: {fileID: 0}

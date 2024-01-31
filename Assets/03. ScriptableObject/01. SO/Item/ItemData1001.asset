@@ -10,11 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
-  m_Name: ItemData0004
+  m_Name: ItemData1001
   m_EditorClassIdentifier: 
-  id: 4
+  id: 1001
   type: 2
-  itemname: "\uD06C\uB9BC\uBE75"
-  description: 
-  speed: 0
-  price: 100
+  itemName: "\uC2DD\uBE75"
+  description: "\uC2DD\uBE75\uBE75"
+  price: 500
+  sprite: {fileID: 21300000, guid: 7023cef3c3ecf634fb652ba17544b224, type: 3}
+  tag: Food
+  canMove: 1
+  moveSpeed: 1
+  canStack: 1
+  maxStackAmount: 10

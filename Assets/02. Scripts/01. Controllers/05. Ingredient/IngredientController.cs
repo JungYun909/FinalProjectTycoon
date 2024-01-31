@@ -12,20 +12,33 @@ public class IngredientController : MonoBehaviour, IInteractable
     
     public GameObject moveFunction;
     public GameObject destination;
+
+    public MovementController movementController;
     
     private void Start()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = itemData.sprite;
+        InitSet();
+    }
 
+    public void InitSet()
+    {
+        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = itemData.sprite;
+        
         if (itemData.canMove)
         {
             moveFunction.SetActive(true);
-            MovementController controller = moveFunction.GetComponent<MovementController>();
-            controller.speed = itemData.moveSpeed;
-            controller.destinationObj = destination;
+            movementController.speed = itemData.moveSpeed;
+            movementController.destinationObj = destination;
         }
     }
-    
+
+    private void OnDisable()
+    {
+        movementController.speed = 0;
+        movementController.destinationObj = null;
+        Debug.Log("지워졌다");
+    }
+
     public bool Continuous()
     {
         return false;
@@ -45,16 +58,18 @@ public class IngredientController : MonoBehaviour, IInteractable
         {
             case "Dough":
                 gameObject.SetActive(false);
+                movementController.isMove = false;
                 break;
             default:
                 GameManager.instance.poolManager.DeSpawnFromPool(gameObject);
+                movementController.isMove = false;
                 break;
         }
     }
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag != "Installation")
+        if(destination != other.gameObject)
             return;
         
         if(gameObject.GetComponent<IInteractable>() != null)
@@ -71,7 +86,7 @@ public class IngredientController : MonoBehaviour, IInteractable
             return;
 
         AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-        
+        other.gameObject.GetComponent<InstallationController>().doughContainer.Enqueue(gameObject);
         GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
     }
 }

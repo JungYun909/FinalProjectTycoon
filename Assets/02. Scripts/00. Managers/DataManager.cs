@@ -21,6 +21,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     public MachineSO[] installationSub;
     public ItemSO[] ingredientSub;
+    public ItemSO[] foodSub;
+    
     public GameObject[] curObject;
 
     public List<GameObject> curInstallations;

@@ -23,4 +23,7 @@ public class MachineSO : ScriptableObject
     public bool haveIngredientInventory;
     public float makeDelay;
     public int maxSlot;
+
+    [Header("CompleteMake")] 
+    public bool completeMake;
 }

@@ -18,7 +18,7 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public Queue<GameObject> doughContainer;
 
-    private int index = -1;
+    private int index = 0;
 
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;

@@ -22,5 +22,6 @@ MonoBehaviour:
   spawnData: {fileID: 0}
   haveDoughInventory: 1
   haveIngredientInventory: 0
-  makeDelay: 20
+  makeDelay: 10
   maxSlot: 5
+  completeMake: 1
