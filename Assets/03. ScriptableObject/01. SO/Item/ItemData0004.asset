@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: ItemData0004
   m_EditorClassIdentifier: 
   id: 4
-  type: 2
-  itemname: "\uD06C\uB9BC\uBE75"
+  type: 3
+  itemName: 
   description: 
-  speed: 0
   price: 100
+  sprite: {fileID: 0}
+  tag: 
+  canMove: 0
+  moveSpeed: 0
+  canStack: 0
+  maxStackAmount: 0

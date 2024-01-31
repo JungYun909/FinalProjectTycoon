@@ -79,36 +79,40 @@ public class InventoryManager : MonoBehaviour
 
     public void TransferItem(int fromInventoryID, int toInventoryID, ItemSO item, int quantity)
     {
-        if (inventories.ContainsKey(fromInventoryID) && inventories.ContainsKey(toInventoryID))
+        if (RemoveItemFromInventory(fromInventoryID, item, quantity))
         {
-            var fromInventory = inventories[fromInventoryID].Items;
-            var toInventory = inventories[toInventoryID].Items;
-
-            // 아이템을 이동시킬 수 있는지 확인
-            if (fromInventory.ContainsKey(item) && fromInventory[item] >= quantity)
-            {
-                // 아이템을 기존 인벤토리에서 제거
-                fromInventory[item] -= quantity;
-                if (fromInventory[item] == 0)
-                {
-                    fromInventory.Remove(item);
-                }
-
-                // 아이템을 새 인벤토리에 추가
-                if (!toInventory.ContainsKey(item))
-                {
-                    toInventory[item] = 0;
-                }
-                toInventory[item] += quantity;
-
-                OnInventoryUpdated?.Invoke(fromInventoryID); // 이벤트 발생
-                OnInventoryUpdated?.Invoke(toInventoryID); // 이벤트 발생
-
-                // 인벤토리 UI 업데이트
-            }
+            AddItemToInventory(toInventoryID, item, quantity);
         }
+        //    if (inventories.ContainsKey(fromInventoryID) && inventories.ContainsKey(toInventoryID))
+        //    {
+        //        var fromInventory = inventories[fromInventoryID].Items;
+        //        var toInventory = inventories[toInventoryID].Items;
+
+        //        // 아이템을 이동시킬 수 있는지 확인
+        //        if (fromInventory.ContainsKey(item) && fromInventory[item] >= quantity)
+        //        {
+        //            // 아이템을 기존 인벤토리에서 제거
+        //            fromInventory[item] -= quantity;
+        //            if (fromInventory[item] == 0)
+        //            {
+        //                fromInventory.Remove(item);
+        //            }
+
+        //            // 아이템을 새 인벤토리에 추가
+        //            if (!toInventory.ContainsKey(item))
+        //            {
+        //                toInventory[item] = 0;
+        //            }
+        //            toInventory[item] += quantity;
+
+        //            OnInventoryUpdated?.Invoke(fromInventoryID); // 이벤트 발생
+        //            OnInventoryUpdated?.Invoke(toInventoryID); // 이벤트 발생
+
+        //            // 인벤토리 UI 업데이트
+        //        }
+        //    }
     }
-    public void TransformItem (int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
+    public void TransformItem(int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
     {
         StartCoroutine(TransformAfterSomeSceonds(inventoryID, fromItem, toItem, duration));
     }

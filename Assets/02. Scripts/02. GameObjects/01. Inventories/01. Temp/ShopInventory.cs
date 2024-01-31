@@ -19,6 +19,7 @@ public class ShopInventory : AbstractInventory
         AddTestItem2();
         AddTestItem3();
         AddTestItem4();
+        AddTestItem5();
     }
     private Dictionary<ItemSO, int> items = new Dictionary<ItemSO, int>();
 
@@ -48,6 +49,7 @@ public class ShopInventory : AbstractInventory
 
     private void AddItemThroughManager(int itemID)
     {
+        inventoryID = FindObjectOfType<ShopInventory>().inventoryID;
         ItemSO item = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(itemID);
         if (item != null)
         {

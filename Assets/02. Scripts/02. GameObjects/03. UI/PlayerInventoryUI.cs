@@ -44,8 +44,7 @@ public class PlayerInventoryUI : UIBase
 
     private void HandleInventoryUpdate(int inventoryID)
     {
-        // 이벤트가 발생했을 때 UI를 업데이트합니다.
-        if (this.inventory != null && this.inventory.inventoryID == inventoryID)
+        if (playerInventory != null && playerInventory.inventoryID == inventoryID)
         {
             UpdateUI();
         }

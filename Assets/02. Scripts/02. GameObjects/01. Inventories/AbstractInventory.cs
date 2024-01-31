@@ -68,8 +68,6 @@ public class AbstractInventory : MonoBehaviour
 
     private void OpenInventoryUI()
     {
-        Debug.Log("Clicked!");
-        Debug.Log("OnInventoryClicked, " + this.inventoryID);
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
     }
