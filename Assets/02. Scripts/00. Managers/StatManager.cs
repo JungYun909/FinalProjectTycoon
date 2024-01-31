@@ -16,10 +16,8 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int modInterior;     //인테리어 수치의 변경값. 가구/인테리어 요소의 점수를 받아와 합산/차감하는 식으로 이루어짐.
     public int modFinance;    //재정상태 수치의 변경값. 흑자일 때, 적자일 때 점수를 매김. 적자시에는 무조건 -1, 흑자일때는 +1을 반환하는 로직을 주고 
     public int modGold;
-
-    public int curNpc;
-
-    public int maxShopLevel;
+    
+    public int maxShopLevel = 1;
     public int maxNpc;
     
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
@@ -37,6 +35,8 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         financeScore = shopStat.financialScore;
         currentGold = shopStat.gold;
         modGold = shopStat.goldUsed;
+        shopLevel = 1;
+        maxNpc = 2;
     }
 
     // private void OnEnable()

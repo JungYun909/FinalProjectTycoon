@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NPCSetting : MonoBehaviour
@@ -28,7 +29,7 @@ public class NPCSetting : MonoBehaviour
     void SelectFaveoriteFood()
     {
         int num;
-        favoriteFood = npcSo.favoriteFood;
+        favoriteFood = new List<int>() {1001};
 
         if (favoriteFood.Count > 1)
         {

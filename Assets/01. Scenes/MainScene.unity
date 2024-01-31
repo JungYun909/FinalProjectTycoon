@@ -586,7 +586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &190758198
 Transform:
   m_ObjectHideFlags: 0
@@ -1024,6 +1024,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258367724}
   m_CullTransparentMesh: 1
+--- !u!1 &261531452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 261531454}
+  - component: {fileID: 261531453}
+  - component: {fileID: 261531455}
+  m_Layer: 0
+  m_Name: NPCSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &261531453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261531452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0835ade5d8ef441787ef983baab5c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &261531454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261531452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -15.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &261531455
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261531452}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &275067481
 GameObject:
   m_ObjectHideFlags: 0
@@ -12121,7 +12211,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -12360,7 +12450,6 @@ MonoBehaviour:
   modInterior: 0
   modFinance: 0
   modGold: 0
-  curNpc: 0
   maxShopLevel: 0
   maxNpc: 0
 --- !u!114 &1590563956
@@ -12454,7 +12543,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   installationObj: {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   ingredientObj: {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
-  npcObj: {fileID: 8138419921899543555, guid: 4dade5c94bc5e4f9fb62157e92d9bfd9, type: 3}
+  npcObj: {fileID: 4232645537948954176, guid: d7160d54949484381894ae076fe1f1f4, type: 3}
+  NPCSpawnObj: {fileID: 261531452}
+  curNpcCount: 0
+  npcDataList:
+  - {fileID: 11400000, guid: 73e3374f98eafc248905d122e92adf37, type: 2}
+  - {fileID: 11400000, guid: 56e8e2c573b8c2045b16141e9b54ee5d, type: 2}
+  - {fileID: 11400000, guid: 838887d6641294e448fcbb8d40278160, type: 2}
+  - {fileID: 11400000, guid: 2e489631a58384f4a97e429d04a289d2, type: 2}
 --- !u!114 &1590563962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12592,8 +12688,7 @@ MonoBehaviour:
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
   - {fileID: 8138419921899543555, guid: 4dade5c94bc5e4f9fb62157e92d9bfd9, type: 3}
   curInstallations: []
-  curSellInstallations: []
-  counter: {fileID: 32482906}
+  counter: {fileID: 1544164879}
 --- !u!82 &1590563969
 AudioSource:
   m_ObjectHideFlags: 0

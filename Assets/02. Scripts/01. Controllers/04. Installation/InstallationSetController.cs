@@ -11,12 +11,16 @@ public class InstallationSetController : MonoBehaviour
     {
         GameManager.instance.poolManager.DeSpawnFromPool(curGameObject);
         GameManager.instance.installationManager.installationManageController.SetActive(false);
+        GameManager.instance.dataManager.SaveInstallation(curGameObject);
+        GameManager.instance.dataManager.SaveData();
         curGameObject = null;
     }
 
     public void InstallationInstall()
     {
         GameManager.instance.installationManager.installationManageController.SetActive(false);
+        GameManager.instance.dataManager.PosUpdate(curGameObject);
+        GameManager.instance.dataManager.SaveData();
         curGameObject = null;
     }
 }

@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+
 
 public class SpawnManager : MonoBehaviour
 {
@@ -13,18 +8,12 @@ public class SpawnManager : MonoBehaviour
     public GameObject installationObj;
     public GameObject ingredientObj;
     public GameObject npcObj;
+
+    [Header("NPCSpawn")]
+    public GameObject NPCSpawnObj;
+    public int curNpcCount;
+    public List<NpcSO> npcDataList = new List<NpcSO>();
     
-
-    private void Start()
-    {
-        //StartCoroutine(SpawnNPC());
-    }
-
-    private void Update()
-    {
-        // if(GameManager.instance.statManager.curNpc < GameManager.instance.statManager.maxNpc)
-        //     StopCoroutine(SpawnNPC());
-    }
 
     public GameObject SpawnInstallaion(MachineSO installationData)
     {
@@ -54,9 +43,7 @@ public class SpawnManager : MonoBehaviour
         controller.InitSet();
         
         SpawnPositionSet(spawningInstallationObj, destinationObj, curSpawnObj);
-
-        GameManager.instance.dataManager.playerData.ingredients++;
-        GameManager.instance.dataManager.SaveData();
+        
         UpdateObjTag(data.tag);
     }
 
@@ -68,22 +55,15 @@ public class SpawnManager : MonoBehaviour
                                       spawnObj.transform.position).normalized);
     }
 
-    IEnumerator SpawnNPC()
+    public void SpawnNPC()
     {
-        while (true)
-        {
-            float visitProbability = GameManager.instance.statManager.shopFame * 0.1f;
+        GameObject curNPC = GameManager.instance.poolManager.SpawnFromPool(npcObj);
+        curNpcCount++;
+        curNPC.transform.position = NPCSpawnObj.transform.position;
+        NPCController npcData = curNPC.GetComponent<NPCController>();
+        npcData.curNPCData = npcDataList[Random.Range(0, npcDataList.Count)];
         
-            int rand = UnityEngine.Random.Range(1, 100);
-
-            if (rand <= visitProbability)
-            {
-                GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npcObj);
-                GameManager.instance.statManager.maxNpc += 1;
-            }
-            
-            yield return new WaitForSeconds(6 - (GameManager.instance.statManager.shopLevel / 20));
-        }
+        npcData.InitSetting();
     }
     
     public void SpawnObjPositionSet(GameObject spawnObj, GameObject destinationObj)
