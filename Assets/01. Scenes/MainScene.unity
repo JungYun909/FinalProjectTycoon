@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reputation: 200
-  time: 10
+  time: 1
   NPCNum: 0
   npc: {fileID: 8138419921899543555, guid: 4dade5c94bc5e4f9fb62157e92d9bfd9, type: 3}
   maxNpc: 0

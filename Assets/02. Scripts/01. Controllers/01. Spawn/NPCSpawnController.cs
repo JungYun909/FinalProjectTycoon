@@ -56,6 +56,7 @@ public class NPCSpawnController : MonoBehaviour
             NPCNum += 1;
             GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npc);
             curNPC.transform.position = positionNum.transform.position;
+            
             npc.SetActive(true);
             Debug.Log("손님이 왕이다");
             
