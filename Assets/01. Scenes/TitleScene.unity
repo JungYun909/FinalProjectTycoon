@@ -179,8 +179,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   installationSub: []
+  ingredientSub: []
+  foodSub: []
   curObject: []
   curInstallations: []
+  curSellInstallations: []
+  counter: {fileID: 0}
 --- !u!114 &811490741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curMouseDirection: {x: 0, y: 0}
+  installationFunctionIndex: 0
 --- !u!114 &811490743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +362,7 @@ MonoBehaviour:
   statManager: {fileID: 811490741}
   dataManager: {fileID: 811490740}
   sceneManager: {fileID: 811490739}
+  recipeManager: {fileID: 0}
 --- !u!4 &811490753
 Transform:
   m_ObjectHideFlags: 0
@@ -709,7 +715,6 @@ GameObject:
   - component: {fileID: 1073453621}
   - component: {fileID: 1073453620}
   - component: {fileID: 1073453619}
-  - component: {fileID: 1073453622}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -782,13 +787,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1073453622}
+      - m_Target: {fileID: 1967258791}
         m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
         m_MethodName: BtnSound
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8300000, guid: 652ff9e7823e4b8458acf8d721330a99, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: MainScene
@@ -844,19 +849,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073453617}
   m_CullTransparentMesh: 1
---- !u!114 &1073453622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073453617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab135217c9845a45b97f4351ca35091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectClip: {fileID: 8300000, guid: 58fa30b0666f3d540bceab444c5ddfd2, type: 3}
 --- !u!1 &1164154569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1116,7 @@ GameObject:
   - component: {fileID: 1967258789}
   - component: {fileID: 1967258788}
   - component: {fileID: 1967258787}
+  - component: {fileID: 1967258791}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1216,3 +1209,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1967258791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967258786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab135217c9845a45b97f4351ca35091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,7 +14,11 @@ public class TestSA : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("d");
-        collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites;
+        if (collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite == null)
+        {
+            collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites;
+        }
+        //collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites;
+
     }
 }
