@@ -34,7 +34,8 @@ public class MovementController : MonoBehaviour
             transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
             yield return null;
         }
-        
         StopCoroutine(curCoroutine);
+        isMove = false;
+        destinationObj = null;
     }
 }

@@ -170,8 +170,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curNPCData: {fileID: 0}
   visitObj: []
+  destinationObj: {fileID: 0}
+  favoriteFood: {fileID: 0}
   destinationController: {fileID: 8742710816093891460}
+  movementController: {fileID: 2782131214090978003}
   visitCounter: 0
+  buy: 0
 --- !u!114 &2782131214090978003
 MonoBehaviour:
   m_ObjectHideFlags: 0
