@@ -58,7 +58,10 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     public void OnButtonClicked(int toInventoryID)
     {
         toInventoryID = FindObjectOfType<InventoryShow>().curInventory.inventoryID;
-
+        if(toInventoryID == 0)
+        {
+            Debug.Log("No Queue Activated");
+        }
         if (toInventoryID != 0)
         {
             DeliverItem?.Invoke(curItem);

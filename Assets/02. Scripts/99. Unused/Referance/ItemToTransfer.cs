@@ -19,6 +19,7 @@ public class ItemToTransfer : MonoBehaviour
         {
             inventoryManager.AddItemToInventory(inventory.inventoryID, itemInfo, 1);
             Destroy(gameObject);
+            Debug.Log("Entered");
 	    }
         else { Debug.Log("NO!"); }
     }

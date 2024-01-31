@@ -70,6 +70,7 @@ public class InstallationController : MonoBehaviour, IInteractable
             index = GameManager.instance.interactionManager.installationFunctionIndex;
         }
         installationFuctionSet?.Invoke();
+        deliverInventoryTypeInfo?.Invoke(_installationData.id);
     }
 
     public void OffClickInteract()
