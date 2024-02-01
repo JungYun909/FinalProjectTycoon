@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 //[System.Serializable]
 //public class Audio
@@ -86,11 +87,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ToggleMusic()
+    public void ToggleMusic(Image image)
     {
         onBgm = !onBgm;
 
         musicSource.mute = !musicSource.mute;
+        //if (!musicSource.mute)
+        //{
+        //    image = Resources.Load<Image>("04.UI/Button/soundBT_UI/soundOff_idle");
+        //}
+        //Debug.Log(image.ToString());
     }
 
     public void ToggleSFX()
