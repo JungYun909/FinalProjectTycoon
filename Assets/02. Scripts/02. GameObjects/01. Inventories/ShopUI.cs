@@ -15,6 +15,7 @@ public class ShopUI : UIBase
     public TMP_Text descriptionText;
     public TMP_Text priceText;
     public List<ItemDataContainer> datas;
+    public MachineSO machineSO;
     public override void Initialize()
     {
         Debug.Log("dd");
@@ -44,8 +45,15 @@ public class ShopUI : UIBase
 
     private void SetInfo(MachineSO sO)
     {
+        machineSO = sO;
         nameText.text = sO.installasionName;
         descriptionText.text = sO.description;
         priceText.text = sO.price.ToString() + "원";
+    }
+
+    public void SpawnInstallation()
+    {
+        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
+        GameManager.instance.uiManager.CloseAll();
     }
 }
