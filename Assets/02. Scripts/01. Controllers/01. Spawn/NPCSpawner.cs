@@ -23,7 +23,7 @@ public class NPCSpawner : MonoBehaviour
 
             int random = Random.Range(1, 101);
 
-            if (random < spawnPercentage * (GameManager.instance.statManager.shopLevel))
+            if (random < spawnPercentage * (GameManager.instance.statManager.shopLevel * 0.2f))
             {
                 GameManager.instance.spawnManager.SpawnNPC();
             }
