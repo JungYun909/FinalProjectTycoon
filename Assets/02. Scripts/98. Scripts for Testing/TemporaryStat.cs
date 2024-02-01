@@ -10,4 +10,7 @@ public class TemporaryStat : MonoBehaviour
     [SerializeField] public int interiorScore = 50;
     [SerializeField] public int financialScore = 0;
     [SerializeField] public int goldUsed = 500;
+    [SerializeField] public float playerTime = 1f;
+    [SerializeField] public int shopLevel = 1;
+    [SerializeField] public int dayTime = 1;
 }
