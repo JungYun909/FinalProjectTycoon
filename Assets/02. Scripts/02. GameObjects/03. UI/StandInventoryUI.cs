@@ -1,7 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using System;
 
 public class StandInventoryUI : UIBase
 {
@@ -18,24 +20,32 @@ public class StandInventoryUI : UIBase
     {
         controller = GetComponentInParent<InstallationController>();
     }
+
     private void OnEnable()
     {
-        controller.deliverInventoryInfo += HandleInventoryInfo;
+        if (controller != null)
+        {
+            controller.deliverInventoryInfo += HandleInventoryInfo;
+        }
     }
 
     private void OnDisable()
     {
-        controller.deliverInventoryInfo -= HandleInventoryInfo;
+        if (controller != null)
+        {
+            controller.deliverInventoryInfo -= HandleInventoryInfo;
+        }
     }
 
     private void HandleInventoryInfo(AbstractInventory obj)
     {
         curInventory = obj;
+        UpdateUI();
     }
 
     public override void Initialize()
     {
-        throw new System.NotImplementedException();
+        // 초기화 로직을 구현하세요.
     }
 
     public override void UpdateUI()
@@ -57,13 +67,19 @@ public class StandInventoryUI : UIBase
             Destroy(child.gameObject);
         }
     }
+
     private void CreateItemSlots(AbstractInventory curInventory)
     {
-        foreach(var item in curInventory.Items)
+        int slotCount = 0;
+
+        foreach (var item in curInventory.Items)
         {
-            if(item.Key.type == 2 || item.Key.type ==3)
+            if (slotCount >= 3) break; // 슬롯 개수 제한
+
+            if (item.Key.type == 2 || item.Key.type == 3)
             {
                 SetItemInfo(item.Key, item.Value);
+                slotCount++;
             }
         }
     }
@@ -82,7 +98,9 @@ public class StandInventoryUI : UIBase
             itemSlotInfo.Setup(item, quantity);
         }
     }
+
     public void OpenPlayerInventory()
     {
-        GameManager.instance.uiManager.OpenWindow(playerInventory, true);    }
+        GameManager.instance.uiManager.OpenWindow(playerInventory, true);
+    }
 }

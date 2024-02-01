@@ -25,6 +25,7 @@ public class AbstractInventory : MonoBehaviour
 {
     private AbstractInventory inventory;
     public InventoryShow inventoryShow;
+    public StandInventoryUI standInventory;
     public int maxDoughQuantity = 5; // 기본값으로 5를 설정
 
     public static event Action<AbstractInventory> OnInventoryClicked;
@@ -42,6 +43,17 @@ public class AbstractInventory : MonoBehaviour
     protected virtual void Start()
     {
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
+        // InstallationController 확인
+        InstallationController installationController = GetComponentInParent<InstallationController>();
+        if (installationController != null)
+        {
+            // 특정 머신에 대한 인벤토리 처리
+            ProcessInventoryBasedOnMachine(installationController._installationData);
+        }
+        else
+        {
+            ProcessStandardInventory();
+        }
     }
 
     private void OnEnable()
@@ -54,7 +66,22 @@ public class AbstractInventory : MonoBehaviour
             GameManager.instance.uiManager.CloseAll();
         }
     }
-    
+    private void ProcessInventoryBasedOnMachine(MachineSO machineData)
+    {
+        if (machineData.id == 5)
+        {
+            OpenStandInventoryUI();
+        }
+        else
+        {
+            OpenInventoryUI();
+        }
+    }
+    private void ProcessStandardInventory()
+    {
+        // 표준 인벤토리 처리 로직
+    }
+
     public void UpdateInspectorList()
     {
         itemsListForInspector.Clear();
@@ -64,40 +91,15 @@ public class AbstractInventory : MonoBehaviour
         }
     }
 
-
+    private void OpenStandInventoryUI()
+    {
+        GameManager.instance.uiManager.OpenWindow(standInventory, this);
+        OnInventoryClicked?.Invoke(this);
+    }
 
     private void OpenInventoryUI()
     {
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
     }
-
-    // 필요한 경우 데이터 접근 메서드 추가
-
-    //public void UpdateInventoryUI(Dictionary<ItemSO, int> items)
-    //{
-    //    foreach (Transform slots in contentPanel)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-
-    //    GameObject currentLine = null;
-    //    int slotIndex = 0;
-
-    //    foreach (var entry in items)
-    //    {
-    //        // 새로운 라인이 필요한 경우 생성
-    //        if (slotIndex % 5 == 0)
-    //        {
-    //            currentLine = Instantiate(itemLinePrefab, contentPanel);
-    //        }
-
-    //        // 아이템 슬롯 생성 및 설정
-    //        GameObject slotObject = Instantiate(itemSlotPrefab, currentLine.transform);
-    //        ItemSlotInfo slotInfo = slotObject.GetComponent<ItemSlotInfo>();
-    //        slotInfo.Setup(entry.Key, entry.Value);
-
-    //        slotIndex++;
-    //    }
-    //}
 }

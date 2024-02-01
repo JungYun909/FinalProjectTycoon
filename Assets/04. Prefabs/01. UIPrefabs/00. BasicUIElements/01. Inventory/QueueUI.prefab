@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 580737354035692228}
   - component: {fileID: 2218245772319706720}
   - component: {fileID: 5185125149203713690}
+  - component: {fileID: 261797146806119381}
   m_Layer: 5
   m_Name: QueueUI
   m_TagString: Untagged
@@ -404,6 +405,23 @@ MonoBehaviour:
   inventoryItemsParent: {fileID: 6478528791979398174}
   doughItemsParent: {fileID: 2016417619981025149}
   doughItemSlot: {fileID: 5573750842521773304, guid: f37f17c386867e94cb54e53aa6272a3f, type: 3}
+  curInventory: {fileID: 0}
+--- !u!114 &261797146806119381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354386346950874515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e292dfcdbbf2740a35ec19a80d8c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInventory: {fileID: 6834499772423413404, guid: 2db5435114778ba45b5b24db32cdc4ae, type: 3}
+  inventoryPanel: {fileID: 4354386346950874515}
+  inventorySlotPrefab: {fileID: 4677891365400509550, guid: ce733845f5f8b444ba02e33b1d3b8078, type: 3}
+  inventoryContentsParent: {fileID: 2016417619981025149}
 --- !u!1 &4533215017286188409
 GameObject:
   m_ObjectHideFlags: 0
