@@ -24,8 +24,12 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;
-    
+
     private void Start()
+    {
+        InitSetting();
+    }
+    public void InitSetting()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
         

@@ -375,6 +375,7 @@ MonoBehaviour:
   descriptionText: {fileID: 5722913285773141645}
   priceText: {fileID: 3929160238309517036}
   datas: []
+  machineSO: {fileID: 0}
 --- !u!1 &2043390557813188793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1115,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2265195511296668049}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4439973424081494210}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: SpawnInstallation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4471065301447742185
 GameObject:
   m_ObjectHideFlags: 0
