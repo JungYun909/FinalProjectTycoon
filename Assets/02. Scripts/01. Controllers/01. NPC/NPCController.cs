@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class NPCController : MonoBehaviour
 {
@@ -16,7 +18,15 @@ public class NPCController : MonoBehaviour
     public NPCDestinationSet destinationController;
     public MovementController movementController;
 
-    
+    private void Start()
+    {
+        GameManager.instance.dataManager.OnSaveEvent += NewInitSetting;
+    }
+
+    private void NewInitSetting()
+    {
+        InitSetting();
+    }
 
     public void InitSetting()
     {

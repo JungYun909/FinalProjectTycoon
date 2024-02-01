@@ -11,7 +11,7 @@ public class InstallationSpawnController : MonoBehaviour
     
     private void Update()
     {
-        if(!_destiantionController.destination[1] || !_controller._installationData.canSpawn)
+        if(!_destiantionController.destination[1] || !_controller._installationData.canSpawn || GameManager.instance.statManager.currentGold < _controller._installationData.spawnData.price)
             return;
 
         spawnTimer += Time.deltaTime;
@@ -19,7 +19,8 @@ public class InstallationSpawnController : MonoBehaviour
         if (spawnTimer > _controller._installationData.spawnDelay)
         {
             spawnTimer = 0f;
-                GameManager.instance.spawnManager.SpawnIngredient(gameObject, _destiantionController.destination[1], _controller._installationData.spawnData);
+            GameManager.instance.statManager.SpendGold(_controller._installationData.spawnData.price);
+            GameManager.instance.spawnManager.SpawnIngredient(gameObject, _destiantionController.destination[1], _controller._installationData.spawnData);
         }
     }
 }

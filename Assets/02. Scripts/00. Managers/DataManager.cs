@@ -25,6 +25,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     public List<GameObject> curInstallations; //판매씬에 배치된 진열대
     public GameObject counter; // 카운터 등록
+    
+    public event Action OnSaveEvent; 
 
     private void Start()
     {
@@ -51,6 +53,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(path + jsonName, jsonData);
+        
+        OnSaveEvent?.Invoke();
     }
 
     public void SaveInstallation(GameObject obj)
