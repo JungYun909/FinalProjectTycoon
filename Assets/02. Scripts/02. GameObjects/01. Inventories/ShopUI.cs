@@ -23,9 +23,10 @@ public class ShopUI : UIBase
 
     public override void UpdateUI()
     {
-        foreach (Transform slot in slotParent)
+        foreach (GameObject slot in slotParent)
         {
             Destroy(slot);
+            Debug.Log("인벤토리 부숴짐");
         }
 
         foreach (MachineSO machine in machines)
