@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
+    public event Action onDateChanged;
     
     private void Awake()	    //TODO
     {
@@ -101,7 +103,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         currentGold += modGold;
         shopStat.gold = currentGold;
-        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
 
@@ -109,7 +111,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         currentGold -= modGold;
         shopStat.gold = currentGold;
-        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
 
@@ -126,9 +128,9 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         if (curTime>0)
         { 
             modTime += Time.deltaTime;
-            curTime -= modTime/600;
+            curTime = 1 - modTime/600;
+            
             shopStat.playerTime = curTime;
-            //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         }
         else
         {
@@ -136,6 +138,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
             curTime = 1;
             curDay += 1;
             shopStat.dayTime = curDay;
+            onDateChanged?.Invoke();
         }
 
     }

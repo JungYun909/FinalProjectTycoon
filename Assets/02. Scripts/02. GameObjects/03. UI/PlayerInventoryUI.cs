@@ -15,8 +15,8 @@ public class PlayerInventoryUI : UIBase
     AbstractInventory inventory;
     private ItemSlotInfo itemSlot;
 
-    public TextMeshProUGUI itemTitle;
-    public TextMeshProUGUI itemDesc;
+    //public TextMeshProUGUI itemTitle;
+    //public TextMeshProUGUI itemDesc;
 
 
     private void Start()
@@ -108,12 +108,12 @@ public class PlayerInventoryUI : UIBase
 
     public void UpdateItemData(ItemSO item)
     {
-        itemTitle.text = "";
-        itemDesc.text = "";
-        if(item != null);
-        {
-            itemTitle.text = item.itemName;
-            itemDesc.text = item.description;
-        }
+        //itemTitle.text = "";
+        //itemDesc.text = "";
+        //if(item != null);
+        //{
+        //    itemTitle.text = item.itemName;
+        //    itemDesc.text = item.description;
+        //}
     }
 }

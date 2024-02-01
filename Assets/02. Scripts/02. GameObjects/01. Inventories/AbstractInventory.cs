@@ -25,13 +25,13 @@ public class AbstractInventory : MonoBehaviour
 {
     private AbstractInventory inventory;
     public InventoryShow inventoryShow;
+    public StandInventoryUI standInventory;
     public int maxDoughQuantity = 5; // 기본값으로 5를 설정
+
 
     public static event Action<AbstractInventory> OnInventoryClicked;
 
     public InstallationController controller;
-
-
 
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
 
@@ -42,21 +42,21 @@ public class AbstractInventory : MonoBehaviour
     protected virtual void Start()
     {
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
+        controller = GetComponentInParent<InstallationController>();
+        
     }
 
     private void OnEnable()
     {
         if (controller != null)
         {
-            controller.installationFuctionSet += OpenInventoryUI;
-            OpenInventoryUI();
-            GameManager.instance.uiManager.CloseAll();
+            controller.installationFuctionSet += OpenUI;
         }
     }
 
     public void InitSet()
     {
-        controller.installationFuctionSet += OpenInventoryUI;
+        controller.installationFuctionSet += OpenUI;
     }
     
     public void UpdateInspectorList()
@@ -68,7 +68,27 @@ public class AbstractInventory : MonoBehaviour
         }
     }
 
-    private void OpenInventoryUI()
+    private void OpenUI()
+    {
+        if(controller!=null && controller._installationData != null)
+        {
+            if(controller._installationData.id == 5)
+            {
+                OpenStandInventoryUI();
+            }
+            else
+            {
+                OpenInventoryUI();
+            }
+        }
+    }
+
+    private void OpenStandInventoryUI()
+    {
+        GameManager.instance.uiManager.OpenWindow(standInventory, this);
+        OnInventoryClicked?.Invoke(this);
+    }
+        private void OpenInventoryUI()
     {
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
