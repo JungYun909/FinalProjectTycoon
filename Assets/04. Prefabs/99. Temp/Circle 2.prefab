@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834fa35ba7f3e48bf9de532fb73ed632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: 35f76c8574cc24bc5a5b6613c9d08e1e, type: 2}
+  itemInfo: {fileID: 11400000, guid: 6860bf9eacac344efa9166cf7280a258, type: 2}
   inventoryManager: {fileID: 0}
   movement: 2
 --- !u!58 &2120137426721037491
@@ -177,3 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f82251bdcbc4f75b864111a5cf51a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  destinationObj: {fileID: 0}
+  isMove: 0

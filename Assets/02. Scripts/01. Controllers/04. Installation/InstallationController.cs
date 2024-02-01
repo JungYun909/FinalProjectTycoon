@@ -24,6 +24,7 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;
+    //public event Action<AbstractInventory> deliverInventoryInfo;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class InstallationController : MonoBehaviour, IInteractable
     public void InitSetting()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
+        //deliverInventoryInfo?.Invoke(_installationData);
         
         
         if (_installationData.haveDoughInventory)

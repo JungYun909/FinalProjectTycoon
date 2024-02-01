@@ -82,6 +82,11 @@ public class IngredientController : MonoBehaviour, IInteractable
             interactInstallation.Enqueue(controller._installationData.id);
         }
 
+        if (other.gameObject.GetComponent<ShopInventory>() != null)
+        {
+            AbstractInventory shopInventory = other.gameObject.GetComponent<ShopInventory>();
+            GameManager.instance.inventoryManager.AddItemToInventory(shopInventory.inventoryID, itemData, 1);
+        }
         if (other.gameObject.GetComponentInChildren<AbstractInventory>() == null)
             return;
 

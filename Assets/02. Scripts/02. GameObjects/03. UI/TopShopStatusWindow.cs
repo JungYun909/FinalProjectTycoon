@@ -11,10 +11,12 @@ public class TopShopStatusWindow : UIBase
     private int goldOwned;
     private int reputeOwned;
     private float curTime;
+    private int curDate;
 
     [SerializeField] private TextMeshProUGUI shopTitle;
     [SerializeField] private TextMeshProUGUI curGold;
     [SerializeField] private TextMeshProUGUI curRepute;
+    [SerializeField] private TextMeshProUGUI curDateText;
     [SerializeField] private Slider timeSlider;
 
     public override void Initialize()
@@ -27,16 +29,38 @@ public class TopShopStatusWindow : UIBase
 
         curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
+        curDate = shopStat.dayTime;
+        curDateText.text = curDate.ToString();
 
         timeSlider.value = curTime;
-
+    }
+    private void Update()
+    {
+        timeSlider.value = GameManager.instance.statManager.curTime;
+    }
+    private void OnEnable()
+    {
+        Initialize();
+        GameManager.instance.statManager.onStatChanged += UpdateUI;
+        GameManager.instance.statManager.onDateChanged += UpdateUI;
     }
 
+    private void OnDisable()
+    {
+        GameManager.instance.statManager.onStatChanged -= UpdateUI;
+        GameManager.instance.statManager.onDateChanged -= UpdateUI;
+    }
     public override void UpdateUI()
     {
+        if(shopStat == null)
+        {
+            Debug.Log("No Stat Info to Update");
+        }
+        Debug.Log("Let'sUpdateUI");
         goldOwned = shopStat.gold;
 	    curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
-
+        curDateText.text = curDate.ToString();
     }
+
 }

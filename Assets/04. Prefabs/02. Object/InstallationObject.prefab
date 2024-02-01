@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryShow: {fileID: 5185125149203713690, guid: 9efe868c157e2324a8b2635613f368bf, type: 3}
+  standInventory: {fileID: 6233883059662430004, guid: 29bd6324927bfdb4a9f30f77256c4bf2, type: 3}
   maxDoughQuantity: 5
   controller: {fileID: 1421688546873149454}
   itemsListForInspector: []

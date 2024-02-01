@@ -36,7 +36,6 @@ public class InventoryShow : UIBase
 
     private void HandleInventoryOpened(AbstractInventory inventory)
     {
-        Debug.Log("Inventory info received: " + inventory.inventoryID);
         // 이벤트가 발생했을 때 UI를 업데이트합니다.
         OpenInventory(inventory);
         curInventory = inventory;
@@ -78,15 +77,27 @@ public class InventoryShow : UIBase
 
     private void CreateItemSlots(AbstractInventory inventory)
     {
-        if (inventory == null)
-            {
-            Debug.Log("What?") ;
-            return;
-            }
+        List<ItemSO> itemsToMove = new List<ItemSO>();
         // 인벤토리의 각 아이템에 대한 UI 생성
         foreach (var item in inventory.Items)
         {
-            if (item.Key.id == 1) // 반죽 아이템(id가 1) 처리
+            if (item.Key.type == 1 && item.Key.id != 1)
+            {
+                ItemSO previousItem = FindPreviousItemOfTypeOne(item.Key, inventory);
+
+                if (previousItem != null)
+                {
+                    itemsToMove.Add(previousItem);
+                }
+            }
+
+            if (item.Key.type == 3)
+            {
+                itemsToMove.Add(item.Key);
+                continue;
+            }
+
+            if (item.Key.id == 1 || item.Key.type == 2) // 반죽 아이템(id가 1) 처리
             {
                 CreateDoughSlots(item.Key, item.Value);
             }
@@ -95,8 +106,22 @@ public class InventoryShow : UIBase
                 CreateNormalItemSlot(item.Key, item.Value);
             }
         }
+        foreach (var item in itemsToMove)
+        {
+            ReturnToPlayerInventory(item);
+        }
     }
-
+    private ItemSO FindPreviousItemOfTypeOne(ItemSO newItem, AbstractInventory inventory)
+    {
+        foreach (var item in inventory.Items)
+        {
+            if (item.Key.type == 1 && item.Key.id != 1 && item.Key != newItem)
+            {
+                return item.Key;
+            }
+        }
+        return null;
+    }
     private void CreateDoughSlots(ItemSO doughItem, int quantity)
     {
         for (int i = 0; i < quantity; i++)
@@ -112,6 +137,19 @@ public class InventoryShow : UIBase
         SetupItemSlot(itemUI, item, quantity);
     }
 
+    private void ReturnToPlayerInventory(ItemSO item)
+    {
+        Debug.Log("Return!");
+        int playerInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
+        int curInventoryID = this.inventory.inventoryID;
+        Debug.Log($"from {curInventoryID} to {playerInventoryID}");
+        if (inventory.Items.TryGetValue(item, out int quantity))
+        {
+            GameManager.instance.inventoryManager.TransferItem(curInventoryID, playerInventoryID, item, quantity);
+            Debug.Log($"Transfered {item.itemName}, {quantity}");
+            inventory.Items.Remove(item);
+        }
+    }
 
     private void SetupItemSlot(GameObject itemSlotObject, ItemSO item, int quantity)
     {
@@ -129,7 +167,7 @@ public class InventoryShow : UIBase
 
     public override void UpdateUI()
     {
-        if(inventory != null)
+        if (inventory != null)
             UpdateInventoryDisplay(inventory);
     }
 
@@ -137,6 +175,5 @@ public class InventoryShow : UIBase
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
         //DeliverInventoryID?.Invoke(curInventory.inventoryID);
-        Debug.Log(curInventory.inventoryID);
     }
 }

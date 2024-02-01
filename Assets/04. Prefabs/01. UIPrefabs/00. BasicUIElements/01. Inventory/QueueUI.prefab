@@ -398,12 +398,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f959416d5feb9eb409028e3a9c68f417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 6834499772423413404, guid: 2db5435114778ba45b5b24db32cdc4ae, type: 3}
+  playerInventory: {fileID: 7678252370206103221, guid: 8aa156b475e6955438023f10f4be31ae, type: 3}
   inventoryPanel: {fileID: 4354386346950874515}
   inventoryItemPrefab: {fileID: 1435018983836451694, guid: dbc719a248611bc47b815a12e0a1020f, type: 3}
   inventoryItemsParent: {fileID: 6478528791979398174}
   doughItemsParent: {fileID: 2016417619981025149}
   doughItemSlot: {fileID: 5573750842521773304, guid: f37f17c386867e94cb54e53aa6272a3f, type: 3}
+  curInventory: {fileID: 0}
 --- !u!1 &4533215017286188409
 GameObject:
   m_ObjectHideFlags: 0

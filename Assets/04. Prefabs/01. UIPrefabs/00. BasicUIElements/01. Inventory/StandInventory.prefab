@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 4480844625888730017}
   - component: {fileID: 3221472905842580548}
   - component: {fileID: 4095914655339792284}
-  - component: {fileID: -1735570812866936932}
+  - component: {fileID: 6233883059662430004}
   m_Layer: 5
   m_Name: StandInventory
   m_TagString: Untagged
@@ -681,7 +681,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &-1735570812866936932
+--- !u!114 &6233883059662430004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -690,16 +690,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6637317101531233368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f959416d5feb9eb409028e3a9c68f417, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b0fd14e1b25e6c4caa12b0c3719ba23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 6834499772423413404, guid: 2db5435114778ba45b5b24db32cdc4ae, type: 3}
+  playerInventory: {fileID: 0}
   inventoryPanel: {fileID: 6637317101531233368}
-  inventoryItemPrefab: {fileID: 3888443893955437806}
-  inventoryItemsParent: {fileID: 7279168374270284716}
-  doughItemsParent: {fileID: 0}
-  doughItemSlot: {fileID: 0}
-  curInventory: {fileID: 0}
+  inventorySlotPrefab: {fileID: 4677891365400509550, guid: ce733845f5f8b444ba02e33b1d3b8078, type: 3}
+  inventoryContentsParent: {fileID: 7279168374270284716}
 --- !u!1 &7473578512140279936
 GameObject:
   m_ObjectHideFlags: 0
