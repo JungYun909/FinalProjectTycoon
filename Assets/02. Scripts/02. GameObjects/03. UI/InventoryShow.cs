@@ -36,6 +36,7 @@ public class InventoryShow : UIBase
 
     private void HandleInventoryOpened(AbstractInventory inventory)
     {
+        Debug.Log("Handled");
         // 이벤트가 발생했을 때 UI를 업데이트합니다.
         OpenInventory(inventory);
         curInventory = inventory;
