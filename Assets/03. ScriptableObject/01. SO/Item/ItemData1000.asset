@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1000
   type: 2
-  itemName: "\uC774\uC0C1\uD55C\uBE75"
+  itemName: "\uB9DD\uD55C\uBE75"
   description: "\uB9DD\uD588\uC5B4\uC694"
-  recipe: 
+  recipe: "\uB808\uC2DC\uD53C\uAC00 \uC5C6\uC73C\uBA74 \uB9CC\uB4E4\uC5B4\uC9D1\uB2C8\uB2E4"
   price: -5
   sprite: {fileID: 21300000, guid: 85cb8a925687c33458a667da147fc919, type: 3}
   tag: Food
-  canMove: 0
-  moveSpeed: 0
-  canStack: 0
+  canMove: 1
+  moveSpeed: 1
+  canStack: 1
   maxStackAmount: 1

@@ -10,6 +10,7 @@ public class PlayerData
     public int money = 0;
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
+    public List<int> recipeIndex = new List<int>();
 }
 public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로딩 관리하기 위한 매니저. json
 {
@@ -30,6 +31,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     private void Start()
     {
+        GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
+        
         path = Application.persistentDataPath + "/";
         
         if (!File.Exists(path + jsonName))
@@ -47,6 +50,13 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
         }
+    }
+
+    private void DiscoverRecipe(int index)
+    {
+        if(!playerData.recipeIndex.Contains(index))
+            playerData.recipeIndex.Add(index);
+        SaveData();
     }
 
     public void SaveData()

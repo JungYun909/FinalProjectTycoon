@@ -16,6 +16,9 @@ public class InstallationInventoryController : MonoBehaviour
     {
         if(controller.doughContainer.Count == 0 || !destinationController.destination[1])
             return;
+        
+        if(controller._installationData.haveIngredientInventory && controller.ingredients.Count == 0)
+            return;
 
         spawnTimer += Time.deltaTime;
         
@@ -37,12 +40,6 @@ public class InstallationInventoryController : MonoBehaviour
 
         GameObject curObj = controller.doughContainer.Dequeue();
         curObj.SetActive(true);
-
-        if (controller._installationData.haveIngredientInventory || controller.ingredients.Count > 0)
-        {
-            gameObject.GetComponent<TestSA>().AddImage();
-            //TODO 여기에 해당 기능 스크립트의 메소드 불러주기 (설치물 컨트롤러에 있는 재료 정보 큐에서 디큐해서 스프라이트 받아서 바꿔끼워주기)
-        }
         
         IngredientController curController = curObj.GetComponent<IngredientController>();
         curController.destination = destinationController.destination[1];
@@ -50,6 +47,19 @@ public class InstallationInventoryController : MonoBehaviour
         
         GameManager.instance.spawnManager.SpawnPositionSet(transform.root.gameObject, curController.destination, curObj);
         GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, curController.itemData, 1);
+
+        if (controller._installationData.haveIngredientInventory)
+        {
+            ItemSO ingredientData = controller.ingredients.Dequeue();
+            curController.addImageController.AddImage(ingredientData.sprite);
+            GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, ingredientData, 1);
+            curController.VisitIngredientDataSet(controller, ingredientData);
+        }
+        else if(!controller._installationData.haveIngredientInventory)
+        {
+            curController.VisitInstallationSet(controller);
+        }
+        
         
         if (controller._installationData.completeMake)
         {
@@ -60,10 +70,8 @@ public class InstallationInventoryController : MonoBehaviour
                 recipeIndex += curController.interactInstallation.Dequeue() + "+";
             }
             
-            Debug.Log("recipeIndex" + recipeIndex);
-            
             int spawnFoodID = GameManager.instance.recipeManager.CompareWithResipe(recipeIndex);
-            GameManager.instance.spawnManager.SpawnIngredient(gameObject, destinationController.destination[1], GameManager.instance.dataManager.foodSub[spawnFoodID-1]);
+            GameManager.instance.spawnManager.SpawnIngredient(gameObject, destinationController.destination[1], GameManager.instance.dataManager.foodSub[spawnFoodID]);
 
             recipeIndex = "";
         }

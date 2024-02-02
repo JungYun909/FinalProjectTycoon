@@ -8,12 +8,14 @@ using UnityEngine.Serialization;
 public class IngredientController : MonoBehaviour, IInteractable
 {
     public ItemSO itemData;
-    public Queue<int> interactInstallation = new Queue<int>();
+    public Queue<float> interactInstallation = new Queue<float>();
     
     public GameObject moveFunction;
     public GameObject destination;
 
     public MovementController movementController;
+    public TestSA addImageController;
+    public SpriteRenderer spriteController;
     
     private void Start()
     {
@@ -22,7 +24,7 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void InitSet()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = itemData.sprite;
+        spriteController.sprite = itemData.sprite;
         
         if (itemData.canMove)
         {
@@ -30,6 +32,8 @@ public class IngredientController : MonoBehaviour, IInteractable
             movementController.speed = itemData.moveSpeed;
             movementController.destinationObj = destination;
         }
+        
+        addImageController.InitSetting();
     }
 
     private void OnDisable()
@@ -86,8 +90,6 @@ public class IngredientController : MonoBehaviour, IInteractable
                 controller.doughContainer.Enqueue(gameObject);
             else
                 controller.ingredients.Enqueue(itemData);
-            
-            interactInstallation.Enqueue(controller._installationData.id);
         }
 
         if (other.gameObject.GetComponent<ShopInventory>() != null)
@@ -101,5 +103,22 @@ public class IngredientController : MonoBehaviour, IInteractable
 
         AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
         GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
+    }
+
+    public void VisitIngredientDataSet(InstallationController controller, ItemSO ingredientData)
+    {
+        if (controller._installationData.haveIngredientInventory)
+        {
+            ItemSO ingredientItemData = controller.ingredients.Dequeue();
+            interactInstallation.Enqueue(controller._installationData.id + (ingredientItemData.id * 0.1f));
+            addImageController.AddImage(ingredientItemData.sprite);
+            
+            Debug.Log(controller._installationData.id + (ingredientItemData.id * 0.1f));
+        }
+    }
+
+    public void VisitInstallationSet(InstallationController controller)
+    {
+        interactInstallation.Enqueue(controller._installationData.id);
     }
 }

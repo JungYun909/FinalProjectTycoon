@@ -31,9 +31,6 @@ public class ShopUI : UIBase
             Destroy(slot.gameObject);
             Debug.Log("인벤토리 부숴짐");
         }
-        
-        if(slotParent.childCount > 0)
-            return;
     }
 
     private void UpdateMachineInfoToShopUI()

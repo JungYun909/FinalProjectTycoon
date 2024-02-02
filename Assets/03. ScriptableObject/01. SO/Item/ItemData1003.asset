@@ -16,6 +16,7 @@ MonoBehaviour:
   type: 2
   itemName: "\uC2DD\uBE75"
   description: "\uC2DD\uBE75\uBE75"
+  recipe: "\uC544"
   price: 50
   sprite: {fileID: 21300000, guid: 7023cef3c3ecf634fb652ba17544b224, type: 3}
   tag: Food

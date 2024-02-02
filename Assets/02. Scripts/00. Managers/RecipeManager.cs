@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
 {
+    public event Action<int> OnCompareRecipe;
+    
     private List<Dictionary<string, object>> data_Resipe = null;
     
     private enum ResipeType
@@ -24,9 +26,11 @@ public class RecipeManager : MonoBehaviour
         {
             if (data_Resipe[i][ResipeType.Recipe.ToString()].ToString() == resipe)
             {
-                return (int)data_Resipe[i][ResipeType.ID.ToString()] + 1;
+                OnCompareRecipe?.Invoke((int)data_Resipe[i][ResipeType.ID.ToString()]);
+                return (int)data_Resipe[i][ResipeType.ID.ToString()];
             }
         }
+        OnCompareRecipe?.Invoke(0);
         return 0;
     }
 }

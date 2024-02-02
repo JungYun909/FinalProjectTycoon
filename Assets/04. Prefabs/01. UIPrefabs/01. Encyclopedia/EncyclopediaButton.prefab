@@ -122,7 +122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5280460405754181190}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -8975464666105559682}
+        m_TargetAssemblyTypeName: EncyclopediaSlotController, Assembly-CSharp
+        m_MethodName: OnBtnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-8975464666105559682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   image: {fileID: 8271634965250969426}
+  nameTxt: {fileID: 0}
+  recipe: {fileID: 0}
+  price: {fileID: 0}
 --- !u!1 &7455218005449641347
 GameObject:
   m_ObjectHideFlags: 0

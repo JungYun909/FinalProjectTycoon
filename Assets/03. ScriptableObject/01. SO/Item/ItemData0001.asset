@@ -18,9 +18,9 @@ MonoBehaviour:
   description: "\uBC18\uC8FD\uBC18\uC8FD"
   recipe: "\uBC18\uC8FD\uAE30\uC5D0\uC11C \uC0DD\uC0B0"
   price: 10
-  sprite: {fileID: 21300000, guid: 4331b921402da144288634af06f25f1e, type: 3}
+  sprite: {fileID: 916061848, guid: 4331b921402da144288634af06f25f1e, type: 3}
   tag: Dough
   canMove: 1
-  moveSpeed: 3
+  moveSpeed: 1
   canStack: 0
   maxStackAmount: 0
