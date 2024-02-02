@@ -38,8 +38,9 @@ public class InstallationInventoryController : MonoBehaviour
         GameObject curObj = controller.doughContainer.Dequeue();
         curObj.SetActive(true);
 
-        if (controller._installationData.haveIngredientInventory)
+        if (controller._installationData.haveIngredientInventory || controller.ingredients.Count > 0)
         {
+            gameObject.GetComponent<TestSA>().AddImage();
             //TODO 여기에 해당 기능 스크립트의 메소드 불러주기 (설치물 컨트롤러에 있는 재료 정보 큐에서 디큐해서 스프라이트 받아서 바꿔끼워주기)
         }
         

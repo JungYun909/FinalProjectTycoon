@@ -77,8 +77,10 @@ public class AudioManager : MonoBehaviour
                 continue;
             else
             {
+                sfxSource[i].clip = effect;
                 sfxSource[i].PlayOneShot(effect);
                 completePlaying = true; //발견!!
+                return;
             }
         }
 
@@ -101,16 +103,15 @@ public class AudioManager : MonoBehaviour
     public void ToggleSFX(Image soundImageOrigin)
     {
         onSfx = !onSfx;
-        for( int i = 0;i < sfxSource.Count;i++)
+        for (int i = 0; i < sfxSource.Count; i++)
         {
             sfxSource[i].Stop();
-            sfxSource[i].mute = onSfx;
+            sfxSource[i].mute = !onSfx;
             if (sfxSource[i].mute)
                 soundImageOrigin.sprite = soundImage[1];
             else
                 soundImageOrigin.sprite = soundImage[0];
         }
-        
     }
 
     public void MusicVolume(float volume)
