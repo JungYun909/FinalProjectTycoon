@@ -5,8 +5,8 @@ using UnityEngine;
 public class TestSA : MonoBehaviour
 {
     //Sprite sprites;
-    InstallationController installationController;
-    SpriteRenderer[] spriteRenderers; 
+    public InstallationController installationController;
+    public SpriteRenderer[] spriteRenderers; 
     // Start is called before the first frame update
     void Start()
     {
@@ -21,14 +21,14 @@ public class TestSA : MonoBehaviour
     //    }
     //}
 
-    //public void AddImage()
-    //{
-    //    foreach (var sprite in spriteRenderers)
-    //    {
-    //        if (sprite.sprite != null)
-    //        {
-    //            sprite.sprite = installationController.
-    //        }
-    //    }
-    //}
+    public void AddImage()
+    {
+        foreach (var sprite in spriteRenderers)
+        {
+            if (sprite.sprite != null)
+            {
+                sprite.sprite = installationController.ingredients.Dequeue().sprite;
+            }
+        }
+    }
 }
