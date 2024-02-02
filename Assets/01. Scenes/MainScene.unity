@@ -554,8 +554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSlider: {fileID: 1578064008}
   _sfxSlider: {fileID: 1996983677}
-  bgmImageOrigin: {fileID: 1462480770}
-  sfxImageOrigin: {fileID: 740966887}
+  bgmImageOrigin: {fileID: 0}
+  sfxImageOrigin: {fileID: 0}
 --- !u!1 &187764539
 GameObject:
   m_ObjectHideFlags: 0
@@ -11345,9 +11345,18 @@ MonoBehaviour:
   ingredientSub:
   - {fileID: 11400000, guid: 68ae17f6ccd0f462b9072368b1341dcd, type: 2}
   - {fileID: 11400000, guid: dff7e5b57aa3d456987f5c002df82298, type: 2}
+  - {fileID: 11400000, guid: 69a788d01a6705f43ae05e9f9d9fe059, type: 2}
   foodSub:
   - {fileID: 11400000, guid: a8aa8a5e8b67048df92528442255afb3, type: 2}
+  - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}
+  - {fileID: 11400000, guid: 4c14cf8e2ad373f4296997d353794267, type: 2}
   - {fileID: 11400000, guid: 6860bf9eacac344efa9166cf7280a258, type: 2}
+  - {fileID: 11400000, guid: b17c47104e7d541a3b92c400db8f52d3, type: 2}
+  - {fileID: 11400000, guid: c9e5b7c2de067468599938344ca64c0a, type: 2}
+  - {fileID: 11400000, guid: a14b68f0a3352401fba4fd5c039f76ec, type: 2}
+  - {fileID: 11400000, guid: 85954918528ce4df1bbb9e133a6a2654, type: 2}
+  - {fileID: 11400000, guid: 56397970994dd451984721a01e1391f7, type: 2}
+  - {fileID: 11400000, guid: 95fb13fbb9f214a2a8cfd2586b916f05, type: 2}
   curObject:
   - {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
@@ -11465,9 +11474,7 @@ MonoBehaviour:
   musicSource: {fileID: 1590563969}
   bgmClip: {fileID: 0}
   sfxSource: []
-  soundImage:
-  - {fileID: 21300000, guid: f2c0c8de2d2b6b540b01f6ccb18aef27, type: 3}
-  - {fileID: 21300000, guid: 4a397482b8b083d4784ca0be45f9dbd4, type: 3}
+  soundImage: []
 --- !u!114 &1590563971
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,11 +18,11 @@ public class RecipeManager : MonoBehaviour
         Debug.Log(data_Resipe[1]["Recipe"]);
     }
     
-    public int CompareWithResipe(int resipe)
+    public int CompareWithResipe(string resipe)
     {
         for (int i = 0; i < data_Resipe.Count; i++)
         {
-            if (((int)data_Resipe[i][ResipeType.Recipe.ToString()] == resipe))
+            if (data_Resipe[i][ResipeType.Recipe.ToString()].ToString() == resipe)
             {
                 return (int)data_Resipe[i][ResipeType.ID.ToString()] + 1;
             }
