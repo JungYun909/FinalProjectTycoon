@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class TestSA : MonoBehaviour
 {
-    Sprite sprites;
-
+    //Sprite sprites;
+    InstallationController installationController;
+    SpriteRenderer[] spriteRenderers; 
     // Start is called before the first frame update
     void Start()
     {
-        sprites = Resources.Load<Sprite>(ResourcePath.bread + "b1");
+        //sprites = Resources.Load<Sprite>(ResourcePath.bread + "b1");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite == null)
-        {
-            collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites;
-        }
-        //collision.gameObject.GetComponentInChildren<SpriteRenderer>().sprite = sprites;
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.GetComponentsInChildren<SpriteRenderer>()[1].sprite == null)
+    //    {
+    //        collision.gameObject.GetComponentsInChildren<SpriteRenderer>()[1].sprite = sprites;
+    //    }
+    //}
 
-    }
+    //public void AddImage()
+    //{
+    //    foreach (var sprite in spriteRenderers)
+    //    {
+    //        if (sprite.sprite != null)
+    //        {
+    //            sprite.sprite = installationController.
+    //        }
+    //    }
+    //}
 }
