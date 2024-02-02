@@ -57,11 +57,41 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void OnButtonClicked(int toInventoryID)
     {
-        toInventoryID = FindObjectOfType<InventoryShow>().curInventory.inventoryID;
-        if (toInventoryID == 0)
+        var inventoryShowInstance = FindObjectOfType<InventoryShow>();
+        if (inventoryShowInstance != null && inventoryShowInstance.curInventory != null)
         {
-            Debug.Log("No Queue Activated");
+            toInventoryID = inventoryShowInstance.curInventory.inventoryID;
         }
+        else
+        {
+            var standInventoryUIInstance = FindObjectOfType<StandInventoryUI>();
+            if (standInventoryUIInstance != null && standInventoryUIInstance.curInventory != null)
+            {
+                toInventoryID = standInventoryUIInstance.curInventory.inventoryID;
+            }
+            else
+            {
+                Debug.Log("No valid Inventory found");
+                return;
+            }
+        }
+        DeliverItemInfo(toInventoryID);
+    }
+
+    public void DeliverItemInfo(int toInventoryID)
+    {
+        if (curItem == null)
+        {
+            Debug.LogError("curItem is null");
+            return;
+        }
+
+        if (shopInventory == null)
+        {
+            Debug.LogError("shopInventory is null");
+            return;
+        }
+
         if (toInventoryID != 0)
         {
             DeliverItem?.Invoke(curItem);

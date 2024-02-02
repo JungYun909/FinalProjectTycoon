@@ -23,9 +23,10 @@ public class ShopUI : UIBase
 
     public override void UpdateUI()
     {
-        foreach (Transform slot in slotParent)
+        foreach (GameObject slot in slotParent)
         {
             Destroy(slot);
+            Debug.Log("인벤토리 부숴짐");
         }
 
         foreach (MachineSO machine in machines)
@@ -53,6 +54,13 @@ public class ShopUI : UIBase
 
     public void SpawnInstallation()
     {
+        if (machineSO.price > GameManager.instance.statManager.currentGold)
+        {
+            Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
+            return;
+        }
+        GameManager.instance.statManager.SpendGold(machineSO.price);
+        
         GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
         GameManager.instance.uiManager.CloseAll();
     }
