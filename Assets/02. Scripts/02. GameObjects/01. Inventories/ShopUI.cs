@@ -17,25 +17,42 @@ public class ShopUI : UIBase
     public TMP_Text priceText;
     public List<ItemDataContainer> datas;
     public MachineSO machineSO;
-
+    public GameObject quantityCheck;
     private ItemDatabaseSO itemData;
+    private int shopInventoryID;
+
+    private void Start()
+    {
+        quantityCheck.SetActive(false);
+    }
     public override void Initialize()
     {
-        UpdateItemInfoToShopUI();
+        
     }
-
+    
     public override void UpdateUI()
     {
+
+    }
+    private void ClearUI()
+    {
+        quantityCheck.SetActive(false);
         foreach (Transform slot in slotParent)
         {
             Destroy(slot.gameObject);
             Debug.Log("인벤토리 부숴짐");
         }
+<<<<<<< Updated upstream
+=======
+
+        if (slotParent.childCount > 0)
+            return;
+>>>>>>> Stashed changes
     }
 
     private void UpdateMachineInfoToShopUI()
     {
-        UpdateUI();
+        ClearUI();
         foreach (MachineSO machine in machines)
         {
             GameObject slot = Instantiate(slotPrefab, slotParent);
@@ -53,27 +70,33 @@ public class ShopUI : UIBase
 
     private void UpdateItemInfoToShopUI()
     {
-        UpdateUI();
+        ClearUI();
         itemData = GameManager.instance.inventoryManager.itemDatabase;
         foreach (ItemSO item in itemData.itemDataList)
         {
-            GameObject slot = Instantiate(itemSlot, slotParent);
-            ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
-            if (itemSlotInfo != null)
+            if (item.type == 1 && item.id != 1)
             {
-                itemSlotInfo.Setup(item, 1);
+                GameObject slot = Instantiate(itemSlot, slotParent);
+                ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
+                if (itemSlotInfo != null)
+                {
+                    itemSlotInfo.Setup(item, 1);
+                }
+            }
+            else
+            {
+                continue;
             }
         }
     }
     public void OpenIngredientShopUI()
     {
-        UpdateUI();
         UpdateItemInfoToShopUI();
+        quantityCheck.SetActive(true);
     }
 
     public void OpenMachinShopUI()
     {
-        UpdateUI();
         UpdateMachineInfoToShopUI();
     }
     private void SetInfo(MachineSO sO)
@@ -92,8 +115,18 @@ public class ShopUI : UIBase
             return;
         }
         GameManager.instance.statManager.SpendGold(machineSO.price);
-        
+
         GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
         GameManager.instance.uiManager.CloseAll();
     }
+
+
+    //public void PurchaseItem()
+    //{
+    //    shopInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
+    //    int quantity = int.Parse(quantityInput.text);
+    //    ItemSO item
+    //    GameManager.instance.inventoryManager.AddItemToInventory(shopInventoryID, item, quantity);
+    //    GameManager.instance.statManager.SpendGold(item.price * quantity);
+    //}
 }
