@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
-  m_Name: ItemData1003
+  m_Name: ItemData1009
   m_EditorClassIdentifier: 
-  id: 1003
+  id: 1009
   type: 2
-  itemName: "\uC2DD\uBE75"
-  description: "\uC2DD\uBE75\uBE75"
-  price: 50
-  sprite: {fileID: 21300000, guid: 7023cef3c3ecf634fb652ba17544b224, type: 3}
+  itemName: "\uC2DC\uB098\uBAAC\uB864"
+  description: "\uBC18\uC8FD > \uBC84\uD130 > \uACC4\uD53C\uC124\uD0D5 > \uC624\uBE10"
+  recipe: 
+  price: 200
+  sprite: {fileID: 21300000, guid: 36a01a6ae047f98488c5b14975933457, type: 3}
   tag: Food
   canMove: 1
   moveSpeed: 1

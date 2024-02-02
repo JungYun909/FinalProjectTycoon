@@ -19,6 +19,7 @@ public class InstallationController : MonoBehaviour, IInteractable
     public AbstractInventory inventoryController;
 
     public Queue<GameObject> doughContainer;
+    public Queue<ItemSO> ingredients;
 
     private int index = 0;
 

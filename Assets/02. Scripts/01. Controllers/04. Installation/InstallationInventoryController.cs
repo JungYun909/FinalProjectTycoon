@@ -9,7 +9,7 @@ public class InstallationInventoryController : MonoBehaviour
     public InstallationDestinationController destinationController;
     public AbstractInventory inventory;
     
-    private int recipeIndex;
+    private string recipeIndex;
     
     private float spawnTimer = 0;
     private void Update()
@@ -37,6 +37,11 @@ public class InstallationInventoryController : MonoBehaviour
 
         GameObject curObj = controller.doughContainer.Dequeue();
         curObj.SetActive(true);
+
+        if (controller._installationData.haveIngredientInventory)
+        {
+            //TODO 여기에 해당 기능 스크립트의 메소드 불러주기 (설치물 컨트롤러에 있는 재료 정보 큐에서 디큐해서 스프라이트 받아서 바꿔끼워주기)
+        }
         
         IngredientController curController = curObj.GetComponent<IngredientController>();
         curController.destination = destinationController.destination[1];
@@ -51,16 +56,15 @@ public class InstallationInventoryController : MonoBehaviour
 
             for (int i = curController.interactInstallation.Count - 1; i >= 0; i--)
             {
-                recipeIndex += (int)Math.Pow(10, i) * curController.interactInstallation.Dequeue();
+                recipeIndex += curController.interactInstallation.Dequeue() + "+";
             }
             
             Debug.Log("recipeIndex" + recipeIndex);
             
             int spawnFoodID = GameManager.instance.recipeManager.CompareWithResipe(recipeIndex);
-            Debug.Log("spawnFoodID" + spawnFoodID);
             GameManager.instance.spawnManager.SpawnIngredient(gameObject, destinationController.destination[1], GameManager.instance.dataManager.foodSub[spawnFoodID-1]);
 
-            recipeIndex = 0;
+            recipeIndex = "";
         }
     }
 }

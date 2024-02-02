@@ -69,6 +69,8 @@ public class IngredientController : MonoBehaviour, IInteractable
     
     private void OnCollisionEnter2D(Collision2D other)
     {
+        InstallationController controller;
+        
         if(destination != other.gameObject)
             return;
         
@@ -77,8 +79,14 @@ public class IngredientController : MonoBehaviour, IInteractable
 
         if (other.gameObject.GetComponent<IInteractable>() != null)
         {
-            InstallationController controller = other.gameObject.GetComponent<InstallationController>();
+            controller = other.gameObject.GetComponent<InstallationController>();
             controller.OnColliderInteract();
+            
+            if(itemData.tag == "Dough")
+                controller.doughContainer.Enqueue(gameObject);
+            else
+                controller.ingredients.Enqueue(itemData);
+            
             interactInstallation.Enqueue(controller._installationData.id);
         }
 
@@ -92,7 +100,6 @@ public class IngredientController : MonoBehaviour, IInteractable
             return;
 
         AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-        other.gameObject.GetComponent<InstallationController>().doughContainer.Enqueue(gameObject);
         GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
     }
 }

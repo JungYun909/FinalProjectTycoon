@@ -11,6 +11,7 @@ public class ItemSO : ScriptableObject
     public int type; // 아이템 타입 (재료 1 판매품2)
     public string itemName; //출력할 아이템 이름
     public string description; //출력할 아이템 설명
+    public string recipe;
     public int price; //해당 아이템 가격
     public Sprite sprite;
     public string tag;
