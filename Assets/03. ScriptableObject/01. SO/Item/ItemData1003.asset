@@ -15,10 +15,10 @@ MonoBehaviour:
   id: 1003
   type: 2
   itemName: "\uC2DD\uBE75"
-  description: "\uC2DD\uBE75\uBE75"
-  recipe: "\uC544"
-  price: 50
-  sprite: {fileID: 21300000, guid: 7023cef3c3ecf634fb652ba17544b224, type: 3}
+  description: "\uC2DD\uBE75\uC774 \uB9DB\uC788\uC5B4\uC57C \uCC10 \uB9DB\uC9D1\uC774\uC9C0"
+  recipe: "\uBC18\uC8FD - \uC870\uD569\uAE30(\uBC84\uD130) - \uC624\uBE10"
+  price: 40
+  sprite: {fileID: 21300000, guid: ca0f6793294eed04db03471b856f5637, type: 3}
   tag: Food
   canMove: 1
   moveSpeed: 1

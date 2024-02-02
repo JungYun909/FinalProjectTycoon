@@ -11357,6 +11357,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85954918528ce4df1bbb9e133a6a2654, type: 2}
   - {fileID: 11400000, guid: 56397970994dd451984721a01e1391f7, type: 2}
   - {fileID: 11400000, guid: 95fb13fbb9f214a2a8cfd2586b916f05, type: 2}
+  - {fileID: 11400000, guid: e1aba187a3c484dba9134508705a420f, type: 2}
+  - {fileID: 11400000, guid: d3af81ec0b61a4df4a917996e97c0060, type: 2}
+  - {fileID: 11400000, guid: d542c1d4d4b724a558f83424af4d6aa4, type: 2}
   curObject:
   - {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}

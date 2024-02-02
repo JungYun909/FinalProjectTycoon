@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uCD08\uCF5C\uB9BF"
   description: "\uB2EC\uB2E4"
   recipe: "\uCD08\uCF5C\uB9BF \uAE30\uACC4\uC5D0\uC11C \uC0DD\uC0B0"
-  price: 30
+  price: 10
   sprite: {fileID: 21300000, guid: 6abaaf4a52572c74c999b0b5b19d3ed6, type: 3}
   tag: Ingredient
   canMove: 1
