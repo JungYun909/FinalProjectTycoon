@@ -370,6 +370,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1864d2ce384f042488362cbb9e7c5198, type: 2}
   - {fileID: 11400000, guid: 2aaae783fd6e0ca49a27040541cd5615, type: 2}
   - {fileID: 11400000, guid: a695c065155744cba85fbe5a2d886704, type: 2}
+  - {fileID: 11400000, guid: b648d255175da4ced92d29a9f9ea854e, type: 2}
   slotPrefab: {fileID: 5866451594632709922, guid: 795383b0f77199b4cbab5ae202b5c20c, type: 3}
   slotParent: {fileID: 555054149231982554}
   nameText: {fileID: 6676213533268660215}
