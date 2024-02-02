@@ -27,6 +27,8 @@ public class AudioManager : MonoBehaviour
     private bool onSfx;
 
 
+    [SerializeField] private Sprite[] soundImage;
+
     private void Awake()
     {
         Init();
@@ -87,26 +89,28 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ToggleMusic(Image image)
+    public void ToggleMusic(Image soundImageOrigin)
     {
-        onBgm = !onBgm;
-
         musicSource.mute = !musicSource.mute;
-        //if (!musicSource.mute)
-        //{
-        //    image = Resources.Load<Image>("04.UI/Button/soundBT_UI/soundOff_idle");
-        //}
-        //Debug.Log(image.ToString());
+        if (musicSource.mute)
+            soundImageOrigin.sprite = soundImage[1];
+        else
+            soundImageOrigin.sprite = soundImage[0];
     }
 
-    public void ToggleSFX()
+    public void ToggleSFX(Image soundImageOrigin)
     {
         onSfx = !onSfx;
         for( int i = 0;i < sfxSource.Count;i++)
         {
             sfxSource[i].Stop();
             sfxSource[i].mute = onSfx;
+            if (sfxSource[i].mute)
+                soundImageOrigin.sprite = soundImage[1];
+            else
+                soundImageOrigin.sprite = soundImage[0];
         }
+        
     }
 
     public void MusicVolume(float volume)

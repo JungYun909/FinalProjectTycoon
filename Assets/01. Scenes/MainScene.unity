@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 151097559}
   - component: {fileID: 151097560}
   m_Layer: 5
-  m_Name: PreferenceUI
+  m_Name: PreferencesUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,7 +554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSlider: {fileID: 1578064008}
   _sfxSlider: {fileID: 1996983677}
-  _image: {fileID: 1462480770}
+  bgmImageOrigin: {fileID: 1462480770}
+  sfxImageOrigin: {fileID: 740966887}
 --- !u!1 &187764539
 GameObject:
   m_ObjectHideFlags: 0
@@ -11016,7 +11017,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 151097560}
+        m_TargetAssemblyTypeName: AudioUIController, Assembly-CSharp
+        m_MethodName: MusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1590563952
 GameObject:
   m_ObjectHideFlags: 0
@@ -11440,6 +11453,9 @@ MonoBehaviour:
   musicSource: {fileID: 1590563969}
   bgmClip: {fileID: 0}
   sfxSource: []
+  soundImage:
+  - {fileID: 21300000, guid: f2c0c8de2d2b6b540b01f6ccb18aef27, type: 3}
+  - {fileID: 21300000, guid: 4a397482b8b083d4784ca0be45f9dbd4, type: 3}
 --- !u!114 &1590563971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13116,7 +13132,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 151097560}
+        m_TargetAssemblyTypeName: AudioUIController, Assembly-CSharp
+        m_MethodName: SFXVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2033564208
 GameObject:
   m_ObjectHideFlags: 0
