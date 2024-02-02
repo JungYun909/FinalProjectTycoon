@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2236721034694485920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4439973424081494210}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: OpenIngredientShopUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1151456152985664751
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961067615477060535}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4439973424081494210}
+        m_TargetAssemblyTypeName: ShopUI, Assembly-CSharp
+        m_MethodName: OpenMachinShopUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1488488693188811567
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +397,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b648d255175da4ced92d29a9f9ea854e, type: 2}
   slotPrefab: {fileID: 5866451594632709922, guid: 795383b0f77199b4cbab5ae202b5c20c, type: 3}
   slotParent: {fileID: 555054149231982554}
+  itemSlot: {fileID: 4677891365400509550, guid: ce733845f5f8b444ba02e33b1d3b8078, type: 3}
   nameText: {fileID: 6676213533268660215}
   descriptionText: {fileID: 5722913285773141645}
   priceText: {fileID: 3929160238309517036}
@@ -2298,6 +2323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 555054149231982554}
   - component: {fileID: 3201771209004584562}
+  - component: {fileID: 5872349299609164813}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -2323,7 +2349,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -323.89, y: 408}
-  m_SizeDelta: {x: 647.78, y: 816}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3201771209004584562
 MonoBehaviour:
@@ -2349,6 +2375,20 @@ MonoBehaviour:
   m_Spacing: {x: 16, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &5872349299609164813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8449950134636833015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 2
 --- !u!1 &9158453845784463336
 GameObject:
   m_ObjectHideFlags: 0

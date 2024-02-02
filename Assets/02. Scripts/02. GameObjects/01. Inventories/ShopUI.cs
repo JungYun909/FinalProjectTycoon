@@ -11,27 +11,34 @@ public class ShopUI : UIBase
     public List<MachineSO> machines;
     public GameObject slotPrefab;
     public Transform slotParent;
+    public GameObject itemSlot;
     public TMP_Text nameText;
     public TMP_Text descriptionText;
     public TMP_Text priceText;
     public List<ItemDataContainer> datas;
     public MachineSO machineSO;
+
+    private ItemDatabaseSO itemData;
     public override void Initialize()
     {
-        Debug.Log("dd");
+        UpdateItemInfoToShopUI();
     }
 
     public override void UpdateUI()
     {
         foreach (Transform slot in slotParent)
         {
-            Destroy(slot);
+            Destroy(slot.gameObject);
             Debug.Log("인벤토리 부숴짐");
         }
         
         if(slotParent.childCount > 0)
             return;
+    }
 
+    private void UpdateMachineInfoToShopUI()
+    {
+        UpdateUI();
         foreach (MachineSO machine in machines)
         {
             GameObject slot = Instantiate(slotPrefab, slotParent);
@@ -47,6 +54,31 @@ public class ShopUI : UIBase
         }
     }
 
+    private void UpdateItemInfoToShopUI()
+    {
+        UpdateUI();
+        itemData = GameManager.instance.inventoryManager.itemDatabase;
+        foreach (ItemSO item in itemData.itemDataList)
+        {
+            GameObject slot = Instantiate(itemSlot, slotParent);
+            ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
+            if (itemSlotInfo != null)
+            {
+                itemSlotInfo.Setup(item, 1);
+            }
+        }
+    }
+    public void OpenIngredientShopUI()
+    {
+        UpdateUI();
+        UpdateItemInfoToShopUI();
+    }
+
+    public void OpenMachinShopUI()
+    {
+        UpdateUI();
+        UpdateMachineInfoToShopUI();
+    }
     private void SetInfo(MachineSO sO)
     {
         machineSO = sO;

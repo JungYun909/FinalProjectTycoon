@@ -12,6 +12,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public event Action<ItemSO> DeliverItem;
     private ItemSO curItem;
+    private MachineSO curMachine;
 
     private InventoryShow inventoryShow;
     private ShopInventory shopInventory;
@@ -23,7 +24,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     }
     public void Setup(ItemSO item, int quantity)
     {
-
         // 아이템 아이콘 설정
         if (item != null && item.sprite != null)
         {
@@ -37,6 +37,20 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         curItem = item;
         // 수량 텍스트 설정
         quantityText.text = quantity > 0 ? quantity.ToString() : "";
+    }
+
+    public void SetupMachineInfo(MachineSO machine, int quantity)
+    {
+        if(machine != null && machine.sprite != null)
+        {
+            itemIcon.sprite = machine.sprite;
+            itemIcon.enabled = true;
+        }
+        else
+        {
+            itemIcon.enabled = false;
+        }
+        curMachine = machine;
     }
 
     private void OnEnable()
