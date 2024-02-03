@@ -707,6 +707,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3caadbd2c22b9824c828cef0c9db5b38, type: 2}
   - {fileID: 11400000, guid: 022b629822432554faf9ab7c43e4bbce, type: 2}
   - {fileID: 11400000, guid: cb1481ff65c503f4bbec198213c172aa, type: 2}
+  - {fileID: 11400000, guid: fa0860dfef0db4897953764c0ecb5b50, type: 2}
+  - {fileID: 11400000, guid: 20a0f38db05784593a42f0defc3554ee, type: 2}
   slotPrefab: {fileID: 5866451594632709922, guid: 795383b0f77199b4cbab5ae202b5c20c, type: 3}
   slotParent: {fileID: 555054149231982554}
   itemSlot: {fileID: 4677891365400509550, guid: ce733845f5f8b444ba02e33b1d3b8078, type: 3}

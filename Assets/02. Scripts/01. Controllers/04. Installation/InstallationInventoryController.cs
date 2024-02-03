@@ -22,13 +22,7 @@ public class InstallationInventoryController : MonoBehaviour
 
         spawnTimer += Time.deltaTime;
         
-        if (spawnTimer > controller._installationData.spawnDelay && !controller._installationData.completeMake)
-        {
-            spawnTimer = 0;
-            DoughSetController();
-        }
-
-        if (spawnTimer > controller._installationData.makeDelay && controller._installationData.completeMake)
+        if (spawnTimer > controller._installationData.makeDelay)
         {
             spawnTimer = 0;
             DoughSetController();
