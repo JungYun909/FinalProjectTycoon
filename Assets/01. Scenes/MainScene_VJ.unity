@@ -12807,6 +12807,7 @@ MonoBehaviour:
   musicSource: {fileID: 1590563969}
   bgmClip: {fileID: 0}
   sfxSource: []
+  soundImage: []
 --- !u!114 &1590563971
 MonoBehaviour:
   m_ObjectHideFlags: 0

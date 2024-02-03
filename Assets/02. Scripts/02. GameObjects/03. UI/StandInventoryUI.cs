@@ -133,4 +133,9 @@ public class StandInventoryUI : UIBase
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
     }
+
+    public void ClosePanel()
+    {
+        GameManager.instance.uiManager.CloseAll();
+    }
 }

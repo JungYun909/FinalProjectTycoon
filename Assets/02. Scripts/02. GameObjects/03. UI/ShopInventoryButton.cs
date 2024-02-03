@@ -15,18 +15,15 @@ public class ShopInventoryButton : MonoBehaviour
         shopUI = GetComponentInParent<ShopUI>();
         shopUI.onIngredientEnabled += SetButtonToShowQuantityController;
         shopUI.onMachineEnabled += SetButtonToSpawnInstallation;
-        Debug.Log("Event Subscribed");
     }
 
     private void SetButtonToSpawnInstallation()
     {
-        Debug.Log("Now Spawns Installation");
         button.onClick.AddListener(SpawnInstallation);
     }
 
     private void SetButtonToShowQuantityController()
     {
-        Debug.Log("Now Enables Quantity controller");
         button.onClick.AddListener(ShowQuantityController);
     }
     private void OnDisable()

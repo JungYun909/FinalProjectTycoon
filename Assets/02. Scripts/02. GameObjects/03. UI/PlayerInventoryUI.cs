@@ -17,12 +17,15 @@ public class PlayerInventoryUI : UIBase
     private ItemSlotInfo itemSlot;
 
     public GameObject quantityController;
+    public int quantity;
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI priceText;
 
     public ItemSO curItem;
+    public int itemQuantityInInventory;
+
     public int curInventoryID;
 
 
@@ -43,14 +46,29 @@ public class PlayerInventoryUI : UIBase
     private void OpenQuantityController()
     {
         quantityController.SetActive(true);
+        QuantityController controller = quantityController.GetComponent<QuantityController>();
+
+        if (controller != null)
+        {
+            // PlayerInventoryUI에서 아이템의 수량을 기반으로 최대 수량 설정
+            controller.SetMaxQuantity(itemQuantityInInventory);
+            controller.DeliverQuantity += HandleTransfer;
+        }
+    }
+
+    private void HandleTransfer(int obj)
+    {
+        if (obj <= itemQuantityInInventory)
+        {
+            GameManager.instance.inventoryManager.TransferItem(playerInventory.inventoryID, curInventoryID, curItem, obj);
+        }
+        else
+            return;
     }
 
     private void OnDisable()
     {
         GameManager.instance.inventoryManager.OnInventoryUpdated -= HandleInventoryUpdate;
-        if (itemSlot != null)
-        {
-        }
     }
 
     private void HandleInventoryUpdate(int inventoryID)
@@ -87,13 +105,23 @@ public class PlayerInventoryUI : UIBase
             itemSlotInfo.Setup(item, quantity);
             itemSlotInfo.DeliverItem += UpdateItemData; // 이벤트 구독 추가
             itemSlotInfo.DeliverInventoryInfo += OpenQuantityController;
-
+            itemSlotInfo.DeliverInventoryID += SetCurInventoryID;
         }
-
     }
+
+    private void SetCurInventoryID(int obj)
+    {
+        curInventoryID = obj;
+    }
+
     private void UpdateItemData(ItemSO item)
     {
         curItem = item;
+        if (playerInventory.Items.TryGetValue(curItem, out int quantity))
+        {
+            itemQuantityInInventory = quantity;
+            Debug.Log(itemQuantityInInventory);
+        }
         UpdateItemInfoInItemInfoWindow();
     }
     // 아이템 슬롯 설정 메서드
@@ -108,7 +136,7 @@ public class PlayerInventoryUI : UIBase
 
     public override void Initialize()
     {
-        
+
     }
 
     public override void UpdateUI()
@@ -118,7 +146,7 @@ public class PlayerInventoryUI : UIBase
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;
-            var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 수량 99로 제한
+            var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 표시수량 99로 제한
 
             CreateItemSlot(item, quantity);
         }
