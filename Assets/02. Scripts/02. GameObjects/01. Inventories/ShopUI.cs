@@ -19,11 +19,20 @@ public class ShopUI : UIBase
     public MachineSO machineSO;
     public GameObject quantityCheck;
     private ItemDatabaseSO itemData;
-    private int shopInventoryID;
+    public int shopInventoryID;
+    public  ItemSO curItem;
 
+    public Button machinePurchase;
+    public Button itemPurchase;
+    private int amountToPay;
+    private int quantityToPurchase;
+
+    public event Action onMachineEnabled;
+    public event Action onIngredientEnabled;
     private void Start()
     {
         quantityCheck.SetActive(false);
+        shopInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
     }
     public override void Initialize()
     {
@@ -34,20 +43,30 @@ public class ShopUI : UIBase
     {
 
     }
+    private void HandleItemInfo(ItemSO obj)
+    {
+        curItem = obj;
+        UpdateItemInfoInItemInfoWindow();
+    }
+
     private void ClearUI()
     {
+        foreach (Transform child in slotParent)
+        {
+            ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
+            if (slotInfo != null)
+            {
+                slotInfo.DeliverItem -= HandleItemInfo;
+            }
+            Destroy(child.gameObject);
+        }
         quantityCheck.SetActive(false);
         foreach (Transform slot in slotParent)
         {
             Destroy(slot.gameObject);
-            Debug.Log("인벤토리 부숴짐");
         }
-<<<<<<< Updated upstream
-=======
-
         if (slotParent.childCount > 0)
             return;
->>>>>>> Stashed changes
     }
 
     private void UpdateMachineInfoToShopUI()
@@ -66,6 +85,7 @@ public class ShopUI : UIBase
         {
             data.seeItemData += SetInfo;
         }
+        onMachineEnabled?.Invoke();
     }
 
     private void UpdateItemInfoToShopUI()
@@ -88,11 +108,20 @@ public class ShopUI : UIBase
                 continue;
             }
         }
+        onIngredientEnabled?.Invoke();
+
     }
     public void OpenIngredientShopUI()
     {
         UpdateItemInfoToShopUI();
-        quantityCheck.SetActive(true);
+        foreach (Transform child in slotParent)
+        {
+            ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
+            if (slotInfo != null)
+            {
+                slotInfo.DeliverItem += HandleItemInfo;
+            }
+        }
     }
 
     public void OpenMachinShopUI()
@@ -107,26 +136,23 @@ public class ShopUI : UIBase
         priceText.text = sO.price.ToString() + "원";
     }
 
-    public void SpawnInstallation()
-    {
-        if (machineSO.price > GameManager.instance.statManager.currentGold)
-        {
-            Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
-            return;
-        }
-        GameManager.instance.statManager.SpendGold(machineSO.price);
-
-        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
-        GameManager.instance.uiManager.CloseAll();
-    }
-
-
-    //public void PurchaseItem()
+    //public void SpawnInstallation()
     //{
-    //    shopInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
-    //    int quantity = int.Parse(quantityInput.text);
-    //    ItemSO item
-    //    GameManager.instance.inventoryManager.AddItemToInventory(shopInventoryID, item, quantity);
-    //    GameManager.instance.statManager.SpendGold(item.price * quantity);
+    //    if (machineSO.price > GameManager.instance.statManager.currentGold)
+    //    {
+    //        Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
+    //        return;
+    //    }
+    //    GameManager.instance.statManager.SpendGold(machineSO.price);
+
+    //    GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
+    //    GameManager.instance.uiManager.CloseAll();
     //}
+
+    private void UpdateItemInfoInItemInfoWindow()
+    {
+        nameText.text = curItem.itemName;
+        descriptionText.text = curItem.description;
+        priceText.text = curItem.price.ToString();
+    }
 }

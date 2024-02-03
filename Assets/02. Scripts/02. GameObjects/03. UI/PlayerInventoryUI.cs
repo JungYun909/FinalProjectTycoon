@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class PlayerInventoryUI : UIBase
 {
@@ -15,22 +16,33 @@ public class PlayerInventoryUI : UIBase
     AbstractInventory inventory;
     private ItemSlotInfo itemSlot;
 
-    //public TextMeshProUGUI itemTitle;
-    //public TextMeshProUGUI itemDesc;
+    public GameObject quantityController;
+
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI priceText;
+
+    public ItemSO curItem;
+    public int curInventoryID;
 
 
     private void Start()
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         itemSlot = GetComponentInChildren<ItemSlotInfo>();
+        quantityController.SetActive(false);
     }
     private void OnEnable()
     {
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
         if (itemSlot != null)
         {
-            itemSlot.DeliverItem += UpdateItemData;
         }
+    }
+
+    private void OpenQuantityController()
+    {
+        quantityController.SetActive(true);
     }
 
     private void OnDisable()
@@ -38,7 +50,6 @@ public class PlayerInventoryUI : UIBase
         GameManager.instance.inventoryManager.OnInventoryUpdated -= HandleInventoryUpdate;
         if (itemSlot != null)
         {
-            itemSlot.DeliverItem -= UpdateItemData;
         }
     }
 
@@ -70,9 +81,21 @@ public class PlayerInventoryUI : UIBase
     private void CreateItemSlot(ItemSO item, int quantity)
     {
         GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
-        SetupItemSlot(itemUI, item, quantity);
-    }
+        ItemSlotInfo itemSlotInfo = itemUI.GetComponent<ItemSlotInfo>();
+        if (itemSlotInfo != null)
+        {
+            itemSlotInfo.Setup(item, quantity);
+            itemSlotInfo.DeliverItem += UpdateItemData; // 이벤트 구독 추가
+            itemSlotInfo.DeliverInventoryInfo += OpenQuantityController;
 
+        }
+
+    }
+    private void UpdateItemData(ItemSO item)
+    {
+        curItem = item;
+        UpdateItemInfoInItemInfoWindow();
+    }
     // 아이템 슬롯 설정 메서드
     private void SetupItemSlot(GameObject itemSlotObject, ItemSO item, int quantity)
     {
@@ -92,6 +115,7 @@ public class PlayerInventoryUI : UIBase
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
+        Debug.Log("Destroyed");
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;
@@ -106,14 +130,10 @@ public class PlayerInventoryUI : UIBase
         GameManager.instance.uiManager.CloseAll();
     }
 
-    public void UpdateItemData(ItemSO item)
+    private void UpdateItemInfoInItemInfoWindow()
     {
-        //itemTitle.text = "";
-        //itemDesc.text = "";
-        //if(item != null);
-        //{
-        //    itemTitle.text = item.itemName;
-        //    itemDesc.text = item.description;
-        //}
+        nameText.text = curItem.itemName;
+        descriptionText.text = curItem.description;
+        priceText.text = curItem.price.ToString();
     }
 }

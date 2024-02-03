@@ -52,11 +52,6 @@ public class TopShopStatusWindow : UIBase
     }
     public override void UpdateUI()
     {
-        if(shopStat == null)
-        {
-            Debug.Log("No Stat Info to Update");
-        }
-        Debug.Log("Let'sUpdateUI");
         goldOwned = shopStat.gold;
 	    curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
