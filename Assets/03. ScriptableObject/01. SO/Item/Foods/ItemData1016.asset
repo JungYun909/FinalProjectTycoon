@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 2
   itemName: "\uBE14\uB8E8\uBCA0\uB9AC\uB9C8\uB4E4\uB9B0"
   description: "\uAC81\uC5D0 \uC9C8\uB9B0 \uB9C8\uB4E4\uB9B0"
-  recipe: "\uB9B0\uBC18\uC8FD - \uC870\uD569\uAE30(\uBC84\uD130) - \uC131\uD615\uAE30(\uB9C8\uB4E4\uB9B0\uD2C0)
+  recipe: "\uBC18\uC8FD - \uC870\uD569\uAE30(\uBC84\uD130) - \uC131\uD615\uAE30(\uB9C8\uB4E4\uB9B0\uD2C0)
     - \uC870\uD569\uAE30(\uBE14\uB8E8\uBCA0\uB9AC) - \uC624\uBE10"
   price: 110
   sprite: {fileID: 21300000, guid: 5c32c691c65947b46a641a4452c10b40, type: 3}

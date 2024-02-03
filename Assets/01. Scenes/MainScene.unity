@@ -11360,6 +11360,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e1aba187a3c484dba9134508705a420f, type: 2}
   - {fileID: 11400000, guid: d3af81ec0b61a4df4a917996e97c0060, type: 2}
   - {fileID: 11400000, guid: d542c1d4d4b724a558f83424af4d6aa4, type: 2}
+  - {fileID: 11400000, guid: 004dbf22b76eb499d993791345ee8211, type: 2}
+  - {fileID: 11400000, guid: 4b84fa1f1d465424ba7034b1701cbb49, type: 2}
+  - {fileID: 11400000, guid: bf9eece4bd1b64028aed4ce943a1b223, type: 2}
+  - {fileID: 11400000, guid: 7f66571c420774ac1a1caa421e7085f8, type: 2}
+  - {fileID: 11400000, guid: 4aa0efb343865441f83ea614ab22ee3b, type: 2}
+  - {fileID: 11400000, guid: e5a94efa6e5d0af43bcc323f9d19fdba, type: 2}
   curObject:
   - {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}

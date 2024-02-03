@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
+  m_Name: ItemData0045
+  m_EditorClassIdentifier: 
+  id: 45
+  type: 4
+  itemName: "\uB9C8\uB4E4\uB80C\uD2C0"
+  description: "\uB9C8\uB4E4\uB80C\uBAA8\uC591\uC73C\uB85C \uB69C\uB454"
+  recipe: "\uB3C4\uAD6C\uC0C1\uC810\uC5D0\uC11C\uAD6C\uB9E4"
+  price: 3000
+  sprite: {fileID: 21300000, guid: 3315b141ee4b06d4084f7ce9bca038d7, type: 3}
+  tag: Ingredient
+  canMove: 1
+  moveSpeed: 1
+  canStack: 1
+  maxStackAmount: 50
