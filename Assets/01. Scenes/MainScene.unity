@@ -554,8 +554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSlider: {fileID: 1578064008}
   _sfxSlider: {fileID: 1996983677}
-  bgmImageOrigin: {fileID: 0}
-  sfxImageOrigin: {fileID: 0}
+  bgmImageOrigin: {fileID: 1462480770}
+  sfxImageOrigin: {fileID: 740966887}
 --- !u!1 &187764539
 GameObject:
   m_ObjectHideFlags: 0
@@ -11620,7 +11620,9 @@ MonoBehaviour:
   musicSource: {fileID: 1590563969}
   bgmClip: {fileID: 0}
   sfxSource: []
-  soundImage: []
+  soundImage:
+  - {fileID: 21300000, guid: f2c0c8de2d2b6b540b01f6ccb18aef27, type: 3}
+  - {fileID: 21300000, guid: 4a397482b8b083d4784ca0be45f9dbd4, type: 3}
 --- !u!114 &1590563971
 MonoBehaviour:
   m_ObjectHideFlags: 0
