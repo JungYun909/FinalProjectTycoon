@@ -4671,6 +4671,112 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &496742222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496742225}
+  - component: {fileID: 496742224}
+  - component: {fileID: 496742223}
+  m_Layer: 0
+  m_Name: little-bear-walk_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &496742223
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496742222}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ff862bb781f5f943897b33301df28d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &496742224
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496742222}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 748758061, guid: 07f3a718626793f4fa3b17b6df60ad60, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &496742225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496742222}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -8049,7 +8155,7 @@ MonoBehaviour:
         m_MethodName: OpenUI
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 4439973424081494210, guid: e495fd99da2bc7f4cb1b557cdf5f313d, type: 3}
+          m_ObjectArgument: {fileID: 4439973424081494210, guid: 3162bfd64ef114c5ca149b89e91a1c78, type: 3}
           m_ObjectArgumentAssemblyTypeName: UIBase, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -11357,6 +11463,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 85954918528ce4df1bbb9e133a6a2654, type: 2}
   - {fileID: 11400000, guid: 56397970994dd451984721a01e1391f7, type: 2}
   - {fileID: 11400000, guid: 95fb13fbb9f214a2a8cfd2586b916f05, type: 2}
+  - {fileID: 11400000, guid: e1aba187a3c484dba9134508705a420f, type: 2}
+  - {fileID: 11400000, guid: d3af81ec0b61a4df4a917996e97c0060, type: 2}
+  - {fileID: 11400000, guid: d542c1d4d4b724a558f83424af4d6aa4, type: 2}
+  - {fileID: 11400000, guid: 004dbf22b76eb499d993791345ee8211, type: 2}
+  - {fileID: 11400000, guid: 4b84fa1f1d465424ba7034b1701cbb49, type: 2}
+  - {fileID: 11400000, guid: bf9eece4bd1b64028aed4ce943a1b223, type: 2}
+  - {fileID: 11400000, guid: 7f66571c420774ac1a1caa421e7085f8, type: 2}
+  - {fileID: 11400000, guid: 4aa0efb343865441f83ea614ab22ee3b, type: 2}
+  - {fileID: 11400000, guid: e5a94efa6e5d0af43bcc323f9d19fdba, type: 2}
   curObject:
   - {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
@@ -13383,18 +13498,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 920374331}
-        m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
-        m_MethodName: BtnSound
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 752114530faaa214988fb64cdcd0632a, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 920374332}
         m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
         m_MethodName: OpenUI
@@ -13402,6 +13505,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 7819584548074993674, guid: b063aa41f69044899b3d976c2f591c87, type: 3}
           m_ObjectArgumentAssemblyTypeName: UIBase, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 920374331}
+        m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
+        m_MethodName: BtnSound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 652ff9e7823e4b8458acf8d721330a99, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
