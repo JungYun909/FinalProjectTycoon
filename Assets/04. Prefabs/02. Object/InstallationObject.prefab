@@ -394,6 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _installationData: {fileID: 0}
+  _animData: {fileID: 11400000, guid: 4b570b4778dee3644ac703716e989393, type: 2}
   spawnFunction: {fileID: 8253763587074324635}
   inventoryFunction: {fileID: 3076810668820568480}
   moveFunction: {fileID: 3079726677750095059}
@@ -409,6 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 683684573869841654}
   - component: {fileID: 7854813660522254275}
+  - component: {fileID: 4269237548176478379}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -483,6 +485,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4269237548176478379
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5145622365234100751}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8253763587074324635
 GameObject:
   m_ObjectHideFlags: 0

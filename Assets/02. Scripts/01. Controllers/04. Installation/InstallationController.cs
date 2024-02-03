@@ -11,10 +11,14 @@ using UnityEngine.UI;
 public class InstallationController : MonoBehaviour, IInteractable
 {
     public MachineSO _installationData;
+    public MachineAnimSO _animData;
+
     public GameObject spawnFunction;
     public GameObject inventoryFunction;
     public GameObject moveFunction;
     public GameObject destinationFunction;
+
+    private RuntimeAnimatorController animatorController;
 
     public AbstractInventory inventoryController;
 
@@ -33,10 +37,11 @@ public class InstallationController : MonoBehaviour, IInteractable
     }
     public void InitSetting()
     {
+        animatorController = _animData.installtionAnimController[_installationData.id-1];
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
         //deliverInventoryInfo?.Invoke(_installationData);
-        
-        
+        gameObject.GetComponentInChildren<Animator>().runtimeAnimatorController = animatorController;
+
         if (_installationData.haveDoughInventory)
         {
             doughContainer = new Queue<GameObject>();
