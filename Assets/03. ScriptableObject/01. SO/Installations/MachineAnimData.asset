@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9713558f6ad520f4bbc9c98ced4b8383, type: 3}
+  m_Name: MachineAnimData
+  m_EditorClassIdentifier: 
+  installtionAnimController:
+  - {fileID: 9100000, guid: 018c28aa71bda0d4d82a773dfcdcb7ca, type: 2}
+  - {fileID: 9100000, guid: 9ed4324a30f34834ab051d0d8c5d65e5, type: 2}
+  - {fileID: 9100000, guid: 221547c04a9050343b44cea99721b77a, type: 2}
+  - {fileID: 9100000, guid: cd5727bbe9a2a604b9e7718887a42d60, type: 2}
+  - {fileID: 0}
+  - {fileID: 9100000, guid: 6c24574eb65ee6940a631a6486a42273, type: 2}
+  - {fileID: 9100000, guid: 2f04253251a0acc4b9376e3a3b277558, type: 2}
+  - {fileID: 9100000, guid: 83d3414ebefd18b4f84a8eaaa67bdb2d, type: 2}
+  - {fileID: 9100000, guid: 4bb4300763991c84bb5cabeab55d5f2d, type: 2}
+  - {fileID: 9100000, guid: 4b4594c43e60c5446abeaa9c69a1de2c, type: 2}
+  - {fileID: 9100000, guid: 9d9be12a257c3a544945817f61223d2a, type: 2}
+  - {fileID: 9100000, guid: cd4fa8361e2391f4c8082f87a4929fae, type: 2}
+  - {fileID: 9100000, guid: dc35ffaed588e2344bb1dfc858a28cc9, type: 2}
+  - {fileID: 9100000, guid: a6aa8bcb7f3f1cb44ae2b4a6f291d54c, type: 2}
+  - {fileID: 9100000, guid: 72c78d38d57ee8045a57853fb37958bf, type: 2}
+  - {fileID: 9100000, guid: 710bcfba546ab824083d088622907c32, type: 2}
+  - {fileID: 9100000, guid: efd43af92147e9c4ba862f5c7da2a550, type: 2}
+  - {fileID: 9100000, guid: db6a476fddd7293498506448bc2e997c, type: 2}
+  - {fileID: 9100000, guid: 1abc172c33bafd34f8016a7efb10e8c3, type: 2}
+  - {fileID: 9100000, guid: 2ca3abdf80b98b24184af1e87997eca2, type: 2}
+  - {fileID: 9100000, guid: d18e45582eb750248ac9dd1ccfcbc270, type: 2}
+  - {fileID: 9100000, guid: b32d87b5f7570624c91d6265c3ddc919, type: 2}
+  - {fileID: 9100000, guid: f7f3d453c33e7584e98f548efdedbc50, type: 2}
+  - {fileID: 9100000, guid: 213adc3f4fa2c5d43af187018e8ba596, type: 2}
+  - {fileID: 9100000, guid: f5addcfa996a90644a0cde212ba9f328, type: 2}
+  - {fileID: 9100000, guid: 7543baf5470d2384789a4ccb8425be92, type: 2}
+  - {fileID: 9100000, guid: cb5c8b0712a9e464ca27f74e64e91507, type: 2}
+  - {fileID: 9100000, guid: add8618b466c9894e81a46e5e0694d98, type: 2}
+  - {fileID: 9100000, guid: 5b3f4918b2429f044ace2fe419101bd8, type: 2}
+  - {fileID: 9100000, guid: 559cbf85c08848a43828781d1764cf55, type: 2}

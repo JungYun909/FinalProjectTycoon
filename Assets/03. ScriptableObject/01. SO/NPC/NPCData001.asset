@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 1
   npcName: "\uC190\uB2D81"
   description: "\uC190\uB2D81"
-  sprite: {fileID: 21300000, guid: 29f09261c572ec74ab35c0ff7c3fdb04, type: 3}
+  sprite: {fileID: 748758061, guid: 07f3a718626793f4fa3b17b6df60ad60, type: 3}
   speed: 1
   favoriteFood:
   - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}

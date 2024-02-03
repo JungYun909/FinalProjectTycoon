@@ -16,7 +16,7 @@ MonoBehaviour:
   installasionName: "\uD0A4\uC704 \uC0DD\uC0B0\uAE30"
   description: "\uBB34\uB824 \uACE8\uB4DC\uD0A4\uC704\uB77C\uAD6C\uC6A9"
   price: 50
-  sprite: {fileID: 21300000, guid: d6c8e7b3f988b17499aa8f6ff7d426f6, type: 3}
+  sprite: {fileID: 1239097821, guid: 32e4c21f0326ea641a1774f74231a90f, type: 3}
   canSpawn: 1
   spawnDelay: 30
   spawnData: {fileID: 11400000, guid: 3738bc780f6c3d04bbf5e5756674fa24, type: 2}
