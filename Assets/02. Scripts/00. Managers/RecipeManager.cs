@@ -30,6 +30,6 @@ public class RecipeManager : MonoBehaviour
             }
         }
         OnCompareRecipe?.Invoke(0);
-        return 0;
+        return -1;
     }
 }

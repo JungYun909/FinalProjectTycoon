@@ -109,10 +109,8 @@ public class IngredientController : MonoBehaviour, IInteractable
         if (controller._installationData.haveIngredientInventory)
         {
             ItemSO ingredientItemData = controller.ingredients.Dequeue();
-            interactInstallation.Enqueue(controller._installationData.id + (ingredientItemData.id * 0.1f));
+            interactInstallation.Enqueue(controller._installationData.id + (ingredientItemData.id * (Mathf.Pow(0.1f, (Mathf.Log10(ingredientItemData.id) + 1)))));
             addImageController.AddImage(ingredientItemData.sprite);
-            
-            Debug.Log(controller._installationData.id + (ingredientItemData.id * 0.1f));
         }
     }
 
