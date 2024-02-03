@@ -68,9 +68,7 @@ public class NPCController : MonoBehaviour
         
         if (other.gameObject == GameManager.instance.dataManager.counter)
         {
-            Debug.Log(GameManager.instance.statManager.currentGold);
             GameManager.instance.statManager.EarnGold(paymentAmount);
-            Debug.Log(GameManager.instance.statManager.currentGold);
         }
         
         if (other.gameObject == GameManager.instance.spawnManager.NPCSpawnObj)
@@ -89,7 +87,6 @@ public class NPCController : MonoBehaviour
 
         if (inventory.Items.Count == 0)
         {
-            Debug.Log("아무것도 없다");
             return;
         }
 
@@ -99,7 +96,6 @@ public class NPCController : MonoBehaviour
             {
                 buy = true;
                 GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, item.Key, 1);
-                Debug.Log(favoriteFood.price);
                 paymentAmount = favoriteFood.price;
                 break;
             }

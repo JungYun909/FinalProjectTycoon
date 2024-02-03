@@ -108,7 +108,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         if (toInventoryID != 0)
         {
             DeliverItem?.Invoke(curItem);
-            Debug.Log(curItem.itemName);
             GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
         }
     }

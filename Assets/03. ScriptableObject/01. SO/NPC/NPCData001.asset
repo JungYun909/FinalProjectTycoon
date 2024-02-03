@@ -18,4 +18,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 29f09261c572ec74ab35c0ff7c3fdb04, type: 3}
   speed: 1
   favoriteFood:
-  - {fileID: 11400000, guid: 6860bf9eacac344efa9166cf7280a258, type: 2}
+  - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}

@@ -40,7 +40,6 @@ public class IngredientController : MonoBehaviour, IInteractable
     {
         movementController.speed = 0;
         movementController.destinationObj = null;
-        Debug.Log("지워졌다");
     }
 
     public bool Continuous()

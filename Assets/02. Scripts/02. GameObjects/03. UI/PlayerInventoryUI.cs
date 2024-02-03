@@ -115,7 +115,6 @@ public class PlayerInventoryUI : UIBase
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
-        Debug.Log("Destroyed");
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;

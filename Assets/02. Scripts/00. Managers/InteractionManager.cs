@@ -40,7 +40,6 @@ public class InteractionManager : MonoBehaviour
                 return;
         
             interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
-            Debug.Log("inin");
             if (interactionObject.Continuous()) //오브젝트의 상호작용이 누르는 동안 반복돠야한다면
             {
                 interactionCoroutine = StartCoroutine(InteractionCoroutine());

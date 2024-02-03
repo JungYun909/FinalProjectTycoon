@@ -18,7 +18,7 @@ MonoBehaviour:
   price: 50
   sprite: {fileID: 21300000, guid: b86a342527fb1df4e865960d785bbfb0, type: 3}
   canSpawn: 1
-  spawnDelay: 10
+  spawnDelay: 30
   spawnData: {fileID: 11400000, guid: e1deb4e91fc734cbc850a55bf37287ba, type: 2}
   haveDoughInventory: 0
   haveIngredientInventory: 0

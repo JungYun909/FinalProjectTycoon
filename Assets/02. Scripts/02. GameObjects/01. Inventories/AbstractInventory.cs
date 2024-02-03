@@ -84,16 +84,12 @@ public class AbstractInventory : MonoBehaviour
 
     private void OpenStandInventoryUI()
     {
-        Debug.Log("Opening Stand inventory");
         GameManager.instance.uiManager.OpenWindow(standInventory, this);
         OnInventoryClicked?.Invoke(this);
-        Debug.Log($"Delivering {this.inventoryID} info");
     }
     private void OpenInventoryUI()
     {
-        Debug.Log("Opening Stand inventory");
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
-        Debug.Log($"Delivering {this.inventoryID} info");
     }
 }

@@ -17,7 +17,6 @@ public class RecipeManager : MonoBehaviour
     private void Awake()
     {
         data_Resipe = CSVReader.Read("RecipeCSV - Recipe");
-        Debug.Log(data_Resipe[1]["Recipe"]);
     }
     
     public int CompareWithResipe(string resipe)

@@ -24,7 +24,6 @@ public class StandInventoryUI : UIBase
     private void OnEnable()
     {
         AbstractInventory.OnInventoryClicked += HandleInventoryInfo;
-        Debug.Log($"HJandled with OnInventoryClickeD. ");
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
     }
 
@@ -46,11 +45,9 @@ public class StandInventoryUI : UIBase
     {
         if (obj == null)
         {
-            Debug.LogError("Received null inventory object");
             return;
         }
 
-        Debug.Log("HandleInventoryInfo called with inventory ID: " + obj.inventoryID);
 
         OpenStandInventory(obj);
         curInventory = obj;
