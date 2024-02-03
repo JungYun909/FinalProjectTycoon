@@ -54,9 +54,11 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     private void DiscoverRecipe(int index)
     {
-        if(!playerData.recipeIndex.Contains(index))
+        if (!playerData.recipeIndex.Contains(index))
+        {
             playerData.recipeIndex.Add(index);
-        SaveData();
+            SaveData();
+        }
     }
 
     public void SaveData()
