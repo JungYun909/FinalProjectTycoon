@@ -54,4 +54,9 @@ public class QuantityController : MonoBehaviour
         this.gameObject.SetActive(false);
         
     }
+
+    public void SetMaxQuantity(int newMax)
+    {
+        maxQuantity = newMax;
+    }
 }

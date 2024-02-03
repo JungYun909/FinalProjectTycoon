@@ -11,6 +11,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     public TextMeshProUGUI quantityText; // 수량을 표시할 TextMeshProUGUI 컴포넌트
 
     public event Action<ItemSO> DeliverItem;
+    public event Action<int> DeliverInventoryID;
     public event Action DeliverInventoryInfo;
     private ItemSO curItem;
     private MachineSO curMachine;
@@ -38,7 +39,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         curItem = item;
         // 수량 텍스트 설정
         quantityText.text = quantity > 0 ? quantity.ToString() : "";
-        if(quantity == 1)
+        if (quantity == 1)
         {
             quantityText.text = "";
         }
@@ -46,7 +47,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void SetupMachineInfo(MachineSO machine, int quantity)
     {
-        if(machine != null && machine.sprite != null)
+        if (machine != null && machine.sprite != null)
         {
             itemIcon.sprite = machine.sprite;
             itemIcon.enabled = true;
@@ -76,15 +77,17 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void OnButtonClicked(int toInventoryID)
     {
-        if(curItem!=null)
+        if (curItem != null)
         {
             DeliverItem?.Invoke(curItem);
+            Debug.Log(curItem.itemName);
         }
         var inventoryShowInstance = FindObjectOfType<InventoryShow>();
         if (inventoryShowInstance != null && inventoryShowInstance.curInventory != null)
         {
             toInventoryID = inventoryShowInstance.curInventory.inventoryID;
             DeliverInventoryInfo?.Invoke();
+            DeliverInventoryID?.Invoke(toInventoryID);
         }
         else
         {
@@ -93,6 +96,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
             {
                 toInventoryID = standInventoryUIInstance.curInventory.inventoryID;
                 DeliverInventoryInfo?.Invoke();
+                DeliverInventoryID?.Invoke(toInventoryID);
             }
             else
             {
@@ -100,15 +104,16 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
                 return;
             }
         }
-        DeliverItemInfo(toInventoryID);
+        //DeliverItemInfo(toInventoryID);
     }
 
-    public void DeliverItemInfo(int toInventoryID)
-    {
-        if (toInventoryID != 0)
-        {
-            DeliverItem?.Invoke(curItem);
-            GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
-        }
-    }
+    //public void DeliverItemInfo(int toInventoryID)
+    //{
+    //    if (toInventoryID != 0)
+    //    {
+    //        DeliverItem?.Invoke(curItem);
+    //        Debug.Log(curItem.itemName);
+    //        GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
+    //    }
+    //}
 }
