@@ -668,7 +668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machines:
-  - {fileID: 11400000, guid: ff8378f7698b94356b8c514e4f3de21a, type: 2}
   - {fileID: 11400000, guid: 83e24d518c626c240bbda103299d4c1f, type: 2}
   - {fileID: 11400000, guid: 4ffd4d231f2485d46bedc3f846643eb7, type: 2}
   - {fileID: 11400000, guid: 1864d2ce384f042488362cbb9e7c5198, type: 2}

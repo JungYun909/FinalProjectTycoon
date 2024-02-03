@@ -108,14 +108,15 @@ public class IngredientController : MonoBehaviour, IInteractable
     {
         if (controller._installationData.haveIngredientInventory)
         {
-            ItemSO ingredientItemData = controller.ingredients.Dequeue();
-            interactInstallation.Enqueue(controller._installationData.id + (ingredientItemData.id * (Mathf.Pow(0.1f, (Mathf.Log10(ingredientItemData.id) + 1)))));
-            addImageController.AddImage(ingredientItemData.sprite);
+            Debug.Log(controller._installationData.id + (ingredientData.id * Mathf.Pow(0.1f,Mathf.FloorToInt(Mathf.Log10(ingredientData.id) + 1))));
+            interactInstallation.Enqueue(controller._installationData.id + (ingredientData.id * Mathf.Pow(0.1f,Mathf.FloorToInt(Mathf.Log10(ingredientData.id) + 1))));
+            addImageController.AddImage(ingredientData.sprite);
         }
     }
 
     public void VisitInstallationSet(InstallationController controller)
     {
-        interactInstallation.Enqueue(controller._installationData.id);
+        if(!controller._installationData.haveIngredientInventory)
+            interactInstallation.Enqueue(controller._installationData.id);
     }
 }
