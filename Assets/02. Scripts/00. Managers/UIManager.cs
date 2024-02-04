@@ -21,29 +21,30 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     public delegate void DailyResultWindowOn();
     public event DailyResultWindowOn OnDailyWindowOpen;
     
-    private void Start()
+    public void Initialize()
     {
         //InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행
         //StartCoroutine(DailyResultWindowRoutine());
         //OpenPermanentWindows(uiAlwaysOn);
         GameManager.instance.statManager.onDateChanged += CheckSceneAndOpenDailyResultWindow;
-
+        GameManager.instance.sceneManager.sceneInfo += HandleScene;
+        Debug.Log("Subscribed");
     }
 
     private void OnEnable()
     {
-        SceneManager.sceneInfo += HandleScene;
+
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneInfo -= HandleScene;
+        GameManager.instance.sceneManager.sceneInfo -= HandleScene;
         GameManager.instance.statManager.onDateChanged -= CheckSceneAndOpenDailyResultWindow;
-
     }
 
     private void HandleScene(SceneType scene)
     {
+        Debug.Log("SceneHandled");
         if (scene != SceneType.TitleScene)
         {
             OpenPermanentWindows(uiAlwaysOn);

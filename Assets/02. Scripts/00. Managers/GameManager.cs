@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public SceneManager sceneManager;
     public AudioManager audioManager;
     public ItemManager itemManager;
     public LogicManager logicManager;
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
     public InteractionManager interactionManager;
     public StatManager statManager;
     public DataManager dataManager;
-    public SceneManager sceneManager;
     public RecipeManager recipeManager;
 
     private void Awake()
@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            uiManager.Initialize();
+            sceneManager.Initialize();
         }
         else
         {
