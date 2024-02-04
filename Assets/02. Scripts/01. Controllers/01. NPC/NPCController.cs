@@ -59,6 +59,8 @@ public class NPCController : MonoBehaviour
         if(other.gameObject != movementController.destinationObj)
             return;
         
+        StopCoroutine(movementController.curCoroutine);
+        
         visitObj.Remove(other.gameObject);
 
         if (other.gameObject == destinationObj)
@@ -96,6 +98,7 @@ public class NPCController : MonoBehaviour
             {
                 buy = true;
                 GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, item.Key, 1);
+                visitObj.Clear();
                 paymentAmount = favoriteFood.price;
                 break;
             }

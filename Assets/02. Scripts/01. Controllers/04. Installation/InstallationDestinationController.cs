@@ -26,21 +26,29 @@ public class InstallationDestinationController : MonoBehaviour
 
     private void destinationFunction()
     {
-        destinationCoroutine = StartCoroutine(StartDestinationSet());
+        if(destinationCoroutine == null)
+            destinationCoroutine = StartCoroutine(StartDestinationSet());
     }
 
     private void stopFunction()
     {
-        StopCoroutine(destinationCoroutine);
-        lineObj.SetActive(false);
+        Debug.Log("aaa");
+        if (destinationCoroutine != null)
+        {
+            StopCoroutine(destinationCoroutine);
+            destinationCoroutine = null;
+            lineObj.SetActive(false);
+        }
     }
     
     IEnumerator StartDestinationSet()
     {
+        lineObj.SetActive(true);
+
         while (true)
         {
-            lineObj.SetActive(true);
         
+            Debug.Log("asdasdasdasdsad");
             RaycastHit2D ray = Physics2D.Raycast(GameManager.instance.interactionManager.curMouseDirection, Vector2.zero, 0f);
         
             if (ray.collider)
@@ -61,11 +69,14 @@ public class InstallationDestinationController : MonoBehaviour
                 destination[1] = null;
             }
 
-            if (destination[0])
+            if (!destination[0])
             {
                 line.SetPosition(0,Vector2.zero);
-            
-                if(!ray.collider)
+                line.SetPosition(1, Vector2.zero);
+            }
+            else if(destination[0])
+            {
+                if(!ray.collider || !destination[1])
                     line.SetPosition(1, GameManager.instance.interactionManager.curMouseDirection - desPos0);
                 else
                     line.SetPosition(1, desPos1 - desPos0);
