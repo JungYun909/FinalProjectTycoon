@@ -24,12 +24,34 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     private void Start()
     {
         //InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행
-        StartCoroutine(DailyResultWindowRoutine());
-        OpenPermanentWindows(uiAlwaysOn);
+        //StartCoroutine(DailyResultWindowRoutine());
+        //OpenPermanentWindows(uiAlwaysOn);
+        GameManager.instance.statManager.onDateChanged += CheckSceneAndOpenDailyResultWindow;
+
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneInfo += HandleScene;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneInfo -= HandleScene;
+        GameManager.instance.statManager.onDateChanged -= CheckSceneAndOpenDailyResultWindow;
+
+    }
+
+    private void HandleScene(SceneType scene)
+    {
+        if (scene != SceneType.TitleScene)
+        {
+            OpenPermanentWindows(uiAlwaysOn);
+        }
+    }
     public void OpenPermanentWindows(List<UIBase> permaUI)
     {
+        
         foreach (UIBase uiWindow in permaUI)
         {
             Instantiate(uiWindow, transform);
@@ -98,7 +120,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
     }
 
-    private void OpenDailyResultWindow()
+    public void OpenDailyResultWindow()
     {
         if (currentDailyResultWindow != null)
         {
@@ -107,6 +129,14 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         currentDailyResultWindow = Instantiate(dailyResultWindow, transform);    //currentDailyResultWindow 생성
         currentDailyResultWindow.Initialize();  // 
         OnDailyWindowOpen?.Invoke();    // 일일정산창 열리면 이벤트를 발생시킴. 여기서는 
+    }
+
+    private void CheckSceneAndOpenDailyResultWindow()
+    {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "TitleScene")
+        {
+            OpenDailyResultWindow();
+        }
     }
 }
 

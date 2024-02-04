@@ -57,5 +57,4 @@ public class TopShopStatusWindow : UIBase
         curRepute.text = reputeOwned.ToString();
         curDateText.text = curDate.ToString();
     }
-
 }
