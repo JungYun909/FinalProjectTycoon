@@ -7,7 +7,7 @@ public class InstallationInstallController : MonoBehaviour
 {
     public InstallationController controller;
 
-    private void Start()
+    public void InitSet()
     {
         controller.installationFuctionSet += installFunction;
         installFunction();
@@ -15,8 +15,6 @@ public class InstallationInstallController : MonoBehaviour
 
     private void installFunction()
     {
-        Debug.Log("1");
-
         GameManager.instance.installationManager.installationManageController.SetActive(true);
         GameManager.instance.installationManager.installationManageController.transform.position = gameObject.transform.position;
         GameManager.instance.installationManager.installationManageController
