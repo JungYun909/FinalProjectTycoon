@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class InstallationInstallController : MonoBehaviour
 {
@@ -15,9 +16,9 @@ public class InstallationInstallController : MonoBehaviour
 
     private void installFunction()
     {
-        GameManager.instance.installationManager.installationManageController.SetActive(true);
-        GameManager.instance.installationManager.installationManageController.transform.position = gameObject.transform.position;
-        GameManager.instance.installationManager.installationManageController
-            .GetComponentInChildren<InstallationSetController>().curGameObject = transform.root.gameObject;
+        GameObject installUI = GameManager.instance.installationManager.installationManageController;
+        installUI.SetActive(true);
+        installUI.transform.position = gameObject.transform.position;
+        installUI.GetComponent<InstallationSetController>().curGameObject = transform.root.gameObject;
     }
 }

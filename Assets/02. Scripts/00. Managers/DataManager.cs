@@ -24,13 +24,26 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     
     public GameObject[] curObject;
 
+    [Header("EssentialInstallation")]
     public List<GameObject> curInstallations; //판매씬에 배치된 진열대
     public GameObject counter; // 카운터 등록
+    public GameObject entrance;
     
-    public event Action OnSaveEvent; 
+    public event Action OnSaveEvent;
 
-    private void Start()
+    public void Initialize()
     {
+        GameManager.instance.sceneManager.sceneInfo += InitSet;
+    }
+
+    public void InitSet(SceneType sceneType)
+    {
+        if(sceneType != SceneType.MainScene)
+            return;
+        
+        counter = GameObject.Find("CounterObj");
+        entrance = GameObject.Find("Entrance");
+        
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
         
         path = Application.persistentDataPath + "/";
@@ -41,7 +54,12 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         }
         
         LoadData();
-        
+
+        LoadInstallation();
+    }
+
+    private void LoadInstallation()
+    {
         for (int i = 0; i < playerData.installationSubInt.Count; i++)
         {
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);

@@ -23,7 +23,7 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
         if (controller.curGameObject)
         {
             StopCoroutine(movementCoroutine);
-            transform.root.position = controller.curGameObject.transform.position;
+            controller.transform.position = controller.curGameObject.transform.position;
         }
     }
 
@@ -34,7 +34,7 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
             Vector2 curMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             controller.curGameObject.transform.position = tilemap.WorldToCell(curMouseDirection);
             controller.curGameObject.transform.position = new Vector2(controller.curGameObject.transform.position.x + 0.5f, controller.curGameObject.transform.position.y + 1.5f);
-            transform.root.position = new Vector2(curMouseDirection.x, curMouseDirection.y + (transform.root.position.y - gameObject.transform.position.y));
+            controller.transform.position = new Vector2(curMouseDirection.x, curMouseDirection.y + (controller.transform.position.y - gameObject.transform.position.y));
 
             yield return null;
         }
