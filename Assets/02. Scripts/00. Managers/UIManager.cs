@@ -80,7 +80,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
 
     public void CloseAll() // 스택으로 관리되는 창 전체 닫기 위한 로지
     {
-        Debug.Log($"The Number of UIs to Destroy : {uiStack.Count}");
         while (uiStack.Count > 0)
         {
             UIBase currentUI = uiStack.Pop();

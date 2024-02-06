@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class QuantityController : UIBase
+public class QuantityController : MonoBehaviour
 {
     public TMP_InputField quantityInput;
     public Button increase;
@@ -60,11 +60,11 @@ public class QuantityController : UIBase
         maxQuantity = newMax;
     }
 
-    public override void Initialize()
-    {
-    }
+    //public override void Initialize()
+    //{
+    //}
 
-    public override void UpdateUI()
-    {
-    }
+    //public override void UpdateUI()
+    //{
+    //}
 }
