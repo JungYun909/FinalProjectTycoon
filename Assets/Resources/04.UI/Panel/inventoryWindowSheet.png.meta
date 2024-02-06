@@ -69,9 +69,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -355,8 +355,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c7f0951cd68b2c4ba8bc0ea65e66a9e
-      internalID: -868533700
+      spriteID: 79dbeedbbc1a0c643a3e2dbcc64e6962
+      internalID: 245155851
       vertices: []
       indices: 
       edges: []
@@ -375,7 +375,7 @@ TextureImporter:
       inventoryWindowSheet_0: -1592569298
       inventoryWindowSheet_1: -1420393349
       inventoryWindowSheet_10: -1740024771
-      inventoryWindowSheet_11: -868533700
+      inventoryWindowSheet_11: 245155851
       inventoryWindowSheet_2: -989366863
       inventoryWindowSheet_3: 1418623717
       inventoryWindowSheet_4: -1975137518
