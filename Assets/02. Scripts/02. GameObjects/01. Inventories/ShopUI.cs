@@ -155,4 +155,10 @@ public class ShopUI : UIBase
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
     }
+
+    public void CloseShop()
+    {
+        GameManager.instance.uiManager.CloseAll();
+    }
+
 }
