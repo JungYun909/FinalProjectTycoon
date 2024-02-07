@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class NPCSpawner : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class NPCSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance.spawnManager.curNpcCount > GameManager.instance.statManager.maxNpc)
+        if (GameManager.instance.spawnManager.curNpcCount > GameManager.instance.statManager.maxNpc || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
             return;
         
         spawnTimer += Time.deltaTime;

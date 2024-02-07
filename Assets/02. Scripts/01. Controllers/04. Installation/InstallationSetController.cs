@@ -2,10 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class InstallationSetController : MonoBehaviour
+public class InstallationSetController : UIBase
 {
     public GameObject curGameObject;
+    [SerializeField] private InstallationMoveController _moveController;
+
+    private void Start()
+    {
+        InitSet();
+    }
+
+    public void InitSet()
+    {
+        gameObject.SetActive(false);
+        GameManager.instance.installationManager.installationManageController = gameObject;
+        _moveController.tilemap = GameObject.Find("Grid").GetComponentInChildren<Tilemap>();
+    }
 
     public void InstallationDestroy()
     {
@@ -22,5 +36,15 @@ public class InstallationSetController : MonoBehaviour
         GameManager.instance.dataManager.PosUpdate(curGameObject);
         GameManager.instance.dataManager.SaveData();
         curGameObject = null;
+    }
+
+    public override void Initialize()
+    {
+        return;
+    }
+
+    public override void UpdateUI()
+    {
+        return;
     }
 }
