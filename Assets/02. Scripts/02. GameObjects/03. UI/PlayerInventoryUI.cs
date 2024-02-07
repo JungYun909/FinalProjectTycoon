@@ -50,9 +50,10 @@ public class PlayerInventoryUI : UIBase
 
         if (controller != null)
         {
+            controller.DeliverQuantity -= HandleTransfer;
+            controller.DeliverQuantity += HandleTransfer;
             // PlayerInventoryUI에서 아이템의 수량을 기반으로 최대 수량 설정
             controller.SetMaxQuantity(itemQuantityInInventory);
-            controller.DeliverQuantity += HandleTransfer;
         }
     }
 
@@ -60,7 +61,15 @@ public class PlayerInventoryUI : UIBase
     {
         if (obj <= itemQuantityInInventory)
         {
-            GameManager.instance.inventoryManager.TransferItem(playerInventory.inventoryID, curInventoryID, curItem, obj);
+            GameManager.instance.inventoryManager.TransferItem(1000, curInventoryID, curItem, obj);
+            if (quantityController != null)
+            {
+                QuantityController controller = quantityController.GetComponent<QuantityController>();
+                if (controller != null)
+                {
+                    controller.DeliverQuantity -= HandleTransfer;
+                }
+            }
         }
         else
             return;
