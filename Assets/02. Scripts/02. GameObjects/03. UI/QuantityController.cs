@@ -59,4 +59,12 @@ public class QuantityController : MonoBehaviour
     {
         maxQuantity = newMax;
     }
+
+    //public override void Initialize()
+    //{
+    //}
+
+    //public override void UpdateUI()
+    //{
+    //}
 }

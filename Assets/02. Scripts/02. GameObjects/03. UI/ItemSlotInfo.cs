@@ -79,9 +79,11 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     {
         if (curItem != null)
         {
+            // 중복 구독 방지를 위해 기존 구독 해제
             DeliverItem?.Invoke(curItem);
             Debug.Log(curItem.itemName);
         }
+
         var inventoryShowInstance = FindObjectOfType<InventoryShow>();
         if (inventoryShowInstance != null && inventoryShowInstance.curInventory != null)
         {
@@ -104,7 +106,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
                 return;
             }
         }
-        //DeliverItemInfo(toInventoryID);
     }
 
     //public void DeliverItemInfo(int toInventoryID)

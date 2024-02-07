@@ -34,6 +34,7 @@ public class AbstractInventory : MonoBehaviour
     public InstallationController controller;
 
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
+    public Queue<ItemSO> itemQueue = new Queue<ItemSO>();
 
     [SerializeField]
     private List<InventoryItemEntry> itemsListForInspector = new List<InventoryItemEntry>();

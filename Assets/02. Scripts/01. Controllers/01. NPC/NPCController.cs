@@ -58,7 +58,9 @@ public class NPCController : MonoBehaviour
     {
         if(other.gameObject != movementController.destinationObj)
             return;
-        
+
+        movementController.isMove = false;
+        movementController.destinationObj = null;
         StopCoroutine(movementController.curCoroutine);
         
         visitObj.Remove(other.gameObject);
@@ -73,7 +75,7 @@ public class NPCController : MonoBehaviour
             GameManager.instance.statManager.EarnGold(paymentAmount);
         }
         
-        if (other.gameObject == GameManager.instance.spawnManager.NPCSpawnObj)
+        if (other.gameObject == GameManager.instance.dataManager.entrance)
         {
             GameManager.instance.poolManager.DeSpawnFromPool(gameObject);
             GameManager.instance.spawnManager.curNpcCount--;
