@@ -13,7 +13,9 @@ public class NPCDestinationSet : MonoBehaviour
     public void MachinePosInform()
     {
         float distanceToMachine = 0; 
+        
         controller.destinationObj = null;
+        
         Vector2 curObjPos = new Vector2(transform.position.x, transform.position.y);
         movementController.speed = controller.curNPCData.speed;
         

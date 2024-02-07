@@ -25,9 +25,17 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        speed = 0f;
+        destinationObj = null;
+        isMove = false;
+        StopCoroutine(curCoroutine);
+    }
+
     private IEnumerator Movement()
     {
-        while (Vector2.Distance(destinationObj.transform.position, gameObject.transform.root.position) > 0.1f)
+        while (true)
         {
             Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
             Vector2 moveAmount = moveDirection * speed * Time.deltaTime;

@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 261531453}
   - component: {fileID: 261531455}
   m_Layer: 0
-  m_Name: NPCSpawner
+  m_Name: Entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10953,7 +10953,7 @@ GameObject:
   - component: {fileID: 1544164881}
   - component: {fileID: 1544164880}
   m_Layer: 0
-  m_Name: Counter
+  m_Name: CounterObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

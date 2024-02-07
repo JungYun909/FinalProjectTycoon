@@ -60,6 +60,9 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     private void LoadInstallation()
     {
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
+            return;
+        
         for (int i = 0; i < playerData.installationSubInt.Count; i++)
         {
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);

@@ -25,6 +25,7 @@ public class NPCController : MonoBehaviour
 
     private void NewInitSetting()
     {
+        movementController.Reset();
         InitSetting();
     }
 
@@ -59,10 +60,7 @@ public class NPCController : MonoBehaviour
         if(other.gameObject != movementController.destinationObj)
             return;
 
-        movementController.isMove = false;
-        movementController.destinationObj = null;
-        StopCoroutine(movementController.curCoroutine);
-        
+        movementController.Reset();
         visitObj.Remove(other.gameObject);
 
         if (other.gameObject == destinationObj)
