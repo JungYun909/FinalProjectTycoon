@@ -11,7 +11,10 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     public TextMeshProUGUI quantityText; // 수량을 표시할 TextMeshProUGUI 컴포넌트
 
     public event Action<ItemSO> DeliverItem;
+    public event Action<int> DeliverInventoryID;
+    public event Action DeliverInventoryInfo;
     private ItemSO curItem;
+    private MachineSO curMachine;
 
     private InventoryShow inventoryShow;
     private ShopInventory shopInventory;
@@ -23,7 +26,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     }
     public void Setup(ItemSO item, int quantity)
     {
-
         // 아이템 아이콘 설정
         if (item != null && item.sprite != null)
         {
@@ -37,6 +39,24 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         curItem = item;
         // 수량 텍스트 설정
         quantityText.text = quantity > 0 ? quantity.ToString() : "";
+        if (quantity == 1)
+        {
+            quantityText.text = "";
+        }
+    }
+
+    public void SetupMachineInfo(MachineSO machine, int quantity)
+    {
+        if (machine != null && machine.sprite != null)
+        {
+            itemIcon.sprite = machine.sprite;
+            itemIcon.enabled = true;
+        }
+        else
+        {
+            itemIcon.enabled = false;
+        }
+        curMachine = machine;
     }
 
     private void OnEnable()
@@ -57,20 +77,44 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void OnButtonClicked(int toInventoryID)
     {
-        toInventoryID = FindObjectOfType<InventoryShow>().curInventory.inventoryID;
-        if(toInventoryID == 0)
+        if (curItem != null)
         {
-            Debug.Log("No Queue Activated");
-        }
-        if (toInventoryID != 0)
-        {
+            // 중복 구독 방지를 위해 기존 구독 해제
             DeliverItem?.Invoke(curItem);
             Debug.Log(curItem.itemName);
-            GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
+        }
+
+        var inventoryShowInstance = FindObjectOfType<InventoryShow>();
+        if (inventoryShowInstance != null && inventoryShowInstance.curInventory != null)
+        {
+            toInventoryID = inventoryShowInstance.curInventory.inventoryID;
+            DeliverInventoryInfo?.Invoke();
+            DeliverInventoryID?.Invoke(toInventoryID);
         }
         else
         {
-            Debug.Log("No destination");
+            var standInventoryUIInstance = FindObjectOfType<StandInventoryUI>();
+            if (standInventoryUIInstance != null && standInventoryUIInstance.curInventory != null)
+            {
+                toInventoryID = standInventoryUIInstance.curInventory.inventoryID;
+                DeliverInventoryInfo?.Invoke();
+                DeliverInventoryID?.Invoke(toInventoryID);
+            }
+            else
+            {
+                Debug.Log("No valid Inventory found");
+                return;
+            }
         }
     }
+
+    //public void DeliverItemInfo(int toInventoryID)
+    //{
+    //    if (toInventoryID != 0)
+    //    {
+    //        DeliverItem?.Invoke(curItem);
+    //        Debug.Log(curItem.itemName);
+    //        GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
+    //    }
+    //}
 }

@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class BtnEffect : MonoBehaviour
 {
-    public AudioClip effectClip;
-
-    public void BtnSound()
+    public void BtnSound(AudioClip effect)
     {
-        GameManager.instance.audioManager.PlaySFX(effectClip);
+        GameManager.instance.audioManager.PlaySFX(effect);
     }
 }

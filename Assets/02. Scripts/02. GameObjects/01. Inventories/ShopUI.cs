@@ -11,22 +11,67 @@ public class ShopUI : UIBase
     public List<MachineSO> machines;
     public GameObject slotPrefab;
     public Transform slotParent;
+    public GameObject itemSlot;
     public TMP_Text nameText;
     public TMP_Text descriptionText;
     public TMP_Text priceText;
     public List<ItemDataContainer> datas;
+    public MachineSO machineSO;
+    public GameObject quantityCheck;
+    private ItemDatabaseSO itemData;
+    public int shopInventoryID;
+    public  ItemSO curItem;
+
+    public Button machinePurchase;
+    public Button itemPurchase;
+    private int amountToPay;
+    private int quantityToPurchase;
+
+    public event Action onMachineEnabled;
+    public event Action onIngredientEnabled;
+    private void Start()
+    {
+        quantityCheck.SetActive(false);
+        shopInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
+    }
     public override void Initialize()
     {
-        Debug.Log("dd");
+        
     }
-
+    
     public override void UpdateUI()
     {
+
+    }
+    private void HandleItemInfo(ItemSO obj)
+    {
+        curItem = obj;
+        UpdateItemInfoInItemInfoWindow();
+    }
+
+    private void ClearUI()
+    {
+        foreach (Transform child in slotParent)
+        {
+            ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
+            if (slotInfo != null)
+            {
+                slotInfo.DeliverItem -= HandleItemInfo;
+            }
+            Destroy(child.gameObject);
+        }
+        quantityCheck.SetActive(false);
         foreach (Transform slot in slotParent)
         {
-            Destroy(slot);
+            Destroy(slot.gameObject);
         }
+        if (slotParent.childCount > 0)
+            return;
+    }
 
+    private void UpdateMachineInfoToShopUI()
+    {
+        ClearUI();
         foreach (MachineSO machine in machines)
         {
             GameObject slot = Instantiate(slotPrefab, slotParent);
@@ -40,12 +85,74 @@ public class ShopUI : UIBase
         {
             data.seeItemData += SetInfo;
         }
+        onMachineEnabled?.Invoke();
     }
 
+    private void UpdateItemInfoToShopUI()
+    {
+        ClearUI();
+        itemData = GameManager.instance.inventoryManager.itemDatabase;
+        foreach (ItemSO item in itemData.itemDataList)
+        {
+            if (item.type == 1 && item.id != 1)
+            {
+                GameObject slot = Instantiate(itemSlot, slotParent);
+                ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
+                if (itemSlotInfo != null)
+                {
+                    itemSlotInfo.Setup(item, 1);
+                }
+            }
+            else
+            {
+                continue;
+            }
+        }
+        onIngredientEnabled?.Invoke();
+
+    }
+    public void OpenIngredientShopUI()
+    {
+        UpdateItemInfoToShopUI();
+        foreach (Transform child in slotParent)
+        {
+            ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
+            if (slotInfo != null)
+            {
+                slotInfo.DeliverItem += HandleItemInfo;
+            }
+        }
+    }
+
+    public void OpenMachinShopUI()
+    {
+        UpdateMachineInfoToShopUI();
+    }
     private void SetInfo(MachineSO sO)
     {
+        machineSO = sO;
         nameText.text = sO.installasionName;
         descriptionText.text = sO.description;
         priceText.text = sO.price.ToString() + "원";
+    }
+
+    //public void SpawnInstallation()
+    //{
+    //    if (machineSO.price > GameManager.instance.statManager.currentGold)
+    //    {
+    //        Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
+    //        return;
+    //    }
+    //    GameManager.instance.statManager.SpendGold(machineSO.price);
+
+    //    GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
+    //    GameManager.instance.uiManager.CloseAll();
+    //}
+
+    private void UpdateItemInfoInItemInfoWindow()
+    {
+        nameText.text = curItem.itemName;
+        descriptionText.text = curItem.description;
+        priceText.text = curItem.price.ToString();
     }
 }

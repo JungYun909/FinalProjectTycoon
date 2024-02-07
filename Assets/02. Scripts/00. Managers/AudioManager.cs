@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 //[System.Serializable]
 //public class Audio
@@ -25,6 +26,8 @@ public class AudioManager : MonoBehaviour
     private bool onBgm;
     private bool onSfx;
 
+
+    [SerializeField] private Sprite[] soundImage;
 
     private void Awake()
     {
@@ -74,8 +77,10 @@ public class AudioManager : MonoBehaviour
                 continue;
             else
             {
+                sfxSource[i].clip = effect;
                 sfxSource[i].PlayOneShot(effect);
                 completePlaying = true; //발견!!
+                return;
             }
         }
 
@@ -86,20 +91,26 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void ToggleMusic()
+    public void ToggleMusic(Image soundImageOrigin)
     {
-        onBgm = !onBgm;
-
         musicSource.mute = !musicSource.mute;
+        if (musicSource.mute)
+            soundImageOrigin.sprite = soundImage[1];
+        else
+            soundImageOrigin.sprite = soundImage[0];
     }
 
-    public void ToggleSFX()
+    public void ToggleSFX(Image soundImageOrigin)
     {
         onSfx = !onSfx;
-        for( int i = 0;i < sfxSource.Count;i++)
+        for (int i = 0; i < sfxSource.Count; i++)
         {
             sfxSource[i].Stop();
-            sfxSource[i].mute = onSfx;
+            sfxSource[i].mute = !onSfx;
+            if (sfxSource[i].mute)
+                soundImageOrigin.sprite = soundImage[1];
+            else
+                soundImageOrigin.sprite = soundImage[0];
         }
     }
 

@@ -8,10 +8,9 @@ public class PlayerData
 {
     public int level = 1;
     public int money = 0;
-    public int installations = 0;
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
-    public int ingredients = 0;
+    public List<int> recipeIndex = new List<int>();
 }
 public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로딩 관리하기 위한 매니저. json
 {
@@ -21,14 +20,19 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     public MachineSO[] installationSub;
     public ItemSO[] ingredientSub;
+    public ItemSO[] foodSub;
+    
     public GameObject[] curObject;
 
-    public List<GameObject> curInstallations;
-    public List<GameObject> curSellInstallations; //판매씬에 배치된 진열대
+    public List<GameObject> curInstallations; //판매씬에 배치된 진열대
     public GameObject counter; // 카운터 등록
+    
+    public event Action OnSaveEvent; 
 
     private void Start()
     {
+        GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
+        
         path = Application.persistentDataPath + "/";
         
         if (!File.Exists(path + jsonName))
@@ -38,7 +42,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         
         LoadData();
         
-        for (int i = 0; i < playerData.installations; i++)
+        for (int i = 0; i < playerData.installationSubInt.Count; i++)
         {
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);
             InstallationController controller = curObj.GetComponent<InstallationController>();
@@ -48,16 +52,38 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         }
     }
 
+    private void DiscoverRecipe(int index)
+    {
+        if (!playerData.recipeIndex.Contains(index))
+        {
+            playerData.recipeIndex.Add(index);
+            SaveData();
+        }
+    }
+
     public void SaveData()
     {
         string jsonData = JsonUtility.ToJson(playerData);
         File.WriteAllText(path + jsonName, jsonData);
+        
+        OnSaveEvent?.Invoke();
     }
 
     public void SaveInstallation(GameObject obj)
     {
-        playerData.installations++;
         InstallationController controller = obj.GetComponent<InstallationController>();
+
+        foreach (var installation in curInstallations)
+        {
+            if (installation == obj)
+            {
+                playerData.installationSubInt.Remove(controller._installationData.id - 1);
+                playerData.installationsPos.Remove(obj.transform.position);
+                curInstallations.Remove(installation);
+                return;
+            }
+        }
+        
         playerData.installationSubInt.Add(controller._installationData.id - 1);
         playerData.installationsPos.Add(obj.transform.position);
         curInstallations.Add(obj);

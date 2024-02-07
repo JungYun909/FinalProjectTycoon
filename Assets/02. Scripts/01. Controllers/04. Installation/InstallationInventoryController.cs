@@ -1,42 +1,75 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstallationInventoryController : MonoBehaviour,IInteractable
+public class InstallationInventoryController : MonoBehaviour
 {
-    public bool Continuous()
+    public InstallationController controller;
+    public InstallationDestinationController destinationController;
+    public AbstractInventory inventory;
+    
+    private string recipeIndex;
+    
+    private float spawnTimer = 0;
+    private void Update()
     {
-        return false;
-    }
+        if(controller.doughContainer.Count == 0 || !destinationController.destination[1])
+            return;
+        
+        if(controller._installationData.haveIngredientInventory && controller.ingredients.Count <= 0)
+            return;
 
-    public void OnClickInteract()
-    {
-        GameObject curInstallationSetObj = GameManager.instance.installationManager.curInstallation;
-
-        if (!curInstallationSetObj)
+        spawnTimer += Time.deltaTime;
+        
+        if (spawnTimer > controller._installationData.makeDelay)
         {
-            GameManager.instance.installationManager.curInstallation = gameObject;
-            GameManager.instance.installationManager.OnInstallationSetUI();
-        }
-        else if (curInstallationSetObj == gameObject)
-        {
-            GameManager.instance.installationManager.OnInstallationSetUI();
-        }
-        else
-        {
-            InstallationController controller = GameManager.instance.installationManager.curInstallation.GetComponent<InstallationController>();
-            // controller.destinationObj = gameObject;
-            GameManager.instance.installationManager.OnInstallationSetUI();
+            spawnTimer = 0;
+            DoughSetController();
         }
     }
 
-    public void OffClickInteract()
+    public void DoughSetController()
     {
-        return;
-    }
 
-    public void OnColliderInteract()
-    {
-        //온콜라이더 상호작용 내용
+        GameObject curObj = controller.doughContainer.Dequeue();
+        curObj.SetActive(true);
+        
+        IngredientController curController = curObj.GetComponent<IngredientController>();
+        curController.destination = destinationController.destination[1];
+        curController.InitSet();
+        
+        GameManager.instance.spawnManager.SpawnPositionSet(transform.root.gameObject, curController.destination, curObj);
+        GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, curController.itemData, 1);
+
+        if (controller._installationData.haveIngredientInventory)
+        {
+            ItemSO ingredientData = controller.ingredients.Dequeue();
+            Debug.Log(ingredientData.id);
+            GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, ingredientData, 1);
+            curController.VisitIngredientDataSet(controller, ingredientData);
+        }
+        else if(!controller._installationData.haveIngredientInventory)
+        {
+            Debug.Log("x");
+            curController.VisitInstallationSet(controller);
+        }
+        
+        
+        if (controller._installationData.completeMake)
+        {
+            GameManager.instance.poolManager.DeSpawnFromPool(curObj);
+
+            for (int i = curController.interactInstallation.Count - 1; i >= 0; i--)
+            {
+                recipeIndex += curController.interactInstallation.Dequeue() + "+";
+            }
+            Debug.Log(recipeIndex);
+            int spawnFoodID = GameManager.instance.recipeManager.CompareWithResipe(recipeIndex);
+            Debug.Log(spawnFoodID);
+            recipeIndex = "";
+            GameManager.instance.spawnManager.SpawnIngredient(gameObject, destinationController.destination[1], GameManager.instance.dataManager.foodSub[spawnFoodID]);
+
+        }
     }
 }

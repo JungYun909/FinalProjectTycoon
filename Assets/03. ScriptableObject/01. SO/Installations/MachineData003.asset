@@ -16,11 +16,12 @@ MonoBehaviour:
   installasionName: "\uC624\uBE10"
   description: "\uB178\uB987\uB178\uB987"
   price: 30
-  sprite: {fileID: 21300000, guid: 0cb71ffb3ea779a41b74c84727344e4e, type: 3}
+  sprite: {fileID: -1595847247, guid: 7481e69166526ff4d8c1e9a28d83822a, type: 3}
   canSpawn: 0
   spawnDelay: 0
   spawnData: {fileID: 0}
   haveDoughInventory: 1
   haveIngredientInventory: 0
-  makeDelay: 20
+  makeDelay: 2
   maxSlot: 5
+  completeMake: 1

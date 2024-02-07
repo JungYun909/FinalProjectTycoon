@@ -12,19 +12,46 @@ public enum SceneType
 }
 public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 계속 유지는 필요함. 씬 변경시 다른 매니저들이 일핡 수 있도록 이벤트 정도 발생?
 {
-    private SceneType _type;
+    public void Initialize()
+    {
+        string curScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (sceneNameToType.TryGetValue(curScene, out SceneType type))
+        {
+            sceneInfo?.Invoke(type);
+            Debug.Log($"Scene info handled: {curScene}");
+        }
+    }
+    private Dictionary<string, SceneType> sceneNameToType = new Dictionary<string, SceneType>()
+    {
+        { "TitleScene", SceneType.TitleScene },
+        { "MainScene", SceneType.MainScene },
+        { "Kitchen", SceneType.Kitchen }
+    };
+    public event Action<SceneType>sceneInfo;
     public void ChangeScene(string sceneName)
     {
-        try
+        if (sceneNameToType.TryGetValue(sceneName, out SceneType type))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            try
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+                OnSceneChange(type);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("SceneError");
+                throw;
+            }
         }
-        catch (Exception e)
+        else
         {
-            Debug.Log("SceneError");
-            throw;
+            Debug.Log("Invalid scene name");
         }
     }
 
-    
+    public void OnSceneChange(SceneType type)
+    {
+        sceneInfo?.Invoke(type);
+    }
 }
+

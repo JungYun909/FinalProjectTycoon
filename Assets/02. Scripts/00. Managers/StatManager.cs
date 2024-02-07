@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,19 +12,23 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int interiorScore;   //인테리어 점수.
     public int financeScore;  //재정상태. 적자일수를 계산하여 초반에 -3처럼 특정 음수값이 되면 fail.
     public int currentGold;    //소지금. 변경가능.
+    public float curTime;     // 현재 게임 시간
+    public int curDay;       // 현재까지 지나온 날짜
 
     public int modFame;        //명성치의 변경값. 
     public int modInterior;     //인테리어 수치의 변경값. 가구/인테리어 요소의 점수를 받아와 합산/차감하는 식으로 이루어짐.
     public int modFinance;    //재정상태 수치의 변경값. 흑자일 때, 적자일 때 점수를 매김. 적자시에는 무조건 -1, 흑자일때는 +1을 반환하는 로직을 주고 
     public int modGold;
-
-    public int curNpc;
-
-    public int maxShopLevel;
+    public int modLevel;
+    public float modTime;
+    public int modDay;
+    
+    public int maxShopLevel = 100;
     public int maxNpc;
     
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
+    public event Action onDateChanged;
     
     private void Awake()	    //TODO
     {
@@ -37,6 +42,10 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         financeScore = shopStat.financialScore;
         currentGold = shopStat.gold;
         modGold = shopStat.goldUsed;
+        shopLevel = shopStat.shopLevel;
+        curTime = shopStat.playerTime;
+        curDay = shopStat.dayTime;
+        maxNpc = 2;
     }
 
     // private void OnEnable()
@@ -94,7 +103,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         currentGold += modGold;
         shopStat.gold = currentGold;
-        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
 
@@ -102,8 +111,37 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         currentGold -= modGold;
         shopStat.gold = currentGold;
-        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
+    }
+
+    public int LevelUP(int modLevel)
+    {
+        shopLevel += modLevel;
+        shopStat.shopLevel = shopLevel;
+        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        return shopLevel;
+    }
+
+    private void Update()  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
+    {
+        if (curTime>0)
+        { 
+            modTime += Time.deltaTime;
+            curTime = 1 - modTime/600;
+            
+            shopStat.playerTime = curTime;
+        }
+        else
+        {
+            modTime = 0;
+            curTime = 1;
+            curDay += 1;
+            shopStat.dayTime = curDay;
+            onDateChanged?.Invoke();
+            GameManager.instance.uiManager.OpenDailyResultWindow();
+        }
+
     }
 
     private void UpdateDailyResult()

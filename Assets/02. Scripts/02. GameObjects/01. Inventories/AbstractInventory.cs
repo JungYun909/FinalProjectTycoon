@@ -28,13 +28,13 @@ public class AbstractInventory : MonoBehaviour
     public StandInventoryUI standInventory;
     public int maxDoughQuantity = 5; // 기본값으로 5를 설정
 
+
     public static event Action<AbstractInventory> OnInventoryClicked;
 
     public InstallationController controller;
 
-
-
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
+    public Queue<ItemSO> itemQueue = new Queue<ItemSO>();
 
     [SerializeField]
     private List<InventoryItemEntry> itemsListForInspector = new List<InventoryItemEntry>();
@@ -43,45 +43,22 @@ public class AbstractInventory : MonoBehaviour
     protected virtual void Start()
     {
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
-        // InstallationController 확인
-        InstallationController installationController = GetComponentInParent<InstallationController>();
-        if (installationController != null)
-        {
-            // 특정 머신에 대한 인벤토리 처리
-            ProcessInventoryBasedOnMachine(installationController._installationData);
-        }
-        else
-        {
-            ProcessStandardInventory();
-        }
+        controller = GetComponentInParent<InstallationController>();
     }
 
     private void OnEnable()
     {
         if (controller != null)
         {
-            controller.installationFuctionSet += OpenInventoryUI;
-
-            OpenInventoryUI();
-            GameManager.instance.uiManager.CloseAll();
+            controller.installationFuctionSet += OpenUI;
         }
-    }
-    private void ProcessInventoryBasedOnMachine(MachineSO machineData)
-    {
-        if (machineData.id == 5)
-        {
-            OpenStandInventoryUI();
-        }
-        else
-        {
-            OpenInventoryUI();
-        }
-    }
-    private void ProcessStandardInventory()
-    {
-        // 표준 인벤토리 처리 로직
     }
 
+    public void InitSet()
+    {
+        controller.installationFuctionSet += OpenUI;
+    }
+    
     public void UpdateInspectorList()
     {
         itemsListForInspector.Clear();
@@ -91,12 +68,26 @@ public class AbstractInventory : MonoBehaviour
         }
     }
 
+    private void OpenUI()
+    {
+        if(controller!=null && controller._installationData != null)
+        {
+            if(controller._installationData.id == 5)
+            {
+                OpenStandInventoryUI();
+            }
+            else
+            {
+                OpenInventoryUI();
+            }
+        }
+    }
+
     private void OpenStandInventoryUI()
     {
         GameManager.instance.uiManager.OpenWindow(standInventory, this);
         OnInventoryClicked?.Invoke(this);
     }
-
     private void OpenInventoryUI()
     {
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);

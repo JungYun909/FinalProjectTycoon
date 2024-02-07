@@ -9,36 +9,33 @@ public class MovementController : MonoBehaviour
 {
     public float speed;
     public GameObject destinationObj;
-    public bool isMove;
+    public bool isMove = false;
+    public Coroutine curCoroutine;
 
     private void Update()
     {
         
-        if(speed <= 0 && !destinationObj)
+        if(speed <= 0 || !destinationObj)
             return;
 
         if (!isMove)
         {
-            StartCoroutine(Movement());
+            curCoroutine = StartCoroutine(Movement());
             isMove = true;
-  
         }
     }
 
     private IEnumerator Movement()
     {
-        if (destinationObj != null)
+        while (Vector2.Distance(destinationObj.transform.position, gameObject.transform.root.position) > 0.1f)
         {
-            while (Vector2.Distance(destinationObj.transform.position, gameObject.transform.root.position) > 0.1f)
-            {
-                Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
-                Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
-                transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
-                yield return null;
-            }
+            Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
+            Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
+            transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
+            yield return null;
         }
-        
-
+        StopCoroutine(curCoroutine);
         isMove = false;
+        destinationObj = null;
     }
 }

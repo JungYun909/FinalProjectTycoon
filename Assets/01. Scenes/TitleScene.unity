@@ -179,8 +179,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   installationSub: []
+  ingredientSub: []
+  foodSub: []
   curObject: []
   curInstallations: []
+  counter: {fileID: 0}
 --- !u!114 &811490741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,11 +202,15 @@ MonoBehaviour:
   interiorScore: 0
   financeScore: 0
   currentGold: 0
+  curTime: 0
+  curDay: 0
   modFame: 0
   modInterior: 0
   modFinance: 0
   modGold: 0
-  curNpc: 0
+  modLevel: 0
+  modTime: 0
+  modDay: 0
   maxShopLevel: 0
   maxNpc: 0
 --- !u!114 &811490742
@@ -219,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curMouseDirection: {x: 0, y: 0}
+  installationFunctionIndex: 0
 --- !u!114 &811490743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +303,9 @@ MonoBehaviour:
   installationObj: {fileID: 0}
   ingredientObj: {fileID: 0}
   npcObj: {fileID: 0}
-  door: {fileID: 0}
+  NPCSpawnObj: {fileID: 0}
+  curNpcCount: 0
+  npcDataList: []
 --- !u!114 &811490748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +367,7 @@ MonoBehaviour:
   statManager: {fileID: 811490741}
   dataManager: {fileID: 811490740}
   sceneManager: {fileID: 811490739}
+  recipeManager: {fileID: 0}
 --- !u!4 &811490753
 Transform:
   m_ObjectHideFlags: 0
@@ -388,6 +399,9 @@ MonoBehaviour:
   musicSource: {fileID: 811490755}
   bgmClip: {fileID: 0}
   sfxSource: []
+  soundImage:
+  - {fileID: 21300000, guid: f2c0c8de2d2b6b540b01f6ccb18aef27, type: 3}
+  - {fileID: 21300000, guid: 4a397482b8b083d4784ca0be45f9dbd4, type: 3}
 --- !u!82 &811490755
 AudioSource:
   m_ObjectHideFlags: 0
@@ -709,7 +723,6 @@ GameObject:
   - component: {fileID: 1073453621}
   - component: {fileID: 1073453620}
   - component: {fileID: 1073453619}
-  - component: {fileID: 1073453622}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -782,13 +795,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1073453622}
+      - m_Target: {fileID: 1967258791}
         m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
         m_MethodName: BtnSound
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8300000, guid: 652ff9e7823e4b8458acf8d721330a99, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: MainScene
@@ -844,19 +857,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073453617}
   m_CullTransparentMesh: 1
---- !u!114 &1073453622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073453617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab135217c9845a45b97f4351ca35091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectClip: {fileID: 8300000, guid: 58fa30b0666f3d540bceab444c5ddfd2, type: 3}
 --- !u!1 &1164154569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1097,9 @@ MonoBehaviour:
   interiorScore: 50
   financialScore: 0
   goldUsed: 500
+  playerTime: 1
+  shopLevel: 1
+  dayTime: 0
 --- !u!4 &1793612304
 Transform:
   m_ObjectHideFlags: 0
@@ -1124,6 +1127,7 @@ GameObject:
   - component: {fileID: 1967258789}
   - component: {fileID: 1967258788}
   - component: {fileID: 1967258787}
+  - component: {fileID: 1967258791}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1216,3 +1220,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1967258791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967258786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab135217c9845a45b97f4351ca35091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

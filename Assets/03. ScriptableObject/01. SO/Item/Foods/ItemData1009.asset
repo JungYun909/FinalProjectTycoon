@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
+  m_Name: ItemData1009
+  m_EditorClassIdentifier: 
+  id: 1009
+  type: 2
+  itemName: "\uC2DC\uB098\uBAAC\uB864"
+  description: "\uACC4\uD53C\uBE75\uC774\uB791 \uB2EC\uB77C\uC694"
+  recipe: "\uBC18\uC8FD - \uC870\uD569\uAE30(\uBC84\uD130) - \uC870\uD569\uAE30(\uACC4\uD53C)
+    - \uC624\uBE10"
+  price: 110
+  sprite: {fileID: 21300000, guid: 36a01a6ae047f98488c5b14975933457, type: 3}
+  tag: Food
+  canMove: 1
+  moveSpeed: 1
+  canStack: 1
+  maxStackAmount: 10

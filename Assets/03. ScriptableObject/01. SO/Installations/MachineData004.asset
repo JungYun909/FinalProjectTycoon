@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   installasionName: "\uC870\uD569\uAE30"
-  description: "\uC870\uD569\uAE30\uAC00 \uB9DE\uC544?"
+  description: "\uD4E8\uC6B0\uC6B0\uC6B0\uC6B0\uC6B0\uC6B0\uC83C!"
   price: 40
-  sprite: {fileID: 21300000, guid: b4e8036c963f4d741a69a189d03b1ff4, type: 3}
+  sprite: {fileID: 1758084000, guid: f0e152dd33f9c9945b7041780ecc321d, type: 3}
   canSpawn: 0
-  spawnDelay: 0
+  spawnDelay: 5
   spawnData: {fileID: 0}
   haveDoughInventory: 1
   haveIngredientInventory: 1
-  makeDelay: 30
+  makeDelay: 1
   maxSlot: 5
+  completeMake: 0

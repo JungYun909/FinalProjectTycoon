@@ -21,15 +21,34 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     public delegate void DailyResultWindowOn();
     public event DailyResultWindowOn OnDailyWindowOpen;
     
-    private void Start()
+    public void Initialize()
     {
-        //InitUIList();   // 매니저 활성화시 전체 UI창 초기화 진행
-        StartCoroutine(DailyResultWindowRoutine());
-        OpenPermanentWindows(uiAlwaysOn);
+
+        GameManager.instance.statManager.onDateChanged += CheckSceneAndOpenDailyResultWindow;
+        GameManager.instance.sceneManager.sceneInfo += HandleScene;
     }
 
+    private void OnEnable()
+    {
+
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.sceneManager.sceneInfo -= HandleScene;
+        GameManager.instance.statManager.onDateChanged -= CheckSceneAndOpenDailyResultWindow;
+    }
+
+    private void HandleScene(SceneType scene)
+    {
+        if (scene != SceneType.TitleScene)
+        {
+            OpenPermanentWindows(uiAlwaysOn);
+        }
+    }
     public void OpenPermanentWindows(List<UIBase> permaUI)
     {
+        
         foreach (UIBase uiWindow in permaUI)
         {
             Instantiate(uiWindow, transform);
@@ -38,6 +57,14 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
 
     public void OpenWindow(UIBase uiPrefab, bool keepPreviousWindow = false, AbstractInventory inventory = null)
     {
+        foreach (UIBase ui in uiStack)
+        {
+            if(ui.GetType() == uiPrefab.GetType())
+            {
+                Destroy(ui.gameObject);
+                break;
+            }
+        }
         UIBase uiInstance = Instantiate(uiPrefab, transform).GetComponent<UIBase>();
         if (uiInstance is InventoryShow inventoryShow && inventory != null)
         {
@@ -56,7 +83,10 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         while (uiStack.Count > 0)
         {
             UIBase currentUI = uiStack.Pop();
-            Destroy(currentUI.gameObject);
+            if (currentUI != null)
+            {
+                Destroy(currentUI.gameObject);
+            }
         }
     }
 
@@ -98,7 +128,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
     }
 
-    private void OpenDailyResultWindow()
+    public void OpenDailyResultWindow()
     {
         if (currentDailyResultWindow != null)
         {
@@ -106,43 +136,22 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
         currentDailyResultWindow = Instantiate(dailyResultWindow, transform);    //currentDailyResultWindow 생성
         currentDailyResultWindow.Initialize();  // 
-        OnDailyWindowOpen?.Invoke();    // 일일정산창 열리면 이벤트를 발생시킴. 여기서는 
+        OnDailyWindowOpen?.Invoke();
+    }
+
+    private void CheckSceneAndOpenDailyResultWindow()
+    {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "TitleScene")
+        {
+            OpenDailyResultWindow();
+        }
     }
 }
 
-//    public void UpdateInventoryUI(Dictionary<ItemSO, int> items, GameObject gameObject)
-//    {
-//        //UIToChange uiToChange = gameObject.GetComponentInChildren<UIToChange>();
-//       // Transform contentPanel = uiToChange.transform; 
-//        foreach (Transform child in contentPanel)
-//        {
-//            Destroy(child.gameObject);
-//        }
 
-//        GameObject currentLine = null;
-//        int slotIndex = 0;
-
-//        foreach (var entry in items)
-//        {
-//            // 새로운 라인이 필요한 경우 생성
-//            if (slotIndex % 5 == 0)
-//            {
-//                currentLine = Instantiate(itemLinePrefab, contentPanel);
-//            }
-
-//            // 아이템 슬롯 생성 및 설정
-//            GameObject slotObject = Instantiate(itemSlotPrefab, currentLine.transform);
-//            ItemSlotInfo slotInfo = slotObject.GetComponent<ItemSlotInfo>();
-//            slotInfo.Setup(entry.Key, entry.Value);
-
-//            slotIndex++;
-//        }
-//    }
-//}
 
 
 // TODO : UI 목록을 리스트가 아닌 딕셔너리로 바꾸는 것 고려
-// 또한 동일한 UI는 한번에 한 개의 오브젝트만 생성되도록 바꿀 필요가 있음. 현재 OpenWindow는 이전에 열렸던 모든 UI를 
+// 또한 동일한 UI는 한번에 한 개의 오브젝트만 생성되도록 바꿀 필요가 있음. 현재 OpenWindow는 이전에 열렸던 모든 UI를  
 // 동일한 UI창이 열렸던 만큼 SetActive = false인 상태로 씬에 존재하므로 메모리 사용 측면에서 손해가 생길 수밖에 없는 구조로 사료됨
-// 덧붙여 현재는 UI창이 통채로 프리팹으로 만들어지므로 (화면마다 공통되는 요소가 반복됨) 반복되는 요소를 줄이기 위해 가장 처음에 발생하는 
-// 1번 스택에 위치한 UI창은 SetActive = false로 되지 않도록 바꾸고 이후 열리는 하위 UI창이 1번 스택인 최상위 창 안에서 생성되도록 바꿀 예정
+// 1번 스택에 위치한 UI창은 SetActive = false로 되지 않도록 바꾸고 이후 열리는 하위 UI창이 1번 스택인 최상위 창 안에서 생성되도록 바꿀 예정 > 

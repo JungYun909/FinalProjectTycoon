@@ -8,24 +8,40 @@ using UnityEngine.Serialization;
 public class IngredientController : MonoBehaviour, IInteractable
 {
     public ItemSO itemData;
-    public Queue<int> interactInstallation = new Queue<int>();
+    public Queue<float> interactInstallation = new Queue<float>();
     
     public GameObject moveFunction;
     public GameObject destination;
+
+    public MovementController movementController;
+    public TestSA addImageController;
+    public SpriteRenderer spriteController;
     
     private void Start()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = itemData.sprite;
+        InitSet();
+    }
 
+    public void InitSet()
+    {
+        spriteController.sprite = itemData.sprite;
+        
         if (itemData.canMove)
         {
             moveFunction.SetActive(true);
-            MovementController controller = moveFunction.GetComponent<MovementController>();
-            controller.speed = itemData.moveSpeed;
-            controller.destinationObj = destination;
+            movementController.speed = itemData.moveSpeed;
+            movementController.destinationObj = destination;
         }
+        
+        addImageController.InitSetting();
     }
-    
+
+    private void OnDisable()
+    {
+        movementController.speed = 0;
+        movementController.destinationObj = null;
+    }
+
     public bool Continuous()
     {
         return false;
@@ -45,16 +61,20 @@ public class IngredientController : MonoBehaviour, IInteractable
         {
             case "Dough":
                 gameObject.SetActive(false);
+                movementController.isMove = false;
                 break;
             default:
                 GameManager.instance.poolManager.DeSpawnFromPool(gameObject);
+                movementController.isMove = false;
                 break;
         }
     }
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag != "Installation")
+        InstallationController controller;
+        
+        if(destination != other.gameObject)
             return;
         
         if(gameObject.GetComponent<IInteractable>() != null)
@@ -62,16 +82,41 @@ public class IngredientController : MonoBehaviour, IInteractable
 
         if (other.gameObject.GetComponent<IInteractable>() != null)
         {
-            InstallationController controller = other.gameObject.GetComponent<InstallationController>();
+            controller = other.gameObject.GetComponent<InstallationController>();
             controller.OnColliderInteract();
-            interactInstallation.Enqueue(controller._installationData.id);
+            
+            if(itemData.tag == "Dough")
+                controller.doughContainer.Enqueue(gameObject);
+            else
+                controller.ingredients.Enqueue(itemData);
         }
 
+        if (other.gameObject.GetComponent<ShopInventory>() != null)
+        {
+            AbstractInventory shopInventory = other.gameObject.GetComponent<ShopInventory>();
+            GameManager.instance.inventoryManager.AddItemToInventory(shopInventory.inventoryID, itemData, 1);
+            return;
+        }
         if (other.gameObject.GetComponentInChildren<AbstractInventory>() == null)
             return;
 
         AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-        
         GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
+    }
+
+    public void VisitIngredientDataSet(InstallationController controller, ItemSO ingredientData)
+    {
+        if (controller._installationData.haveIngredientInventory)
+        {
+            Debug.Log(controller._installationData.id + (ingredientData.id * Mathf.Pow(0.1f,Mathf.FloorToInt(Mathf.Log10(ingredientData.id) + 1))));
+            interactInstallation.Enqueue(controller._installationData.id + (ingredientData.id * Mathf.Pow(0.1f,Mathf.FloorToInt(Mathf.Log10(ingredientData.id) + 1))));
+            addImageController.AddImage(ingredientData.sprite);
+        }
+    }
+
+    public void VisitInstallationSet(InstallationController controller)
+    {
+        if(!controller._installationData.haveIngredientInventory)
+            interactInstallation.Enqueue(controller._installationData.id);
     }
 }

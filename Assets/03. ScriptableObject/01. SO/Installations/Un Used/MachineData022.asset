@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4c4d2029487e54aaea9faf63824963, type: 3}
+  m_Name: MachineData022
+  m_EditorClassIdentifier: 
+  id: 22
+  installasionName: "\uC544\uBCF4\uCE74\uB3C4 \uC0DD\uC0B0\uAE30"
+  description: "\uC544\uBCF4\uCE74\uB3C4 \uC528\uB294 \uBE7C\uC904\uAC8C"
+  price: 50
+  sprite: {fileID: 938827588, guid: 67e7fcad91e69d44db08e8018f439e58, type: 3}
+  canSpawn: 1
+  spawnDelay: 30
+  spawnData: {fileID: 11400000, guid: 1401d2731888f6c4aa77a48bc22090f7, type: 2}
+  haveDoughInventory: 0
+  haveIngredientInventory: 0
+  makeDelay: 0
+  maxSlot: 10
+  completeMake: 0

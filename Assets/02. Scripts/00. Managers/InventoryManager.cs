@@ -9,11 +9,20 @@ public class InventoryManager : MonoBehaviour
 
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
-    private int nextInventoryID = 1000;   // 인덱스용 아이디를 부여하기 위한 필드
+    private int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
+    private int playerInventoryID = 1000;
 
     public int RegisterInventory(AbstractInventory inventory)    // 새로 생기는 인벤토리를 딕셔너리에 등재하기 위한 메서드. 모든 인벤토리 생성시
     {
-        int inventoryID = nextInventoryID++;
+        int inventoryID;
+        if(inventory is ShopInventory)
+        {
+            inventoryID = playerInventoryID;
+        }
+        else
+        {
+            inventoryID = nextInventoryID++;
+        }
         inventories[inventoryID] = inventory;
         return inventoryID;
     }
@@ -23,34 +32,27 @@ public class InventoryManager : MonoBehaviour
         if (inventories.ContainsKey(inventoryID))
         {
             var inventory = inventories[inventoryID];
-
-            // 반죽 아이템의 경우
-            if (item.id == 1)
+            
+            if(!inventory.Items.ContainsKey(item))
             {
-                inventory.Items.TryGetValue(item, out int currentQuantity);
-
-                // 새로운 수량 계산
-                int newQuantity = currentQuantity + quantity;
-
-                // 최대 수량을 초과하는 경우, 최대 수량으로 제한
-                if (newQuantity > inventory.maxDoughQuantity)
-                {
-                    newQuantity = inventory.maxDoughQuantity;
-                }
-
-                // 수량 업데이트
-                inventory.Items[item] = newQuantity;
+                inventory.Items[item] = 0;
             }
-            else
+            inventory.Items[item] += quantity;
+
+            if(item.id == 1 || item.type ==2)
             {
-                // 다른 아이템의 경우, 정상적으로 추가
-                if (!inventory.Items.ContainsKey(item))
+                if (inventoryID == 1000)
                 {
-                    inventory.Items[item] = 0;
+                    return;
                 }
-                inventory.Items[item] += quantity;
+                else
+                {
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        inventory.itemQueue.Enqueue(item);
+                    }
+                }
             }
-
             OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
             inventory.UpdateInspectorList();
         }
@@ -68,6 +70,17 @@ public class InventoryManager : MonoBehaviour
                 {
                     inventory.Items.Remove(item);
                 }
+
+                if(inventoryID!=1000 && (item.id == 1 || item.type ==2))
+                {
+                    for(int i = 0; i<quantity;i++)
+                    {
+                        if(inventory.itemQueue.Count > 0 && inventory.itemQueue.Peek() ==item)
+                        {
+                            inventory.itemQueue.Dequeue();
+                        }
+                    }
+                }
                 OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
                 inventory.UpdateInspectorList();
 
@@ -79,40 +92,69 @@ public class InventoryManager : MonoBehaviour
 
     public void TransferItem(int fromInventoryID, int toInventoryID, ItemSO item, int quantity)
     {
-        if (RemoveItemFromInventory(fromInventoryID, item, quantity))
+        if (inventories.ContainsKey(fromInventoryID) && inventories.ContainsKey(toInventoryID))
         {
-            AddItemToInventory(toInventoryID, item, quantity);
+            var fromInventory = inventories[fromInventoryID];
+            var toInventory = inventories[toInventoryID];
+
+            Debug.Log($"[TransferItem] Trying to transfer {quantity} of {item.name} from {fromInventoryID} to {toInventoryID}");
+
+            // 아이템을 이동시킬 수 있는지 확인
+            if (fromInventory.Items.ContainsKey(item) && fromInventory.Items[item] >= quantity)
+            {
+                Debug.Log($"[TransferItem] Enough items in fromInventory. Current quantity: {fromInventory.Items[item]}");
+
+                // 기존 인벤토리에서 아이템 제거
+                fromInventory.Items[item] -= quantity;
+                Debug.Log($"[TransferItem] Items removed from fromInventory. New quantity: {fromInventory.Items[item]}");
+
+                // 큐 관리
+                if (item.id == 1 || item.type == 2)
+                {
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        if (fromInventory.itemQueue.Count > 0 && fromInventory.itemQueue.Peek() == item)
+                        {
+                            fromInventory.itemQueue.Dequeue();
+                            Debug.Log($"[TransferItem] Item dequeued from fromInventory's queue");
+                        }
+                    }
+                }
+
+                // 새 인벤토리에 아이템 추가
+                if (!toInventory.Items.ContainsKey(item))
+                {
+                    toInventory.Items[item] = 0;
+                }
+                toInventory.Items[item] += quantity;
+                Debug.Log($"[TransferItem] Items added to toInventory. New quantity: {toInventory.Items[item]}");
+
+                // 새 인벤토리의 큐 관리
+                if (item.id == 1 || item.type == 2)
+                {
+                    for (int i = 0; i < quantity; i++)
+                    {
+                        toInventory.itemQueue.Enqueue(item);
+                        Debug.Log($"[TransferItem] Item enqueued to toInventory's queue");
+                    }
+                }
+
+                // 이벤트 발생 및 UI 업데이트
+                OnInventoryUpdated?.Invoke(fromInventoryID);
+                OnInventoryUpdated?.Invoke(toInventoryID);
+            }
+            else
+            {
+                Debug.Log($"[TransferItem] Not enough items in fromInventory or item not found");
+            }
         }
-        //    if (inventories.ContainsKey(fromInventoryID) && inventories.ContainsKey(toInventoryID))
-        //    {
-        //        var fromInventory = inventories[fromInventoryID].Items;
-        //        var toInventory = inventories[toInventoryID].Items;
-
-        //        // 아이템을 이동시킬 수 있는지 확인
-        //        if (fromInventory.ContainsKey(item) && fromInventory[item] >= quantity)
-        //        {
-        //            // 아이템을 기존 인벤토리에서 제거
-        //            fromInventory[item] -= quantity;
-        //            if (fromInventory[item] == 0)
-        //            {
-        //                fromInventory.Remove(item);
-        //            }
-
-        //            // 아이템을 새 인벤토리에 추가
-        //            if (!toInventory.ContainsKey(item))
-        //            {
-        //                toInventory[item] = 0;
-        //            }
-        //            toInventory[item] += quantity;
-
-        //            OnInventoryUpdated?.Invoke(fromInventoryID); // 이벤트 발생
-        //            OnInventoryUpdated?.Invoke(toInventoryID); // 이벤트 발생
-
-        //            // 인벤토리 UI 업데이트
-        //        }
-        //    }
+        else
+        {
+            Debug.Log($"[TransferItem] One or both inventories not found");
+        }
     }
-    public void TransformItem(int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
+
+    public void TransformItem (int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
     {
         StartCoroutine(TransformAfterSomeSceonds(inventoryID, fromItem, toItem, duration));
     }

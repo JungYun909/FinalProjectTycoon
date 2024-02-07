@@ -36,6 +36,7 @@ public class InventoryShow : UIBase
 
     private void HandleInventoryOpened(AbstractInventory inventory)
     {
+        Debug.Log("Handled");
         // 이벤트가 발생했을 때 UI를 업데이트합니다.
         OpenInventory(inventory);
         curInventory = inventory;
@@ -81,23 +82,23 @@ public class InventoryShow : UIBase
         // 인벤토리의 각 아이템에 대한 UI 생성
         foreach (var item in inventory.Items)
         {
-            if(item.Key.type ==1 && item.Key.id !=1)
+            if (item.Key.type == 1 && item.Key.id != 1)
             {
                 ItemSO previousItem = FindPreviousItemOfTypeOne(item.Key, inventory);
 
-                if(previousItem != null)
+                if (previousItem != null)
                 {
                     itemsToMove.Add(previousItem);
                 }
             }
 
-            if(item.Key.type== 3)
+            if (item.Key.type == 3)
             {
                 itemsToMove.Add(item.Key);
                 continue;
             }
 
-            if (item.Key.id == 1 || item.Key.type ==2) // 반죽 아이템(id가 1) 처리
+            if (item.Key.id == 1 || item.Key.type == 2) // 반죽 아이템(id가 1) 처리
             {
                 CreateDoughSlots(item.Key, item.Value);
             }
@@ -115,7 +116,7 @@ public class InventoryShow : UIBase
     {
         foreach (var item in inventory.Items)
         {
-            if(item.Key.type ==1 && item.Key.id != 1 && item.Key != newItem)
+            if (item.Key.type == 1 && item.Key.id != 1 && item.Key != newItem)
             {
                 return item.Key;
             }
@@ -143,7 +144,7 @@ public class InventoryShow : UIBase
         int playerInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
         int curInventoryID = this.inventory.inventoryID;
         Debug.Log($"from {curInventoryID} to {playerInventoryID}");
-        if(inventory.Items.TryGetValue(item, out int quantity))
+        if (inventory.Items.TryGetValue(item, out int quantity))
         {
             GameManager.instance.inventoryManager.TransferItem(curInventoryID, playerInventoryID, item, quantity);
             Debug.Log($"Transfered {item.itemName}, {quantity}");
@@ -167,7 +168,7 @@ public class InventoryShow : UIBase
 
     public override void UpdateUI()
     {
-        if(inventory != null)
+        if (inventory != null)
             UpdateInventoryDisplay(inventory);
     }
 

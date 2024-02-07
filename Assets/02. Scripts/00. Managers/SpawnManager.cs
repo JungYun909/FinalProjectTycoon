@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+
 
 public class SpawnManager : MonoBehaviour
 {
@@ -14,30 +9,21 @@ public class SpawnManager : MonoBehaviour
     public GameObject ingredientObj;
     public GameObject npcObj;
 
-    [Header("SpawnPosition")]
-    public GameObject door;
+    [Header("NPCSpawn")]
+    public GameObject NPCSpawnObj;
+    public int curNpcCount;
+    public List<NpcSO> npcDataList = new List<NpcSO>();
     
-
-    private void Start()
-    {
-        //StartCoroutine(SpawnNPC());
-    }
-
-    private void Update()
-    {
-        // if(GameManager.instance.statManager.curNpc < GameManager.instance.statManager.maxNpc)
-        //     StopCoroutine(SpawnNPC());
-    }
 
     public GameObject SpawnInstallaion(MachineSO installationData)
     {
         GameObject spawnInstallationObj = GameManager.instance.poolManager.SpawnFromPool(installationObj);
-        spawnInstallationObj.transform.position = new Vector3(0f, 0f, 0f);
+        spawnInstallationObj.transform.position =
+            new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 0f);
         
         InstallationController controller = spawnInstallationObj.GetComponent<InstallationController>();
-        
         controller._installationData = installationData;
-        
+        controller.InitSetting();
         GameManager.instance.dataManager.SaveInstallation(spawnInstallationObj);//TODO 데이터 매니저의 설치물 리스트를 통해 갱신시킨다
         GameManager.instance.dataManager.SaveData();
 
@@ -53,33 +39,30 @@ public class SpawnManager : MonoBehaviour
         
         controller.itemData = data;
         controller.destination = destinationObj;
+        controller.InitSet();
         
-        curSpawnObj.transform.position = spawningInstallationObj.transform.position +
-                                         ((destinationObj.transform.position -
-                                           spawningInstallationObj.transform.position).normalized);
-
-        GameManager.instance.dataManager.playerData.ingredients++;
-        GameManager.instance.dataManager.SaveData();
+        SpawnPositionSet(spawningInstallationObj, destinationObj, curSpawnObj);
+        
         UpdateObjTag(data.tag);
     }
 
-    IEnumerator SpawnNPC()
-    {
-        while (true)
-        {
-            float visitProbability = GameManager.instance.statManager.shopFame * 0.1f;
-        
-            int rand = UnityEngine.Random.Range(1, 100);
 
-            if (rand <= visitProbability)
-            {
-                GameObject curNPC =  GameManager.instance.poolManager.SpawnFromPool(npcObj);
-                curNPC.transform.position = door.transform.position;
-                GameManager.instance.statManager.maxNpc += 1;
-            }
-            
-            yield return new WaitForSeconds(6 - (GameManager.instance.statManager.shopLevel / 20));
-        }
+    public void SpawnPositionSet(GameObject spawnObj, GameObject destinationObj,GameObject curObj)
+    {
+        curObj.transform.position = spawnObj.transform.position +
+                                    ((destinationObj.transform.position -
+                                      spawnObj.transform.position).normalized);
+    }
+
+    public void SpawnNPC()
+    {
+        GameObject curNPC = GameManager.instance.poolManager.SpawnFromPool(npcObj);
+        curNpcCount++;
+        curNPC.transform.position = NPCSpawnObj.transform.position;
+        NPCController npcData = curNPC.GetComponent<NPCController>();
+        npcData.curNPCData = npcDataList[Random.Range(0, npcDataList.Count)];
+        
+        npcData.InitSetting();
     }
     
     public void SpawnObjPositionSet(GameObject spawnObj, GameObject destinationObj)

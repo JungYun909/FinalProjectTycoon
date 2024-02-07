@@ -24,7 +24,6 @@ public class InstallationMoveController : MonoBehaviour, IPointerDownHandler, IP
         {
             StopCoroutine(movementCoroutine);
             transform.root.position = controller.curGameObject.transform.position;
-            GameManager.instance.dataManager.PosUpdate(controller.curGameObject);
         }
     }
 

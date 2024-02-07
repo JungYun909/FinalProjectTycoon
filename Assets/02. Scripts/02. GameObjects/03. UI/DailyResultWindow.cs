@@ -20,6 +20,7 @@ public class DailyResultWindow : UIBase
     private void OnEnable()
     {
         UpdateUI();
+        Initialize();
     }
 	
     public override void Initialize()

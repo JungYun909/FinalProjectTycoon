@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8780971169892884077}
   - component: {fileID: 5067048929176711184}
   - component: {fileID: 8832446666227578149}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: NPCObject
   m_TagString: NPC
   m_Icon: {fileID: 0}
@@ -64,13 +64,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0df15325622a147807bf7bc535558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryManager: {fileID: 0}
+  npcSetting: {fileID: 8780971169892884077}
+  movementController: {fileID: 4660136104070691429}
   installationList: []
   buying: 0
   goCounter: 0
+  goDoor: 0
   bestMachine: {fileID: 0}
   installationListPosition: 0
   bestPosition_num: 0
+  delayTime: 0
 --- !u!212 &5203631563759980877
 SpriteRenderer:
   m_ObjectHideFlags: 0
