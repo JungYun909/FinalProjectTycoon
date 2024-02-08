@@ -69,8 +69,8 @@ public class IngredientController : MonoBehaviour, IInteractable
                 break;
         }
     }
-    
-    private void OnCollisionEnter2D(Collision2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         InstallationController controller;
         
