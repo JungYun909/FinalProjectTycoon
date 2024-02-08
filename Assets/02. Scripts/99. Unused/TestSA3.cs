@@ -29,6 +29,7 @@ public class TestSA3 : MonoBehaviour
         ItemSO itemSO = Resources.Load<ItemSO>(ResourcePath.ItemSo + itemID);
         //기본재료중 랜덤으로 하나 나오게 하기
         GameManager.instance.inventoryManager.AddItemToInventory(itemID, itemSO, 1);
+        GameObject.Find("PlayerInventoryUI(Clone)").GetComponent<PlayerInventoryUI>().UpdateUI();
         rewardImage.sprite = itemSO.sprite;
         rewardTxt.text = itemSO.itemName;
     }
