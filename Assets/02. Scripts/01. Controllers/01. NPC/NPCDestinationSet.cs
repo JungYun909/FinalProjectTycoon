@@ -8,6 +8,8 @@ public class NPCDestinationSet : MonoBehaviour
     public MovementController movementController;
     public NPCController controller;
 
+    public Coroutine curCoroutine;
+
     public void MachinePosInform()
     {
         float distanceToMachine = 0; 
@@ -18,7 +20,7 @@ public class NPCDestinationSet : MonoBehaviour
 
         if (controller.visitCounter == true)
         {
-            movementController.destinationObj = GameManager.instance.spawnManager.NPCSpawnObj;
+            movementController.destinationObj = GameManager.instance.dataManager.entrance;
             return;
         }
 

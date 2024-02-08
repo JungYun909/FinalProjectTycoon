@@ -34,8 +34,7 @@ public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 �
         {
             try
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-                OnSceneChange(type);
+                StartCoroutine(LoadSceneAsync(sceneName, type));
             }
             catch (Exception e)
             {
@@ -47,6 +46,18 @@ public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 �
         {
             Debug.Log("Invalid scene name");
         }
+    }
+    
+    private IEnumerator LoadSceneAsync(string sceneName, SceneType type)
+    {
+        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
+        
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        
+        OnSceneChange(type);
     }
 
     public void OnSceneChange(SceneType type)
