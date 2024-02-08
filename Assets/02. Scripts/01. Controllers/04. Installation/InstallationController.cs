@@ -40,7 +40,7 @@ public class InstallationController : MonoBehaviour, IInteractable
 
         if (_installationData.haveDoughInventory)
         {
-            doughContainer = new Queue<GameObject>();
+           doughContainer = new Queue<GameObject>();
             ingredients = new Queue<ItemSO>();
             inventoryController.gameObject.SetActive(true);
         }

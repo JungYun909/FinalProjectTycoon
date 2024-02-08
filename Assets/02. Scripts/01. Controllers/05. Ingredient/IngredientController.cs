@@ -57,6 +57,16 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void OnColliderInteract()
     {
+        //if(itemData.id == 1)
+        //{
+        //    gameObject.SetActive(false);
+        //    movementController.isMove = false;
+        //}
+        //else if (itemData.type ==2)
+        //{
+        //    GameManager.instance.poolManager.DeSpawnFromPool(gameObject);
+        //    movementController.isMove = false;
+        //}
         switch (itemData.tag)
         {
             case "Dough":
@@ -73,7 +83,6 @@ public class IngredientController : MonoBehaviour, IInteractable
     private void OnCollisionEnter2D(Collision2D other)
     {
         InstallationController controller;
-        
         if(destination != other.gameObject)
             return;
         

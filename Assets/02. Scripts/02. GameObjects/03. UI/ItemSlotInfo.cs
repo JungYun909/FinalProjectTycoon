@@ -81,7 +81,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         {
             // 중복 구독 방지를 위해 기존 구독 해제
             DeliverItem?.Invoke(curItem);
-            Debug.Log(curItem.itemName);
         }
 
         var inventoryShowInstance = FindObjectOfType<InventoryShow>();

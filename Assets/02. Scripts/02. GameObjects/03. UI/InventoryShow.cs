@@ -80,6 +80,11 @@ public class InventoryShow : UIBase
     {
         List<ItemSO> itemsToMove = new List<ItemSO>();
         // 인벤토리의 각 아이템에 대한 UI 생성
+        foreach(var item in inventory.itemQueue)
+        {
+            CreateDoughSlots(item, 1);
+        }
+
         foreach (var item in inventory.Items)
         {
             if (item.Key.type == 1 && item.Key.id != 1)
@@ -100,8 +105,9 @@ public class InventoryShow : UIBase
 
             if (item.Key.id == 1 || item.Key.type == 2) // 반죽 아이템(id가 1) 처리
             {
-                CreateDoughSlots(item.Key, item.Value);
+                continue;
             }
+
             else // 다른 아이템 처리
             {
                 CreateNormalItemSlot(item.Key, item.Value);
@@ -120,6 +126,7 @@ public class InventoryShow : UIBase
             {
                 return item.Key;
             }
+            Debug.Log($"PreivousItem:{ item.Key.itemName}");
         }
         return null;
     }
@@ -141,14 +148,14 @@ public class InventoryShow : UIBase
     private void ReturnToPlayerInventory(ItemSO item)
     {
         Debug.Log("Return!");
-        int playerInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
+        int playerInventoryID = 1000;
         int curInventoryID = this.inventory.inventoryID;
         Debug.Log($"from {curInventoryID} to {playerInventoryID}");
         if (inventory.Items.TryGetValue(item, out int quantity))
         {
             GameManager.instance.inventoryManager.TransferItem(curInventoryID, playerInventoryID, item, quantity);
             Debug.Log($"Transfered {item.itemName}, {quantity}");
-            inventory.Items.Remove(item);
+            //inventory.Items.Remove(item);
         }
     }
 
@@ -165,7 +172,7 @@ public class InventoryShow : UIBase
     {
         Debug.Log("DD");
     }
-
+    
     public override void UpdateUI()
     {
         if (inventory != null)
