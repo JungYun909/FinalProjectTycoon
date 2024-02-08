@@ -45,6 +45,7 @@ public class TestSA2 : MonoBehaviour
             timeTxt.text = "00:00";
             gameObject.SetActive(false);
             rewardBtn.SetActive(true);
+            sec = 10;
             return;
         }
     }

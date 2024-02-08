@@ -48,13 +48,13 @@ public class ShopInventory : AbstractInventory
     public void AddTestItem10() { AddItemThroughManager(10); }
     public void AddTestItem11() { AddItemThroughManager(11); }
 
-    public void AddItemThroughManager(int itemID)
+    private void AddItemThroughManager(int itemID)
     {
         ItemSO item = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(itemID);
         if (item != null)
         {
             GameManager.instance.inventoryManager.AddItemToInventory(inventoryID, item, 5);
         }
-        //UpdateDebugItemList();
+        UpdateDebugItemList();
     }
 }
