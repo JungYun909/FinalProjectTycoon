@@ -13,6 +13,6 @@ public class TemporaryStat : MonoBehaviour
     [SerializeField] public float playerTime = 1f;
     [SerializeField] public int shopLevel = 1;
     [SerializeField] public int dayTime = 0;
-    [SerializeField] public int Debt = 50000;
+    [SerializeField] public int Debt = 500;
     [SerializeField] public int warningCount = 0;
 }

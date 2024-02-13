@@ -11028,6 +11028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payBackGold: 0
+  happyEnd: 0
 --- !u!114 &1590563964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11328,6 +11329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   payBackGold: 1200
+  happyEnd: 0
 --- !u!1 &1591901236
 GameObject:
   m_ObjectHideFlags: 0
@@ -12529,7 +12531,7 @@ MonoBehaviour:
   playerTime: 0
   shopLevel: 1
   dayTime: 1
-  Debt: 50000
+  Debt: 500
   warningCount: 0
 --- !u!4 &1891069125
 Transform:

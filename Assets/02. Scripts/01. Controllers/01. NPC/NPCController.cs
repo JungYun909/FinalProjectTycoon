@@ -20,7 +20,18 @@ public class NPCController : MonoBehaviour
 
     private void Start()
     {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
+        {
+            Debug.Log("disdisdis");
+            return;
+        }
+        
         GameManager.instance.dataManager.OnSaveEvent += NewInitSetting;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.dataManager.OnSaveEvent -= NewInitSetting;
     }
 
     private void NewInitSetting()
