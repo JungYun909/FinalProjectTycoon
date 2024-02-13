@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -32,6 +34,11 @@ public class InstallationSetController : UIBase
 
     public void InstallationInstall()
     {
+        RaycastHit2D[] ray = Physics2D.RaycastAll(gameObject.transform.position, Vector2.zero, 0f);
+        Debug.Log(ray.Length);
+        if(ray.Length > 2 || ray.Length < 2)
+            return;
+        
         GameManager.instance.installationManager.installationManageController.SetActive(false);
         GameManager.instance.dataManager.PosUpdate(curGameObject);
         GameManager.instance.dataManager.SaveData();

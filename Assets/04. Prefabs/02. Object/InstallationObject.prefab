@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8264764714169948600}
   - component: {fileID: 107927889293074542}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5234343641514292190}
   - component: {fileID: 7668016188072440741}
   - component: {fileID: 7344404901063357745}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: InventoryFunction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7428516192598294658}
   - component: {fileID: 2001539584022440787}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MoveFunction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847568469477029919}
   - component: {fileID: 5245645433901317557}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DestinationFunction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 9006730046424788966}
   - component: {fileID: 1419680406982925656}
   - component: {fileID: 1421688546873149454}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: InstallationObject
   m_TagString: Installation
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 683684573869841654}
   - component: {fileID: 7854813660522254275}
   - component: {fileID: 4269237548176478379}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3789587691419538016}
   - component: {fileID: 5463271039139519540}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnFunction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
