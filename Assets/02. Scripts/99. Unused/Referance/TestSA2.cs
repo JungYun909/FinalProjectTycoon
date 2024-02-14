@@ -6,7 +6,9 @@ using UnityEngine;
 public class TestSA2 : MonoBehaviour
 {
     private TMP_Text timeTxt;
-    private float time = 10f;
+    private float sec = 10;
+    private int min = 0;
+
     [SerializeField] private GameObject rewardBtn;
 
     private void Awake()
@@ -22,16 +24,28 @@ public class TestSA2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.activeSelf && time > 0)
+        Timer();
+    }
+
+    private void Timer()
+    {
+        if (gameObject.activeSelf)
         {
-            time -= Time.deltaTime;
-            timeTxt.text = time.ToString("N2");
+            sec -= Time.deltaTime;
+            
+            timeTxt.text = string.Format("{0:D2}:{1:D2}", min, (int)sec);
+            if((int)sec < 0)
+            {
+                min--;
+                sec = 59;
+            }
         }
-        if (time <= 0)
+        if (min <= 0 && sec <= 0)
         {
             timeTxt.text = "00:00";
             gameObject.SetActive(false);
             rewardBtn.SetActive(true);
+            sec = 10;
             return;
         }
     }
