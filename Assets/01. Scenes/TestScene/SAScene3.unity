@@ -5793,6 +5793,8 @@ MonoBehaviour:
   currentGold: 0
   curTime: 0
   curDay: 0
+  curDebt: 0
+  curWarningCount: 0
   modFame: 0
   modInterior: 0
   modFinance: 0
@@ -5800,6 +5802,8 @@ MonoBehaviour:
   modLevel: 0
   modTime: 0
   modDay: 0
+  modDebt: 0
+  modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
 --- !u!114 &313458109
@@ -5920,6 +5924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  payBackGold: 0
+  happyEnd: 0
 --- !u!114 &313458117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7672,7 +7678,7 @@ GameObject:
   - component: {fileID: 666117366}
   - component: {fileID: 666117370}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_Delivery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14101,6 +14107,8 @@ MonoBehaviour:
   playerTime: 0
   shopLevel: 1
   dayTime: 1
+  Debt: 500
+  warningCount: 0
 --- !u!4 &1656063216
 Transform:
   m_ObjectHideFlags: 0
