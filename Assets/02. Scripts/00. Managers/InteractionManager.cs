@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Random = System.Random;
 
@@ -31,6 +32,19 @@ public class InteractionManager : MonoBehaviour
     //마우스 눌렀을때 상호작용 관리
     public void OnClick(InputValue value)
     {
+        PointerEventData data = new PointerEventData(EventSystem.current);
+        data.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(data, results);
+
+        if(results.Count > 0)
+        {
+            foreach(RaycastResult r in results)
+            {
+                Debug.Log("UI 검출 : " + r.gameObject.name);
+            }
+        }
+
         //클릭 중일떄 발생
         if (value.isPressed && interactionObject == null)
         {

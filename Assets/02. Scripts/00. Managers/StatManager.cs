@@ -145,7 +145,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
             curDay += 1;
             shopStat.dayTime = curDay;
             onDateChanged?.Invoke();
-            GameManager.instance.uiManager.OpenDailyResultWindow();
+            //GameManager.instance.uiManager.OpenDailyResultWindow();
         }
 
     }

@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     //UI오픈에 반응하는 델리게이트 / 이벤트 선언하기 위한 필드
     public delegate void DailyResultWindowOn();
     public event DailyResultWindowOn OnDailyWindowOpen;
+
+    public string lastUIName;
     
     public void Initialize()
     {
@@ -76,6 +78,8 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
         uiStack.Push(uiInstance);  //ui프리팹을 열어줌
         uiInstance.UpdateUI();
+        Debug.Log(uiInstance.gameObject.name);
+        lastUIName = uiInstance.name;
     }
 
     public void CloseAll() // 스택으로 관리되는 창 전체 닫기 위한 로지
@@ -143,7 +147,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "TitleScene")
         {
-            OpenDailyResultWindow();
+            //OpenDailyResultWindow();
         }
     }
 }
