@@ -5,20 +5,24 @@ using UnityEngine;
 
 public class TutorialDestinationMission : TutorialBase
 {
-    [SerializeField] private string startTarget;
-    [SerializeField] private string endTarget;
+    InstallationDestinationController controller;
 
+    private TutorialController controller_;
     public override void Enter()
     {
         base.Enter();
-        gameObject.AddComponent<InstallationDestinationController>().OnDestinationEvent += Check;
-        
+
+        var destinationcontroller = GameManager.instance.dataManager.curInstallations[0].transform.GetChild(5);
+        destinationcontroller.gameObject.SetActive(true);
+        controller = destinationcontroller.GetComponent<InstallationDestinationController>();
+        controller.OnDestinationEvent += Check;
     }
 
     private void Check(GameObject startObj, GameObject EndObj)
     {
-        if(startObj.GetComponent<InstallationController>()._installationData.installasionName.Contains(startTarget)
-            && EndObj.GetComponent<InstallationController>()._installationData.installasionName.Contains(endTarget))
+        if(startObj == GameManager.instance.dataManager.curInstallations[0] && EndObj == GameManager.instance.dataManager.curInstallations[1])
+            completed = true;
+        else if (startObj == GameManager.instance.dataManager.curInstallations[1] && EndObj == GameManager.instance.dataManager.entrance)
             completed = true;
     }
 
@@ -30,5 +34,6 @@ public class TutorialDestinationMission : TutorialBase
     public override void Exit()
     {
         base.Exit();
+        controller.OnDestinationEvent -= Check;
     }
 }
