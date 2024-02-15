@@ -20,11 +20,23 @@ public class NPCController : MonoBehaviour
 
     private void Start()
     {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
+        {
+            Debug.Log("disdisdis");
+            return;
+        }
+        
         GameManager.instance.dataManager.OnSaveEvent += NewInitSetting;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.dataManager.OnSaveEvent -= NewInitSetting;
     }
 
     private void NewInitSetting()
     {
+        movementController.Reset();
         InitSetting();
     }
 
@@ -43,7 +55,7 @@ public class NPCController : MonoBehaviour
         
         foreach (var installation in GameManager.instance.dataManager.curInstallations)
         {
-            if (installation.GetComponent<InstallationController>()._installationData.id == 5)
+            if (installation != null && installation.GetComponent<InstallationController>()._installationData.id == 5)
             {
                 visitObj.Add(installation);
             }
@@ -53,16 +65,13 @@ public class NPCController : MonoBehaviour
         
         destinationController.MachinePosInform();
     }
-    
-    private void OnCollisionEnter2D(Collision2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject != movementController.destinationObj)
             return;
 
-        movementController.isMove = false;
-        movementController.destinationObj = null;
-        StopCoroutine(movementController.curCoroutine);
-        
+        movementController.Reset();
         visitObj.Remove(other.gameObject);
 
         if (other.gameObject == destinationObj)

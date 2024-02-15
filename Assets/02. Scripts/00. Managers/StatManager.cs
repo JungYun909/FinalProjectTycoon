@@ -13,7 +13,9 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int financeScore;  //재정상태. 적자일수를 계산하여 초반에 -3처럼 특정 음수값이 되면 fail.
     public int currentGold;    //소지금. 변경가능.
     public float curTime;     // 현재 게임 시간
-    public int curDay;       // 현재까지 지나온 날짜
+    public int curDay;
+    public int curDebt;// 현재까지 지나온 날짜
+    public int curWarningCount;
 
     public int modFame;        //명성치의 변경값. 
     public int modInterior;     //인테리어 수치의 변경값. 가구/인테리어 요소의 점수를 받아와 합산/차감하는 식으로 이루어짐.
@@ -22,9 +24,12 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int modLevel;
     public float modTime;
     public int modDay;
+    public int modDebt;
+    public int modWarningCount;
     
     public int maxShopLevel = 100;
     public int maxNpc;
+    private int dayTime = 10;
     
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
@@ -45,6 +50,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         shopLevel = shopStat.shopLevel;
         curTime = shopStat.playerTime;
         curDay = shopStat.dayTime;
+        curDebt = shopStat.Debt;
         maxNpc = 2;
     }
 
@@ -128,7 +134,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         if (curTime>0)
         { 
             modTime += Time.deltaTime;
-            curTime = 1 - modTime/600;
+            curTime = 1 - modTime/dayTime;
             
             shopStat.playerTime = curTime;
         }

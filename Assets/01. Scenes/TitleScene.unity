@@ -725,6 +725,8 @@ MonoBehaviour:
   playerTime: 0
   shopLevel: 1
   dayTime: 1
+  Debt: 500
+  warningCount: 0
 --- !u!4 &1739303614
 Transform:
   m_ObjectHideFlags: 0
@@ -1038,6 +1040,8 @@ MonoBehaviour:
   currentGold: 0
   curTime: 0
   curDay: 0
+  curDebt: 0
+  curWarningCount: 0
   modFame: 0
   modInterior: 0
   modFinance: 0
@@ -1045,6 +1049,8 @@ MonoBehaviour:
   modLevel: 0
   modTime: 0
   modDay: 0
+  modDebt: 0
+  modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
 --- !u!114 &1830320771
@@ -1165,6 +1171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  payBackGold: 100
+  happyEnd: 0
 --- !u!114 &1830320779
 MonoBehaviour:
   m_ObjectHideFlags: 0

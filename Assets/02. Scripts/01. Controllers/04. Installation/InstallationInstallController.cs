@@ -17,8 +17,14 @@ public class InstallationInstallController : MonoBehaviour
     private void installFunction()
     {
         GameObject installUI = GameManager.instance.installationManager.installationManageController;
+        InstallationSetController installUIController = installUI.GetComponent<InstallationSetController>();
+        if (installUIController.curGameObject != null)
+        {
+            return;
+        }
+        
         installUI.SetActive(true);
         installUI.transform.position = gameObject.transform.position;
-        installUI.GetComponent<InstallationSetController>().curGameObject = transform.root.gameObject;
+        installUIController.curGameObject = transform.root.gameObject;
     }
 }
