@@ -15,7 +15,9 @@ public class InstallationDestinationController : MonoBehaviour
     private Vector2 desPos1;
     
     public InstallationController controller;
-    
+
+    public event Action<GameObject, GameObject> OnDestinationEvent;
+
     public void InitSet()
     {
         controller.installationFuctionSet += destinationFunction;
@@ -62,6 +64,7 @@ public class InstallationDestinationController : MonoBehaviour
                 {
                     destination[1] = ray.collider.gameObject;
                     desPos1 = destination[1].transform.position;
+                    OnDestinationEvent?.Invoke(destination[0], destination[1]);
                 }
             }
             else

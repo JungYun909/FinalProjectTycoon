@@ -23,6 +23,9 @@ public class InteractionManager : MonoBehaviour
 
     public int installationFunctionIndex = 0;
 
+    public string targetID;
+
+    public event Action onTuto;
     //마우스 포지션 바뀔때마다 정보갱신
     public void OnLook(InputValue value)
     {
@@ -39,9 +42,19 @@ public class InteractionManager : MonoBehaviour
 
         if(results.Count > 0)
         {
-            foreach(RaycastResult r in results)
+            foreach (RaycastResult r in results)
             {
+                if (r.gameObject.GetComponent<TutorialMissionID>() == null)
+                    continue;
+                Debug.Log(r.gameObject.GetComponent<TutorialMissionID>().missionID);
+                Debug.Log(targetID);
+                if (r.gameObject.GetComponent<TutorialMissionID>().missionID == targetID)
+                {
+                    onTuto?.Invoke();
+                }
                 Debug.Log("UI 검출 : " + r.gameObject.name);
+                Debug.Log(r.gameObject.GetComponent<TutorialMissionID>().missionID);
+                Debug.Log(targetID);
             }
         }
 

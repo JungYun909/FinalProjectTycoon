@@ -30,6 +30,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject entrance;
     
     public event Action OnSaveEvent;
+    public event Action<Vector3> PosUpdateEvent;
 
     public void Initialize()
     {
@@ -129,6 +130,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
                 playerData.installationsPos[i] = curObj.transform.position;
             }
         }
+        //배치위치받아오는시점
+        PosUpdateEvent?.Invoke(curObj.transform.position);
     }
 
     public void LoadData()

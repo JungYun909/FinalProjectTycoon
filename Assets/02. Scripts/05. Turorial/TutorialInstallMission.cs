@@ -1,29 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialInstallMission : TutorialBase
 {
-    
+    [SerializeField] private string targetName;
     public override void Enter()
     {
-        
+        base.Enter();
+        GameManager.instance.spawnManager.installMachineEvent += Check;
+    }
+
+    private void Check(MachineSO curMachineSO)
+    {
+        if (curMachineSO.installasionName.Contains(targetName))
+            completed = true;
+        Debug.Log(completed);
     }
 
     public override void Execute(TutorialController tutorialController)
     {
-        //GameObject gameObject = GameManager.instance.spawnManager.spawnInstallationObj;
-        ////if(GameManager.instance.spawnManager.SpawnInstallaion().name.Contains("MachineData001"))
-        ////{
-        ////    tutorialController.SetNextTutorial();
-        ////}
-        //if(gameObject.name.Contains("MachineData001"))
-        //    tutorialController.SetNextTutorial();
+        if (completed == true) tutorialController.SetNextTutorial();
     }
     
     public override void Exit()
     {
-        
+        base.Exit();
+        GameManager.instance.spawnManager.installMachineEvent -= Check;
     }
 
 

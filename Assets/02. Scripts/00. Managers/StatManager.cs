@@ -29,7 +29,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     
     public int maxShopLevel = 100;
     public int maxNpc;
-    private int dayTime = 10;
+    private int dayTime = 600;
     
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
