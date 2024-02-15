@@ -62,7 +62,7 @@ public class InteractionManager : MonoBehaviour
         if (value.isPressed && interactionObject == null)
         {
             RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f, LayerMask.GetMask("Installation"));
-            Debug.Log(ray.collider.gameObject.name);
+            //Debug.Log(ray.collider.gameObject.name);
             if( !ray.collider || ray.collider.gameObject.GetComponent<IInteractable>() == null)
                 return;
         
