@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class SpawnManager : MonoBehaviour
@@ -12,7 +14,8 @@ public class SpawnManager : MonoBehaviour
     [Header("NPCSpawn")]
     public int curNpcCount;
     public List<NpcSO> npcDataList = new List<NpcSO>();
-    
+
+    public event Action<ItemSO> SpawnIngredientEvnet; 
 
     public GameObject SpawnInstallaion(MachineSO installationData)
     {
@@ -42,6 +45,7 @@ public class SpawnManager : MonoBehaviour
         
         SpawnPositionSet(spawningInstallationObj, destinationObj, curSpawnObj);
         
+        SpawnIngredientEvnet?.Invoke(data);
         UpdateObjTag(data.tag);
     }
 

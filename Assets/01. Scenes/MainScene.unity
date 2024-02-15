@@ -8819,9 +8819,9 @@ GameObject:
   m_Component:
   - component: {fileID: 748217692}
   - component: {fileID: 748217693}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Installation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13285,7 +13285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16dfbcca479c46a08d4b23e1a09eb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  installationManageController: {fileID: 0}
+  installationManageController: {fileID: 8918987454552872553, guid: f25500c4c2f9d4f248f75df35af9e07b, type: 3}
 --- !u!114 &1590563961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13333,6 +13333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payBackGold: 0
   happyEnd: 0
+  questPrefab: {fileID: 0}
 --- !u!114 &1590563964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13371,6 +13372,7 @@ MonoBehaviour:
   statManager: {fileID: 1590563955}
   dataManager: {fileID: 1590563968}
   recipeManager: {fileID: 1590563971}
+  questManager: {fileID: 0}
 --- !u!4 &1590563966
 Transform:
   m_ObjectHideFlags: 0
@@ -13634,6 +13636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payBackGold: 1200
   happyEnd: 0
+  questPrefab: {fileID: 0}
 --- !u!1 &1591901236
 GameObject:
   m_ObjectHideFlags: 0
@@ -14565,9 +14568,9 @@ GameObject:
   - component: {fileID: 1765728720}
   - component: {fileID: 1765728719}
   - component: {fileID: 1765728718}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: KitchenDoor
-  m_TagString: Untagged
+  m_TagString: Installation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15609,7 +15612,7 @@ MonoBehaviour:
   playerTime: 0
   shopLevel: 1
   dayTime: 1
-  Debt: 500
+  debt: 0
   warningCount: 0
 --- !u!4 &1891069125
 Transform:

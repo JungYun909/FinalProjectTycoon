@@ -1,0 +1,4 @@
+ID,Category,Title,Detail,Reward,NeedID,Count
+0,make,빵 만들기,만들기,200,1,10
+1,collect,재화 모으기,모으기,200,money,2000
+2,collect,파견 보내기,보내기,400,money,1

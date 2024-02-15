@@ -64,9 +64,8 @@ public class InstallationInventoryController : MonoBehaviour
             {
                 recipeIndex += curController.interactInstallation.Dequeue() + "+";
             }
-            Debug.Log(recipeIndex);
             int spawnFoodID = GameManager.instance.recipeManager.CompareWithResipe(recipeIndex);
-            Debug.Log(spawnFoodID);
+            
             recipeIndex = "";
             GameManager.instance.spawnManager.SpawnIngredient(gameObject, destinationController.destination[1], GameManager.instance.dataManager.foodSub[spawnFoodID]);
 

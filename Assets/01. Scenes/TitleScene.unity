@@ -719,13 +719,13 @@ MonoBehaviour:
   fame: 200
   gold: 1000
   shopName: "\uB530\uB048\uB530\uB048"
-  interiorScore: 50
+  interiorScore: 0
   financialScore: 0
-  goldUsed: 500
+  goldUsed: 0
   playerTime: 0
   shopLevel: 1
   dayTime: 1
-  Debt: 500
+  debt: 10000
   warningCount: 0
 --- !u!4 &1739303614
 Transform:
@@ -765,6 +765,7 @@ GameObject:
   - component: {fileID: 1830320769}
   - component: {fileID: 1830320768}
   - component: {fileID: 1830320767}
+  - component: {fileID: 1830320782}
   - component: {fileID: 1830320766}
   - component: {fileID: 1830320765}
   - component: {fileID: 1830320764}
@@ -1173,6 +1174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payBackGold: 100
   happyEnd: 0
+  questPrefab: {fileID: 3465089061949424958, guid: 80db358ba2d794b30b3bb562ff1db938, type: 3}
 --- !u!114 &1830320779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,6 +1213,7 @@ MonoBehaviour:
   statManager: {fileID: 1830320770}
   dataManager: {fileID: 1830320768}
   recipeManager: {fileID: 1830320764}
+  questManager: {fileID: 1830320782}
 --- !u!4 &1830320781
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,6 +1230,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830320782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830320763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc73f9064e3624396bee0574802f06f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1967258786
 GameObject:
   m_ObjectHideFlags: 0

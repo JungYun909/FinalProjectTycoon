@@ -8,6 +8,7 @@ public class PlayerData
 {
     public int level = 1;
     public int money = 0;
+    public int warningCount = 0;
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
     public List<int> recipeIndex = new List<int>();
@@ -62,6 +63,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         playerData.level = 1;
         playerData.money = 0;
+        playerData.warningCount = 0;
         playerData.installationsPos.Clear();
         playerData.installationSubInt.Clear();
         

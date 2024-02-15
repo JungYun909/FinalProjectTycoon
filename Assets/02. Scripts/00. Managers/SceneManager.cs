@@ -31,7 +31,7 @@ public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 �
         { "EndScene" , SceneType.EndScene},
         { "HappyEndScene" , SceneType.HappyEndScene}
     };
-    public event Action<SceneType>sceneInfo;
+    public event Action<SceneType> sceneInfo;
     public void ChangeScene(string sceneName)
     {
         if (sceneNameToType.TryGetValue(sceneName, out SceneType type))
