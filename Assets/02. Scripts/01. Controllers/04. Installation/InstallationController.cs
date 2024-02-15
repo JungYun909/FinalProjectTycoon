@@ -35,10 +35,17 @@ public class InstallationController : MonoBehaviour, IInteractable
     {
         InitSetting();
         destinationID = GameManager.instance.destinationManager.RegisterInstallationDestinationController(this);
-        LoadDestinationDataAndSetDestination();
+        StartCoroutine(DelayLoadingDestinationInfo());
     }
+
+    private IEnumerator DelayLoadingDestinationInfo()
+    {
+        yield return new WaitForSeconds(1f);
+        LoadDestinationDataAndSetDestination();
+    }    
     private void LoadDestinationDataAndSetDestination()
     {
+        destinationController.gameObject.SetActive(true);
         DestinationData loadedData = GameManager.instance.dataManager.LoadDestinationData(this.destinationID) ;
         if (loadedData != null)
         {

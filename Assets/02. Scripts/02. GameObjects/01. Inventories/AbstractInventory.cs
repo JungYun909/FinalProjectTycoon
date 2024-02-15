@@ -47,6 +47,12 @@ public class AbstractInventory : MonoBehaviour
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
         controller = GetComponentInParent<InstallationController>();
         inventoryController = GetComponent<InstallationInventoryController>();
+        InventoryData data = GameManager.instance.dataManager.LoadInventoryData(inventoryID);
+        if (data != null)
+        {
+            LoadInventory(data);
+        }
+
     }
 
     private void OnEnable()
@@ -73,11 +79,6 @@ public class AbstractInventory : MonoBehaviour
 
     private void OpenUI()
     {
-        InventoryData data = GameManager.instance.dataManager.LoadInventoryData(inventoryID);
-        if(data != null)
-        {
-            LoadInventory(data);
-        }
 
         if(controller!=null && controller._installationData != null)
         {
@@ -123,7 +124,8 @@ public class AbstractInventory : MonoBehaviour
         foreach (var itemData in data.items)
         {
             ItemSO item = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(itemData.itemID);
-            this.Items.Add(item, itemData.quantity);
+            GameManager.instance.inventoryManager.AddItemToInventory(this.inventoryID, item, itemData.quantity);
+            //this.Items.Add(item, itemData.quantity);
         }
         UpdateInspectorList(); // Inspector 리스트 업데이트
     }

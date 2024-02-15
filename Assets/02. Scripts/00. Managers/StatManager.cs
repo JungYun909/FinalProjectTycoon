@@ -30,7 +30,10 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int maxShopLevel = 100;
     public int maxNpc;
     private int dayTime = 10;
-    
+
+
+    public int goldUsed = 0;
+
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
     public event Action onDateChanged;
@@ -102,7 +105,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         financeScore += modFinance;
         shopStat.financialScore = financeScore;
-        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return financeScore;
     }
     public int EarnGold(int modGold)  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
@@ -117,6 +120,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         currentGold -= modGold;
         shopStat.gold = currentGold;
+        goldUsed += modGold;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return currentGold;
     }
@@ -125,7 +129,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         shopLevel += modLevel;
         shopStat.shopLevel = shopLevel;
-        //onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return shopLevel;
     }
 
@@ -142,12 +146,11 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         {
             modTime = 0;
             curTime = 1;
+            Debug.Log("CurTime Changed");
             curDay += 1;
             shopStat.dayTime = curDay;
-            onDateChanged?.Invoke();
-            GameManager.instance.uiManager.OpenDailyResultWindow();
+            onStatChanged?.Invoke();
         }
-
     }
 
     private void UpdateDailyResult()

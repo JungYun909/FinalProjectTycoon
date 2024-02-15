@@ -768,6 +768,7 @@ GameObject:
   - component: {fileID: 1830320766}
   - component: {fileID: 1830320765}
   - component: {fileID: 1830320764}
+  - component: {fileID: 1830320782}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1211,6 +1212,7 @@ MonoBehaviour:
   statManager: {fileID: 1830320770}
   dataManager: {fileID: 1830320768}
   recipeManager: {fileID: 1830320764}
+  destinationManager: {fileID: 1830320782}
 --- !u!4 &1830320781
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,6 +1229,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830320782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830320763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d47be555c7c3f94389b7c0cbc121c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationInfo: []
 --- !u!1 &1967258786
 GameObject:
   m_ObjectHideFlags: 0
