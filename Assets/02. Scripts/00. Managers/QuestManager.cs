@@ -6,22 +6,22 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    private List<Dictionary<string, object>> data_Quest = null;
-
-    public TextMeshProUGUI questTitle;
-    public TextMeshProUGUI questDetail;
-    public TextMeshProUGUI questReward;
+    public List<Dictionary<string, object>> data_Quest = null;
     
-    private enum QuestType
+    public enum QuestType
     {
         ID,
         Category,
         Title,
         Detail,
         Reward,
-        NeedID,
-        InstallID,
-        FoodID
+        Count
+    }
+    
+    public enum CategoryType
+    {
+        make,
+        collect
     }
 
     private void Awake()
@@ -29,10 +29,12 @@ public class QuestManager : MonoBehaviour
         data_Quest = CSVReader.Read("QuestCSV - Quest");
     }
 
-    public void StartQuest(int questNum)
+    public (string, string, string) QuestText(int questNum)
     {
-        questTitle.text = data_Quest[questNum][QuestType.Title.ToString()].ToString();
-        questDetail.text = data_Quest[questNum][QuestType.Detail.ToString()].ToString();
-        questReward.text = data_Quest[questNum][QuestType.Reward.ToString()].ToString();
+        string detail = data_Quest[questNum][QuestType.Detail.ToString()].ToString();
+        string reward = data_Quest[questNum][QuestType.Reward.ToString()].ToString();
+        string count = data_Quest[questNum][QuestType.Count.ToString()].ToString();
+
+        return (detail, reward, count);
     }
 }

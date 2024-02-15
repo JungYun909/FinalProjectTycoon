@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class InstallationDestinationController : MonoBehaviour
@@ -34,7 +35,6 @@ public class InstallationDestinationController : MonoBehaviour
 
     private void stopFunction()
     {
-        Debug.Log("aaa");
         if (destinationCoroutine != null)
         {
             StopCoroutine(destinationCoroutine);
@@ -49,9 +49,7 @@ public class InstallationDestinationController : MonoBehaviour
 
         while (true)
         {
-        
-            Debug.Log("asdasdasdasdsad");
-            RaycastHit2D ray = Physics2D.Raycast(GameManager.instance.interactionManager.curMouseDirection, Vector2.zero, 0f);
+            RaycastHit2D ray = Physics2D.Raycast(GameManager.instance.interactionManager.curMouseDirection, Vector2.zero, 0f, LayerMask.GetMask("Installation"));
         
             if (ray.collider)
             {

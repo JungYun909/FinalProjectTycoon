@@ -8,9 +8,25 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
     [SerializeField] private int payBackGold;
 
     public bool happyEnd;
+    public UIBase questPrefab;
     private void Start()
     {
         GameManager.instance.statManager.onDateChanged += PayBack;
+        GameManager.instance.statManager.onDateChanged += OnQuest;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.statManager.onDateChanged -= PayBack;
+        GameManager.instance.statManager.onDateChanged -= OnQuest;
+    }
+
+    private void OnQuest()
+    {
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
+            return;
+        
+        GameManager.instance.uiManager.OpenWindow(questPrefab);
     }
 
     private void PayBack()
@@ -25,20 +41,19 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
             if (GameManager.instance.statManager.currentGold >= payBackGold)
             {
                 GameManager.instance.statManager.SpendGold(payBackGold);
-                GameManager.instance.statManager.shopStat.Debt -= payBackGold;
-                GameManager.instance.statManager.curWarningCount++;
+                GameManager.instance.statManager.shopStat.debt -= payBackGold;
+                GameManager.instance.dataManager.playerData.warningCount++;
             }
             else
             {
                 GameManager.instance.statManager.SpendGold(GameManager.instance.statManager.currentGold);
-                GameManager.instance.statManager.shopStat.Debt -= GameManager.instance.statManager.currentGold;
-                GameManager.instance.statManager.curWarningCount--;
+                GameManager.instance.statManager.shopStat.debt -= GameManager.instance.statManager.currentGold;
+                GameManager.instance.dataManager.playerData.warningCount--;
             }
             
         }
-
-        Debug.Log(GameManager.instance.statManager.curWarningCount);
-        if (GameManager.instance.statManager.curWarningCount < -2)
+        
+        if (GameManager.instance.dataManager.playerData.warningCount < -2)
         {
             GameManager.instance.sceneManager.ChangeScene(SceneType.EndScene.ToString());
             GameManager.instance.dataManager.ResetData();
@@ -49,9 +64,7 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
 
     private void HappyEnding()
     {
-        //해피 엔딩 조건
-        Debug.Log(GameManager.instance.statManager.shopStat.Debt);
-        if (GameManager.instance.statManager.shopStat.Debt > 0)
+        if (GameManager.instance.statManager.shopStat.debt > 0)
             return;
 
         happyEnd = true;
