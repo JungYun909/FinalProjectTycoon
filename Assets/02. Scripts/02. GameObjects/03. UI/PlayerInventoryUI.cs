@@ -129,7 +129,6 @@ public class PlayerInventoryUI : UIBase
         if (playerInventory.Items.TryGetValue(curItem, out int quantity))
         {
             itemQuantityInInventory = quantity;
-            Debug.Log(itemQuantityInInventory);
         }
         UpdateItemInfoInItemInfoWindow();
     }

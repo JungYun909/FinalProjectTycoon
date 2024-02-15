@@ -28,9 +28,50 @@ public class InstallationController : MonoBehaviour, IInteractable
     public event Action installationFuctionSet;
     public event Action installationFuctionOut;
 
+
+    public int destinationID;
+
     private void Start()
     {
         InitSetting();
+        destinationID = GameManager.instance.destinationManager.RegisterInstallationDestinationController(this);
+        StartCoroutine(DelayLoadingDestinationInfo());
+    }
+
+    private IEnumerator DelayLoadingDestinationInfo()
+    {
+        yield return new WaitForSeconds(1f);
+        LoadDestinationDataAndSetDestination();
+    }    
+    private void LoadDestinationDataAndSetDestination()
+    {
+        destinationController.gameObject.SetActive(true);
+        DestinationData loadedData = GameManager.instance.dataManager.LoadDestinationData(this.destinationID) ;
+        if (loadedData != null)
+        {
+            if (loadedData.controllerID == this.destinationID)
+            {
+                InstallationController connectedController = GameManager.instance.destinationManager.GetDestinationGameObject(loadedData.connectedControllerID);
+                if (connectedController != null)
+                {
+                    InstallationDestinationController destinationController = GetComponentInChildren<InstallationDestinationController>();
+                    destinationController.destination[1] = connectedController.gameObject;
+                    destinationController.desPos1 = connectedController.gameObject.transform.position;
+                }
+            }
+        }
+    }
+
+
+    public void SaveDestination()
+    {
+        if (this.GetComponentInChildren<InstallationDestinationController>().destination[1] != null)
+        {
+            int fromID = this.destinationID;
+            int toID = this.GetComponentInChildren<InstallationDestinationController>().destination[1].GetComponent<InstallationController>().destinationID;
+            DestinationData data = new DestinationData(fromID, toID);
+            GameManager.instance.dataManager.SaveDestinationData(data);
+        }
     }
     public void InitSetting()
     {
@@ -40,7 +81,7 @@ public class InstallationController : MonoBehaviour, IInteractable
 
         if (_installationData.haveDoughInventory)
         {
-            doughContainer = new Queue<GameObject>();
+           doughContainer = new Queue<GameObject>();
             ingredients = new Queue<ItemSO>();
             inventoryController.gameObject.SetActive(true);
         }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2098980059594774918}
   - component: {fileID: -5676927361082338546}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Circle 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834fa35ba7f3e48bf9de532fb73ed632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInfo: {fileID: 11400000, guid: 68ae17f6ccd0f462b9072368b1341dcd, type: 2}
+  itemInfo: {fileID: 11400000, guid: 8564fc979d2384051887ac490d001d0a, type: 2}
   inventoryManager: {fileID: 0}
   movement: 2
 --- !u!58 &2120137426721037491
