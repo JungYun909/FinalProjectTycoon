@@ -8,6 +8,11 @@ public class InstallationInventoryController : MonoBehaviour
     public InstallationController controller;
     public InstallationDestinationController destinationController;
     public AbstractInventory inventory;
+
+    private float eventTimer = 0f;
+    private const float eventInterval = 1f;
+
+    public event Action<float> deliverCurrentTime;
     
     private string recipeIndex;
     
@@ -21,17 +26,22 @@ public class InstallationInventoryController : MonoBehaviour
             return;
 
         spawnTimer += Time.deltaTime;
-        
+
         if (spawnTimer > controller._installationData.makeDelay)
         {
             spawnTimer = 0;
             DoughSetController();
         }
+        eventTimer += Time.deltaTime;
+        if (eventTimer >= eventInterval)
+        {
+            deliverCurrentTime?.Invoke(spawnTimer);
+            eventTimer = 0;
+        }
     }
 
     public void DoughSetController()
     {
-
         GameObject curObj = controller.doughContainer.Dequeue();
         curObj.SetActive(true);
         

@@ -26,10 +26,12 @@ public class AbstractInventory : MonoBehaviour
     private AbstractInventory inventory;
     public InventoryShow inventoryShow;
     public StandInventoryUI standInventory;
+    public InstallationInventoryController inventoryController;
     public int maxDoughQuantity = 5; // 기본값으로 5를 설정
 
 
     public static event Action<AbstractInventory> OnInventoryClicked;
+    public static event Action<MachineSO> DeliverMachineSO;
 
     public InstallationController controller;
 
@@ -44,6 +46,7 @@ public class AbstractInventory : MonoBehaviour
     {
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
         controller = GetComponentInParent<InstallationController>();
+        inventoryController = GetComponent<InstallationInventoryController>();
     }
 
     private void OnEnable()
@@ -70,6 +73,12 @@ public class AbstractInventory : MonoBehaviour
 
     private void OpenUI()
     {
+        InventoryData data = GameManager.instance.dataManager.LoadInventoryData(inventoryID);
+        if(data != null)
+        {
+            LoadInventory(data);
+        }
+
         if(controller!=null && controller._installationData != null)
         {
             if(controller._installationData.id == 5)
@@ -92,5 +101,30 @@ public class AbstractInventory : MonoBehaviour
     {
         GameManager.instance.uiManager.OpenWindow(inventoryShow, this);
         OnInventoryClicked?.Invoke(this);
+        DeliverMachineSO?.Invoke(controller._installationData);
+    }
+
+    public void SaveInventory()
+    {
+        InventoryData data = new InventoryData();
+        data.inventoryID = this.inventoryID;
+        data.items = new List<ItemData>();
+        foreach (var entry in Items)
+        {
+            data.items.Add(new ItemData() { itemID = entry.Key.id, quantity = entry.Value });
+        }
+        GameManager.instance.dataManager.SaveInventoryData(data);
+    }
+
+    public void LoadInventory(InventoryData data)
+    {
+        this.inventoryID = data.inventoryID;
+        this.Items.Clear();
+        foreach (var itemData in data.items)
+        {
+            ItemSO item = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(itemData.itemID);
+            this.Items.Add(item, itemData.quantity);
+        }
+        UpdateInspectorList(); // Inspector 리스트 업데이트
     }
 }

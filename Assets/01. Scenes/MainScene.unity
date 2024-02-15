@@ -11149,6 +11149,7 @@ GameObject:
   - component: {fileID: 1590563970}
   - component: {fileID: 1590563969}
   - component: {fileID: 1590563971}
+  - component: {fileID: 1590563972}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -11353,6 +11354,7 @@ MonoBehaviour:
   statManager: {fileID: 1590563955}
   dataManager: {fileID: 1590563968}
   recipeManager: {fileID: 1590563971}
+  destinationManager: {fileID: 1590563972}
 --- !u!4 &1590563966
 Transform:
   m_ObjectHideFlags: 0
@@ -11602,6 +11604,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf7a197874f1480d9d13e726b6a324a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1590563972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590563952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d47be555c7c3f94389b7c0cbc121c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationInfo: []
 --- !u!1 &1591901236
 GameObject:
   m_ObjectHideFlags: 0
@@ -12252,12 +12267,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryShow: {fileID: 0}
   standInventory: {fileID: 0}
+  inventoryController: {fileID: 0}
   maxDoughQuantity: 5
   controller: {fileID: 0}
   itemsListForInspector: []
   inventoryID: 0
   inventoryUI: {fileID: 0}
-  debugItemList: []
 --- !u!4 &1765728720
 Transform:
   m_ObjectHideFlags: 0

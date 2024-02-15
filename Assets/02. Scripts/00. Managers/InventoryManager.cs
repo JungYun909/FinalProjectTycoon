@@ -3,12 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public class InventoryData
+{
+    public int inventoryID;
+    public List<ItemData> items; // 아이템 데이터 리스트
+}
+
+[System.Serializable]
+public class ItemData
+{
+    public int itemID; // ItemSO의 id와 매칭
+    public int quantity; // 해당 아이템의 수량
+}
+
+
 public class InventoryManager : MonoBehaviour
 {
     public event Action<int> OnInventoryUpdated; // 인벤토리 ID를 인자로 사용
 
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
-    private Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
+    public Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
     private int playerInventoryID = 1000;
 
@@ -55,6 +71,7 @@ public class InventoryManager : MonoBehaviour
             }
             OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
             inventory.UpdateInspectorList();
+            inventory.SaveInventory();
         }
     }
 
@@ -83,6 +100,7 @@ public class InventoryManager : MonoBehaviour
                 }
                 OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
                 inventory.UpdateInspectorList();
+                inventory.SaveInventory();
 
                 return true;
             }

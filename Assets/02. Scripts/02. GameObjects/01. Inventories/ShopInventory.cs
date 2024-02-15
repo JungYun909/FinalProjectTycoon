@@ -15,6 +15,10 @@ public class ShopInventory : AbstractInventory
     protected override void Start()
     {
         base.Start();
+        if (GameManager.instance.dataManager.IsFileExist(1000))
+        {
+            LoadInventory(GameManager.instance.dataManager.LoadInventoryData(1000));
+        }
         AddTestItem1();
         AddTestItem2();
         AddTestItem3();
@@ -22,19 +26,7 @@ public class ShopInventory : AbstractInventory
         AddTestItem5();
         AddTestItem6();
     }
-    private Dictionary<ItemSO, int> items = new Dictionary<ItemSO, int>();
-
-    [SerializeField]
-    private List<ItemEntry> debugItemList; // 디버그 목적으로만 사용
-
-    private void UpdateDebugItemList()   // 디버그용 인스펙터업데이트
-    {
-        debugItemList.Clear();
-        foreach (var entry in items)
-        {
-            debugItemList.Add(new ItemEntry { item = entry.Key, quantity = entry.Value });
-        }
-    }
+    //private Dictionary<ItemSO, int> items = new Dictionary<ItemSO, int>();
 
     public void AddTestItem1() { AddItemThroughManager(1); }
     public void AddTestItem2() { AddItemThroughManager(2); }
@@ -55,6 +47,5 @@ public class ShopInventory : AbstractInventory
         {
             GameManager.instance.inventoryManager.AddItemToInventory(inventoryID, item, 5);
         }
-        UpdateDebugItemList();
     }
 }

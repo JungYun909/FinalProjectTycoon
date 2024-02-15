@@ -9,6 +9,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 {
     public Image itemIcon; // 아이템 아이콘을 표시할 Image 컴포넌트
     public TextMeshProUGUI quantityText; // 수량을 표시할 TextMeshProUGUI 컴포넌트
+    public Slider timer;
 
     public event Action<ItemSO> DeliverItem;
     public event Action<int> DeliverInventoryID;
@@ -17,15 +18,25 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     private MachineSO curMachine;
 
     private InventoryShow inventoryShow;
+    private InstallationInventoryController inventoryController;
     private ShopInventory shopInventory;
+
+    private float timerDuration;
+    private float curTimer = 0f;
+    private bool isTimerOn = false;
 
     private void Awake()
     {
-        inventoryShow = FindObjectOfType<InventoryShow>();
+        inventoryShow = GetComponentInParent<InventoryShow>();
+        if(inventoryShow != null) Debug.Log("InventoryShow Found");
         shopInventory = FindObjectOfType<ShopInventory>();
     }
+    
     public void Setup(ItemSO item, int quantity)
     {
+        timer.gameObject.SetActive(false);
+        if(curMachine != null)
+        timerDuration = curMachine.makeDelay;
         // 아이템 아이콘 설정
         if (item != null && item.sprite != null)
         {
@@ -45,6 +56,23 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         }
     }
 
+    public void StartTimer()
+    {
+        Debug.Log("Timer Started");
+        timer.gameObject.SetActive(true);
+        isTimerOn = true;
+    }
+
+    public void SetTimerDuration(float duration)
+    {
+        this.timerDuration = duration;
+    }
+
+    public void SetupMachineInfo(MachineSO machineSO)
+    {
+        curMachine = machineSO;
+    }
+
     public void SetupMachineInfo(MachineSO machine, int quantity)
     {
         if (machine != null && machine.sprite != null)
@@ -62,15 +90,33 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     private void OnEnable()
     {
         if (inventoryShow != null)
+        {
             inventoryShow.DeliverInventoryID += OnButtonClicked;
+            inventoryController = inventoryShow.curInventory.GetComponent<InstallationInventoryController>();
+            if (inventoryController != null)
+            {
+                inventoryController.deliverCurrentTime += UpdateTimer;
+            }
+        }
         else
             return;
     }
-
+    private void UpdateTimer(float time)
+    {
+        if (!isTimerOn)
+            return;
+        curTimer = time;
+        timer.value = curTimer / timerDuration;
+    }
     private void OnDisable()
     {
         if (inventoryShow != null)
+        {
             inventoryShow.DeliverInventoryID -= OnButtonClicked;
+            //inventoryShow.DeliverMachineInfo -= SetupMachineInfo;
+            if (inventoryController != null)
+                inventoryController.deliverCurrentTime -= UpdateTimer;
+        }
         else
             return;
     }
@@ -106,14 +152,4 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
             }
         }
     }
-
-    //public void DeliverItemInfo(int toInventoryID)
-    //{
-    //    if (toInventoryID != 0)
-    //    {
-    //        DeliverItem?.Invoke(curItem);
-    //        Debug.Log(curItem.itemName);
-    //        GameManager.instance.inventoryManager.TransferItem(shopInventory.inventoryID, toInventoryID, curItem, 1);
-    //    }
-    //}
 }
