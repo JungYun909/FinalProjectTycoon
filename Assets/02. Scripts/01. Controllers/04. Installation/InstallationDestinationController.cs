@@ -32,7 +32,10 @@ public class InstallationDestinationController : MonoBehaviour
     private void destinationFunction()
     {
         if (destinationCoroutine == null)
+        {
+            InitLineSet();
             destinationCoroutine = StartCoroutine(StartDestinationSet());
+        }
     }
 
     private void stopFunction()
@@ -51,6 +54,25 @@ public class InstallationDestinationController : MonoBehaviour
         else if (destination[0] != null)
         {
             GameManager.instance.destinationManager.DeleteDestinationInfo(destination[0].GetComponentInParent<InstallationController>().destinationID);
+        }
+    }
+
+    private void InitLineSet()
+    {
+        if (destination[0])
+        {
+            desPos0 = destination[0].transform.position;
+            line.SetPosition(0, Vector2.zero);
+            
+            if (destination[1])
+            {
+                desPos1 = destination[1].transform.position;
+                line.SetPosition(1, desPos1 - desPos0);
+            }
+            else if(!destination[1])
+            {
+                line.SetPosition(1, Vector2.zero);
+            }
         }
     }
 

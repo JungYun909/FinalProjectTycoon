@@ -28,8 +28,7 @@ public class InstallationSetController : UIBase
         GameManager.instance.poolManager.DeSpawnFromPool(curGameObject);
         GameManager.instance.installationManager.installationManageController.SetActive(false);
         GameManager.instance.dataManager.SaveInstallation(curGameObject);
-        GameManager.instance.dataManager.SaveData();
-        curGameObject = null;
+        InstallationEndSet();
     }
 
     public void InstallationInstall()
@@ -41,8 +40,14 @@ public class InstallationSetController : UIBase
         
         GameManager.instance.installationManager.installationManageController.SetActive(false);
         GameManager.instance.dataManager.PosUpdate(curGameObject);
+        InstallationEndSet();
+    }
+
+    private void InstallationEndSet()
+    {
         GameManager.instance.dataManager.SaveData();
         curGameObject = null;
+        GameManager.instance.interactionManager.interactionObject = null;
     }
 
     public override void Initialize()
