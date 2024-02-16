@@ -30,6 +30,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public List<GameObject> curInstallations; //판매씬에 배치된 진열대
     public GameObject counter; // 카운터 등록
     public GameObject entrance;
+    public GameObject kitchenDoor;
     
     public event Action OnSaveEvent;
     public event Action<Vector3> PosUpdateEvent;
@@ -46,6 +47,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         
         counter = GameObject.Find("CounterObj");
         entrance = GameObject.Find("Entrance");
+        kitchenDoor = GameObject.Find("KitchenDoor");
         
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
         

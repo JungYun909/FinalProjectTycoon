@@ -45,7 +45,6 @@ public class InstallationDestinationController : MonoBehaviour
         }
         if(destination[0]!=null && destination[1] != null)
         {
-            Debug.Log($"{destination[0].GetComponent<InstallationController>().destinationID} is linked with {destination[1].GetComponent<InstallationController>().destinationID}");
             GameManager.instance.destinationManager.RegisterDestinationInfo(destination[0].GetComponent<InstallationController>().destinationID, destination[1].GetComponent<InstallationController>().destinationID);
             this.gameObject.GetComponentInParent<InstallationController>().SaveDestination();
         }
