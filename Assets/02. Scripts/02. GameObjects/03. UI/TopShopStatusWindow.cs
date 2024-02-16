@@ -29,7 +29,7 @@ public class TopShopStatusWindow : UIBase
 
         curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
-        curDate = shopStat.dayTime;
+        curDate = GameManager.instance.statManager.curDay;
         curDateText.text = curDate.ToString();
 
         timeSlider.value = curTime;
@@ -55,6 +55,6 @@ public class TopShopStatusWindow : UIBase
         goldOwned = shopStat.gold;
 	    curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
-        curDateText.text = curDate.ToString();
+        curDateText.text = (GameManager.instance.statManager.curDay-1).ToString();
     }
 }

@@ -35,18 +35,22 @@ public class QuestUIController : UIBase
     private void OnEnable()
     {
         GameManager.instance.spawnManager.SpawnIngredientEvnet += MakeQuestUpdate;
-        Debug.Log("En");
+        GameManager.instance.statManager.onDateChanged += ReStartQuest;
         InitSet();
     }
 
 
     private void Start()
     {
-        Debug.Log("Start");
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
             return;
 
-        Debug.Log("canStart");
+        InitSet();
+    }
+
+    private void ReStartQuest()
+    {
+        ResetQuest();
         InitSet();
     }
 

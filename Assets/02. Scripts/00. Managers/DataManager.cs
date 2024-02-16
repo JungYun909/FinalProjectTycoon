@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerData
 {
     public int level = 1;
@@ -29,6 +30,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public List<GameObject> curInstallations; //판매씬에 배치된 진열대
     public GameObject counter; // 카운터 등록
     public GameObject entrance;
+    public GameObject kitchenDoor;
     
     public event Action OnSaveEvent;
     public event Action<Vector3> PosUpdateEvent;
@@ -45,6 +47,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         
         counter = GameObject.Find("CounterObj");
         entrance = GameObject.Find("Entrance");
+        kitchenDoor = GameObject.Find("KitchenDoor");
         
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
         
@@ -140,5 +143,54 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string jsonData = File.ReadAllText(path + jsonName);
         playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+    }
+
+    public void SaveInventoryData(InventoryData data)
+    {
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/inventory" + data.inventoryID + ".json", json);
+    }
+
+    public InventoryData LoadInventoryData(int inventoryID)
+    {
+        string path = Application.persistentDataPath + "/inventory" + inventoryID + ".json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            InventoryData data = JsonUtility.FromJson<InventoryData>(json);
+            // 여기서 data.items 리스트를 순회하면서 각 ItemData의 itemID를 사용해 ItemSO 객체를 검색 및 복원
+            return data;
+        }
+        return null;
+    }
+
+    public void SaveDestinationData(DestinationData data)
+    {
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "/DestinationInfo" + data.controllerID + ".json", json);
+        Debug.Log("Destination info Saved" + json);
+    }
+
+
+    public DestinationData LoadDestinationData(int controllerID)
+    {
+        string path = Application.persistentDataPath + "/DestinationInfo" + controllerID + ".json";
+        if(File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            DestinationData data = JsonUtility.FromJson<DestinationData>(json);
+            return data;
+        }
+        else
+        {
+            Debug.Log("No Destination Setting Data");
+            return null;
+        }
+    }
+
+    public bool IsFileExist(int inventoryID)
+    {
+        string path = Application.persistentDataPath + "/inventory" + inventoryID + ".json";
+        return File.Exists(path);
     }
 }

@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 1830320766}
   - component: {fileID: 1830320765}
   - component: {fileID: 1830320764}
+  - component: {fileID: 1830320783}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1054,6 +1055,7 @@ MonoBehaviour:
   modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
+  goldUsed: 0
 --- !u!114 &1830320771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,6 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curMouseDirection: {x: 0, y: 0}
   installationFunctionIndex: 0
+  targetID: 
 --- !u!114 &1830320772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,12 +1086,14 @@ MonoBehaviour:
   dailyResultWindow: {fileID: 5866281504846087371, guid: 2b508d2f7d8754cc686da3fa81cd7d9c, type: 3}
   uiAlwaysOn:
   - {fileID: 8308437243358786327, guid: 8916f53d72a3b436d93af644dadb7be2, type: 3}
+  - {fileID: 3465089061949424958, guid: 80db358ba2d794b30b3bb562ff1db938, type: 3}
   uiList:
   - {fileID: 5185125149203713690, guid: 9efe868c157e2324a8b2635613f368bf, type: 3}
   - {fileID: 6834499772423413404, guid: 2db5435114778ba45b5b24db32cdc4ae, type: 3}
   dailyResultOpenInterval: 60
   itemSlotPrefab: {fileID: 0}
   itemLinePrefab: {fileID: 0}
+  lastUIName: 
 --- !u!114 &1830320773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,9 +1177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  payBackGold: 100
-  happyEnd: 0
-  questPrefab: {fileID: 3465089061949424958, guid: 80db358ba2d794b30b3bb562ff1db938, type: 3}
 --- !u!114 &1830320779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,6 +1216,7 @@ MonoBehaviour:
   dataManager: {fileID: 1830320768}
   recipeManager: {fileID: 1830320764}
   questManager: {fileID: 1830320782}
+  destinationManager: {fileID: 1830320783}
 --- !u!4 &1830320781
 Transform:
   m_ObjectHideFlags: 0
@@ -1242,6 +1245,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc73f9064e3624396bee0574802f06f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1830320783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830320763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d47be555c7c3f94389b7c0cbc121c18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destinationInfo: []
 --- !u!1 &1967258786
 GameObject:
   m_ObjectHideFlags: 0

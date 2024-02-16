@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     private UIBase currentDailyResultWindow;
     [SerializeField] private List<UIBase> uiAlwaysOn = new List<UIBase>();   //상하단에 항상 위치하는 UI요소의 리스트 - UIStack으로 관리하지 않을 대상
     [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // 일반적인 UI창 - uiStack으로 관리할 대상들
+
+
+    private List<GameObject> activeUI = new List<GameObject>();
     private Stack<UIBase> uiStack = new Stack<UIBase>();   // UI창 스택
 
     [SerializeField] private float dailyResultOpenInterval = 60f; // 정산창을 띄우기 위한 주기. 서버사용 없을 땐 약 5분 / 서버일 땐 하루단위 (86400초)로 설6
@@ -43,17 +46,37 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
 
     private void HandleScene(SceneType scene)
     {
-        if (scene != SceneType.TitleScene)
+        if (scene != SceneType.TitleScene && scene != SceneType.EndScene && scene != SceneType.HappyEndScene)
         {
             OpenPermanentWindows(uiAlwaysOn);
+            GameManager.instance.statManager.enabled = true;
+        }
+        else
+            GameManager.instance.statManager.enabled = false;
+
+        if(scene!=SceneType.MainScene)
+        {
+            DestroyAllUIObject();
         }
     }
     public void OpenPermanentWindows(List<UIBase> permaUI)
     {
-        
         foreach (UIBase uiWindow in permaUI)
         {
             Instantiate(uiWindow, transform);
+            activeUI.Add(uiWindow.gameObject);
+        }
+    }
+
+    public void ClosePermanentWindow()
+    {
+        Debug.Log(activeUI.Count);
+        if (activeUI.Count > 0)
+        {
+            foreach (GameObject uiWindow in activeUI)
+            {
+                Destroy(uiWindow);
+            }
         }
     }
 
@@ -109,6 +132,15 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         Destroy(objectToDestroy);
     }
 
+    public void DestroyAllUIObject()
+    {
+        UIBase[] uiObjects = FindObjectsOfType<UIBase>(true);
+        foreach(UIBase uiObject in uiObjects)
+        {
+            Destroy(uiObject.gameObject);
+        }
+    }
+
     private void InitUIList()    // 매니저로 관리할 모든 UI요소들의 초기화 일제 실행. 추후 UI매닉저가 싱글톤이 아니어도 InitUIList를 통해 전체 UI에게 초기화 명령을 내릴 수 있.
     {
         dailyResultWindow.Initialize();
@@ -120,15 +152,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         foreach (UIBase uiWindow in uiList)
         {
             uiWindow.Initialize();
-        }
-    }
-
-    private IEnumerator DailyResultWindowRoutine()   //코루틴으로 일일정산창UI 열기 관리
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(dailyResultOpenInterval);
-            OpenDailyResultWindow();
         }
     }
 
@@ -147,7 +170,10 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "TitleScene")
         {
-            //OpenDailyResultWindow();
+            if(GameManager.instance.statManager.curDay != 2)
+            {
+                OpenDailyResultWindow();
+            }
         }
     }
 }

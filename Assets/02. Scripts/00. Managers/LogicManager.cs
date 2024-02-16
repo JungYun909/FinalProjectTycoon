@@ -12,21 +12,11 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
     private void Start()
     {
         GameManager.instance.statManager.onDateChanged += PayBack;
-        GameManager.instance.statManager.onDateChanged += OnQuest;
     }
 
     private void OnDisable()
     {
         GameManager.instance.statManager.onDateChanged -= PayBack;
-        GameManager.instance.statManager.onDateChanged -= OnQuest;
-    }
-
-    private void OnQuest()
-    {
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
-            return;
-        
-        GameManager.instance.uiManager.OpenWindow(questPrefab);
     }
 
     private void PayBack()
