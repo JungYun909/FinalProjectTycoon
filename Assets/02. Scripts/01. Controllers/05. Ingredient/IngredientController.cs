@@ -96,6 +96,8 @@ public class IngredientController : MonoBehaviour, IInteractable
             
             if(itemData.tag == "Dough")
                 controller.doughContainer.Enqueue(gameObject);
+            else if (controller.destinationID == 1)
+                 return; 
             else
                 controller.ingredients.Enqueue(itemData);
         }

@@ -92,7 +92,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         if (inventoryShow != null)
         {
             inventoryShow.DeliverInventoryID += OnButtonClicked;
-            inventoryController = inventoryShow.curInventory.GetComponent<InstallationInventoryController>();
+            inventoryController = inventoryShow.curInventory.gameObject.GetComponent<InstallationInventoryController>();
             if (inventoryController != null)
             {
                 inventoryController.deliverCurrentTime += UpdateTimer;
