@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 39, y: 39, z: 39, w: 39}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -108,18 +108,40 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ingredientSlot_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 158
+        height: 158
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 39, y: 40, z: 39, w: 39}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62004093bf78e4a6097fe3b8f94c7f70
+      internalID: 1675866898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ingredientSlot_0: 1675866898
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

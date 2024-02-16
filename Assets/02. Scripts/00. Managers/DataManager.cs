@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerData
 {
+    public string shopName = "";
     public int level = 1;
     public int money = 0;
     public int warningCount = 0;
@@ -38,11 +39,24 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject kitchenDoor;
     
     public event Action OnSaveEvent;
+    public event Action OnLoadEvent; 
     public event Action<Vector3> PosUpdateEvent;
 
     public void Initialize()
     {
         GameManager.instance.sceneManager.sceneInfo += InitSet;
+    }
+
+    private void Awake()
+    {
+        path = Application.persistentDataPath + "/";
+        
+        if (!File.Exists(path + jsonName))
+        {
+            ResetData();
+        }
+        
+        LoadData();
     }
 
     public void InitSet(SceneType sceneType)
@@ -55,26 +69,32 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         kitchenDoor = GameObject.Find("KitchenDoor");
         
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
-        
-        path = Application.persistentDataPath + "/";
-        
-        if (!File.Exists(path + jsonName))
-        {
-            SaveData();
-        }
-        
-        LoadData();
+        // GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
+        //
+        // path = Application.persistentDataPath + "/";
+        //
+        // if (!File.Exists(path + jsonName))
+        // {
+        //     ResetData();
+        // }
+        //
+        // LoadData();
 
         LoadInstallation();
     }
 
     public void ResetData()
     {
+        playerData.shopName = "";
         playerData.level = 1;
-        playerData.money = 0;
+        playerData.money = 1000;
         playerData.warningCount = 0;
-        playerData.installationsPos.Clear();
+        playerData.time = 0f;
+        playerData.day = 1;
+        playerData.debt = 10000;
+        playerData.fame = 0;
         playerData.installationSubInt.Clear();
+        playerData.installationsPos.Clear();
         
         SaveData();
     }
@@ -148,6 +168,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string jsonData = File.ReadAllText(path + jsonName);
         playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+        OnLoadEvent?.Invoke();
     }
 
     public void SaveInventoryData(InventoryData data)

@@ -1490,7 +1490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &261531453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13123,28 +13123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb1ba323ad094b98bb137408b275770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopStat: {fileID: 1891069124}
-  shopLevel: 0
-  shopFame: 0
-  interiorScore: 0
-  financeScore: 0
-  currentGold: 0
   curTime: 0
-  curDay: 0
-  curDebt: 0
-  curWarningCount: 0
-  modFame: 0
-  modInterior: 0
-  modFinance: 0
-  modGold: 0
-  modLevel: 0
-  modTime: 0
-  modDay: 0
-  modDebt: 0
-  modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
   goldUsed: 0
+  goldEarned: 0
 --- !u!114 &1590563956
 MonoBehaviour:
   m_ObjectHideFlags: 0

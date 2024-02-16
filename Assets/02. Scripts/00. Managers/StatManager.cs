@@ -13,7 +13,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     // public int interiorScore;   //인테리어 점수.
     // public int financeScore;  //재정상태. 적자일수를 계산하여 초반에 -3처럼 특정 음수값이 되면 fail.
     // public int currentGold;    //소지금. 변경가능.
-    public float maxTime = 1f;     // 현재 게임 시간
+    public float curTime = 0f; // 현재 게임 시간
     // public int curDay;
     // public int curDebt;// 현재까지 지나온 날짜
     // public int curWarningCount;
@@ -134,15 +134,15 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
 
     private void Update()  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
-        if (maxTime > 0)
+        if (GameManager.instance.dataManager.playerData.time > 0)
         { 
-            GameManager.instance.dataManager.playerData.time += Time.deltaTime;
-            maxTime = 1 - GameManager.instance.dataManager.playerData.time / dayTime;
+            curTime += Time.deltaTime;
+            GameManager.instance.dataManager.playerData.time = 1 - curTime / dayTime;
         }
         else
         {
-            GameManager.instance.dataManager.playerData.time = 0;
-            maxTime = 1;
+            GameManager.instance.dataManager.playerData.time = 1f;
+            curTime = 0f;
             GameManager.instance.dataManager.playerData.day += 1;
             onDateChanged?.Invoke();
             //GameManager.instance.uiManager.OpenDailyResultWindow();
