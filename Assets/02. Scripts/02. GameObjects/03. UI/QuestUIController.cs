@@ -89,9 +89,9 @@ public class QuestUIController : UIBase
         maxQuestCount = 999;
         questType = "";
         
-        questDetail.text = "???";
-        questReward.text = "(?? / ??)";
-        questCount.text = "???";
+        questDetail.text = "성공!";
+        questReward.text = "(성공 / 성공)";
+        questCount.text = "성공";
     }
 
     private void QuestIDSet()
@@ -112,7 +112,7 @@ public class QuestUIController : UIBase
         if (curQuestCount >= maxQuestCount)
         {
             ResetQuest();
-            InitSet();
+            // InitSet();
         }
     }
 }

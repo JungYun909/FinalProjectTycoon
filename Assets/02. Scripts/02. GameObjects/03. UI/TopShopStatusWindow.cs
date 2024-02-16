@@ -29,14 +29,14 @@ public class TopShopStatusWindow : UIBase
 
         curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
-        curDate = GameManager.instance.statManager.curDay;
+        curDate = GameManager.instance.dataManager.playerData.day;
         curDateText.text = curDate.ToString();
 
         timeSlider.value = curTime;
     }
     private void Update()
     {
-        timeSlider.value = GameManager.instance.statManager.curTime;
+        timeSlider.value = GameManager.instance.statManager.maxTime;
     }
     private void OnEnable()
     {
@@ -55,6 +55,6 @@ public class TopShopStatusWindow : UIBase
         goldOwned = shopStat.gold;
 	    curGold.text = goldOwned.ToString();
         curRepute.text = reputeOwned.ToString();
-        curDateText.text = (GameManager.instance.statManager.curDay-1).ToString();
+        curDateText.text = (GameManager.instance.dataManager.playerData.day - 1).ToString();
     }
 }

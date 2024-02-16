@@ -13,7 +13,7 @@ public class EndingSceneController : MonoBehaviour
         if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.HappyEndScene.ToString())
             return;
         
-        money.text = GameManager.instance.statManager.currentGold.ToString();
+        money.text = GameManager.instance.dataManager.playerData.money.ToString();
     }
 
     public void ResetEndChangeScene()

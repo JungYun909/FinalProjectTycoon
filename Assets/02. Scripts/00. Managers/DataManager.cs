@@ -10,6 +10,11 @@ public class PlayerData
     public int level = 1;
     public int money = 0;
     public int warningCount = 0;
+    public float time = 0f;
+    public int day = 1;
+    public int debt = 10000;
+    public int fame = 0;
+    
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
     public List<int> recipeIndex = new List<int>();

@@ -26,18 +26,18 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
         
         HappyEnding();
 
-        if (GameManager.instance.statManager.curDebt > 0)
+        if (GameManager.instance.dataManager.playerData.debt > 0)
         {
-            if (GameManager.instance.statManager.currentGold >= payBackGold)
+            if (GameManager.instance.dataManager.playerData.money >= payBackGold)
             {
                 GameManager.instance.statManager.SpendGold(payBackGold);
-                GameManager.instance.statManager.shopStat.debt -= payBackGold;
+                GameManager.instance.dataManager.playerData.debt -= payBackGold;
                 GameManager.instance.dataManager.playerData.warningCount++;
             }
             else
             {
-                GameManager.instance.statManager.SpendGold(GameManager.instance.statManager.currentGold);
-                GameManager.instance.statManager.shopStat.debt -= GameManager.instance.statManager.currentGold;
+                GameManager.instance.statManager.SpendGold(GameManager.instance.dataManager.playerData.money);
+                GameManager.instance.dataManager.playerData.debt -= GameManager.instance.dataManager.playerData.money;
                 GameManager.instance.dataManager.playerData.warningCount--;
             }
             
@@ -54,7 +54,7 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
 
     private void HappyEnding()
     {
-        if (GameManager.instance.statManager.shopStat.debt > 0)
+        if (GameManager.instance.dataManager.playerData.debt > 0)
             return;
 
         happyEnd = true;
