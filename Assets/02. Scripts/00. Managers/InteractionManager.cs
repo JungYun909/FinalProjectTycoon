@@ -58,6 +58,8 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
+        if(interactionObject != null)
+            Debug.Log("iiiasdiasidaisdi");
         //클릭 중일떄 발생
         if (value.isPressed && interactionObject == null)
         {
