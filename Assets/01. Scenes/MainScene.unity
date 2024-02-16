@@ -8819,6 +8819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748217692}
   - component: {fileID: 748217693}
+  - component: {fileID: 748217694}
   m_Layer: 12
   m_Name: Square
   m_TagString: Installation
@@ -8893,6 +8894,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &748217694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748217691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d4fcdd45f684f87bcbd392ff98cc30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination:
+  - {fileID: 0}
+  - {fileID: 0}
+  line: {fileID: 0}
+  lineObj: {fileID: 0}
+  destinationID: 0
+  desPos1: {x: 0, y: 0}
+  controller: {fileID: 0}
 --- !u!1 &793645039
 GameObject:
   m_ObjectHideFlags: 0
@@ -13213,6 +13234,7 @@ MonoBehaviour:
   modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
+  goldUsed: 0
 --- !u!114 &1590563956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13227,6 +13249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curMouseDirection: {x: 0, y: 0}
   installationFunctionIndex: 0
+  targetID: 
 --- !u!114 &1590563957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13248,6 +13271,7 @@ MonoBehaviour:
   dailyResultOpenInterval: 60
   itemSlotPrefab: {fileID: 0}
   itemLinePrefab: {fileID: 0}
+  lastUIName: 
 --- !u!114 &1590563958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13373,6 +13397,7 @@ MonoBehaviour:
   dataManager: {fileID: 1590563968}
   recipeManager: {fileID: 1590563971}
   questManager: {fileID: 0}
+  destinationManager: {fileID: 0}
 --- !u!4 &1590563966
 Transform:
   m_ObjectHideFlags: 0
@@ -13496,6 +13521,7 @@ MonoBehaviour:
   curInstallations: []
   counter: {fileID: 1544164879}
   entrance: {fileID: 0}
+  kitchenDoor: {fileID: 0}
 --- !u!82 &1590563969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14568,6 +14594,7 @@ GameObject:
   - component: {fileID: 1765728720}
   - component: {fileID: 1765728719}
   - component: {fileID: 1765728718}
+  - component: {fileID: 1765728721}
   m_Layer: 12
   m_Name: KitchenDoor
   m_TagString: Installation
@@ -14604,7 +14631,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14634,12 +14661,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryShow: {fileID: 0}
   standInventory: {fileID: 0}
+  inventoryController: {fileID: 0}
   maxDoughQuantity: 5
   controller: {fileID: 0}
   itemsListForInspector: []
   inventoryID: 0
   inventoryUI: {fileID: 0}
-  debugItemList: []
 --- !u!4 &1765728720
 Transform:
   m_ObjectHideFlags: 0
@@ -14656,6 +14683,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1765728721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765728717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd58b2a503964f40904a0c062e8abf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _installationData: {fileID: 0}
+  _animData: {fileID: 0}
+  inventoryController: {fileID: 0}
+  installController: {fileID: 0}
+  destinationController: {fileID: 748217694}
+  spawnController: {fileID: 0}
+  destinationID: 0
 --- !u!1 &1795819412
 GameObject:
   m_ObjectHideFlags: 0
