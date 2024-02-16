@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialDestinationMission : TutorialBase
+public class TutorialDestinationMission_2 : TutorialBase
 {
     InstallationDestinationController controller;
 
@@ -11,7 +10,7 @@ public class TutorialDestinationMission : TutorialBase
     {
         base.Enter();
 
-        var destinationcontroller = GameManager.instance.dataManager.curInstallations[0].transform.GetChild(5);
+        var destinationcontroller = GameManager.instance.dataManager.curInstallations[1].transform.GetChild(5);
         destinationcontroller.gameObject.SetActive(true);
         controller = destinationcontroller.GetComponent<InstallationDestinationController>();
         controller.OnDestinationEvent += Check;
@@ -19,9 +18,8 @@ public class TutorialDestinationMission : TutorialBase
 
     private void Check(GameObject startObj, GameObject EndObj)
     {
-        if(startObj == GameManager.instance.dataManager.curInstallations[0] && EndObj == GameManager.instance.dataManager.curInstallations[1])
+        if (startObj == GameManager.instance.dataManager.curInstallations[1] && EndObj == GameManager.instance.dataManager.kitchenDoor)
             completed = true;
-        
     }
 
     public override void Execute(TutorialController tutorialController)
@@ -34,4 +32,5 @@ public class TutorialDestinationMission : TutorialBase
         base.Exit();
         controller.OnDestinationEvent -= Check;
     }
+    
 }

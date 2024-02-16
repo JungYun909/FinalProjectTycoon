@@ -35,6 +35,10 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public event Action OnSaveEvent;
     public event Action<Vector3> PosUpdateEvent;
 
+    private void Start()
+    {
+        InitSet(SceneType.MainScene);
+    }
     public void Initialize()
     {
         GameManager.instance.sceneManager.sceneInfo += InitSet;
