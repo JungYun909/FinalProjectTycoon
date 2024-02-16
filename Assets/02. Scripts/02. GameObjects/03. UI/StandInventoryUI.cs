@@ -16,6 +16,8 @@ public class StandInventoryUI : UIBase
     public AbstractInventory curInventory;
     private InstallationController controller;
 
+    public event Action OpenInventoryEvent;
+
     private void Start()
     {
         controller = GetComponentInParent<InstallationController>();
@@ -132,6 +134,7 @@ public class StandInventoryUI : UIBase
     public void OpenPlayerInventory()
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
+        OpenInventoryEvent?.Invoke();
     }
 
     public void ClosePanel()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,12 @@ public class TutorialOpenInventory : TutorialBase
     public override void Enter()
     {
         base.Enter();
-
     }
+
 
     public override void Execute(TutorialController tutorialController)
     {
-        if (inventoryUI.inventoryPanel.activeSelf) tutorialController.SetNextTutorial();
+        if (GameManager.instance.uiManager.lastUIName.Contains("StandInventory")) tutorialController.SetNextTutorial();
     }
 
     public override void Exit()
