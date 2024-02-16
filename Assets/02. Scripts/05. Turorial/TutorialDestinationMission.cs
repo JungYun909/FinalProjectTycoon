@@ -7,7 +7,6 @@ public class TutorialDestinationMission : TutorialBase
 {
     InstallationDestinationController controller;
 
-    private TutorialController controller_;
     public override void Enter()
     {
         base.Enter();
@@ -22,7 +21,7 @@ public class TutorialDestinationMission : TutorialBase
     {
         if(startObj == GameManager.instance.dataManager.curInstallations[0] && EndObj == GameManager.instance.dataManager.curInstallations[1])
             completed = true;
-        else if (startObj == GameManager.instance.dataManager.curInstallations[1] && EndObj == GameManager.instance.dataManager.entrance)
+        else if (startObj == GameManager.instance.dataManager.curInstallations[1] && EndObj == GameManager.instance.dataManager.kitchenDoor)
             completed = true;
     }
 

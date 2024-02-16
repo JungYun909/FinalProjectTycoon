@@ -258,12 +258,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryShow: {fileID: 0}
   standInventory: {fileID: 0}
+  inventoryController: {fileID: 0}
   maxDoughQuantity: 5
   controller: {fileID: 0}
   itemsListForInspector: []
   inventoryID: 0
   inventoryUI: {fileID: 0}
-  debugItemList: []
 --- !u!4 &15356109
 Transform:
   m_ObjectHideFlags: 0
@@ -2116,6 +2116,15 @@ MonoBehaviour:
   - {fileID: 2010309186}
   - {fileID: 265639945}
   - {fileID: 294592676}
+  - {fileID: 1501609552}
+  - {fileID: 185073375}
+  - {fileID: 1169513321}
+  - {fileID: 1997473616}
+  - {fileID: 669991418}
+  - {fileID: 2146836814}
+  - {fileID: 1947783686}
+  - {fileID: 2116407976}
+  - {fileID: 1332930174}
   nextSceneName: Ending
 --- !u!1 &226304566
 GameObject:
@@ -6655,6 +6664,7 @@ MonoBehaviour:
   curInstallations: []
   counter: {fileID: 1950877038}
   entrance: {fileID: 0}
+  kitchenDoor: {fileID: 0}
 --- !u!114 &313458107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6700,6 +6710,7 @@ MonoBehaviour:
   modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
+  goldUsed: 0
 --- !u!114 &313458109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6820,6 +6831,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  payBackGold: 0
+  happyEnd: 0
+  questPrefab: {fileID: 0}
 --- !u!114 &313458117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6859,6 +6873,7 @@ MonoBehaviour:
   dataManager: {fileID: 313458106}
   recipeManager: {fileID: 313458102}
   questManager: {fileID: 0}
+  destinationManager: {fileID: 0}
 --- !u!4 &313458119
 Transform:
   m_ObjectHideFlags: 0
@@ -16331,7 +16346,7 @@ MonoBehaviour:
   playerTime: 0
   shopLevel: 1
   dayTime: 1
-  debt: 0
+  debt: 10000
   warningCount: 0
 --- !u!4 &1656063216
 Transform:
@@ -16425,12 +16440,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryShow: {fileID: 0}
   standInventory: {fileID: 0}
+  inventoryController: {fileID: 0}
   maxDoughQuantity: 5
   controller: {fileID: 0}
   itemsListForInspector: []
   inventoryID: 0
   inventoryUI: {fileID: 0}
-  debugItemList: []
 --- !u!4 &1674242171
 Transform:
   m_ObjectHideFlags: 0
