@@ -170,7 +170,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "TitleScene")
         {
-            if(GameManager.instance.statManager.curDay != 2)
+            if(GameManager.instance.dataManager.playerData.day != 2)
             {
                 OpenDailyResultWindow();
             }

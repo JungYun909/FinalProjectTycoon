@@ -42,7 +42,7 @@ public class ShopInventoryButton : MonoBehaviour
     private void SpawnInstallation()
     {
         Debug.Log("[ShopInventoryButton] SpawnInstallation called");
-        if (shopUI.machineSO.price > GameManager.instance.statManager.currentGold)
+        if (shopUI.machineSO.price > GameManager.instance.dataManager.playerData.money)
         {
             //TODO 경고창
             return;
@@ -63,7 +63,7 @@ public class ShopInventoryButton : MonoBehaviour
     private void HandlePurchaseItem(int quantity)
     {
         Debug.Log("Purchase Occured");
-        if(GameManager.instance.statManager.currentGold < shopUI.curItem.price * quantity)
+        if(GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * quantity)
         {
             return;
         }
