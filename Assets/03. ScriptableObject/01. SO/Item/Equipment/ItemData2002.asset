@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
-  m_Name: ItemData0046
+  m_Name: ItemData2002
   m_EditorClassIdentifier: 
-  id: 46
+  id: 44
   type: 4
-  itemName: "\uD30C\uC774\uD2C0"
-  description: "\uD30C\uC774\uB97C \uB9CC\uB4E4\uC218\uC788\uB294 \uD2C0"
+  itemName: "\uB9C9\uB300\uAE30"
+  description: "\uC798 \uC774\uC6A9\uD558\uBA74 \uBB50\uAC00\uB098\uC62C\uC218\uB3C4"
   recipe: "\uB3C4\uAD6C\uC0C1\uC810\uC5D0\uC11C\uAD6C\uB9E4"
-  price: 3000
-  sprite: {fileID: 21300000, guid: eac104e67efff5341bef9e810134ebeb, type: 3}
+  price: 2000
+  sprite: {fileID: 21300000, guid: de0a3b994a5d1fa48adeff5ef7dcaa77, type: 3}
   tag: Ingredient
   canMove: 1
   moveSpeed: 1

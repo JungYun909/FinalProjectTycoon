@@ -29,7 +29,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     
     public int maxShopLevel = 100;
     public int maxNpc;
-    private int dayTime = 600;
+    private int dayTime = 300;
 
 
     public int goldUsed;

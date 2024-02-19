@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
-  m_Name: ItemData0043
+  m_Name: ItemData2001
   m_EditorClassIdentifier: 
   id: 43
-  type: 4
+  type: 2001
   itemName: "\uC6D0\uD615\uCEE4\uD130"
   description: "\uC6D0\uD615\uC73C\uB85C \uC798\uB77C\uC900\uB2E4"
   recipe: "\uB3C4\uAD6C\uC0C1\uC810\uC5D0\uC11C \uAD6C\uB9E4"
