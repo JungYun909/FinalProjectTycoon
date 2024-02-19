@@ -2,26 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TestSA2 : MonoBehaviour
+public class RewardTimeControll : MonoBehaviour
 {
     private TMP_Text timeTxt;
     private float sec = 10;
     private int min = 0;
 
-    [SerializeField] private GameObject rewardBtn;
+    [SerializeField] private Button rewardBtn;
 
     private void Awake()
     {
         timeTxt = GetComponentInChildren<TMP_Text>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         Timer();
@@ -44,7 +39,7 @@ public class TestSA2 : MonoBehaviour
         {
             timeTxt.text = "00:00";
             gameObject.SetActive(false);
-            rewardBtn.SetActive(true);
+            rewardBtn.gameObject.SetActive(true);
             sec = 10;
             return;
         }

@@ -27,8 +27,6 @@ public class DialogSystem : MonoBehaviour
     [SerializeField]
     private Image imageDialog; // 대화창 이미지UI 
     [SerializeField]
-    private TMP_Text textName; // 현재 대사중인 캐릭터 이름 출력 텍스트UI
-    [SerializeField]
     private TMP_Text textDialogue; // 현재 대사 출력 텍스트UI
     [SerializeField]
     private GameObject objectArrow; // 대사가 완료되었을 때 출려고디는 커서 오브젝트
@@ -37,8 +35,8 @@ public class DialogSystem : MonoBehaviour
 
     private int curIndex = -1;
     private bool isTypingEffect = false; // 텍스트 타이핑 효과를 재생중인지
-    //private Speaker curSpeaker = Speaker.Soo;
 
+    private Coroutine typingCoroutine;
     public void Setup()
     {
         //for(int i = 0; i < 2; i++)
@@ -59,7 +57,7 @@ public class DialogSystem : MonoBehaviour
             if(isTypingEffect == true)
             {
                 //타이핑 효과를 중지하고, 현재 대사 전체를 출력한다
-                StopCoroutine(TypingText());
+                StopCoroutine(typingCoroutine);
                 isTypingEffect = false;
                 textDialogue.text = dialogs[curIndex].dialogue;
                 //대사가 완료되었을때 출력되는 커서 활성화
@@ -103,19 +101,16 @@ public class DialogSystem : MonoBehaviour
         //대화창 활성화
         imageDialog.gameObject.SetActive(true);
 
-        // 현재 화자 이름 텍스트 활성화 및 설정
-        textName.gameObject.SetActive(true);
-        //textNames[(int)curSpeaker].text = dialogs[curIndex].speaker.ToString();
-
         // 화자의 대사 텍스트 활성화 및 설정 (Typing Effect)
         textDialogue.gameObject.SetActive(true);
-        StartCoroutine(nameof(TypingText));
+        if(typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+        typingCoroutine = StartCoroutine(nameof(TypingText));
     }
 
     private void InActiveObjects()
     {
         imageDialog.gameObject.SetActive(false);
-        textName.gameObject.SetActive(false);
         textDialogue.gameObject.SetActive(false);
         objectArrow.SetActive(false);
     }

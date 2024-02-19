@@ -4,10 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestSA3 : MonoBehaviour
+public class RandomReward : MonoBehaviour
 {
+    [SerializeField] private Image errorImage;
     [SerializeField] private Image rewardImage;
     [SerializeField] private TMP_Text rewardTxt;
+    [SerializeField] private Button timerBtn;
+    [SerializeField] private Button originBtn;
+    [SerializeField] private Image deliveryImage;
     private int rewardGold;
 
     public void GoldReward()// 골드 리워드 선택시 랜덤골드 증정
@@ -38,6 +42,17 @@ public class TestSA3 : MonoBehaviour
 
     public void BuyReward(int gold)// 배달시스템이용시 드는 돈 마이너스
     {
-        GameManager.instance.statManager.SpendGold(gold);
+        Debug.Log(GameManager.instance.dataManager.playerData.money);
+        if (GameManager.instance.dataManager.playerData.money < 580)
+        {
+            errorImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            GameManager.instance.statManager.SpendGold(gold);
+            originBtn.gameObject.SetActive(false);
+            timerBtn.gameObject.SetActive(true);
+            deliveryImage.gameObject.SetActive(false);
+        }
     }
 }

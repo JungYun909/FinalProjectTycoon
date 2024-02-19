@@ -10,6 +10,7 @@ public class TutorialController : MonoBehaviour
 
     private TutorialBase curTutorial = null;
     private int curIndex = -1;
+    private int saveIndex = 0;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class TutorialController : MonoBehaviour
 
         curIndex++;
         curTutorial = tutorials[curIndex];
+        saveIndex++;
 
         curTutorial.Enter();
     }
