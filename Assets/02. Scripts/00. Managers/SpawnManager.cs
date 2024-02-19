@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class SpawnManager : MonoBehaviour
@@ -12,7 +14,9 @@ public class SpawnManager : MonoBehaviour
     [Header("NPCSpawn")]
     public int curNpcCount;
     public List<NpcSO> npcDataList = new List<NpcSO>();
-    
+
+    public event Action<ItemSO> SpawnIngredientEvnet;
+    public event Action<MachineSO> installMachineEvent;
 
     public GameObject SpawnInstallaion(MachineSO installationData)
     {
@@ -26,6 +30,7 @@ public class SpawnManager : MonoBehaviour
         GameManager.instance.dataManager.SaveInstallation(spawnInstallationObj);//TODO 데이터 매니저의 설치물 리스트를 통해 갱신시킨다
         GameManager.instance.dataManager.SaveData();
 
+        installMachineEvent?.Invoke(installationData);
         return spawnInstallationObj;
     }
 
@@ -42,6 +47,7 @@ public class SpawnManager : MonoBehaviour
         
         SpawnPositionSet(spawningInstallationObj, destinationObj, curSpawnObj);
         
+        SpawnIngredientEvnet?.Invoke(data);
         UpdateObjTag(data.tag);
     }
 

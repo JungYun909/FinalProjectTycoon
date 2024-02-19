@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class TopShopStatusWindow : UIBase
 {
-    public TemporaryStat shopStat;
-    private string shopName;
-    private int goldOwned;
-    private int reputeOwned;
-    private float curTime;
-    private int curDate;
+    // public TemporaryStat shopStat;
+    // private string shopName;
+    // private int goldOwned;
+    // private int reputeOwned;
+    // private float curTime;
+    // private int curDate;
 
     [SerializeField] private TextMeshProUGUI shopTitle;
     [SerializeField] private TextMeshProUGUI curGold;
@@ -21,22 +21,20 @@ public class TopShopStatusWindow : UIBase
 
     public override void Initialize()
     {
-        shopStat = FindObjectOfType<TemporaryStat>();
-        shopName = shopStat.shopName;
-        shopTitle.text = shopName;
-        goldOwned = shopStat.gold;
-        curTime = shopStat.playerTime;
+        //shopStat = FindObjectOfType<TemporaryStat>();
+        //shopName = shopStat.shopName;
+        shopTitle.text = GameManager.instance.dataManager.playerData.shopName;
+        //goldOwned = shopStat.gold;
+        // curTime = shopStat.playerTime;
 
-        curGold.text = goldOwned.ToString();
-        curRepute.text = reputeOwned.ToString();
-        curDate = GameManager.instance.statManager.curDay;
-        curDateText.text = curDate.ToString();
-
-        timeSlider.value = curTime;
+        curGold.text = GameManager.instance.dataManager.playerData.money.ToString();
+        curRepute.text = GameManager.instance.dataManager.playerData.fame.ToString();
+        curDateText.text = GameManager.instance.dataManager.playerData.day.ToString();
+        timeSlider.value = GameManager.instance.dataManager.playerData.time;
     }
     private void Update()
     {
-        timeSlider.value = GameManager.instance.statManager.curTime;
+        timeSlider.value = GameManager.instance.dataManager.playerData.time;
     }
     private void OnEnable()
     {
@@ -52,9 +50,8 @@ public class TopShopStatusWindow : UIBase
     }
     public override void UpdateUI()
     {
-        goldOwned = shopStat.gold;
-	    curGold.text = goldOwned.ToString();
-        curRepute.text = reputeOwned.ToString();
-        curDateText.text = (GameManager.instance.statManager.curDay-1).ToString();
+	    curGold.text = GameManager.instance.dataManager.playerData.money.ToString();
+        curRepute.text = GameManager.instance.dataManager.playerData.fame.ToString();
+        curDateText.text = (GameManager.instance.dataManager.playerData.day - 1).ToString();
     }
 }

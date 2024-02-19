@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -18,6 +19,8 @@ public class InstallationDestinationController : MonoBehaviour
 
     public InstallationController controller;
 
+    public event Action<GameObject, GameObject> OnDestinationEvent;
+
     public void InitSet()
     {
         controller.installationFuctionSet += destinationFunction;
@@ -29,7 +32,10 @@ public class InstallationDestinationController : MonoBehaviour
     private void destinationFunction()
     {
         if (destinationCoroutine == null)
+        {
+            InitLineSet();
             destinationCoroutine = StartCoroutine(StartDestinationSet());
+        }
     }
 
     private void stopFunction()
@@ -40,15 +46,33 @@ public class InstallationDestinationController : MonoBehaviour
             destinationCoroutine = null;
             lineObj.SetActive(false);
         }
-        if(destination[0]!=null && destination[1] != null)
+        //if(destination[0]!=null && destination[1] != null)
+        //{
+        //    GameManager.instance.destinationManager.RegisterDestinationInfo(destination[0].GetComponent<InstallationController>().destinationID, destination[1].GetComponent<InstallationController>().destinationID);
+        //    this.gameObject.GetComponentInParent<InstallationController>().SaveDestination();
+        //}
+        //else if (destination[0] != null)
+        //{
+        //    GameManager.instance.destinationManager.DeleteDestinationInfo(destination[0].GetComponentInParent<InstallationController>().destinationID);
+        //}
+    }
+
+    private void InitLineSet()
+    {
+        if (destination[0])
         {
-            Debug.Log($"{destination[0].GetComponent<InstallationController>().destinationID} is linked with {destination[1].GetComponent<InstallationController>().destinationID}");
-            GameManager.instance.destinationManager.RegisterDestinationInfo(destination[0].GetComponent<InstallationController>().destinationID, destination[1].GetComponent<InstallationController>().destinationID);
-            this.gameObject.GetComponentInParent<InstallationController>().SaveDestination();
-        }
-        else if (destination[0] != null)
-        {
-            GameManager.instance.destinationManager.DeleteDestinationInfo(destination[0].GetComponentInParent<InstallationController>().destinationID);
+            desPos0 = destination[0].transform.position;
+            line.SetPosition(0, Vector2.zero);
+            
+            if (destination[1])
+            {
+                desPos1 = destination[1].transform.position;
+                line.SetPosition(1, desPos1 - desPos0);
+            }
+            else if(!destination[1])
+            {
+                line.SetPosition(1, Vector2.zero);
+            }
         }
     }
 
@@ -58,9 +82,8 @@ public class InstallationDestinationController : MonoBehaviour
 
         while (true)
         {
-
-            RaycastHit2D ray = Physics2D.Raycast(GameManager.instance.interactionManager.curMouseDirection, Vector2.zero, 0f);
-
+            RaycastHit2D ray = Physics2D.Raycast(GameManager.instance.interactionManager.curMouseDirection, Vector2.zero, 0f, LayerMask.GetMask("Installation"));
+        
             if (ray.collider)
             {
                 if (destination[0] == null)
@@ -72,6 +95,7 @@ public class InstallationDestinationController : MonoBehaviour
                 {
                     destination[1] = ray.collider.gameObject;
                     desPos1 = destination[1].transform.position;
+                    OnDestinationEvent?.Invoke(destination[0], destination[1]);
                 }
             }
             else

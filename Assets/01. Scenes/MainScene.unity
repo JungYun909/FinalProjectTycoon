@@ -1338,96 +1338,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187764539}
   m_CullTransparentMesh: 1
---- !u!1 &190758197
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 190758198}
-  - component: {fileID: 190758200}
-  - component: {fileID: 190758201}
-  m_Layer: 0
-  m_Name: NPCSpawnController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &190758198
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190758197}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -15.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &190758200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190758197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b955aa15ce3b4c4881d328d794d40fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!61 &190758201
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 190758197}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1 &258367724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,7 +1516,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &261531455
 BoxCollider2D:
@@ -6218,7 +6128,7 @@ RectTransform:
   - {fileID: 1558915774}
   - {fileID: 606590350}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8669,7 +8579,7 @@ RectTransform:
   - {fileID: 340748712}
   - {fileID: 127421190}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8819,9 +8729,10 @@ GameObject:
   m_Component:
   - component: {fileID: 748217692}
   - component: {fileID: 748217693}
-  m_Layer: 0
+  - component: {fileID: 748217694}
+  m_Layer: 12
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Installation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8912,7 +8823,7 @@ MonoBehaviour:
   lineObj: {fileID: 0}
   destinationID: 0
   desPos1: {x: 0, y: 0}
-  controller: {fileID: 1765728721}
+  controller: {fileID: 0}
 --- !u!1 &793645039
 GameObject:
   m_ObjectHideFlags: 0
@@ -9352,7 +9263,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &920374329
 GameObject:
@@ -9499,7 +9410,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &944562721
 GameObject:
@@ -11162,7 +11073,7 @@ Transform:
   - {fileID: 300702584}
   - {fileID: 32482907}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519001507
 GameObject:
@@ -12768,7 +12679,7 @@ Transform:
   m_Children:
   - {fileID: 614483695}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1549891827
 GameObject:
@@ -13181,7 +13092,6 @@ GameObject:
   - component: {fileID: 1590563969}
   - component: {fileID: 1590563971}
   - component: {fileID: 1590563972}
-  - component: {fileID: 1590563973}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -13213,27 +13123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb1ba323ad094b98bb137408b275770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopStat: {fileID: 1891069124}
-  shopLevel: 0
-  shopFame: 0
-  interiorScore: 0
-  financeScore: 0
-  currentGold: 0
   curTime: 0
-  curDay: 0
-  curDebt: 0
-  curWarningCount: 0
-  modFame: 0
-  modInterior: 0
-  modFinance: 0
-  modGold: 0
-  modLevel: 0
-  modTime: 0
-  modDay: 0
-  modDebt: 0
-  modWarningCount: 0
   maxShopLevel: 0
   maxNpc: 0
+  goldUsed: 0
+  goldEarned: 0
 --- !u!114 &1590563956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13248,6 +13142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curMouseDirection: {x: 0, y: 0}
   installationFunctionIndex: 0
+  targetID: 
 --- !u!114 &1590563957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13269,6 +13164,7 @@ MonoBehaviour:
   dailyResultOpenInterval: 60
   itemSlotPrefab: {fileID: 0}
   itemLinePrefab: {fileID: 0}
+  lastUIName: 
 --- !u!114 &1590563958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13306,7 +13202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16dfbcca479c46a08d4b23e1a09eb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  installationManageController: {fileID: 0}
+  installationManageController: {fileID: 8918987454552872553, guid: f25500c4c2f9d4f248f75df35af9e07b, type: 3}
 --- !u!114 &1590563961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13354,6 +13250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   payBackGold: 0
   happyEnd: 0
+  questPrefab: {fileID: 0}
 --- !u!114 &1590563964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13392,7 +13289,8 @@ MonoBehaviour:
   statManager: {fileID: 1590563955}
   dataManager: {fileID: 1590563968}
   recipeManager: {fileID: 1590563971}
-  destinationManager: {fileID: 1590563973}
+  questManager: {fileID: 0}
+  destinationManager: {fileID: 0}
 --- !u!4 &1590563966
 Transform:
   m_ObjectHideFlags: 0
@@ -13407,7 +13305,7 @@ Transform:
   m_Children:
   - {fileID: 1891069125}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1590563967
 MonoBehaviour:
@@ -13516,6 +13414,7 @@ MonoBehaviour:
   curInstallations: []
   counter: {fileID: 1544164879}
   entrance: {fileID: 0}
+  kitchenDoor: {fileID: 0}
 --- !u!82 &1590563969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13654,21 +13553,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  payBackGold: 0
+  payBackGold: 1200
   happyEnd: 0
---- !u!114 &1590563973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590563952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d47be555c7c3f94389b7c0cbc121c18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destinationInfo: []
+  questPrefab: {fileID: 0}
 --- !u!1 &1591901236
 GameObject:
   m_ObjectHideFlags: 0
@@ -14224,7 +14111,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1720149661
 GameObject:
@@ -14600,9 +14487,10 @@ GameObject:
   - component: {fileID: 1765728720}
   - component: {fileID: 1765728719}
   - component: {fileID: 1765728718}
-  m_Layer: 0
+  - component: {fileID: 1765728721}
+  m_Layer: 12
   m_Name: KitchenDoor
-  m_TagString: Untagged
+  m_TagString: Installation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14636,7 +14524,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14686,7 +14574,7 @@ Transform:
   m_Children:
   - {fileID: 748217692}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1765728721
 MonoBehaviour:
@@ -14706,7 +14594,7 @@ MonoBehaviour:
   installController: {fileID: 0}
   destinationController: {fileID: 748217694}
   spawnController: {fileID: 0}
-  destinationID: 1
+  destinationID: 0
 --- !u!1 &1795819412
 GameObject:
   m_ObjectHideFlags: 0
@@ -15663,7 +15551,7 @@ MonoBehaviour:
   playerTime: 0
   shopLevel: 1
   dayTime: 1
-  Debt: 500
+  debt: 10000
   warningCount: 0
 --- !u!4 &1891069125
 Transform:
@@ -16760,7 +16648,7 @@ Transform:
   - {fileID: 113136243}
   - {fileID: 26204936}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145639699
 GameObject:

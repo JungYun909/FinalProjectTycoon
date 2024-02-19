@@ -16,6 +16,8 @@ public class StandInventoryUI : UIBase
     public AbstractInventory curInventory;
     private InstallationController controller;
 
+    public event Action OpenInventoryEvent;
+
     private void Start()
     {
         controller = GetComponentInParent<InstallationController>();
@@ -129,9 +131,10 @@ public class StandInventoryUI : UIBase
             itemSlotInfo.Setup(item, quantity);
         }
     }
-    public void OpenPlayerInventory()
+    public void OpenPlayerInventory()  // 스탠드 UI의 + 버튼에 붙어있는 메서드. 누르면 창고 인벤토리 열림.
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
+        OpenInventoryEvent?.Invoke();
     }
 
     public void ClosePanel()

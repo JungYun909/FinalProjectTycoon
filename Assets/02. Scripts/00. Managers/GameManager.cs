@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
     public InteractionManager interactionManager;
     public StatManager statManager;
     public DataManager dataManager;
+    
     public RecipeManager recipeManager;
+    public QuestManager questManager;
     public DestinationManager destinationManager;
 
     private void Awake()

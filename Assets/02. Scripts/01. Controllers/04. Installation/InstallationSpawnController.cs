@@ -11,7 +11,7 @@ public class InstallationSpawnController : MonoBehaviour
     
     private void Update()
     {
-        if(!_destiantionController.destination[1] || !_controller._installationData.canSpawn || GameManager.instance.statManager.currentGold < _controller._installationData.spawnData.price)
+        if(!_destiantionController.destination[1] || !_controller._installationData.canSpawn || GameManager.instance.dataManager.playerData.money < _controller._installationData.spawnData.price)
             return;
 
         spawnTimer += Time.deltaTime;

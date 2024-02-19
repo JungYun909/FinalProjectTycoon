@@ -78,19 +78,22 @@ public class InstallationController : MonoBehaviour, IInteractable
     }
     public void InitSetting()
     {
-        animatorController = _animData.installtionAnimController[_installationData.id-1];
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
-        gameObject.GetComponentInChildren<Animator>().runtimeAnimatorController = animatorController;
-
-        if (_installationData.haveDoughInventory)
+        if (_animData != null)
         {
-           doughContainer = new Queue<GameObject>();
-            ingredients = new Queue<ItemSO>();
-            inventoryController.gameObject.SetActive(true);
+            animatorController = _animData.installtionAnimController[_installationData.id - 1];
+            gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
+            gameObject.GetComponentInChildren<Animator>().runtimeAnimatorController = animatorController;
+
+            if (_installationData.haveDoughInventory)
+            {
+                doughContainer = new Queue<GameObject>();
+                ingredients = new Queue<ItemSO>();
+                inventoryController.gameObject.SetActive(true);
+            }
+
+            if (_installationData.canSpawn)
+                spawnController.gameObject.SetActive(true);
         }
-            
-        if(_installationData.canSpawn)
-            spawnController.gameObject.SetActive(true);
     }
     
 

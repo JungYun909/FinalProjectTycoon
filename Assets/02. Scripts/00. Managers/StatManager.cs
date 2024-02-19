@@ -2,37 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StatManager : MonoBehaviour            // 플레이어 (가게) 정보의 업데이트
 {
-    public TemporaryStat shopStat;
+    //public TemporaryStat shopStat;
     
-    public int shopLevel;     //가게 레벨. 가게 레벨에 따라 레시피/시설 해금 등이 필요하다면. 명성치, 재정현황 등의 지표가 특정 수준 이상일 때 ++ // 수식으로 관리
-    public int shopFame;    //명성치, 가게 수준.
-    public int interiorScore;   //인테리어 점수.
-    public int financeScore;  //재정상태. 적자일수를 계산하여 초반에 -3처럼 특정 음수값이 되면 fail.
-    public int currentGold;    //소지금. 변경가능.
-    public float curTime;     // 현재 게임 시간
-    public int curDay;
-    public int curDebt;// 현재까지 지나온 날짜
-    public int curWarningCount;
+    // public int shopLevel;     //가게 레벨. 가게 레벨에 따라 레시피/시설 해금 등이 필요하다면. 명성치, 재정현황 등의 지표가 특정 수준 이상일 때 ++ // 수식으로 관리
+    // public int shopFame;    //명성치, 가게 수준.
+    // public int interiorScore;   //인테리어 점수.
+    // public int financeScore;  //재정상태. 적자일수를 계산하여 초반에 -3처럼 특정 음수값이 되면 fail.
+    // public int currentGold;    //소지금. 변경가능.
+    public float curTime = 0f; // 현재 게임 시간
+    // public int curDay;
+    // public int curDebt;// 현재까지 지나온 날짜
+    // public int curWarningCount;
 
-    public int modFame;        //명성치의 변경값. 
-    public int modInterior;     //인테리어 수치의 변경값. 가구/인테리어 요소의 점수를 받아와 합산/차감하는 식으로 이루어짐.
-    public int modFinance;    //재정상태 수치의 변경값. 흑자일 때, 적자일 때 점수를 매김. 적자시에는 무조건 -1, 흑자일때는 +1을 반환하는 로직을 주고 
-    public int modGold;
-    public int modLevel;
-    public float modTime;
-    public int modDay;
-    public int modDebt;
-    public int modWarningCount;
+    // public int modFame;        //명성치의 변경값. 
+    // public int modInterior;     //인테리어 수치의 변경값. 가구/인테리어 요소의 점수를 받아와 합산/차감하는 식으로 이루어짐.
+    // public int modFinance;    //재정상태 수치의 변경값. 흑자일 때, 적자일 때 점수를 매김. 적자시에는 무조건 -1, 흑자일때는 +1을 반환하는 로직을 주고 
+    // public int modLevel;
+    // public float modTime;
+    // public int modDay;
+    // public int modDebt;
+    // public int modWarningCount;
     
     public int maxShopLevel = 100;
     public int maxNpc;
-    private int dayTime = 10;
+    private int dayTime = 600;
 
 
-    public int goldUsed = 0;
+    public int goldUsed;
+    public int goldEarned;
 
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
@@ -45,15 +46,17 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
 
     private void Initialize()
     {
-        shopStat = GetComponentInChildren<TemporaryStat>();//TODO 현재는 같은 오브젝트에 붙여 사용하므로 GetComponent사용. 이후 StatManager가 MonoBehaviour가 아닐 때를 고민할 필요가 있음.   
-        shopFame = shopStat.fame;
-        financeScore = shopStat.financialScore;
-        currentGold = shopStat.gold;
-        modGold = shopStat.goldUsed;
-        shopLevel = shopStat.shopLevel;
-        curTime = shopStat.playerTime;
-        curDay = shopStat.dayTime;
-        curDebt = shopStat.Debt;
+        goldUsed = 0;
+        goldEarned = 0;
+        // shopStat = GetComponentInChildren<TemporaryStat>();//TODO 현재는 같은 오브젝트에 붙여 사용하므로 GetComponent사용. 이후 StatManager가 MonoBehaviour가 아닐 때를 고민할 필요가 있음.   
+        // shopFame = shopStat.fame;
+        // financeScore = shopStat.financialScore;
+        // currentGold = shopStat.gold;
+        // modGold = shopStat.goldUsed;
+        // shopLevel = shopStat.shopLevel;
+        // curTime = shopStat.playerTime;
+        // curDay = shopStat.dayTime;
+        // curDebt = shopStat.debt;
         maxNpc = 2;
     }
 
@@ -73,10 +76,10 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     // }
     
     
-    private void SaveStat()
-    {
-        //현재 스탯 정보를 json 파일로 저장하는 로직. 추후 정보저장용 스크립트로 따로 분리 필요.
-    }
+    // private void SaveStat()
+    // {
+    //     //현재 스탯 정보를 json 파일로 저장하는 로직. 추후 정보저장용 스크립트로 따로 분리 필요.
+    // }
 
     private void UpdateStat()
     {
@@ -95,66 +98,60 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
 
     private int CalculateFame(int modFame)  // 매개변수는 명성치의 변경을 계산하는 메서드를 딜리게이트로 넣으면 될 듯함.
     {
-        shopFame += modFame;
-        shopStat.fame = shopFame;
-        return shopFame;
+        GameManager.instance.dataManager.playerData.fame += modFame;
+        return GameManager.instance.dataManager.playerData.fame;
 
     }
 
     private int CalculateFinanceScore(int modFinance)  // 재정점수 계산기. 재정점수는 
     {
-        financeScore += modFinance;
-        shopStat.financialScore = financeScore;
+        GameManager.instance.dataManager.playerData.warningCount += modFinance;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
-        return financeScore;
+        return GameManager.instance.dataManager.playerData.warningCount;
     }
     public int EarnGold(int modGold)  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
-        currentGold += modGold;
-        shopStat.gold = currentGold;
+        GameManager.instance.dataManager.playerData.money += modGold;
+        goldEarned += modGold;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
-        return currentGold;
+        return GameManager.instance.dataManager.playerData.money;
     }
 
     public int SpendGold(int modGold)  // 돈을 쓸 때 호출한 메서드. 매개변수는 구매하는 아이템의 가격, 일 영업비용, 파견을 위한 종업원의 일급, 등. 
     {
-        currentGold -= modGold;
-        shopStat.gold = currentGold;
+        GameManager.instance.dataManager.playerData.money -= modGold;
         goldUsed += modGold;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
-        return currentGold;
+        return GameManager.instance.dataManager.playerData.money;
     }
 
     public int LevelUP(int modLevel)
     {
-        shopLevel += modLevel;
-        shopStat.shopLevel = shopLevel;
+        GameManager.instance.dataManager.playerData.level += modLevel;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
-        return shopLevel;
+        return GameManager.instance.dataManager.playerData.level;
     }
 
     private void Update()  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
-        if (curTime>0)
+        if (GameManager.instance.dataManager.playerData.time > 0)
         { 
-            modTime += Time.deltaTime;
-            curTime = 1 - modTime/dayTime;
-            
-            shopStat.playerTime = curTime;
+            curTime += Time.deltaTime;
+            GameManager.instance.dataManager.playerData.time = 1 - curTime / dayTime;
         }
         else
         {
-            modTime = 0;
-            curTime = 1;
-            curDay += 1;
-            shopStat.dayTime = curDay;
+            GameManager.instance.dataManager.playerData.time = 1f;
+            curTime = 0f;
+            GameManager.instance.dataManager.playerData.day += 1;
             onDateChanged?.Invoke();
+            //GameManager.instance.uiManager.OpenDailyResultWindow();
             onStatChanged?.Invoke();
         }
     }
 
-    private void UpdateDailyResult()
-    {
-        SpendGold(modGold);
-    }
+    // private void UpdateDailyResult()
+    // {
+    //     SpendGold(modGold);
+    // }
 }
