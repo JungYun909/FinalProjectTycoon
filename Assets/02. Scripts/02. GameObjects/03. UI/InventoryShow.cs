@@ -13,7 +13,7 @@ public class InventoryShow : UIBase
     public Transform inventoryItemsParent; // 
     public Transform doughItemsParent; // 반죽 아이템을 보여줄 부모 객체
     public GameObject doughItemSlot;
-    AbstractInventory inventory;
+    public AbstractInventory inventory;
     public InstallationInventoryController installationInventoryController;
 
     public AbstractInventory curInventory;
@@ -81,25 +81,17 @@ public class InventoryShow : UIBase
     private void ClearInventoryDisplay()
     {
         Debug.Log("Clear!");
-        List<GameObject> inventoryChildren = new List<GameObject>();
         // 기존 일반 및 특별 아이템 UI를 모두 제거
-        foreach (Transform child in inventoryItemsParent)
+        if (inventoryItemsParent != null && doughItemsParent != null)
         {
-            inventoryChildren.Add(child.gameObject);
-        }
-        foreach (GameObject child in inventoryChildren)
-        {
-            Destroy(child);
-        }
-
-        List<GameObject> doughChildren = new List<GameObject>();
-        foreach (Transform child in doughItemsParent)
-        {
-            doughChildren.Add(child.gameObject);
-        }
-        foreach (GameObject child in doughChildren)
-        {
-            Destroy(child);
+            foreach (Transform child in inventoryItemsParent)
+            {
+                Destroy(child.gameObject);
+            }
+            foreach (Transform child in doughItemsParent)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 
@@ -162,22 +154,25 @@ public class InventoryShow : UIBase
     }
     private void CreateDoughSlots(ItemSO doughItem, int quantity, bool isFirstDoughItem)
     {
-        GameObject doughUI = Instantiate(doughItemSlot, doughItemsParent);
-        SetupItemSlot(doughUI, doughItem, quantity);
-        ItemSlotInfo itemSlot = doughUI.GetComponent<ItemSlotInfo>();
-        if(itemSlot != null)
-        {
-            if(curMachineSO !=null)
+        if (inventoryItemsParent != null && doughItemsParent != null)
+        { 
+            GameObject doughUI = Instantiate(doughItemSlot, doughItemsParent);
+            SetupItemSlot(doughUI, doughItem, quantity);
+            ItemSlotInfo itemSlot = doughUI.GetComponent<ItemSlotInfo>();
+            if (itemSlot != null)
             {
-                itemSlot.SetupMachineInfo(curMachineSO);
-                itemSlot.SetTimerDuration(curMachineSO.makeDelay);
-            }
+                if (curMachineSO != null)
+                {
+                    itemSlot.SetupMachineInfo(curMachineSO);
+                    itemSlot.SetTimerDuration(curMachineSO.makeDelay);
+                }
 
-            if(isFirstDoughItem)
-            {
-                itemSlot.StartTimer();
+                if (isFirstDoughItem)
+                {
+                    itemSlot.StartTimer();
+                }
             }
-        }
+         }   
     }
 
     private void CreateNormalItemSlot(ItemSO item, int quantity)
@@ -212,8 +207,8 @@ public class InventoryShow : UIBase
     
     public override void UpdateUI()
     {
-        if (inventory != null)
-            UpdateInventoryDisplay(inventory);
+        if (curInventory != null)
+            UpdateInventoryDisplay(curInventory);
     }
 
     public void OpenPlayerInventory()

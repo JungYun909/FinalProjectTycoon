@@ -68,10 +68,10 @@ public class InstallationController : MonoBehaviour, IInteractable
     {
         if (destinationController.destination[1] == null)
             Debug.Log("No Destination Info");
-        if (this.GetComponentInChildren<InstallationDestinationController>().destination[1] != null)
+        if (destinationController.destination[1] != null)
         {
             int fromID = this.destinationID;
-            int toID = this.GetComponentInChildren<InstallationDestinationController>().destination[1].GetComponent<InstallationController>().destinationID;
+            int toID = destinationController.destination[1].GetComponent<InstallationController>().destinationID;
             DestinationData data = new DestinationData(fromID, toID);
             GameManager.instance.dataManager.SaveDestinationData(data);
         }
