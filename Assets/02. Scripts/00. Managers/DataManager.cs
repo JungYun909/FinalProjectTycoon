@@ -161,7 +161,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/DestinationInfo" + data.controllerID + ".json", json);
-        Debug.Log("Destination info Saved" + json);
     }
 
 
@@ -176,7 +175,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         }
         else
         {
-            Debug.Log("No Destination Setting Data");
             return null;
         }
     }

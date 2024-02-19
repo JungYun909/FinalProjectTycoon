@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryShow: {fileID: 5185125149203713690, guid: 9efe868c157e2324a8b2635613f368bf, type: 3}
   standInventory: {fileID: 6233883059662430004, guid: 29bd6324927bfdb4a9f30f77256c4bf2, type: 3}
+  inventoryController: {fileID: 7344404901063357745}
   maxDoughQuantity: 5
   controller: {fileID: 1421688546873149454}
   itemsListForInspector: []
@@ -296,6 +297,8 @@ MonoBehaviour:
   - {fileID: 0}
   line: {fileID: 107927889293074542}
   lineObj: {fileID: 221192514841785522}
+  destinationID: 0
+  desPos1: {x: 0, y: 0}
   controller: {fileID: 1421688546873149454}
 --- !u!1 &4658642214538745355
 GameObject:
@@ -399,6 +402,7 @@ MonoBehaviour:
   installController: {fileID: 2001539584022440787}
   destinationController: {fileID: 5245645433901317557}
   spawnController: {fileID: 5463271039139519540}
+  destinationID: 0
 --- !u!1 &5145622365234100751
 GameObject:
   m_ObjectHideFlags: 0

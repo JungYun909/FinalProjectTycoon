@@ -28,10 +28,10 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     private void Awake()
     {
         inventoryShow = GetComponentInParent<InventoryShow>();
-        if(inventoryShow != null) Debug.Log("InventoryShow Found");
         shopInventory = FindObjectOfType<ShopInventory>();
+
     }
-    
+
     public void Setup(ItemSO item, int quantity)
     {
         timer.gameObject.SetActive(false);
@@ -58,7 +58,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void StartTimer()
     {
-        Debug.Log("Timer Started");
         timer.gameObject.SetActive(true);
         isTimerOn = true;
     }
@@ -89,10 +88,13 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     private void OnEnable()
     {
+
         if (inventoryShow != null)
         {
             inventoryShow.DeliverInventoryID += OnButtonClicked;
-            inventoryController = inventoryShow.curInventory.GetComponent<InstallationInventoryController>();
+            inventoryController = inventoryShow.installationInventoryController;
+            if(inventoryController == null)
+            { return; }
             if (inventoryController != null)
             {
                 inventoryController.deliverCurrentTime += UpdateTimer;
@@ -147,7 +149,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
             }
             else
             {
-                Debug.Log("No valid Inventory found");
                 return;
             }
         }

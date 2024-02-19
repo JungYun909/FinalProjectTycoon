@@ -14,7 +14,7 @@ public class InventoryShow : UIBase
     public Transform doughItemsParent; // 반죽 아이템을 보여줄 부모 객체
     public GameObject doughItemSlot;
     AbstractInventory inventory;
-
+    public InstallationInventoryController installationInventoryController;
 
     public AbstractInventory curInventory;
     public MachineSO curMachineSO;
@@ -22,11 +22,11 @@ public class InventoryShow : UIBase
     public event Action<int> DeliverInventoryID;
     public event Action<MachineSO> DeliverMachineInfo;
 
-    private void OnEnable()
+    private void Awake()
     {
+        AbstractInventory.DeliverMachineSO += HandleMachineInfo;
         AbstractInventory.OnInventoryClicked += HandleInventoryOpened;
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
-        Debug.Log("Events Subscribed");
         
     }
 
@@ -35,7 +35,6 @@ public class InventoryShow : UIBase
         AbstractInventory.DeliverMachineSO -= HandleMachineInfo;
         AbstractInventory.OnInventoryClicked -= HandleInventoryOpened;
         GameManager.instance.inventoryManager.OnInventoryUpdated -= HandleInventoryUpdate;
-        Debug.Log("Events Dismissed");
 
     }
 
@@ -43,6 +42,7 @@ public class InventoryShow : UIBase
     {
         OpenInventory(inventory);
         curInventory = inventory;
+        installationInventoryController = inventory.inventoryController;
     }
 
     private void HandleMachineInfo(MachineSO machineSO)
@@ -50,12 +50,11 @@ public class InventoryShow : UIBase
         if (machineSO != null)
         {
             curMachineSO = machineSO;
-            Debug.Log($"CurMachineSO Set : {curMachineSO.id}");
             CreateItemSlots(curInventory);
         }
         if (machineSO == null)
         {
-            Debug.Log("NO machine SO info");
+            return;
         }
     }
     private void HandleInventoryUpdate(int inventoryID)
@@ -81,24 +80,38 @@ public class InventoryShow : UIBase
 
     private void ClearInventoryDisplay()
     {
+        Debug.Log("Clear!");
+        List<GameObject> inventoryChildren = new List<GameObject>();
         // 기존 일반 및 특별 아이템 UI를 모두 제거
         foreach (Transform child in inventoryItemsParent)
         {
-            Destroy(child.gameObject);
+            inventoryChildren.Add(child.gameObject);
         }
+        foreach (GameObject child in inventoryChildren)
+        {
+            Destroy(child);
+        }
+
+        List<GameObject> doughChildren = new List<GameObject>();
         foreach (Transform child in doughItemsParent)
         {
-            Destroy(child.gameObject);
+            doughChildren.Add(child.gameObject);
+        }
+        foreach (GameObject child in doughChildren)
+        {
+            Destroy(child);
         }
     }
 
     private void CreateItemSlots(AbstractInventory inventory)
     {
+        bool isFirstDoughItem = true;
         List<ItemSO> itemsToMove = new List<ItemSO>();
         // 인벤토리의 각 아이템에 대한 UI 생성
         foreach(var item in inventory.itemQueue)
         {
-            CreateDoughSlots(item, 1);
+            CreateDoughSlots(item, 1, isFirstDoughItem) ;
+            isFirstDoughItem = false;
         }
 
         foreach (var item in inventory.Items)
@@ -134,6 +147,7 @@ public class InventoryShow : UIBase
             ReturnToPlayerInventory(item);
         }
         DeliverMachineInfo?.Invoke(curMachineSO);
+        DeliverInventoryID?.Invoke(inventory.inventoryID);
     }
     private ItemSO FindPreviousItemOfTypeOne(ItemSO newItem, AbstractInventory inventory)
     {
@@ -143,30 +157,24 @@ public class InventoryShow : UIBase
             {
                 return item.Key;
             }
-            Debug.Log($"PreivousItem:{ item.Key.itemName}");
         }
         return null;
     }
-    private void CreateDoughSlots(ItemSO doughItem, int quantity)
+    private void CreateDoughSlots(ItemSO doughItem, int quantity, bool isFirstDoughItem)
     {
-        for (int i = 0; i < quantity; i++)
+        GameObject doughUI = Instantiate(doughItemSlot, doughItemsParent);
+        SetupItemSlot(doughUI, doughItem, quantity);
+        ItemSlotInfo itemSlot = doughUI.GetComponent<ItemSlotInfo>();
+        if(itemSlot != null)
         {
-            GameObject doughUI = Instantiate(doughItemSlot, doughItemsParent);
-            SetupItemSlot(doughUI, doughItem, 1); // 각 반죽은 개별 슬롯에 들어감
-            ItemSlotInfo itemSlot = doughUI.GetComponent<ItemSlotInfo>();
-            Debug.Log($"[InventoryShow] Created Dough Slot for {doughItem.name}, Index: {i}");
-            if (itemSlot != null)
+            if(curMachineSO !=null)
             {
-                if(curMachineSO != null)
-                {
-                    itemSlot.SetupMachineInfo(curMachineSO);
-                    itemSlot.SetTimerDuration(curMachineSO.makeDelay);
-
-                }
+                itemSlot.SetupMachineInfo(curMachineSO);
+                itemSlot.SetTimerDuration(curMachineSO.makeDelay);
             }
-            if(i == 0)
+
+            if(isFirstDoughItem)
             {
-                Debug.Log("[InventoryShow] Starting Timer for the first Dough Slot");
                 itemSlot.StartTimer();
             }
         }
@@ -180,14 +188,11 @@ public class InventoryShow : UIBase
 
     private void ReturnToPlayerInventory(ItemSO item)
     {
-        Debug.Log("Return!");
         int playerInventoryID = 1000;
         int curInventoryID = this.inventory.inventoryID;
-        Debug.Log($"from {curInventoryID} to {playerInventoryID}");
         if (inventory.Items.TryGetValue(item, out int quantity))
         {
             GameManager.instance.inventoryManager.TransferItem(curInventoryID, playerInventoryID, item, quantity);
-            Debug.Log($"Transfered {item.itemName}, {quantity}");
         }
     }
 
@@ -202,7 +207,7 @@ public class InventoryShow : UIBase
 
     public override void Initialize()
     {
-        Debug.Log("DD");
+        
     }
     
     public override void UpdateUI()
@@ -214,6 +219,6 @@ public class InventoryShow : UIBase
     public void OpenPlayerInventory()
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
-        //DeliverInventoryID?.Invoke(curInventory.inventoryID);
+        DeliverInventoryID?.Invoke(curInventory.inventoryID);
     }
 }

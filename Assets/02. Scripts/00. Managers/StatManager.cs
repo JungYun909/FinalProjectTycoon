@@ -146,9 +146,9 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         {
             modTime = 0;
             curTime = 1;
-            Debug.Log("CurTime Changed");
             curDay += 1;
             shopStat.dayTime = curDay;
+            onDateChanged?.Invoke();
             onStatChanged?.Invoke();
         }
     }
