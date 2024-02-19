@@ -43,7 +43,7 @@ public class RandomReward : MonoBehaviour
     public void BuyReward(int gold)// 배달시스템이용시 드는 돈 마이너스
     {
         Debug.Log(GameManager.instance.dataManager.playerData.money);
-        if (GameManager.instance.dataManager.playerData.money < 580)
+        if (GameManager.instance.dataManager.playerData.money < 5000)
         {
             errorImage.gameObject.SetActive(true);
         }
