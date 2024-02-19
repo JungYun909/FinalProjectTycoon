@@ -34,7 +34,8 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void Setup(ItemSO item, int quantity)
     {
-        timer.gameObject.SetActive(false);
+        if(timer != null)
+            timer.gameObject.SetActive(false);
         if(curMachine != null)
         timerDuration = curMachine.makeDelay;
         // 아이템 아이콘 설정
