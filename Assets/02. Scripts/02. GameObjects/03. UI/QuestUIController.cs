@@ -80,8 +80,8 @@ public class QuestUIController : UIBase
         questType = "";
         
         questDetail.text = "성공!";
-        questReward.text = "(성공 / 성공)";
-        questCount.text = "성공";
+        questReward.text = "성공";
+        questCount.text = "성공 / 성공";
     }
 
     private void QuestDataSet()
