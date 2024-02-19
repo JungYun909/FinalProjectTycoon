@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -33,10 +34,32 @@ public class InstallationSetController : UIBase
 
     public void InstallationInstall()
     {
-        RaycastHit2D[] ray = Physics2D.RaycastAll(gameObject.transform.position, Vector2.zero, 0f);
-        Debug.Log(ray.Length);
-        if(ray.Length > 2 || ray.Length < 2)
+        RaycastHit2D[] rays = Physics2D.RaycastAll(gameObject.transform.position, Vector2.zero, 0f);
+        Debug.Log(rays.Length);
+        if(rays.Length > 2 || rays.Length < 2)
             return;
+
+        InstallationController controller = curGameObject.GetComponent<InstallationController>();
+
+        foreach (var ray in rays)
+        {
+            if (controller._installationData.installasionName != "진열대")
+            {
+                if (ray.collider.tag == "Store")
+                {
+                    Debug.Log("Warning Can't install here");
+                    return;
+                }
+            }
+            else if(controller._installationData.installasionName == "진열대")
+            {
+                if (ray.collider.tag == "Kitchen")
+                {
+                    Debug.Log("Warning Can't install here");
+                    return;
+                }
+            }
+        }
         
         GameManager.instance.installationManager.installationManageController.SetActive(false);
         GameManager.instance.dataManager.PosUpdate(curGameObject);

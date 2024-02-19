@@ -15,6 +15,10 @@ public class PlayerData
     public int day = 1;
     public int debt = 10000;
     public int fame = 0;
+
+    public int questNum = -1;
+    public int questCount = 0;
+    public int makeQuestItemID = 0;
     
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
@@ -75,16 +79,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         kitchenDoor = GameObject.Find("KitchenDoor");
         
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
-        // GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
-        //
-        // path = Application.persistentDataPath + "/";
-        //
-        // if (!File.Exists(path + jsonName))
-        // {
-        //     ResetData();
-        // }
-        //
-        // LoadData();
 
         LoadInstallation();
     }
@@ -99,6 +93,9 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.day = 1;
         playerData.debt = 10000;
         playerData.fame = 0;
+        playerData.questNum = -1;
+        playerData.questCount = 0;
+        playerData.makeQuestItemID = 0;
         playerData.installationSubInt.Clear();
         playerData.installationsPos.Clear();
         
@@ -200,7 +197,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/DestinationInfo" + data.controllerID + ".json", json);
-        Debug.Log("Destination info Saved" + json);
     }
 
 
@@ -215,7 +211,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         }
         else
         {
-            Debug.Log("No Destination Setting Data");
             return null;
         }
     }

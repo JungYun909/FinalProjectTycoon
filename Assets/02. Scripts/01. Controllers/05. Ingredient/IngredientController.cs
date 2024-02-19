@@ -91,21 +91,23 @@ public class IngredientController : MonoBehaviour, IInteractable
 
         if (other.gameObject.GetComponent<IInteractable>() != null)
         {
-            controller = other.gameObject.GetComponent<InstallationController>();
-            controller.OnColliderInteract();
-            
-            if(itemData.tag == "Dough")
-                controller.doughContainer.Enqueue(gameObject);
-            else if (controller.destinationID == 1)
-                 return; 
-            else
-                controller.ingredients.Enqueue(itemData);
+            if (other.gameObject.GetComponent<InstallationController>().destinationID != 1)
+            {
+                controller = other.gameObject.GetComponent<InstallationController>();
+                controller.OnColliderInteract();
+
+                if (itemData.tag == "Dough")
+                    controller.doughContainer.Enqueue(gameObject);
+                else if (controller.destinationID == 1)
+                    return;
+                else
+                    controller.ingredients.Enqueue(itemData);
+            }
         }
 
         if (other.gameObject.GetComponent<ShopInventory>() != null)
         {
-            AbstractInventory shopInventory = other.gameObject.GetComponent<ShopInventory>();
-            GameManager.instance.inventoryManager.AddItemToInventory(shopInventory.inventoryID, itemData, 1);
+            GameManager.instance.inventoryManager.AddItemToInventory(1000, itemData, 1);
             return;
         }
         if (other.gameObject.GetComponentInChildren<AbstractInventory>() == null)

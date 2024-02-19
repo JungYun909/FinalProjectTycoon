@@ -8,9 +8,13 @@ using Random = UnityEngine.Random;
 public class NPCController : MonoBehaviour
 {
     public NpcSO curNPCData;
+    public SpriteRenderer npcImage;
     public List<GameObject> visitObj;
     public GameObject destinationObj;
     public ItemSO favoriteFood;
+
+    public GameObject whatToBuy;
+    public SpriteRenderer favoriteFoodIcon;
     private int paymentAmount;
     public bool visitCounter;
     public bool buy;
@@ -22,7 +26,6 @@ public class NPCController : MonoBehaviour
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
         {
-            Debug.Log("disdisdis");
             return;
         }
         
@@ -51,7 +54,8 @@ public class NPCController : MonoBehaviour
         movementController.isMove = false;
         visitObj.Clear();
         
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = curNPCData.sprite;
+        npcImage.sprite = curNPCData.sprite;
+        whatToBuy.SetActive(true);
         
         foreach (var installation in GameManager.instance.dataManager.curInstallations)
         {
@@ -62,7 +66,7 @@ public class NPCController : MonoBehaviour
         }
 
         favoriteFood = curNPCData.favoriteFood[Random.Range(0, curNPCData.favoriteFood.Count)];
-        
+        favoriteFoodIcon.sprite = favoriteFood.sprite;
         destinationController.MachinePosInform();
     }
 
@@ -108,6 +112,7 @@ public class NPCController : MonoBehaviour
             if (item.Key == favoriteFood)
             {
                 buy = true;
+                whatToBuy.SetActive(false);
                 GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, item.Key, 1);
                 visitObj.Clear();
                 paymentAmount = favoriteFood.price;

@@ -61,7 +61,6 @@ public class InstallationInventoryController : MonoBehaviour
         }
         else if(!controller._installationData.haveIngredientInventory)
         {
-            Debug.Log("x");
             curController.VisitInstallationSet(controller);
         }
         

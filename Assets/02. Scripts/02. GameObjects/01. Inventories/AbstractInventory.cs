@@ -46,14 +46,40 @@ public class AbstractInventory : MonoBehaviour
     {
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
         controller = GetComponentInParent<InstallationController>();
-        inventoryController = GetComponent<InstallationInventoryController>();
         InventoryData data = GameManager.instance.dataManager.LoadInventoryData(inventoryID);
         if (data != null)
         {
             LoadInventory(data);
+            CopyItemsToDoughContainer();
         }
-
     }
+
+    public void CopyItemsToDoughContainer()
+    {
+        List<ItemSO> itemToDelete = new List<ItemSO>();
+        if (inventoryID != 1000 && (controller == null || controller.doughContainer == null))
+        {
+            Debug.Log("InstallationController or its doughContainer is not set.");
+            return;
+        }
+        GameObject destObj = controller.gameObject;
+        foreach (ItemSO item in itemQueue)
+        {
+            GameManager.instance.spawnManager.SpawnIngredient(controller.gameObject, destObj, item);
+            itemToDelete.Add(item);
+        }
+        foreach (var item in itemToDelete)
+        {
+            GameManager.instance.inventoryManager.RemoveItemFromInventory(inventoryID, item, 1);
+        }
+    }
+
+    private GameObject FindOrCreateDoughGameObject(ItemSO item)
+    {
+        GameObject doughObject = new GameObject(item.name);
+        return doughObject;
+    }
+
 
     private void OnEnable()
     {

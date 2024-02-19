@@ -10,15 +10,9 @@ public class QuestUIController : UIBase
     public TextMeshProUGUI questDetail;
     public TextMeshProUGUI questReward;
     public TextMeshProUGUI questCount;
-
-    private int randomNum;
     
     //퀘스트 정보
-    private int curQuestCount;
     private int maxQuestCount;
-    
-    //아이템 모으기
-    private int makeQuestItemID;
     
     private string questType;
 
@@ -56,63 +50,70 @@ public class QuestUIController : UIBase
 
     private void InitSet()
     {
-        QuestIDSet();
+        if(GameManager.instance.dataManager.playerData.questNum == -1) 
+            QuestDataSet();
 
-        randomNum = 0; //실험용
-        var (detail, reward, count) = GameManager.instance.questManager.QuestText(randomNum);
+        var (detail, reward, count) = GameManager.instance.questManager.QuestText(GameManager.instance.dataManager.playerData.questNum);
 
-        questDetail.text = $"{GameManager.instance.dataManager.foodSub[makeQuestItemID].itemName} {detail}";
+        questDetail.text = $"{GameManager.instance.dataManager.foodSub[GameManager.instance.dataManager.playerData.makeQuestItemID].itemName} {detail}";
         questReward.text = reward;
-        
         int.TryParse(count, out maxQuestCount);
-
-        int randomIndex = Random.Range(0, GameManager.instance.dataManager.playerData.recipeIndex.Count);
-        makeQuestItemID = GameManager.instance.dataManager.playerData.recipeIndex[randomIndex];
 
         CurQuestCountUpdate();
         
-        questType = GameManager.instance.questManager.data_Quest[randomNum][QuestManager.QuestType.Category.ToString()]
+        questType = GameManager.instance.questManager.data_Quest[GameManager.instance.dataManager.playerData.questNum][QuestManager.QuestType.Category.ToString()]
             .ToString();
         
-        
+        GameManager.instance.dataManager.SaveData();
     }
 
     private void CurQuestCountUpdate()
     {
-        questCount.text = $"( {curQuestCount} / {maxQuestCount} )";
+        questCount.text = $"( {GameManager.instance.dataManager.playerData.questCount} / {maxQuestCount} )";
     }
 
     private void ResetQuest()
     {
-        randomNum = -1;
-        curQuestCount = 0;
+        GameManager.instance.dataManager.playerData.questNum = -1;
+        GameManager.instance.dataManager.playerData.questCount = 0;
         maxQuestCount = 999;
         questType = "";
         
         questDetail.text = "성공!";
-        questReward.text = "(성공 / 성공)";
-        questCount.text = "성공";
+        questReward.text = "성공";
+        questCount.text = "성공 / 성공";
     }
 
-    private void QuestIDSet()
+    private void QuestDataSet()
     {
-        randomNum = Random.Range(0, GameManager.instance.questManager.data_Quest.Count + 1);
+        GameManager.instance.dataManager.playerData.questNum = Random.Range(0, GameManager.instance.questManager.data_Quest.Count + 1);
+        GameManager.instance.dataManager.playerData.questNum = 0; //실험용
+        
+        if (GameManager.instance.dataManager.playerData.recipeIndex.Count > 0)
+        {
+            int randomIndex = Random.Range(0, GameManager.instance.dataManager.playerData.recipeIndex.Count);
+            GameManager.instance.dataManager.playerData.makeQuestItemID = GameManager.instance.dataManager.playerData.recipeIndex[randomIndex];
+        }
+        else
+        {
+            GameManager.instance.dataManager.playerData.makeQuestItemID = 1;
+        }
+
     }
 
     private void MakeQuestUpdate(ItemSO obj)
     {
-        Debug.Log(makeQuestItemID + 1000);
-        Debug.Log(obj.id);
-        if(makeQuestItemID + 1000 != obj.id)
+        if(GameManager.instance.dataManager.playerData.makeQuestItemID + 1000 != obj.id)
             return;
 
-        curQuestCount++;
+        GameManager.instance.dataManager.playerData.questCount++;
         CurQuestCountUpdate();
 
-        if (curQuestCount >= maxQuestCount)
+        if (GameManager.instance.dataManager.playerData.questCount >= maxQuestCount)
         {
             ResetQuest();
-            // InitSet();
         }
+        
+        GameManager.instance.dataManager.SaveData();
     }
 }

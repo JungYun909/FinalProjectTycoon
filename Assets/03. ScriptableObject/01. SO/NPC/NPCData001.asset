@@ -19,3 +19,5 @@ MonoBehaviour:
   speed: 1
   favoriteFood:
   - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}
+  - {fileID: 11400000, guid: 4c14cf8e2ad373f4296997d353794267, type: 2}
+  - {fileID: 11400000, guid: 6860bf9eacac344efa9166cf7280a258, type: 2}

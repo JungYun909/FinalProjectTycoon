@@ -55,6 +55,7 @@ public class InstallationController : MonoBehaviour, IInteractable
                 if (connectedController != null)
                 {
                     InstallationDestinationController destinationController = GetComponentInChildren<InstallationDestinationController>();
+                    destinationController.destination[0] = this.gameObject;
                     destinationController.destination[1] = connectedController.gameObject;
                     destinationController.desPos1 = connectedController.gameObject.transform.position;
                 }
@@ -65,10 +66,12 @@ public class InstallationController : MonoBehaviour, IInteractable
 
     public void SaveDestination()
     {
-        if (this.GetComponentInChildren<InstallationDestinationController>().destination[1] != null)
+        if (destinationController.destination[1] == null)
+            Debug.Log("No Destination Info");
+        if (destinationController.destination[1] != null)
         {
             int fromID = this.destinationID;
-            int toID = this.GetComponentInChildren<InstallationDestinationController>().destination[1].GetComponent<InstallationController>().destinationID;
+            int toID = destinationController.destination[1].GetComponent<InstallationController>().destinationID;
             DestinationData data = new DestinationData(fromID, toID);
             GameManager.instance.dataManager.SaveDestinationData(data);
         }
