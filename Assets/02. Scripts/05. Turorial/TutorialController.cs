@@ -9,8 +9,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private string nextSceneName = "";
 
     private TutorialBase curTutorial = null;
-    private int curIndex = -1;
-    private int saveIndex = 0;
+    //private int curIndex = -1;
 
     private void Start()
     {
@@ -32,15 +31,14 @@ public class TutorialController : MonoBehaviour
             curTutorial.Exit();
         }
 
-        if(curIndex >= tutorials.Count - 1)
+        if(GameManager.instance.dataManager.playerData.tutoNum >= tutorials.Count - 1)
         {
             CompletedAllTutorials();
             return;
         }
 
-        curIndex++;
-        curTutorial = tutorials[curIndex];
-        saveIndex++;
+        GameManager.instance.dataManager.playerData.tutoNum++;
+        curTutorial = tutorials[GameManager.instance.dataManager.playerData.tutoNum];
 
         curTutorial.Enter();
     }

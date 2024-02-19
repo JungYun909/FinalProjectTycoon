@@ -19,7 +19,9 @@ public class PlayerData
     public int questNum = -1;
     public int questCount = 0;
     public int makeQuestItemID = 0;
-    
+
+    public int tutoNum = -1;
+
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
     public List<int> recipeIndex = new List<int>();
@@ -41,6 +43,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject counter; // 카운터 등록
     public GameObject entrance;
     public GameObject kitchenDoor;
+    public GameObject tutoPrefab;
     
     public event Action OnSaveEvent;
     public event Action OnLoadEvent; 
@@ -73,7 +76,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         if(sceneType != SceneType.MainScene)
             return;
-        
+
         counter = GameObject.Find("CounterObj");
         entrance = GameObject.Find("Entrance");
         kitchenDoor = GameObject.Find("KitchenDoor");
