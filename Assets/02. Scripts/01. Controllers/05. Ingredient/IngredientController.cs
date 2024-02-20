@@ -16,6 +16,8 @@ public class IngredientController : MonoBehaviour, IInteractable
     public MovementController movementController;
     public TestSA addImageController;
     public SpriteRenderer spriteController;
+
+    public event Action OnInteractEvent; 
     
     private void Start()
     {
@@ -85,9 +87,12 @@ public class IngredientController : MonoBehaviour, IInteractable
         InstallationController controller;
         if(destination != other.gameObject)
             return;
-        
-        if(gameObject.GetComponent<IInteractable>() != null)
+
+        if (gameObject.GetComponent<IInteractable>() != null)
+        {
             gameObject.GetComponent<IInteractable>().OnColliderInteract();
+            OnInteractEvent?.Invoke();
+        }
 
         if (other.gameObject.GetComponent<IInteractable>() != null)
         {

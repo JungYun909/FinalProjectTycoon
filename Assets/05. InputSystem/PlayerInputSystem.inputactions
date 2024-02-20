@@ -38,8 +38,19 @@
                 },
                 {
                     "name": "",
-                    "id": "1cb10edc-607d-4e36-a615-133b4cbae8ad",
+                    "id": "a6e65e6e-de20-4f6c-868c-48c41115e01c",
                     "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a56d343a-dcbf-4ba1-9f7d-1cbfdd42f077",
+                    "path": "<Touchscreen>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
