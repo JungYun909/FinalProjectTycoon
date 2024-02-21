@@ -15,8 +15,9 @@ MonoBehaviour:
   id: 7
   installasionName: "\uB538\uAE30 \uC0DD\uC0B0\uAE30"
   description: "\uB538\uAE30 \uB69C\uC648\uAE30"
-  price: 500
+  price: 1000
   sprite: {fileID: -634700909, guid: 1730f5490f3f1aa498d7203df2ea6b02, type: 3}
+  level: 1
   canSpawn: 1
   spawnDelay: 30
   spawnData: {fileID: 11400000, guid: fded909fcd2fe8a47b61672d14f42078, type: 2}

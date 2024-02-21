@@ -12,6 +12,7 @@ public class MachineSO : ScriptableObject
     public string description; //출력할 기계 설명
     public int price;
     public Sprite sprite;
+    public int level;
 
     [Header("Spawning")]
     public bool canSpawn;

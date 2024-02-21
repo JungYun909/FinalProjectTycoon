@@ -1577,6 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   main: {fileID: 519420031}
+  isMain: 1
 --- !u!114 &138804213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18275,6 +18276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: ef8a304b897d041be9d5acd3853d3db2, type: 2}
+  machineDatabase: {fileID: 0}
 --- !u!114 &1590563960
 MonoBehaviour:
   m_ObjectHideFlags: 0
