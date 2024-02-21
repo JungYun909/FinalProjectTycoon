@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5280460405754181190}
   - component: {fileID: 8079240563728937334}
   - component: {fileID: -8975464666105559682}
+  - component: {fileID: 2053820485671519109}
   m_Layer: 5
   m_Name: EncyclopediaButton
   m_TagString: Untagged
@@ -135,6 +136,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2053820485671519109}
+        m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
+        m_MethodName: BtnSound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 752114530faaa214988fb64cdcd0632a, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-8975464666105559682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,9 +162,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   image: {fileID: 8271634965250969426}
-  nameTxt: {fileID: 0}
-  recipe: {fileID: 0}
-  price: {fileID: 0}
+  nameTxt: 
+  recipe: 
+  price: 
+--- !u!114 &2053820485671519109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6464418660509086265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab135217c9845a45b97f4351ca35091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7455218005449641347
 GameObject:
   m_ObjectHideFlags: 0
