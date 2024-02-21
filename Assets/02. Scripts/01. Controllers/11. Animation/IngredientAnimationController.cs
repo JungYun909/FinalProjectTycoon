@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationController : AnimationBase
+public class IngredientAnimationController : AnimationBase
 {
     private static readonly int IsSpawning = Animator.StringToHash("IsSpawning");
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
