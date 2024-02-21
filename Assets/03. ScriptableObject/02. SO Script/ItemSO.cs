@@ -15,6 +15,8 @@ public class ItemSO : ScriptableObject
     public int price; //해당 아이템 가격
     public Sprite sprite;
     public string tag;
+
+    public int level;
     
     [Header("Movement")]
     public bool canMove;

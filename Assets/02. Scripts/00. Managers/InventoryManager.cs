@@ -24,6 +24,7 @@ public class InventoryManager : MonoBehaviour
     public event Action<int> OnInventoryUpdated; // 인벤토리 ID를 인자로 사용
 
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
+    public MachineDatabaseSO machineDatabase;
     public Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
     private int playerInventoryID = 1000;
@@ -74,6 +75,46 @@ public class InventoryManager : MonoBehaviour
             inventory.SaveInventory();
         }
     }
+
+    public void AddMachineToPlayerInventory(MachineSO machine, int quantity)
+    {
+        if(inventories.ContainsKey(1000))
+        {
+            var inventory = inventories[1000];
+            if(!inventory.machines.ContainsKey(machine))
+            {
+                inventory.machines[machine] = 0;
+            }
+            inventory.machines[machine] += quantity;
+
+            OnInventoryUpdated?.Invoke(1000);
+            inventory.UpdateInspectorList();
+            inventory.SaveInventory();
+        }
+    }
+
+    public bool RemoveMachineFromPlayerInventory(MachineSO machine, int quantity)
+    {
+        if(inventories.ContainsKey(1000))
+        {
+            var inventory = inventories[1000];
+            if(inventory.machines.ContainsKey(machine) && inventory.machines[machine] >= quantity)
+            {
+                inventory.machines[machine] -= quantity;
+                if(inventory.machines[machine] == 0)
+                {
+                    inventory.machines.Remove(machine);
+                }
+                OnInventoryUpdated?.Invoke(1000); // 이벤트 발생
+                inventory.UpdateInspectorList();
+                inventory.SaveInventory();
+
+                return true;
+            }
+        }
+        return false;
+    }    
+
 
     public bool RemoveItemFromInventory(int inventoryID, ItemSO item, int quantity)
     {

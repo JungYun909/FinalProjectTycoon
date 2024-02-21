@@ -12,6 +12,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     public Slider timer;
 
     public event Action<ItemSO> DeliverItem;
+    public event Action<MachineSO> DeliverMachine;
     public event Action<int> DeliverInventoryID;
     public event Action DeliverInventoryInfo;
     private ItemSO curItem;
@@ -37,7 +38,7 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         if(timer != null)
             timer.gameObject.SetActive(false);
         if(curMachine != null)
-        timerDuration = curMachine.makeDelay;
+            timerDuration = curMachine.makeDelay;
         // 아이템 아이콘 설정
         if (item != null && item.sprite != null)
         {
@@ -75,6 +76,10 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
 
     public void SetupMachineInfo(MachineSO machine, int quantity)
     {
+        if (timer != null)
+            timer.gameObject.SetActive(false);
+        if (curMachine != null)
+            timerDuration = curMachine.makeDelay;
         if (machine != null && machine.sprite != null)
         {
             itemIcon.sprite = machine.sprite;
@@ -85,6 +90,11 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
             itemIcon.enabled = false;
         }
         curMachine = machine;
+        quantityText.text = quantity > 0 ? quantity.ToString() : "";
+        if (quantity == 1)
+        {
+            quantityText.text = "";
+        }
     }
 
     private void OnEnable()
@@ -127,10 +137,9 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
     public void OnButtonClicked(int toInventoryID)
     {
         if (curItem != null)
-        {
-            // 중복 구독 방지를 위해 기존 구독 해제
             DeliverItem?.Invoke(curItem);
-        }
+        if (curMachine != null)
+            DeliverMachine?.Invoke(curMachine);
 
         var inventoryShowInstance = FindObjectOfType<InventoryShow>();
         if (inventoryShowInstance != null && inventoryShowInstance.curInventory != null)

@@ -16,12 +16,13 @@ public class ShopUI : UIBase
     public TMP_Text nameText;
     public TMP_Text descriptionText;
     public TMP_Text priceText;
-    public List<ItemDataContainer> datas;
     public MachineSO machineSO;
     public GameObject quantityCheck;
     private ItemDatabaseSO itemData;
-    public int shopInventoryID;
+    private MachineDatabaseSO machineData;
     public  ItemSO curItem;
+    public MachineSO curMachine;
+    private CameraMovementController camController;
 
     public Button machinePurchase;
     public Button itemPurchase;
@@ -33,7 +34,7 @@ public class ShopUI : UIBase
     private void Start()
     {
         quantityCheck.SetActive(false);
-        shopInventoryID = FindObjectOfType<ShopInventory>().inventoryID;
+        camController = FindObjectOfType<CameraMovementController>();
     }
     public override void Initialize()
     {
@@ -50,6 +51,12 @@ public class ShopUI : UIBase
         UpdateItemInfoInItemInfoWindow();
     }
 
+    private void HandleMachineInfo(MachineSO obj)
+    {
+        curMachine = obj;
+        UpdateMachinInfoWindow();
+    }
+
     private void ClearUI()
     {
         datas.Clear();
@@ -59,6 +66,7 @@ public class ShopUI : UIBase
             if (slotInfo != null)
             {
                 slotInfo.DeliverItem -= HandleItemInfo;
+                slotInfo.DeliverMachine -= HandleMachineInfo;
             }
             Destroy(child.gameObject);
         }
@@ -74,18 +82,40 @@ public class ShopUI : UIBase
     private void UpdateMachineInfoToShopUI()
     {
         ClearUI();
-        foreach (MachineSO machine in machines)
+        machineData = GameManager.instance.inventoryManager.machineDatabase;
+        if (camController.isMain)
         {
-            GameObject slot = Instantiate(slotPrefab, slotParent);
-            slot.GetComponent<Image>().sprite = machine.sprite;
-            ItemDataContainer curItemData = slot.GetComponent<ItemDataContainer>();
-            datas.Add(curItemData);
-            curItemData.machineSO = machine;
+            foreach (MachineSO machine in machineData.machineDataList)
+            {
+                if (machine.id != 5)
+                {
+                    GameObject slot = Instantiate(itemSlot, slotParent);
+                    ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
+                    if(itemSlotInfo != null)
+                    {
+                        itemSlotInfo.SetupMachineInfo(machine, 1);
+                    }    
+                }
+                else
+                    continue;
+            }
         }
-
-        foreach (var data in datas)
+        else
         {
-            data.seeItemData += SetInfo;
+            foreach(MachineSO machine in machineData.machineDataList)
+            {
+                if (machine.id == 5)
+                {
+                    GameObject slot = Instantiate(itemSlot, slotParent);
+                    ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
+                    if (itemSlotInfo != null)
+                    {
+                        itemSlotInfo.SetupMachineInfo(machine, 1);
+                    }
+                }
+                else
+                    continue;
+            }
         }
         onMachineEnabled?.Invoke();
     }
@@ -124,7 +154,6 @@ public class ShopUI : UIBase
             }
         }
         onIngredientEnabled?.Invoke();
-
     }
     public void OpenIngredientShopUI()
     {
@@ -158,13 +187,14 @@ public class ShopUI : UIBase
             return;
         }
         UpdateMachineInfoToShopUI();
-    }
-    private void SetInfo(MachineSO sO)
-    {
-        machineSO = sO;
-        nameText.text = sO.installasionName;
-        descriptionText.text = sO.description;
-        priceText.text = sO.price.ToString() + "원";
+        foreach(Transform child in slotParent)
+        {
+            ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
+            if(slotInfo != null)
+            {
+                slotInfo.DeliverMachine += HandleMachineInfo;
+            }
+        }
     }
 
     //public void SpawnInstallation()
@@ -185,6 +215,13 @@ public class ShopUI : UIBase
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
+    }
+
+    private void UpdateMachinInfoWindow()
+    {
+        nameText.text = curMachine.installasionName;
+        descriptionText.text = curMachine.description;
+        priceText.text = curMachine.price.ToString();
     }
 
     public void CloseShop()
