@@ -6,19 +6,19 @@ using System.Resources;
 using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InstallationController : MonoBehaviour, IInteractable
 {
     public MachineSO _installationData;
-    public MachineAnimSO _animData;
 
-    private RuntimeAnimatorController animatorController;
-
-    public AbstractInventory inventoryController;
+    public AbstractInventory inventory;
+    public InstallationInventoryController inventoryController;
     public InstallationInstallController installController;
     public InstallationDestinationController destinationController;
     public InstallationSpawnController spawnController;
+    public InstallationAnimationController animController;
 
     public Queue<GameObject> doughContainer;
     public Queue<ItemSO> ingredients;
@@ -78,24 +78,24 @@ public class InstallationController : MonoBehaviour, IInteractable
     }
     public void InitSetting()
     {
-        if (_animData != null)
+        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
+
+        if (_installationData.haveDoughInventory)
         {
-            animatorController = _animData.installtionAnimController[_installationData.id - 1];
-            gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
-            gameObject.GetComponentInChildren<Animator>().runtimeAnimatorController = animatorController;
+            doughContainer = new Queue<GameObject>();
+            ingredients = new Queue<ItemSO>();
+            inventoryController.gameObject.SetActive(true);
+            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
+            inventoryController.InitSet();
+        }
 
-            if (_installationData.haveDoughInventory)
-            {
-                doughContainer = new Queue<GameObject>();
-                ingredients = new Queue<ItemSO>();
-                inventoryController.gameObject.SetActive(true);
-            }
-
-            if (_installationData.canSpawn)
-                spawnController.gameObject.SetActive(true);
+        if (_installationData.canSpawn)
+        {
+            spawnController.gameObject.SetActive(true);
+            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
+            spawnController.InitSet();
         }
     }
-    
 
     public bool Continuous()
     {
@@ -111,7 +111,7 @@ public class InstallationController : MonoBehaviour, IInteractable
             switch (GameManager.instance.interactionManager.installationFunctionIndex)
             {
                 case 0:    
-                    inventoryController.InitSet();
+                    inventory.InitSet();
                     installController.gameObject.SetActive(false);
                     destinationController.gameObject.SetActive(false);
                     break;

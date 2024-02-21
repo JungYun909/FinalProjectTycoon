@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InstallationInventoryController : MonoBehaviour
 {
-    public InstallationController controller;
+    public InstallationController _controller;
     public InstallationDestinationController destinationController;
     public AbstractInventory inventory;
 
@@ -17,19 +18,34 @@ public class InstallationInventoryController : MonoBehaviour
     private string recipeIndex;
     
     public float spawnTimer = 0;
+    
+    private float animTime;
+    private bool startAnim;
+
+    public void InitSet()
+    {
+        animTime = _controller._installationData.animation[(int)InstallationAnimType.Spawn].length;
+    }
     private void Update()
     {
-        if(controller.doughContainer.Count == 0 || !destinationController.destination[1])
+        if(_controller.doughContainer.Count == 0 || !destinationController.destination[1])
             return;
         
-        if(controller._installationData.haveIngredientInventory && controller.ingredients.Count <= 0)
+        if(_controller._installationData.haveIngredientInventory && _controller.ingredients.Count <= 0)
             return;
 
         spawnTimer += Time.deltaTime;
 
-        if (spawnTimer > controller._installationData.makeDelay)
+        if (spawnTimer > _controller._installationData.makeDelay - (animTime * 0.8f) && startAnim == false)
+        {
+            _controller.animController.StartSpawnAnim();
+            startAnim = true;
+        }
+
+        if (spawnTimer > _controller._installationData.makeDelay)
         {
             spawnTimer = 0;
+            startAnim = false;
             DoughSetController();
         }
         eventTimer += Time.deltaTime;
@@ -42,7 +58,7 @@ public class InstallationInventoryController : MonoBehaviour
 
     public void DoughSetController()
     {
-        GameObject curObj = controller.doughContainer.Dequeue();
+        GameObject curObj = _controller.doughContainer.Dequeue();
         curObj.SetActive(true);
         
         IngredientController curController = curObj.GetComponent<IngredientController>();
@@ -52,20 +68,20 @@ public class InstallationInventoryController : MonoBehaviour
         GameManager.instance.spawnManager.SpawnPositionSet(transform.root.gameObject, curController.destination, curObj);
         GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, curController.itemData, 1);
 
-        if (controller._installationData.haveIngredientInventory)
+        if (_controller._installationData.haveIngredientInventory)
         {
-            ItemSO ingredientData = controller.ingredients.Dequeue();
+            ItemSO ingredientData = _controller.ingredients.Dequeue();
             Debug.Log(ingredientData.id);
             GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, ingredientData, 1);
-            curController.VisitIngredientDataSet(controller, ingredientData);
+            curController.VisitIngredientDataSet(_controller, ingredientData);
         }
-        else if(!controller._installationData.haveIngredientInventory)
+        else if(!_controller._installationData.haveIngredientInventory)
         {
-            curController.VisitInstallationSet(controller);
+            curController.VisitInstallationSet(_controller);
         }
         
         
-        if (controller._installationData.completeMake)
+        if (_controller._installationData.completeMake)
         {
             GameManager.instance.poolManager.DeSpawnFromPool(curObj);
 

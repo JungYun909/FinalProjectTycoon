@@ -200,9 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272a0f3210081492c8b00fe5c2daf706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1421688546873149454}
+  _controller: {fileID: 1421688546873149454}
   destinationController: {fileID: 5245645433901317557}
   inventory: {fileID: 7668016188072440741}
+  eventTimer: 0
+  spawnTimer: 0
 --- !u!1 &3079726677750095059
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +313,7 @@ GameObject:
   - component: {fileID: 9006730046424788966}
   - component: {fileID: 1419680406982925656}
   - component: {fileID: 1421688546873149454}
+  - component: {fileID: 1810131896715007411}
   m_Layer: 12
   m_Name: InstallationObject
   m_TagString: Installation
@@ -397,12 +400,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _installationData: {fileID: 0}
-  _animData: {fileID: 11400000, guid: 4b570b4778dee3644ac703716e989393, type: 2}
-  inventoryController: {fileID: 7668016188072440741}
+  inventory: {fileID: 7668016188072440741}
+  inventoryController: {fileID: 7344404901063357745}
   installController: {fileID: 2001539584022440787}
   destinationController: {fileID: 5245645433901317557}
   spawnController: {fileID: 5463271039139519540}
+  animController: {fileID: 1810131896715007411}
   destinationID: 0
+--- !u!114 &1810131896715007411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658642214538745355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ec4529415674a2f80a775f773e9eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5145622365234100751
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,15 +493,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -990214313, guid: 08b6f9f34022111499309b06f96e65df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8148148, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &4269237548176478379
@@ -498,7 +514,7 @@ Animator:
   m_GameObject: {fileID: 5145622365234100751}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 61f54a1be3e884c66b745c94632419dd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

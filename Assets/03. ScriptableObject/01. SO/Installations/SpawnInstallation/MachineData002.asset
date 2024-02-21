@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa4c4d2029487e54aaea9faf63824963, type: 3}
-  m_Name: MachineData001
+  m_Name: MachineData002
   m_EditorClassIdentifier: 
-  id: 1
-  installasionName: "\uBC18\uC8FD\uAE30"
-  description: "\uAC1C\uCA4C\uB294 \uBC18\uC8FD\uAE30"
-  price: 300
-  sprite: {fileID: -990214313, guid: 08b6f9f34022111499309b06f96e65df, type: 3}
+  id: 2
+  installasionName: "\uCD08\uCF5C\uB9BF \uC0DD\uC0B0\uAE30"
+  description: "\uB2EC\uC544\uC694"
+  price: 500
+  sprite: {fileID: 1190235823, guid: 9b9802d9a53b9424f88b15cfb8513180, type: 3}
+  animation:
+  - {fileID: 7400000, guid: 2d1ab091c30b44cddaa40eb80dd27b07, type: 2}
   canSpawn: 1
-  spawnDelay: 15
-  spawnData: {fileID: 11400000, guid: 68ae17f6ccd0f462b9072368b1341dcd, type: 2}
+  spawnDelay: 20
+  spawnData: {fileID: 11400000, guid: dff7e5b57aa3d456987f5c002df82298, type: 2}
   haveDoughInventory: 0
   haveIngredientInventory: 0
   makeDelay: 0
