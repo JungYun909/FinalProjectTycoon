@@ -1884,6 +1884,7 @@ MonoBehaviour:
   counter: {fileID: 0}
   entrance: {fileID: 0}
   kitchenDoor: {fileID: 0}
+  tutoPrefab: {fileID: 0}
   isClearTuto: 0
 --- !u!114 &1830320769
 MonoBehaviour:
@@ -2685,7 +2686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD55C\uAE00\uB9CC \uC785\uB835 \uAC00\uB2A5\uD574\uC694!"
+  m_text: "\uD55C\uAE00\uB9CC \uC785\uB825 \uAC00\uB2A5\uD574\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
   m_sharedMaterial: {fileID: 3931606681535558488, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}

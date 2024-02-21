@@ -54,6 +54,10 @@ public class EncyclopediaUI : UIBase
         foodName.text = itemName;
         foodRecipe.text = recipe;
         foodPrice.text = price;
+    }
 
+    public void BackBtn()
+    {
+        GameManager.instance.uiManager.CloseAll();
     }
 }
