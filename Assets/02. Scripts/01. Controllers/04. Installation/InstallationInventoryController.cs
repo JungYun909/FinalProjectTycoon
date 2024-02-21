@@ -9,14 +9,14 @@ public class InstallationInventoryController : MonoBehaviour
     public InstallationDestinationController destinationController;
     public AbstractInventory inventory;
 
-    private float eventTimer = 0f;
+    public float eventTimer = 0f;
     private const float eventInterval = 1f;
 
     public event Action<float> deliverCurrentTime;
     
     private string recipeIndex;
     
-    private float spawnTimer = 0;
+    public float spawnTimer = 0;
     private void Update()
     {
         if(controller.doughContainer.Count == 0 || !destinationController.destination[1])

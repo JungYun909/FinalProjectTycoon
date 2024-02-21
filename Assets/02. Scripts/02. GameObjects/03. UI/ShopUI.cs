@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -51,6 +52,7 @@ public class ShopUI : UIBase
 
     private void ClearUI()
     {
+        datas.Clear();
         foreach (Transform child in slotParent)
         {
             ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
@@ -85,6 +87,19 @@ public class ShopUI : UIBase
         {
             data.seeItemData += SetInfo;
         }
+        onMachineEnabled?.Invoke();
+    }
+
+    private void UpdateTutoMachineInfoToShopUI(MachineSO data)
+    {
+        ClearUI();
+        GameObject slot = Instantiate(slotPrefab, slotParent);
+        slot.GetComponent<Image>().sprite = data.sprite;
+        ItemDataContainer curItemData = slot.GetComponent<ItemDataContainer>();
+        datas.Add(curItemData);
+        curItemData.machineSO = data;
+
+        datas[0].seeItemData += SetInfo;
         onMachineEnabled?.Invoke();
     }
 
@@ -126,6 +141,22 @@ public class ShopUI : UIBase
 
     public void OpenMachinShopUI()
     {
+        Debug.Log(GameManager.instance.dataManager.playerData.tutoNum);
+        if (GameManager.instance.dataManager.playerData.tutoNum == 4)
+        {
+            UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[0]);
+            return;
+        }
+        else if(GameManager.instance.dataManager.playerData.tutoNum == 12)
+        {
+            UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[2]);
+            return;
+        }
+        else if(GameManager.instance.dataManager.playerData.tutoNum == 26)
+        {
+            UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[4]);
+            return;
+        }
         UpdateMachineInfoToShopUI();
     }
     private void SetInfo(MachineSO sO)

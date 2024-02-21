@@ -33,5 +33,11 @@ public class TutorialDestinationMission : TutorialBase
     {
         base.Exit();
         controller.OnDestinationEvent -= Check;
+        SpawnImmediately();
+    }
+
+    private void SpawnImmediately()
+    {
+        GameManager.instance.dataManager.curInstallations[0].GetComponent<InstallationController>().spawnController.spawnTimer = 999;
     }
 }

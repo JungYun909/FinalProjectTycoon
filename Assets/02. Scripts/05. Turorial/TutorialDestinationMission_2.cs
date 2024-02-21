@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TutorialDestinationMission_2 : TutorialBase
@@ -31,6 +32,14 @@ public class TutorialDestinationMission_2 : TutorialBase
     {
         base.Exit();
         controller.OnDestinationEvent -= Check;
+        SpawnImmediately();
     }
-    
+
+    private void SpawnImmediately()
+    {
+        InstallationInventoryController inventoryController = GameManager.instance.dataManager.curInstallations[1].GetComponentInChildren<InstallationInventoryController>();
+        inventoryController.spawnTimer = 999;
+        inventoryController.eventTimer = 999;
+    }
+
 }
