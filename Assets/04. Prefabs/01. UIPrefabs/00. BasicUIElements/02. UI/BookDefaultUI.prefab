@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
-  m_sharedMaterial: {fileID: 3931606681535558488, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
+  m_sharedMaterial: {fileID: -715155081317310308, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -516,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 4885621566728180158}
   quantityText: {fileID: 3350582188639784682}
+  timer: {fileID: 0}
 --- !u!114 &8784849169010084432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,6 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 3863371965319163141}
   quantityText: {fileID: 3313263576516517524}
+  timer: {fileID: 0}
 --- !u!114 &5581852632610240621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,6 +1418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 1099415916744062584}
   quantityText: {fileID: 93201599527624317}
+  timer: {fileID: 0}
 --- !u!114 &5136038696337501262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1639,6 +1642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 6762038727075450425}
   quantityText: {fileID: 6032807176285807068}
+  timer: {fileID: 0}
 --- !u!114 &694477438302618937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1866,6 +1870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 3157408715417096579}
   quantityText: {fileID: 5556566279022993245}
+  timer: {fileID: 0}
 --- !u!114 &9052281019625988112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2016,6 +2021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 4963639497631866558}
   quantityText: {fileID: 888464880049583519}
+  timer: {fileID: 0}
 --- !u!114 &5493994821936506997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2446,10 +2452,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uC548\uB155 \uD558\uC138\uC694"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
-  m_sharedMaterial: {fileID: 3931606681535558488, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
+  m_sharedMaterial: {fileID: -715155081317310308, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2473,8 +2479,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2484,7 +2490,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_wordSpacing: 10
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -2581,10 +2587,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uC548\uB155"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
-  m_sharedMaterial: {fileID: 3931606681535558488, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
+  m_sharedMaterial: {fileID: -715155081317310308, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2608,8 +2614,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2619,7 +2625,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_wordSpacing: 10
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -4069,6 +4075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 2909583089071820486}
   quantityText: {fileID: 3874820986290470381}
+  timer: {fileID: 0}
 --- !u!114 &5288970126706577164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4219,6 +4226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 7689347082720608319}
   quantityText: {fileID: 4647977441677447779}
+  timer: {fileID: 0}
 --- !u!114 &4565192438189173574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5466,6 +5474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 3170680058852262974}
   quantityText: {fileID: 5468101952707460220}
+  timer: {fileID: 0}
 --- !u!114 &2903795240057944156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5616,6 +5625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 3803233667228615787}
   quantityText: {fileID: 8031462621612864820}
+  timer: {fileID: 0}
 --- !u!114 &5391247421762186683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5842,6 +5852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 1062634395441787247}
   quantityText: {fileID: 4156105395529669008}
+  timer: {fileID: 0}
 --- !u!114 &8100006860726468181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6165,6 +6176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 3626981938766229435}
   quantityText: {fileID: 4797022576979588135}
+  timer: {fileID: 0}
 --- !u!114 &6079542944090451211
 MonoBehaviour:
   m_ObjectHideFlags: 0
