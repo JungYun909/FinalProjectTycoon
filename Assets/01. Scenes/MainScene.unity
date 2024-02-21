@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 2501166}
   - component: {fileID: 2501165}
   m_Layer: 0
-  m_Name: 48_TutorialDialog
+  m_Name: 60_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 41875260}
   - component: {fileID: 41875259}
   m_Layer: 0
-  m_Name: 38_TutorialDialog
+  m_Name: 50_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 55879360}
   - component: {fileID: 55879359}
   m_Layer: 0
-  m_Name: 50_TutorialDialog
+  m_Name: 62_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 124479143}
   - component: {fileID: 124479144}
   m_Layer: 0
-  m_Name: 53_TutorialMission
+  m_Name: 65_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1830,7 +1830,7 @@ GameObject:
   - component: {fileID: 171815910}
   - component: {fileID: 171815909}
   m_Layer: 0
-  m_Name: 32_TutorialDialog
+  m_Name: 44_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1961,6 +1961,136 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187764539}
   m_CullTransparentMesh: 1
+--- !u!1 &197956037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197956038}
+  - component: {fileID: 197956040}
+  - component: {fileID: 197956039}
+  m_Layer: 0
+  m_Name: 10_TutorialDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &197956038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197956037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &197956039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197956037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1610fa5311bf63448abe80c4d3976fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
+  imageDialog: {fileID: 1672967149}
+  textDialogue: {fileID: 1139187683}
+  objectArrow: {fileID: 1051970963}
+  typingSpeed: 0.1
+--- !u!114 &197956040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197956037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6e6a1add1a1a4997d5f5e8a316874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 
+  completed: 0
+--- !u!1 &200105225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200105226}
+  - component: {fileID: 200105228}
+  - component: {fileID: 200105227}
+  m_Layer: 0
+  m_Name: 36_TutorialDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200105226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200105225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &200105227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200105225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1610fa5311bf63448abe80c4d3976fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogue: "\uBC30\uCE58\uBC84\uD2BC\uC744 \uB20C\uB7EC\uBCF4\uC790! "
+  imageDialog: {fileID: 1672967149}
+  textDialogue: {fileID: 1139187683}
+  objectArrow: {fileID: 1051970963}
+  typingSpeed: 0.1
+--- !u!114 &200105228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200105225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6e6a1add1a1a4997d5f5e8a316874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 
+  completed: 0
 --- !u!1 &217552306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,7 +2102,7 @@ GameObject:
   - component: {fileID: 217552307}
   - component: {fileID: 217552308}
   m_Layer: 0
-  m_Name: 27_TutorialMission
+  m_Name: 35_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,7 +2375,7 @@ GameObject:
   - component: {fileID: 265431426}
   - component: {fileID: 265431425}
   m_Layer: 0
-  m_Name: 20_TutorialDialog
+  m_Name: 26_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2887,7 +3017,7 @@ GameObject:
   - component: {fileID: 321697924}
   - component: {fileID: 321697923}
   m_Layer: 0
-  m_Name: 34_TutorialDialog
+  m_Name: 46_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5997,6 +6127,71 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &360001589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360001590}
+  - component: {fileID: 360001592}
+  - component: {fileID: 360001591}
+  m_Layer: 0
+  m_Name: 20_TutorialDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &360001590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360001589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &360001591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360001589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1610fa5311bf63448abe80c4d3976fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
+  imageDialog: {fileID: 1672967149}
+  textDialogue: {fileID: 1139187683}
+  objectArrow: {fileID: 1051970963}
+  typingSpeed: 0.1
+--- !u!114 &360001592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360001589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6e6a1add1a1a4997d5f5e8a316874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 
+  completed: 0
 --- !u!1 &418594434
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,6 +6371,52 @@ RectTransform:
   m_AnchoredPosition: {x: 230, y: 262}
   m_SizeDelta: {x: 320, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &464344860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 464344861}
+  - component: {fileID: 464344862}
+  m_Layer: 0
+  m_Name: 21_TutorialMission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &464344861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464344860}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &464344862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464344860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932f9414c22df3946ab1c5ca60a5ede3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 01-N
+  completed: 0
 --- !u!1 &488945499
 GameObject:
   m_ObjectHideFlags: 0
@@ -6285,7 +6526,7 @@ GameObject:
   - component: {fileID: 517284509}
   - component: {fileID: 517284510}
   m_Layer: 0
-  m_Name: 31_TutorialMission
+  m_Name: 43_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6547,6 +6788,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525964413}
   m_CullTransparentMesh: 1
+--- !u!1 &549835390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 549835391}
+  - component: {fileID: 549835393}
+  - component: {fileID: 549835392}
+  m_Layer: 0
+  m_Name: 40_TutorialDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &549835391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549835390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &549835392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549835390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1610fa5311bf63448abe80c4d3976fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
+  imageDialog: {fileID: 1672967149}
+  textDialogue: {fileID: 1139187683}
+  objectArrow: {fileID: 1051970963}
+  typingSpeed: 0.1
+--- !u!114 &549835393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549835390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6e6a1add1a1a4997d5f5e8a316874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 
+  completed: 0
 --- !u!1 &555805097
 GameObject:
   m_ObjectHideFlags: 0
@@ -6817,7 +7123,7 @@ GameObject:
   - component: {fileID: 577813957}
   - component: {fileID: 577813958}
   m_Layer: 0
-  m_Name: 39_TutorialMission
+  m_Name: 51_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7107,7 +7413,7 @@ GameObject:
   - component: {fileID: 580116671}
   - component: {fileID: 580116672}
   m_Layer: 0
-  m_Name: 11_TutorialMission
+  m_Name: 13_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8534,7 +8840,7 @@ GameObject:
   - component: {fileID: 681814312}
   - component: {fileID: 681814311}
   m_Layer: 0
-  m_Name: 18_TutorialDialog
+  m_Name: 24_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10066,7 +10372,7 @@ GameObject:
   - component: {fileID: 696728057}
   - component: {fileID: 696728056}
   m_Layer: 0
-  m_Name: 44_TutorialDialog
+  m_Name: 56_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10519,7 +10825,7 @@ GameObject:
   - component: {fileID: 747836610}
   - component: {fileID: 747836609}
   m_Layer: 0
-  m_Name: 52_TutorialDialog
+  m_Name: 64_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11005,7 +11311,7 @@ GameObject:
   - component: {fileID: 810505148}
   - component: {fileID: 810505147}
   m_Layer: 0
-  m_Name: 14_TutorialDialog
+  m_Name: 16_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11039,9 +11345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogue: "\uC544\uAE4C \uD55C\uAC70\uCC98\uB7FC \uBC30\uCE58\uBC84\uD2BC\uC744
-      \uB20C\uB7EC\uC11C \uD45C\uC2DC\uB41C \uC704\uCE58\uAE4C\uC9C0 \uC774\uB3D9\uC2DC\uD0A4\uACE0
-      \uC124\uCE58\uD655\uC815\uC744 \uB204\uB974\uC790! "
+  - dialogue: "\uC774\uC81C \uB2E4\uC2DC \uBC30\uCE58 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
   imageDialog: {fileID: 1672967149}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
@@ -11071,7 +11375,7 @@ GameObject:
   - component: {fileID: 812193115}
   - component: {fileID: 812193116}
   m_Layer: 0
-  m_Name: 17_TutorialMission
+  m_Name: 23_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11376,6 +11680,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionID: 01-A
+--- !u!1 &868024805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868024806}
+  - component: {fileID: 868024807}
+  m_Layer: 0
+  m_Name: 29_TutorialMission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &868024806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868024805}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868024807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868024805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932f9414c22df3946ab1c5ca60a5ede3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 01-N
+  completed: 0
 --- !u!1 &891736572
 GameObject:
   m_ObjectHideFlags: 0
@@ -11838,6 +12188,52 @@ MonoBehaviour:
   - {fileID: 1519001509}
   speed: 0.05
   backBtn: {fileID: 1055242992}
+--- !u!1 &931462040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 931462041}
+  - component: {fileID: 931462042}
+  m_Layer: 0
+  m_Name: 11_TutorialMission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &931462041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931462040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &931462042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931462040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932f9414c22df3946ab1c5ca60a5ede3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 01-N
+  completed: 0
 --- !u!1 &936799364
 GameObject:
   m_ObjectHideFlags: 0
@@ -11849,7 +12245,7 @@ GameObject:
   - component: {fileID: 936799365}
   - component: {fileID: 936799366}
   m_Layer: 0
-  m_Name: 49_TutorialMission
+  m_Name: 61_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12092,6 +12488,8 @@ MonoBehaviour:
   dialogs:
   - dialogue: "\uC774\uC81C \uBC18\uC8FD\uAE30\uB97C \uD45C\uC2DC\uB41C \uC704\uCE58\uAE4C\uC9C0
       \uC774\uB3D9\uC2DC\uCF1C\uC11C \uC124\uCE58 \uD655\uC815\uC744 \uB204\uB974\uBA74\uB3FC! "
+  - dialogue: "\uBC18\uC8FD\uAE30\uB97C \uD074\uB9AD\uD558\uBA74 \uC774\uB3D9\uD560\uC218
+      \uC788\uB294 \uBC84\uD2BC\uC774 \uC0DD\uAE38\uAC70\uC57C!! "
   imageDialog: {fileID: 1672967149}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
@@ -12343,6 +12741,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969603001}
   m_CullTransparentMesh: 1
+--- !u!1 &988732043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 988732044}
+  - component: {fileID: 988732045}
+  m_Layer: 0
+  m_Name: 41_TutorialMission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &988732044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988732043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &988732045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988732043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932f9414c22df3946ab1c5ca60a5ede3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 01-N
+  completed: 0
 --- !u!1 &989954444
 GameObject:
   m_ObjectHideFlags: 0
@@ -12355,7 +12799,7 @@ GameObject:
   - component: {fileID: 989954447}
   - component: {fileID: 989954446}
   m_Layer: 0
-  m_Name: 28_TutorialDialog
+  m_Name: 38_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12389,8 +12833,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs:
-  - dialogue: "\uC9C4\uC5F4\uB300\uB3C4 \uBC30\uCE58\uBC84\uD2BC\uC744 \uD074\uB9AD\uD574\uC11C
-      \uD45C\uC2DC\uB41C \uC704\uCE58\uC5D0 \uC124\uCE58\uD558\uC790~~  "
+  - dialogue: "\uC774\uC81C \uC9C4\uC5F4\uB300\uB97C \uD45C\uC2DC\uB41C \uC704\uCE58\uAE4C\uC9C0
+      \uC774\uB3D9\uC2DC\uCF1C\uC11C \uC124\uCE58 \uD655\uC815\uC744 \uB204\uB974\uBA74\uB3FC! "
+  - dialogue: "\uC9C4\uC5F4\uB300\uB97C \uD074\uB9AD\uD558\uBA74 \uC774\uB3D9\uD560\uC218
+      \uC788\uB294 \uBC84\uD2BC\uC774 \uC0DD\uAE38\uAC70\uC57C!! "
   imageDialog: {fileID: 1672967149}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
@@ -12497,7 +12943,7 @@ GameObject:
   - component: {fileID: 1035552672}
   - component: {fileID: 1035552671}
   m_Layer: 0
-  m_Name: 22_TutorialDialog
+  m_Name: 30_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12664,6 +13110,7 @@ GameObject:
   - component: {fileID: 1055242994}
   - component: {fileID: 1055242993}
   - component: {fileID: 1055242992}
+  - component: {fileID: 1055242995}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -12834,6 +13281,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055242990}
   m_CullTransparentMesh: 1
+--- !u!114 &1055242995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055242990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d196796645b51494ea06f145c02de0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionID: 01-N
 --- !u!1 &1061442954
 GameObject:
   m_ObjectHideFlags: 0
@@ -12846,7 +13306,7 @@ GameObject:
   - component: {fileID: 1061442957}
   - component: {fileID: 1061442956}
   m_Layer: 0
-  m_Name: 26_TutorialDialog
+  m_Name: 34_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12911,7 +13371,7 @@ GameObject:
   - component: {fileID: 1077074531}
   - component: {fileID: 1077074530}
   m_Layer: 0
-  m_Name: 24_TutorialDialog
+  m_Name: 32_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13113,7 +13573,7 @@ GameObject:
   - component: {fileID: 1093097276}
   - component: {fileID: 1093097275}
   m_Layer: 0
-  m_Name: 36_TutorialDialog
+  m_Name: 48_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13388,16 +13848,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'New Text
-
-    New Text
-
-    New Text
-
-'
+  m_text: "\uC548\uB155\uD558\uC138\uC694 \uC548\uB155\uD558\uC138\uC694\n\uC548\uB155\uD558\uC138\uC694
+    \uD558\uC774\nNew Text\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
-  m_sharedMaterial: {fileID: 3931606681535558488, guid: 13fddf178a72f48ba963333632b9cf8c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
+  m_sharedMaterial: {fileID: -715155081317310308, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13427,13 +13882,13 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_characterSpacing: 5
+  m_wordSpacing: 15
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -13511,6 +13966,64 @@ MonoBehaviour:
   completed: 0
   fadeEffect: {fileID: 1827752635}
   isFadeIn: 1
+--- !u!1 &1180713471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180713472}
+  - component: {fileID: 1180713473}
+  m_Layer: 0
+  m_Name: 17_TutorialMission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1180713472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180713471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1180713473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180713471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4fc4a964ea79c41bdf19a698e9ae4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 01-B
+  completed: 0
+  fingerIcon: {fileID: 818943112}
+  missionBtn:
+  - {fileID: 863333133}
+  - {fileID: 2093157658}
+  - {fileID: 685471854}
+  - {fileID: 1456166132}
+  - {fileID: 138804209}
+  - {fileID: 1879512776}
+  - {fileID: 1055242992}
+  - {fileID: 1519001509}
+  targetBtn: {fileID: 1456166132}
+  isClick: 0
 --- !u!1 &1206026061
 GameObject:
   m_ObjectHideFlags: 0
@@ -13522,7 +14035,7 @@ GameObject:
   - component: {fileID: 1206026062}
   - component: {fileID: 1206026063}
   m_Layer: 0
-  m_Name: 25_TutorialMission
+  m_Name: 33_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13581,7 +14094,7 @@ GameObject:
   - component: {fileID: 1215066138}
   - component: {fileID: 1215066137}
   m_Layer: 0
-  m_Name: 12_TutorialDialog
+  m_Name: 14_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13723,7 +14236,7 @@ GameObject:
   - component: {fileID: 1220975097}
   - component: {fileID: 1220975096}
   m_Layer: 0
-  m_Name: 46_TutorialDialog
+  m_Name: 58_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13787,7 +14300,7 @@ GameObject:
   - component: {fileID: 1223973945}
   - component: {fileID: 1223973946}
   m_Layer: 0
-  m_Name: 15_TutorialMission
+  m_Name: 19_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13957,6 +14470,74 @@ RectTransform:
   m_AnchoredPosition: {x: 403, y: 262}
   m_SizeDelta: {x: 320, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1310501207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1310501208}
+  - component: {fileID: 1310501210}
+  - component: {fileID: 1310501209}
+  m_Layer: 0
+  m_Name: 18_TutorialDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1310501208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310501207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1310501209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310501207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1610fa5311bf63448abe80c4d3976fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogue: "\uC774\uC81C \uBC18\uC8FD\uAE30\uB97C \uD45C\uC2DC\uB41C \uC704\uCE58\uAE4C\uC9C0
+      \uC774\uB3D9\uC2DC\uCF1C\uC11C \uC124\uCE58 \uD655\uC815\uC744 \uB204\uB974\uBA74\uB3FC! "
+  - dialogue: "\uC624\uBE10\uC744 \uD074\uB9AD\uD558\uBA74 \uC774\uB3D9\uD560\uC218
+      \uC788\uB294 \uBC84\uD2BC\uC774 \uC0DD\uAE38\uAC70\uC57C!! "
+  imageDialog: {fileID: 1672967149}
+  textDialogue: {fileID: 1139187683}
+  objectArrow: {fileID: 1051970963}
+  typingSpeed: 0.1
+--- !u!114 &1310501210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310501207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6e6a1add1a1a4997d5f5e8a316874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 
+  completed: 0
 --- !u!1 &1311005221
 GameObject:
   m_ObjectHideFlags: 0
@@ -14031,7 +14612,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d4006fe3e2f75ae44804ed039d6ea472, type: 3}
-  m_Color: {r: 0.63529414, g: 1, b: 0.9647059, a: 1}
+  m_Color: {r: 0.69411767, g: 0.3137255, b: 0.2392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -14518,7 +15099,7 @@ GameObject:
   - component: {fileID: 1378500740}
   - component: {fileID: 1378500739}
   m_Layer: 0
-  m_Name: 54_TutorialDialog
+  m_Name: 66_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14828,26 +15409,38 @@ Transform:
   - {fileID: 92318764}
   - {fileID: 950746513}
   - {fileID: 334240563}
+  - {fileID: 197956038}
+  - {fileID: 931462041}
   - {fileID: 1745595855}
   - {fileID: 580116671}
   - {fileID: 1215066136}
   - {fileID: 1814231003}
   - {fileID: 810505146}
+  - {fileID: 1180713472}
+  - {fileID: 1310501208}
   - {fileID: 1223973945}
+  - {fileID: 360001590}
+  - {fileID: 464344861}
   - {fileID: 2108368938}
   - {fileID: 812193115}
   - {fileID: 681814310}
   - {fileID: 1607567598}
   - {fileID: 265431424}
   - {fileID: 1804499857}
+  - {fileID: 1474033135}
+  - {fileID: 868024806}
   - {fileID: 1035552670}
   - {fileID: 1573339114}
   - {fileID: 1077074529}
   - {fileID: 1206026062}
   - {fileID: 1061442955}
   - {fileID: 217552307}
+  - {fileID: 200105226}
+  - {fileID: 1598629776}
   - {fileID: 989954445}
   - {fileID: 1556386653}
+  - {fileID: 549835391}
+  - {fileID: 988732044}
   - {fileID: 1749772664}
   - {fileID: 517284509}
   - {fileID: 171815908}
@@ -14898,26 +15491,38 @@ MonoBehaviour:
   - {fileID: 92318765}
   - {fileID: 950746515}
   - {fileID: 334240564}
+  - {fileID: 197956040}
+  - {fileID: 931462042}
   - {fileID: 1745595857}
   - {fileID: 580116672}
   - {fileID: 1215066138}
   - {fileID: 1814231004}
   - {fileID: 810505148}
+  - {fileID: 1180713473}
+  - {fileID: 1310501210}
   - {fileID: 1223973946}
+  - {fileID: 360001592}
+  - {fileID: 464344862}
   - {fileID: 2108368940}
   - {fileID: 812193116}
   - {fileID: 681814312}
   - {fileID: 1607567599}
   - {fileID: 265431426}
   - {fileID: 1804499858}
+  - {fileID: 1474033137}
+  - {fileID: 868024807}
   - {fileID: 1035552672}
   - {fileID: 1573339115}
   - {fileID: 1077074531}
   - {fileID: 1206026063}
   - {fileID: 1061442957}
   - {fileID: 217552308}
+  - {fileID: 200105228}
+  - {fileID: 1598629777}
   - {fileID: 989954447}
   - {fileID: 1556386654}
+  - {fileID: 549835393}
+  - {fileID: 988732045}
   - {fileID: 1749772666}
   - {fileID: 517284510}
   - {fileID: 171815910}
@@ -15261,6 +15866,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462480767}
   m_CullTransparentMesh: 1
+--- !u!1 &1474033134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474033135}
+  - component: {fileID: 1474033137}
+  - component: {fileID: 1474033136}
+  m_Layer: 0
+  m_Name: 28_TutorialDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474033135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474033134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1474033136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474033134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1610fa5311bf63448abe80c4d3976fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
+  imageDialog: {fileID: 1672967149}
+  textDialogue: {fileID: 1139187683}
+  objectArrow: {fileID: 1051970963}
+  typingSpeed: 0.1
+--- !u!114 &1474033137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474033134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf6e6a1add1a1a4997d5f5e8a316874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 
+  completed: 0
 --- !u!1 &1490342553
 GameObject:
   m_ObjectHideFlags: 0
@@ -16866,7 +17536,7 @@ GameObject:
   - component: {fileID: 1543346003}
   - component: {fileID: 1543346004}
   m_Layer: 0
-  m_Name: 51_TutorialMission
+  m_Name: 63_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17137,7 +17807,7 @@ GameObject:
   - component: {fileID: 1556386653}
   - component: {fileID: 1556386654}
   m_Layer: 0
-  m_Name: 29_TutorialMission
+  m_Name: 39_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17330,7 +18000,7 @@ GameObject:
   - component: {fileID: 1573339114}
   - component: {fileID: 1573339115}
   m_Layer: 0
-  m_Name: 23_TutorialMission
+  m_Name: 31_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18133,6 +18803,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595631244}
   m_CullTransparentMesh: 1
+--- !u!1 &1598629775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1598629776}
+  - component: {fileID: 1598629777}
+  m_Layer: 0
+  m_Name: 37_TutorialMission
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1598629776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598629775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1426467453}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1598629777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598629775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4fc4a964ea79c41bdf19a698e9ae4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutoID: 01-B
+  completed: 0
+  fingerIcon: {fileID: 818943112}
+  missionBtn:
+  - {fileID: 863333133}
+  - {fileID: 2093157658}
+  - {fileID: 685471854}
+  - {fileID: 1456166132}
+  - {fileID: 138804209}
+  - {fileID: 1879512776}
+  - {fileID: 1055242992}
+  - {fileID: 1519001509}
+  targetBtn: {fileID: 1456166132}
+  isClick: 0
 --- !u!1 &1598652244
 GameObject:
   m_ObjectHideFlags: 0
@@ -18304,7 +19032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -657, y: 271}
+  m_AnchoredPosition: {x: -150, y: 271}
   m_SizeDelta: {x: 320, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1604117315
@@ -18453,7 +19181,7 @@ GameObject:
   - component: {fileID: 1607567598}
   - component: {fileID: 1607567599}
   m_Layer: 0
-  m_Name: 19_TutorialMission
+  m_Name: 25_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19200,7 +19928,7 @@ GameObject:
   - component: {fileID: 1713265733}
   - component: {fileID: 1713265734}
   m_Layer: 0
-  m_Name: 35_TutorialMission
+  m_Name: 47_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19322,7 +20050,7 @@ GameObject:
   - component: {fileID: 1724733209}
   - component: {fileID: 1724733210}
   m_Layer: 0
-  m_Name: 43_TutorialMission
+  m_Name: 55_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19592,7 +20320,7 @@ GameObject:
   - component: {fileID: 1743321302}
   - component: {fileID: 1743321301}
   m_Layer: 0
-  m_Name: 42_TutorialDialog
+  m_Name: 54_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19737,7 +20465,7 @@ GameObject:
   - component: {fileID: 1745595857}
   - component: {fileID: 1745595856}
   m_Layer: 0
-  m_Name: 10_TutorialDialog
+  m_Name: 12_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19804,7 +20532,7 @@ GameObject:
   - component: {fileID: 1749772666}
   - component: {fileID: 1749772665}
   m_Layer: 0
-  m_Name: 30_TutorialDialog
+  m_Name: 42_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19988,7 +20716,7 @@ GameObject:
   - component: {fileID: 1790397446}
   - component: {fileID: 1790397447}
   m_Layer: 0
-  m_Name: 47_TutorialMission
+  m_Name: 59_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20217,7 +20945,7 @@ GameObject:
   - component: {fileID: 1804499857}
   - component: {fileID: 1804499858}
   m_Layer: 0
-  m_Name: 21_TutorialMission
+  m_Name: 27_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20263,7 +20991,7 @@ GameObject:
   - component: {fileID: 1814231003}
   - component: {fileID: 1814231004}
   m_Layer: 0
-  m_Name: 13_TutorialMission
+  m_Name: 15_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21326,7 +22054,7 @@ GameObject:
   - component: {fileID: 1910025343}
   - component: {fileID: 1910025344}
   m_Layer: 0
-  m_Name: 33_TutorialMission
+  m_Name: 45_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21472,7 +22200,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d4006fe3e2f75ae44804ed039d6ea472, type: 3}
-  m_Color: {r: 0.63529414, g: 1, b: 0.9647059, a: 1}
+  m_Color: {r: 0.69411767, g: 0.3137255, b: 0.2392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -21709,7 +22437,7 @@ GameObject:
   - component: {fileID: 1955778715}
   - component: {fileID: 1955778716}
   m_Layer: 0
-  m_Name: 37_TutorialMission
+  m_Name: 49_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21818,7 +22546,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d4006fe3e2f75ae44804ed039d6ea472, type: 3}
-  m_Color: {r: 0.6367924, g: 1, b: 0.96521515, a: 1}
+  m_Color: {r: 0.69411767, g: 0.3137255, b: 0.2392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -22137,7 +22865,7 @@ GameObject:
   - component: {fileID: 1999648082}
   - component: {fileID: 1999648083}
   m_Layer: 0
-  m_Name: 41_TutorialMission
+  m_Name: 53_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22183,7 +22911,7 @@ GameObject:
   - component: {fileID: 2030081464}
   - component: {fileID: 2030081465}
   m_Layer: 0
-  m_Name: 45_TutorialMission
+  m_Name: 57_TutorialMission
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22499,7 +23227,7 @@ GameObject:
   - component: {fileID: 2076821819}
   - component: {fileID: 2076821818}
   m_Layer: 0
-  m_Name: 40_TutorialDialog
+  m_Name: 52_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22999,7 +23727,7 @@ GameObject:
   - component: {fileID: 2108368940}
   - component: {fileID: 2108368939}
   m_Layer: 0
-  m_Name: 16_TutorialDialog
+  m_Name: 22_TutorialDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

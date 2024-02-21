@@ -147,12 +147,12 @@ public class ShopUI : UIBase
             UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[0]);
             return;
         }
-        else if(GameManager.instance.dataManager.playerData.tutoNum == 12)
+        else if(GameManager.instance.dataManager.playerData.tutoNum == 14)
         {
             UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[2]);
             return;
         }
-        else if(GameManager.instance.dataManager.playerData.tutoNum == 26)
+        else if(GameManager.instance.dataManager.playerData.tutoNum == 34)
         {
             UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[4]);
             return;
