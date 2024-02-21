@@ -59,7 +59,7 @@ public class ShopUI : UIBase
 
     private void ClearUI()
     {
-        datas.Clear();
+        // datas.Clear();
         foreach (Transform child in slotParent)
         {
             ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
@@ -125,11 +125,11 @@ public class ShopUI : UIBase
         ClearUI();
         GameObject slot = Instantiate(slotPrefab, slotParent);
         slot.GetComponent<Image>().sprite = data.sprite;
-        ItemDataContainer curItemData = slot.GetComponent<ItemDataContainer>();
-        datas.Add(curItemData);
-        curItemData.machineSO = data;
-
-        datas[0].seeItemData += SetInfo;
+        // ItemDataContainer curItemData = slot.GetComponent<ItemDataContainer>();
+        // datas.Add(curItemData);
+        // curItemData.machineSO = data;
+        //
+        // datas[0].seeItemData += SetInfo;
         onMachineEnabled?.Invoke();
     }
 
