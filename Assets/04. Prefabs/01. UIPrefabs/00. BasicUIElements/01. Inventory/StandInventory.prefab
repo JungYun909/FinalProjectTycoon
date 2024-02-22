@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0fd14e1b25e6c4caa12b0c3719ba23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 7678252370206103221, guid: 8aa156b475e6955438023f10f4be31ae, type: 3}
+  playerInventory: {fileID: 1193657198914110676, guid: fcc16b2546ab2ad40a5998e01fb1fb96, type: 3}
   inventoryPanel: {fileID: 6637317101531233368}
   inventorySlotPrefab: {fileID: 4677891365400509550, guid: ce733845f5f8b444ba02e33b1d3b8078, type: 3}
   inventoryContentsParent: {fileID: 7279168374270284716}

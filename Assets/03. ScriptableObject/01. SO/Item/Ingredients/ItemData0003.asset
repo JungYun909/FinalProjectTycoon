@@ -17,9 +17,10 @@ MonoBehaviour:
   itemName: "\uBC84\uD130"
   description: "\uBC84\uD130\uC57C \uBC84\uD168"
   recipe: "\uC6B0\uC720 > \uC1A5"
-  price: 70
+  price: 40
   sprite: {fileID: 21300000, guid: b348e1bbef6161c488b09e952ba9c5f4, type: 3}
   tag: Ingredient
+  level: 1
   canMove: 1
   moveSpeed: 1
   canStack: 1

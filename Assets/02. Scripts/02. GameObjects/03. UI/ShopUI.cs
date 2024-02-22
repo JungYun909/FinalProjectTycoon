@@ -59,7 +59,6 @@ public class ShopUI : UIBase
 
     private void ClearUI()
     {
-        datas.Clear();
         foreach (Transform child in slotParent)
         {
             ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
@@ -120,16 +119,30 @@ public class ShopUI : UIBase
         onMachineEnabled?.Invoke();
     }
 
-    private void UpdateTutoMachineInfoToShopUI(MachineSO data)
+    //private void UpdateTutoMachineInfoToShopUI(MachineSO data)
+    //{
+    //    ClearUI();
+    //    GameObject slot = Instantiate(slotPrefab, slotParent);
+    //    slot.GetComponent<Image>().sprite = data.sprite;
+    //    ItemDataContainer curItemData = slot.GetComponent<ItemDataContainer>();
+    //    datas.Add(curItemData);
+    //    curItemData.machineSO = data;
+
+    //    datas[0].seeItemData += SetInfo;
+    //    onMachineEnabled?.Invoke();
+    //}
+
+    private void UpdateTutoMachineInfoToShopUI(int machineID)
     {
         ClearUI();
-        GameObject slot = Instantiate(slotPrefab, slotParent);
-        slot.GetComponent<Image>().sprite = data.sprite;
-        ItemDataContainer curItemData = slot.GetComponent<ItemDataContainer>();
-        datas.Add(curItemData);
-        curItemData.machineSO = data;
-
-        datas[0].seeItemData += SetInfo;
+        GameObject slot = Instantiate(itemSlot, slotParent);
+        ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
+        MachineSO machine = GameManager.instance.inventoryManager.machineDatabase.GetItemByID(machineID);
+        if (itemSlotInfo != null)
+        {
+            itemSlotInfo.SetupMachineInfo(machine, 1);
+            itemSlotInfo.DeliverMachine += HandleMachineInfo;
+        }
         onMachineEnabled?.Invoke();
     }
 
@@ -173,17 +186,17 @@ public class ShopUI : UIBase
         Debug.Log(GameManager.instance.dataManager.playerData.tutoNum);
         if (GameManager.instance.dataManager.playerData.tutoNum == 4)
         {
-            UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[0]);
+            UpdateTutoMachineInfoToShopUI(1);
             return;
         }
         else if(GameManager.instance.dataManager.playerData.tutoNum == 14)
         {
-            UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[2]);
+            UpdateTutoMachineInfoToShopUI(3);
             return;
         }
         else if(GameManager.instance.dataManager.playerData.tutoNum == 34)
         {
-            UpdateTutoMachineInfoToShopUI(GameManager.instance.dataManager.installationSub[4]);
+            UpdateTutoMachineInfoToShopUI(5);
             return;
         }
         UpdateMachineInfoToShopUI();
@@ -197,18 +210,18 @@ public class ShopUI : UIBase
         }
     }
 
-    //public void SpawnInstallation()
-    //{
-    //    if (machineSO.price > GameManager.instance.statManager.currentGold)
-    //    {
-    //        Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
-    //        return;
-    //    }
-    //    GameManager.instance.statManager.SpendGold(machineSO.price);
+    public void SpawnInstallation()
+    {
+        if (curMachine.price > GameManager.instance.dataManager.playerData.money)
+        {
+            Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
+            return;
+        }
+        GameManager.instance.statManager.SpendGold(curMachine.price);
 
-    //    GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(machineSO);
-    //    GameManager.instance.uiManager.CloseAll();
-    //}
+        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
+        GameManager.instance.uiManager.CloseAll();
+    }
 
     private void UpdateItemInfoInItemInfoWindow()
     {
