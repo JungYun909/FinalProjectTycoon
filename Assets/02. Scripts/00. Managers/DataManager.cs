@@ -11,7 +11,6 @@ public class PlayerData
     public int level = 1;
     public int money = 0;
     public int warningCount = 0;
-    public float time = 0f;
     public int day = 1;
     public int debt = 10000;
     public int fame = 0;
@@ -24,15 +23,25 @@ public class PlayerData
 
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
+    
     public List<int> recipeIndex = new List<int>();
+}
+
+public class PlayerTimeData
+{
+    public float time = 0f;
+    public float deliveryTime = 0;
 }
 public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로딩 관리하기 위한 매니저. json
 {
     public PlayerData playerData = new PlayerData();
+    public PlayerTimeData playerTimeData = new PlayerTimeData();
+    
     private string path;
     private string jsonName = "PlayerJson";
-
-    public MachineSO[] installationSub;
+    private string timeJsonName = "PlayerTimeJson";
+    
+    public MachineDatabaseSO installationData;
     public ItemSO[] ingredientSub;
     public ItemSO[] foodSub;
     
@@ -50,33 +59,22 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public event Action<Vector3> PosUpdateEvent;
 
     public bool isClearTuto = false;
-
-    private void Start()
-    {
-        InitSet(SceneType.MainScene);
-    }
-    public void Initialize()
-    {
-        GameManager.instance.sceneManager.sceneInfo += InitSet;
-    }
-
-    private void Awake()
+    
+    public void InitSet()
     {
         path = Application.persistentDataPath + "/";
         
         if (!File.Exists(path + jsonName))
         {
             ResetData();
+            SaveData();
         }
         
         LoadData();
     }
-
-    public void InitSet(SceneType sceneType)
+    
+    public void LoadInstallationData()
     {
-        if(sceneType != SceneType.MainScene)
-            return;
-
         counter = GameObject.Find("CounterObj");
         entrance = GameObject.Find("Entrance");
         kitchenDoor = GameObject.Find("KitchenDoor");
@@ -92,7 +90,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.level = 1;
         playerData.money = 20000;
         playerData.warningCount = 0;
-        playerData.time = 0f;
         playerData.day = 1;
         playerData.debt = 10000;
         playerData.fame = 0;
@@ -101,20 +98,18 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.makeQuestItemID = 0;
         playerData.installationSubInt.Clear();
         playerData.installationsPos.Clear();
-        
-        SaveData();
+
+        playerTimeData.time = 0;
+        playerTimeData.deliveryTime = 0;
     }
 
     private void LoadInstallation()
     {
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
-            return;
-        
         for (int i = 0; i < playerData.installationSubInt.Count; i++)
         {
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);
             InstallationController controller = curObj.GetComponent<InstallationController>();
-            controller._installationData = installationSub[playerData.installationSubInt[i]];
+            controller._installationData = installationData.GetItemByID(playerData.installationSubInt[i]);
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
         }
@@ -137,24 +132,34 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         OnSaveEvent?.Invoke();
     }
 
+    public void SaveTimeData()
+    {
+        string timeJsonData = JsonUtility.ToJson(playerTimeData);
+        File.WriteAllText(path + timeJsonName, timeJsonData);
+    }
+
     public void SaveInstallation(GameObject obj)
     {
         InstallationController controller = obj.GetComponent<InstallationController>();
+        playerData.installationSubInt.Add(controller._installationData.id);
+        playerData.installationsPos.Add(obj.transform.position);
+        curInstallations.Add(obj);
+    }
 
-        foreach (var installation in curInstallations)
+    public void RemoveInstallationData(GameObject obj)
+    {
+        InstallationController controller = obj.GetComponent<InstallationController>();
+
+        for (int i = 0; i < curInstallations.Count; i++)
         {
-            if (installation == obj)
+            if (curInstallations[i] == obj)
             {
-                playerData.installationSubInt.Remove(controller._installationData.id - 1);
-                playerData.installationsPos.Remove(obj.transform.position);
-                curInstallations.Remove(installation);
+                playerData.installationSubInt.RemoveAt(i);
+                playerData.installationsPos.RemoveAt(i);
+                curInstallations.RemoveAt(i);
                 return;
             }
         }
-        
-        playerData.installationSubInt.Add(controller._installationData.id - 1);
-        playerData.installationsPos.Add(obj.transform.position);
-        curInstallations.Add(obj);
     }
 
     public void PosUpdate(GameObject curObj)
@@ -168,6 +173,15 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         }
         //배치위치받아오는시점
         PosUpdateEvent?.Invoke(curObj.transform.position);
+    }
+
+    public IEnumerator SaveTimeRoutine()
+    {
+        while (true)
+        {
+            SaveTimeData();
+            yield return new WaitForSeconds(3f);
+        }
     }
 
     public void LoadData()

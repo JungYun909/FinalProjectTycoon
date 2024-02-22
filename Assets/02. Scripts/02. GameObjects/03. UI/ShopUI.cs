@@ -78,9 +78,17 @@ public class ShopUI : UIBase
             return;
     }
 
+    private void ClearInfo()
+    {
+        nameText.text = "";
+        descriptionText.text = "";
+        priceText.text = "";
+    }
+
     private void UpdateMachineInfoToShopUI()
     {
         ClearUI();
+        ClearInfo();
         machineData = GameManager.instance.inventoryManager.machineDatabase;
         if (camController.isMain)
         {
@@ -135,6 +143,7 @@ public class ShopUI : UIBase
     private void UpdateTutoMachineInfoToShopUI(int machineID)
     {
         ClearUI();
+        ClearInfo();
         GameObject slot = Instantiate(itemSlot, slotParent);
         ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
         MachineSO machine = GameManager.instance.inventoryManager.machineDatabase.GetItemByID(machineID);
@@ -149,6 +158,7 @@ public class ShopUI : UIBase
     private void UpdateItemInfoToShopUI()
     {
         ClearUI();
+        ClearInfo();
         itemData = GameManager.instance.inventoryManager.itemDatabase;
         foreach (ItemSO item in itemData.itemDataList)
         {

@@ -12,6 +12,7 @@ public class MovementController : MonoBehaviour
     public bool isMove = false;
     public Coroutine curCoroutine;
 
+    public float angle;
     private void Update()
     {
         
@@ -30,7 +31,9 @@ public class MovementController : MonoBehaviour
         speed = 0f;
         destinationObj = null;
         isMove = false;
-        StopCoroutine(curCoroutine);
+        
+        if(curCoroutine != null)
+            StopCoroutine(curCoroutine);
     }
 
     private IEnumerator Movement()
@@ -38,6 +41,7 @@ public class MovementController : MonoBehaviour
         while (true)
         {
             Vector2 moveDirection = (destinationObj.transform.position - gameObject.transform.root.position).normalized;
+            angle = Vector2.Angle(Vector2.right, moveDirection);
             Vector2 moveAmount = moveDirection * speed * Time.deltaTime;
             transform.root.position += new Vector3(moveAmount.x, moveAmount.y, 0f);
             yield return null;

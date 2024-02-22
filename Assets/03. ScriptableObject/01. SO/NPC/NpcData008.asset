@@ -10,14 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13f33477d04a4a4bb806e58e0484c95, type: 3}
-  m_Name: NpcData004
+  m_Name: NpcData008
   m_EditorClassIdentifier: 
-  id: 4
-  npcName: "\uC0F4\uACE0\uB0E5\uB2D8"
+  id: 8
+  npcName: "\uD5C8\uC2A4\uCEF9\uB2D8"
   description: "\uAE4C\uCE60\uD574\uBCF4\uC778\uB2E4"
-  sprite: {fileID: -222640850, guid: 54de11047b28ae1419fb9aaedd12af2b, type: 3}
+  sprite: {fileID: -1094324984, guid: 245b1ec371e6a6b4d9b01e03b946aa4c, type: 3}
   speed: 1
   favoriteFood:
   - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}
   - {fileID: 11400000, guid: 4c14cf8e2ad373f4296997d353794267, type: 2}
   - {fileID: 11400000, guid: 6860bf9eacac344efa9166cf7280a258, type: 2}
+  - {fileID: 11400000, guid: b17c47104e7d541a3b92c400db8f52d3, type: 2}
+  - {fileID: 11400000, guid: c9e5b7c2de067468599938344ca64c0a, type: 2}
+  - {fileID: 11400000, guid: a14b68f0a3352401fba4fd5c039f76ec, type: 2}
+  - {fileID: 11400000, guid: 85954918528ce4df1bbb9e133a6a2654, type: 2}
+  - {fileID: 11400000, guid: 56397970994dd451984721a01e1391f7, type: 2}
+  - {fileID: 11400000, guid: 95fb13fbb9f214a2a8cfd2586b916f05, type: 2}
+  - {fileID: 11400000, guid: e1aba187a3c484dba9134508705a420f, type: 2}

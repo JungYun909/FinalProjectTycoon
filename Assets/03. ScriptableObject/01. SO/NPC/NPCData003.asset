@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13f33477d04a4a4bb806e58e0484c95, type: 3}
-  m_Name: NPCData003
+  m_Name: NpcData003
   m_EditorClassIdentifier: 
   id: 3
-  npcName: "\uC190\uB2D83"
-  description: 3
-  sprite: {fileID: 21300000, guid: b156af1de8fabf54fa18208fcbcb906e, type: 3}
-  speed: 1
+  npcName: "\uC8FC\uACE0\uB0E5\uB2D8"
+  description: "\uB290\uAE0B\uD574\uBCF4\uC778\uB2E4"
+  sprite: {fileID: 494173493, guid: 2f645d1a263d8144dafe509d9bf1500d, type: 3}
+  speed: 0.5
   favoriteFood:
   - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}
   - {fileID: 11400000, guid: 4c14cf8e2ad373f4296997d353794267, type: 2}

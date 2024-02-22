@@ -30,11 +30,11 @@ public class TopShopStatusWindow : UIBase
         curGold.text = GameManager.instance.dataManager.playerData.money.ToString();
         curRepute.text = GameManager.instance.dataManager.playerData.fame.ToString();
         curDateText.text = GameManager.instance.dataManager.playerData.day.ToString();
-        timeSlider.value = GameManager.instance.dataManager.playerData.time;
+        timeSlider.value = 1 - (GameManager.instance.dataManager.playerTimeData.time / GameManager.instance.statManager.dayTime);
     }
     private void Update()
     {
-        timeSlider.value = GameManager.instance.dataManager.playerData.time;
+        timeSlider.value = 1 - (GameManager.instance.dataManager.playerTimeData.time / GameManager.instance.statManager.dayTime);
     }
     private void OnEnable()
     {

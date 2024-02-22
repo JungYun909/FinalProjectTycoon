@@ -481,6 +481,7 @@ MonoBehaviour:
   speed: 0
   destinationObj: {fileID: 0}
   isMove: 0
+  angle: 0
 --- !u!1 &7086125045498420675
 GameObject:
   m_ObjectHideFlags: 0

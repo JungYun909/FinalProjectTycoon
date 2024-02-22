@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &246923314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 246923316}
+  - component: {fileID: 246923315}
+  m_Layer: 0
+  m_Name: DataController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &246923315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246923314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33a51222fcd9406a9f7ee706154fef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &246923316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246923314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252991849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,25 +1886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c626f7072ec16ba4b812c04cfe5792e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  installationSub:
-  - {fileID: 11400000, guid: 83e24d518c626c240bbda103299d4c1f, type: 2}
-  - {fileID: 11400000, guid: 4ffd4d231f2485d46bedc3f846643eb7, type: 2}
-  - {fileID: 11400000, guid: 1864d2ce384f042488362cbb9e7c5198, type: 2}
-  - {fileID: 11400000, guid: 2aaae783fd6e0ca49a27040541cd5615, type: 2}
-  - {fileID: 11400000, guid: a695c065155744cba85fbe5a2d886704, type: 2}
-  - {fileID: 11400000, guid: b648d255175da4ced92d29a9f9ea854e, type: 2}
-  - {fileID: 11400000, guid: 85392cf4e654d464894307b2798f0bfc, type: 2}
-  - {fileID: 11400000, guid: 45aecc6aa7b564b4285d44f8bac5d9aa, type: 2}
-  - {fileID: 11400000, guid: 1ada186d8a4e9a24d8ae71eae3d04bf4, type: 2}
-  - {fileID: 11400000, guid: bc380fade283af14fad795d17bcdb26e, type: 2}
-  - {fileID: 11400000, guid: 1d76704568ce68144b031b1c9323dfb0, type: 2}
-  - {fileID: 11400000, guid: 17cc5466fb806884a88d43e84eb222d4, type: 2}
-  - {fileID: 11400000, guid: 49c47463b4a4d1641b4d95a45254aee3, type: 2}
-  - {fileID: 11400000, guid: 85211b4a294243c46b34095bd663ce89, type: 2}
-  - {fileID: 11400000, guid: 7f1a7f737322a794c90294fd7ecd2abe, type: 2}
-  - {fileID: 11400000, guid: 2a2b9b35b7cd80241919fd80ba402dce, type: 2}
-  - {fileID: 11400000, guid: fa0860dfef0db4897953764c0ecb5b50, type: 2}
-  - {fileID: 11400000, guid: 20a0f38db05784593a42f0defc3554ee, type: 2}
+  installationData: {fileID: 11400000, guid: 715423fb9358c3d46acce361f181fff3, type: 2}
   ingredientSub:
   - {fileID: 11400000, guid: 68ae17f6ccd0f462b9072368b1341dcd, type: 2}
   - {fileID: 11400000, guid: dff7e5b57aa3d456987f5c002df82298, type: 2}
@@ -1934,9 +1960,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fb1ba323ad094b98bb137408b275770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curTime: 0
   maxShopLevel: 0
   maxNpc: 0
+  dayTime: 300
   goldUsed: 0
   goldEarned: 0
 --- !u!114 &1830320771
