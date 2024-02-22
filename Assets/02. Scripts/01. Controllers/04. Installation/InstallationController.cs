@@ -85,15 +85,18 @@ public class InstallationController : MonoBehaviour, IInteractable
             doughContainer = new Queue<GameObject>();
             ingredients = new Queue<ItemSO>();
             inventoryController.gameObject.SetActive(true);
-            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
             inventoryController.InitSet();
         }
 
         if (_installationData.canSpawn)
         {
             spawnController.gameObject.SetActive(true);
-            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
             spawnController.InitSet();
+        }
+
+        if (_installationData.haveDoughInventory || _installationData.canSpawn && _installationData.animation.Count > 0)
+        {
+            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
         }
     }
 
