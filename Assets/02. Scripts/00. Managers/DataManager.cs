@@ -24,6 +24,7 @@ public class PlayerData
 
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
+    
     public List<int> recipeIndex = new List<int>();
 }
 public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로딩 관리하기 위한 매니저. json
@@ -50,16 +51,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public event Action<Vector3> PosUpdateEvent;
 
     public bool isClearTuto = false;
-
-    private void Start()
-    {
-        InitSet(SceneType.MainScene);
-    }
-    public void Initialize()
-    {
-        GameManager.instance.sceneManager.sceneInfo += InitSet;
-    }
-
+    
     private void Awake()
     {
         path = Application.persistentDataPath + "/";
@@ -72,9 +64,31 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         LoadData();
     }
 
-    public void InitSet(SceneType sceneType)
+    private void Start()
     {
-        if(sceneType != SceneType.MainScene)
+        GameManager.instance.sceneManager.sceneInfo += MainSceneDataSet;
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        if(pauseStatus)
+            SaveData();
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if(hasFocus)
+            SaveData();
+    }
+
+    public void MainSceneDataSet(SceneType type)
+    {
+        if(type != SceneType.MainScene)
             return;
 
         counter = GameObject.Find("CounterObj");
@@ -101,15 +115,10 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.makeQuestItemID = 0;
         playerData.installationSubInt.Clear();
         playerData.installationsPos.Clear();
-        
-        SaveData();
     }
 
     private void LoadInstallation()
     {
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
-            return;
-        
         for (int i = 0; i < playerData.installationSubInt.Count; i++)
         {
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);
@@ -140,21 +149,25 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public void SaveInstallation(GameObject obj)
     {
         InstallationController controller = obj.GetComponent<InstallationController>();
-
-        foreach (var installation in curInstallations)
-        {
-            if (installation == obj)
-            {
-                playerData.installationSubInt.Remove(controller._installationData.id - 1);
-                playerData.installationsPos.Remove(obj.transform.position);
-                curInstallations.Remove(installation);
-                return;
-            }
-        }
-        
         playerData.installationSubInt.Add(controller._installationData.id - 1);
         playerData.installationsPos.Add(obj.transform.position);
         curInstallations.Add(obj);
+    }
+
+    public void RemoveInstallationData(GameObject obj)
+    {
+        InstallationController controller = obj.GetComponent<InstallationController>();
+
+        for (int i = 0; i < curInstallations.Count; i++)
+        {
+            if (curInstallations[i] == obj)
+            {
+                playerData.installationSubInt.RemoveAt(i);
+                playerData.installationsPos.RemoveAt(i);
+                curInstallations.RemoveAt(i);
+                return;
+            }
+        }
     }
 
     public void PosUpdate(GameObject curObj)

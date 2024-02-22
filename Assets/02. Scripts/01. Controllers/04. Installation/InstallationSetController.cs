@@ -26,14 +26,14 @@ public class InstallationSetController : UIBase
     {
         GameManager.instance.poolManager.DeSpawnFromPool(curGameObject);
         GameManager.instance.installationManager.installationManageController.SetActive(false);
-        GameManager.instance.dataManager.SaveInstallation(curGameObject);
+        GameManager.instance.dataManager.RemoveInstallationData(curGameObject);
         InstallationEndSet();
     }
 
     public void InstallationInstall()
     {
         RaycastHit2D[] rays = Physics2D.RaycastAll(gameObject.transform.position, Vector2.zero, 0f);
-        Debug.Log(rays.Length);
+        
         if(rays.Length > 2 || rays.Length < 2)
             return;
 
@@ -45,7 +45,6 @@ public class InstallationSetController : UIBase
             {
                 if (ray.collider.tag == "Store")
                 {
-                    Debug.Log("Warning Can't install here");
                     return;
                 }
             }
@@ -53,7 +52,6 @@ public class InstallationSetController : UIBase
             {
                 if (ray.collider.tag == "Kitchen")
                 {
-                    Debug.Log("Warning Can't install here");
                     return;
                 }
             }
@@ -66,7 +64,6 @@ public class InstallationSetController : UIBase
 
     private void InstallationEndSet()
     {
-        GameManager.instance.dataManager.SaveData();
         curGameObject = null;
         GameManager.instance.interactionManager.interactionObject = null;
     }

@@ -30,7 +30,9 @@ public class MovementController : MonoBehaviour
         speed = 0f;
         destinationObj = null;
         isMove = false;
-        StopCoroutine(curCoroutine);
+        
+        if(curCoroutine != null)
+            StopCoroutine(curCoroutine);
     }
 
     private IEnumerator Movement()

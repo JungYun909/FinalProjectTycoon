@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             uiManager.Initialize();
-            dataManager.Initialize();
             sceneManager.Initialize();
         }
         else
