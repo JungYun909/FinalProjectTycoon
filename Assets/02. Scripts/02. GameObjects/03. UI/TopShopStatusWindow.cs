@@ -34,7 +34,7 @@ public class TopShopStatusWindow : UIBase
     }
     private void Update()
     {
-        timeSlider.value = GameManager.instance.dataManager.playerData.time;
+        timeSlider.value = 1 - (GameManager.instance.dataManager.playerData.time / GameManager.instance.statManager.dayTime);
     }
     private void OnEnable()
     {

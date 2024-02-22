@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13f33477d04a4a4bb806e58e0484c95, type: 3}
-  m_Name: NPCData002
+  m_Name: NpcData002
   m_EditorClassIdentifier: 
   id: 2
-  npcName: "\uC190\uB2D82"
-  description: 22
-  sprite: {fileID: 21300000, guid: f308115a065796d49b305e90f7d09ac4, type: 3}
+  npcName: "\uAC80\uACE0\uB0E5\uB2D8"
+  description: "\uC628\uD654\uD574\uBCF4\uC778\uB2E4"
+  sprite: {fileID: 1118279850, guid: fa1a4ebecce19f042ad2b245494c9832, type: 3}
   speed: 1
   favoriteFood:
   - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}

@@ -126,6 +126,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             controller._installationData = installationSub[playerData.installationSubInt[i]];
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
+            Debug.Log(controller._installationData.installasionName);
         }
     }
 
