@@ -8,7 +8,7 @@ public class RewardTimeControll : MonoBehaviour
 {
     private TMP_Text timeTxt;
     private float sec = 0;
-    private int min = 30;
+    private int min = 10;
 
     [SerializeField] private Button rewardBtn;
 
@@ -40,7 +40,7 @@ public class RewardTimeControll : MonoBehaviour
             timeTxt.text = "00:00";
             gameObject.SetActive(false);
             rewardBtn.gameObject.SetActive(true);
-            min = 30;
+            min = 10;
             return;
         }
     }
