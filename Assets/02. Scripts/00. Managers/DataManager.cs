@@ -21,6 +21,9 @@ public class PlayerData
 
     public int tutoNum = -1;
 
+    public bool deliveryClear = false;
+    public bool deliveryStart = false;
+
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
     
@@ -30,7 +33,9 @@ public class PlayerData
 public class PlayerTimeData
 {
     public float time = 0f;
-    public float deliveryTime = 0;
+
+    public float deliverySec = 0f;
+    public int deliveryMin = 10;
 }
 public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로딩 관리하기 위한 매니저. json
 {
@@ -98,9 +103,13 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.makeQuestItemID = 0;
         playerData.installationSubInt.Clear();
         playerData.installationsPos.Clear();
+        playerData.deliveryClear = false;
+        playerData.deliveryStart = false;
 
         playerTimeData.time = 0;
-        playerTimeData.deliveryTime = 0;
+
+        playerTimeData.deliveryMin = 10;
+        playerTimeData.deliverySec = 0;
     }
 
     private void LoadInstallation()

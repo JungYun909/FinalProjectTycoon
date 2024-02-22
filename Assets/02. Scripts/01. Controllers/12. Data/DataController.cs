@@ -10,7 +10,7 @@ public class DataController : MonoBehaviour
     {
         GameManager.instance.dataManager.InitSet();
         GameManager.instance.sceneManager.sceneInfo += MainSceneDataSet;
-        
+        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
         DontDestroyOnLoad(gameObject);
     }
 
@@ -30,14 +30,16 @@ public class DataController : MonoBehaviour
         while (true)
         {
             GameManager.instance.dataManager.SaveTimeData();
-            Debug.Log("SaveTimeData");
+            Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
             yield return new WaitForSeconds(3f);
         }
     }
 
     private void OnApplicationQuit()
     {
+        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
         GameManager.instance.dataManager.SaveData();
+
     }
 
     private void OnApplicationPause(bool pauseStatus)

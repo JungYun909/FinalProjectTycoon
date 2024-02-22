@@ -27,6 +27,15 @@ public class RandomReward : MonoBehaviour
                 rewardItems.Add(item);
             }
         }
+        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
+        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliveryMin);
+        Debug.Log(GameManager.instance.dataManager.playerData.deliveryClear);
+
+        if(GameManager.instance.dataManager.playerData.deliveryStart == true)
+        {
+            timerBtn.gameObject.SetActive(true);
+            originBtn.gameObject.SetActive(false);
+        }
     }
 
     public void GoldReward()// 골드 리워드 선택시 랜덤골드 증정
@@ -68,11 +77,19 @@ public class RandomReward : MonoBehaviour
             originBtn.gameObject.SetActive(false);
             timerBtn.gameObject.SetActive(true);
             deliveryImage.gameObject.SetActive(false);
+            GameManager.instance.dataManager.playerData.deliveryStart = true;
+            GameManager.instance.dataManager.SaveData();
         }
     }
 
     public void UpdateGoldTxt()
     {
         spendGoldTxt.text = (GameManager.instance.dataManager.playerData.level * deliveryPrice).ToString() +"냥";
+    }
+
+    public void DeliveryInitSet()
+    {
+        GameManager.instance.dataManager.playerData.deliveryClear = false;
+        GameManager.instance.dataManager.SaveData();
     }
 }
