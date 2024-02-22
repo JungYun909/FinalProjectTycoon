@@ -139,7 +139,10 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
         if (curItem != null)
             DeliverItem?.Invoke(curItem);
         if (curMachine != null)
+        {
+            Debug.Log("MachineInfoDelivered");
             DeliverMachine?.Invoke(curMachine);
+        }
 
         var inventoryShowInstance = FindObjectOfType<InventoryShow>();
         if (inventoryShowInstance != null && inventoryShowInstance.curInventory != null)

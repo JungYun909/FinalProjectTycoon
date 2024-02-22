@@ -450,6 +450,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2616974632365461345}
+        m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
+        m_MethodName: BtnSound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 752114530faaa214988fb64cdcd0632a, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1812427824099044178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +623,7 @@ GameObject:
   - component: {fileID: 3221472905842580548}
   - component: {fileID: 4095914655339792284}
   - component: {fileID: 6233883059662430004}
+  - component: {fileID: 2616974632365461345}
   m_Layer: 5
   m_Name: StandInventory
   m_TagString: Untagged
@@ -714,11 +727,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0fd14e1b25e6c4caa12b0c3719ba23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 7678252370206103221, guid: 8aa156b475e6955438023f10f4be31ae, type: 3}
+  playerInventory: {fileID: 1193657198914110676, guid: fcc16b2546ab2ad40a5998e01fb1fb96, type: 3}
   inventoryPanel: {fileID: 6637317101531233368}
   inventorySlotPrefab: {fileID: 4677891365400509550, guid: ce733845f5f8b444ba02e33b1d3b8078, type: 3}
   inventoryContentsParent: {fileID: 7279168374270284716}
   curInventory: {fileID: 0}
+--- !u!114 &2616974632365461345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6637317101531233368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab135217c9845a45b97f4351ca35091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7473578512140279936
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,6 +874,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2616974632365461345}
+        m_TargetAssemblyTypeName: BtnEffect, Assembly-CSharp
+        m_MethodName: BtnSound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 752114530faaa214988fb64cdcd0632a, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

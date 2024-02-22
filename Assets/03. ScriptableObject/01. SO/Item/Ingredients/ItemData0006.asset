@@ -20,6 +20,7 @@ MonoBehaviour:
   price: 20
   sprite: {fileID: 21300000, guid: 30c361f97e564574ebc50a81ba4f289d, type: 3}
   tag: Ingredient
+  level: 0
   canMove: 1
   moveSpeed: 2
   canStack: 1

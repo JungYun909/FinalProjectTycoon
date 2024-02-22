@@ -78,6 +78,9 @@ public class InstallationController : MonoBehaviour, IInteractable
     }
     public void InitSetting()
     {
+        if(_installationData == null)
+            return;
+        
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
 
         if (_installationData.haveDoughInventory)
@@ -85,15 +88,19 @@ public class InstallationController : MonoBehaviour, IInteractable
             doughContainer = new Queue<GameObject>();
             ingredients = new Queue<ItemSO>();
             inventoryController.gameObject.SetActive(true);
-            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
             inventoryController.InitSet();
         }
 
         if (_installationData.canSpawn)
         {
             spawnController.gameObject.SetActive(true);
-            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
             spawnController.InitSet();
+        }
+
+        Debug.Log(_installationData.animation.Count);
+        if (_installationData.animation.Count > 0 && _installationData.haveDoughInventory || _installationData.canSpawn)
+        {
+            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
         }
     }
 

@@ -9,6 +9,8 @@ public class TutorialController : MonoBehaviour
     [SerializeField] private string nextSceneName = "";
 
     private TutorialBase curTutorial = null;
+    //public AudioClip tutoClearSound;
+
     //private int curIndex = -1;
 
     private void Start()
@@ -29,9 +31,10 @@ public class TutorialController : MonoBehaviour
         if(curTutorial != null)
         {
             curTutorial.Exit();
+            //GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         }
 
-        if(GameManager.instance.dataManager.playerData.tutoNum >= tutorials.Count - 1)
+        if (GameManager.instance.dataManager.playerData.tutoNum >= tutorials.Count - 1)
         {
             CompletedAllTutorials();
             return;
