@@ -7834,6 +7834,7 @@ MonoBehaviour:
   errorImage: {fileID: 1937907335}
   rewardImage: {fileID: 944562723}
   rewardTxt: {fileID: 1885265062}
+  spendGoldTxt: {fileID: 1355432667}
   timerBtn: {fileID: 606590352}
   originBtn: {fileID: 2061014538}
   deliveryImage: {fileID: 2122964248}
@@ -8999,7 +9000,7 @@ MonoBehaviour:
         m_MethodName: OpenUI
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 7678252370206103221, guid: 8aa156b475e6955438023f10f4be31ae, type: 3}
+          m_ObjectArgument: {fileID: 1193657198914110676, guid: fcc16b2546ab2ad40a5998e01fb1fb96, type: 3}
           m_ObjectArgumentAssemblyTypeName: UIBase, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -14388,7 +14389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1249741362
 Transform:
   m_ObjectHideFlags: 0
@@ -14912,7 +14913,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "5000\uB0E5"
+  m_text: 00000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
   m_sharedMaterial: {fileID: -715155081317310308, guid: bdb84fa99ecba48db9862a9c5af3580e, type: 2}
@@ -21094,9 +21095,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 608216325}
-        m_TargetAssemblyTypeName: TestSA3, Assembly-CSharp
+        m_TargetAssemblyTypeName: RandomReward, Assembly-CSharp
         m_MethodName: BuyReward
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -23283,6 +23284,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 8300000, guid: 752114530faaa214988fb64cdcd0632a, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 608216325}
+        m_TargetAssemblyTypeName: RandomReward, Assembly-CSharp
+        m_MethodName: UpdateGoldTxt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
