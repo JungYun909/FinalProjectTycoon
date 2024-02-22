@@ -24,7 +24,8 @@ public class InstallationInventoryController : MonoBehaviour
 
     public void InitSet()
     {
-        animTime = _controller._installationData.animation[(int)InstallationAnimType.Spawn].length;
+        if(_controller._installationData.animation.Count > 0)
+            animTime = _controller._installationData.animation[(int)InstallationAnimType.Spawn].length;
     }
     private void Update()
     {
