@@ -20950,7 +20950,7 @@ MonoBehaviour:
   destinationController: {fileID: 748217694}
   spawnController: {fileID: 0}
   animController: {fileID: 0}
-  destinationID: 0
+  destinationID: 1
 --- !u!1 &1790397445
 GameObject:
   m_ObjectHideFlags: 0

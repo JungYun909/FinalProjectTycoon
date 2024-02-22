@@ -78,26 +78,28 @@ public class InstallationController : MonoBehaviour, IInteractable
     }
     public void InitSetting()
     {
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
-
-        if (_installationData.haveDoughInventory)
+        if (_installationData != null)
         {
-            doughContainer = new Queue<GameObject>();
-            ingredients = new Queue<ItemSO>();
-            inventoryController.gameObject.SetActive(true);
-            inventoryController.InitSet();
-        }
+            gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
+            if (_installationData.haveDoughInventory)
+            {
+                doughContainer = new Queue<GameObject>();
+                ingredients = new Queue<ItemSO>();
+                inventoryController.gameObject.SetActive(true);
+                inventoryController.InitSet();
+            }
 
-        if (_installationData.canSpawn)
-        {
-            spawnController.gameObject.SetActive(true);
-            spawnController.InitSet();
-        }
+            if (_installationData.canSpawn)
+            {
+                spawnController.gameObject.SetActive(true);
+                spawnController.InitSet();
+            }
 
-        Debug.Log(_installationData.animation.Count);
-        if (_installationData.animation.Count > 0 && _installationData.haveDoughInventory || _installationData.canSpawn)
-        {
-            animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
+            Debug.Log(_installationData.animation.Count);
+            if (_installationData.animation.Count > 0 && _installationData.haveDoughInventory || _installationData.canSpawn)
+            {
+                animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
+            }
         }
     }
 

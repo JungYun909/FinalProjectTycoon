@@ -20,7 +20,7 @@ public class ShopUI : UIBase
     public GameObject quantityCheck;
     private ItemDatabaseSO itemData;
     private MachineDatabaseSO machineData;
-    public  ItemSO curItem;
+    public ItemSO curItem;
     public MachineSO curMachine;
     private CameraMovementController camController;
 
@@ -38,9 +38,9 @@ public class ShopUI : UIBase
     }
     public override void Initialize()
     {
-        
+
     }
-    
+
     public override void UpdateUI()
     {
 
@@ -81,6 +81,8 @@ public class ShopUI : UIBase
     private void UpdateMachineInfoToShopUI()
     {
         ClearUI();
+        ClearInfo();
+        quantityCheck.SetActive(false);
         machineData = GameManager.instance.inventoryManager.machineDatabase;
         if (camController.isMain)
         {
@@ -90,10 +92,10 @@ public class ShopUI : UIBase
                 {
                     GameObject slot = Instantiate(itemSlot, slotParent);
                     ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
-                    if(itemSlotInfo != null)
+                    if (itemSlotInfo != null)
                     {
                         itemSlotInfo.SetupMachineInfo(machine, 1);
-                    }    
+                    }
                 }
                 else
                     continue;
@@ -101,7 +103,7 @@ public class ShopUI : UIBase
         }
         else
         {
-            foreach(MachineSO machine in machineData.machineDataList)
+            foreach (MachineSO machine in machineData.machineDataList)
             {
                 if (machine.id == 5)
                 {
@@ -135,6 +137,7 @@ public class ShopUI : UIBase
     private void UpdateTutoMachineInfoToShopUI(int machineID)
     {
         ClearUI();
+        ClearInfo();
         GameObject slot = Instantiate(itemSlot, slotParent);
         ItemSlotInfo itemSlotInfo = slot.GetComponent<ItemSlotInfo>();
         MachineSO machine = GameManager.instance.inventoryManager.machineDatabase.GetItemByID(machineID);
@@ -149,6 +152,7 @@ public class ShopUI : UIBase
     private void UpdateItemInfoToShopUI()
     {
         ClearUI();
+        ClearInfo();
         itemData = GameManager.instance.inventoryManager.itemDatabase;
         foreach (ItemSO item in itemData.itemDataList)
         {
@@ -189,21 +193,21 @@ public class ShopUI : UIBase
             UpdateTutoMachineInfoToShopUI(1);
             return;
         }
-        else if(GameManager.instance.dataManager.playerData.tutoNum == 14)
+        else if (GameManager.instance.dataManager.playerData.tutoNum == 14)
         {
             UpdateTutoMachineInfoToShopUI(3);
             return;
         }
-        else if(GameManager.instance.dataManager.playerData.tutoNum == 34)
+        else if (GameManager.instance.dataManager.playerData.tutoNum == 34)
         {
             UpdateTutoMachineInfoToShopUI(5);
             return;
         }
         UpdateMachineInfoToShopUI();
-        foreach(Transform child in slotParent)
+        foreach (Transform child in slotParent)
         {
             ItemSlotInfo slotInfo = child.GetComponent<ItemSlotInfo>();
-            if(slotInfo != null)
+            if (slotInfo != null)
             {
                 slotInfo.DeliverMachine += HandleMachineInfo;
             }
@@ -212,6 +216,8 @@ public class ShopUI : UIBase
 
     public void SpawnInstallation()
     {
+        if (curMachine == null)
+            Debug.Log("잘못탔지롱? ");
         if (curMachine.price > GameManager.instance.dataManager.playerData.money)
         {
             Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
@@ -222,7 +228,12 @@ public class ShopUI : UIBase
         GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
         GameManager.instance.uiManager.CloseAll();
     }
-
+    private void ClearInfo()
+    {
+        nameText.text = "";
+        descriptionText.text = "";
+        priceText.text = "";
+    }
     private void UpdateItemInfoInItemInfoWindow()
     {
         nameText.text = curItem.itemName;

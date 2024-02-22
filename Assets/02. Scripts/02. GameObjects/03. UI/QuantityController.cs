@@ -32,6 +32,7 @@ public class QuantityController : MonoBehaviour
         if (quantity<maxQuantity)
         {
             quantity++;
+            Debug.Log(quantity);
             UpdateDisplay();
         }
     }
@@ -41,6 +42,7 @@ public class QuantityController : MonoBehaviour
         if (quantity > 0)
         {
             quantity--;
+            Debug.Log(quantity);
             UpdateDisplay();
         }
     }
