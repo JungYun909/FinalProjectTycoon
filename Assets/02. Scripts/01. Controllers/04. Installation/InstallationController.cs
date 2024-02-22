@@ -78,7 +78,12 @@ public class InstallationController : MonoBehaviour, IInteractable
     }
     public void InitSetting()
     {
-        if (_installationData != null)
+        if(_installationData == null)
+            return;
+        
+        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
+
+        if (_installationData.haveDoughInventory)
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
             if (_installationData.haveDoughInventory)

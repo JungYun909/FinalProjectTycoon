@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class RewardTimeControll : MonoBehaviour
 {
     private TMP_Text timeTxt;
-    private float sec = 10;
-    private int min = 0;
+    private float sec = 0;
+    private int min = 30;
 
     [SerializeField] private Button rewardBtn;
 
@@ -40,7 +40,7 @@ public class RewardTimeControll : MonoBehaviour
             timeTxt.text = "00:00";
             gameObject.SetActive(false);
             rewardBtn.gameObject.SetActive(true);
-            sec = 10;
+            min = 30;
             return;
         }
     }
