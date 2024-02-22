@@ -16,6 +16,7 @@ public class PlayerInventoryUI : UIBase
     AbstractInventory inventory;
     private ItemSlotInfo itemSlot;
 
+    public Button installConfirm;
     public GameObject quantityController;
     public int quantity;
 
@@ -41,9 +42,6 @@ public class PlayerInventoryUI : UIBase
     private void OnEnable()
     {
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
-        if (itemSlot != null)
-        {
-        }
     }
 
     private void OpenQuantityController()
@@ -174,6 +172,7 @@ public class PlayerInventoryUI : UIBase
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
+        ClearInfoWindow();
         if (whatToShow == 1)
             UpdateProductInventory();
         else if (whatToShow == 2)
@@ -184,6 +183,7 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateItemInventory()
     {
+        installConfirm.gameObject.SetActive(false);
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;
@@ -196,6 +196,7 @@ public class PlayerInventoryUI : UIBase
     }
     private void UpdateProductInventory()
     {
+        installConfirm.gameObject.SetActive(false);
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;
@@ -229,6 +230,7 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateItemInfoInItemInfoWindow()
     {
+
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
@@ -236,8 +238,26 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateMachineInfoWindow()
     {
+        installConfirm.gameObject.SetActive(true);
+        installConfirm.onClick.AddListener(SpawnInstallation);
         nameText.text = curMachine.installasionName;
         descriptionText.text = curMachine.description;
         priceText.text = curMachine.price.ToString();
+    }
+
+    private void ClearInfoWindow()
+    {
+        nameText.text = "";
+        descriptionText.text = "";
+        priceText.text = "";
+    }
+
+    private void SpawnInstallation()
+    {
+        if (curMachine != null)
+        {
+            GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
+            GameManager.instance.uiManager.CloseAll();
+        }
     }
 }
