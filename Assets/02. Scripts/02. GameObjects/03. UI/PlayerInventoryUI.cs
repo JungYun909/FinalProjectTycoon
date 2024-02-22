@@ -26,8 +26,11 @@ public class PlayerInventoryUI : UIBase
     public ItemSO curItem;
     public int itemQuantityInInventory;
 
-    public int curInventoryID;
+    public MachineSO curMachine;
+    public int machineQuantityInInventory;
 
+    public int curInventoryID;
+    private int whatToShow = 1;
 
     private void Start()
     {
@@ -118,6 +121,16 @@ public class PlayerInventoryUI : UIBase
         }
     }
 
+    private void CreateMachineSlot(MachineSO machine, int quantity)
+    {
+        GameObject machineUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
+        ItemSlotInfo itemSlotInfo = machineUI.GetComponent<ItemSlotInfo>();
+        if(itemSlotInfo!= null)
+        {
+            itemSlotInfo.SetupMachineInfo(machine, quantity);
+            itemSlotInfo.DeliverMachine += UpdateMachineData;
+        }
+    }
     private void SetCurInventoryID(int obj)
     {
         curInventoryID = obj;
@@ -132,15 +145,25 @@ public class PlayerInventoryUI : UIBase
         }
         UpdateItemInfoInItemInfoWindow();
     }
-    // 아이템 슬롯 설정 메서드
-    private void SetupItemSlot(GameObject itemSlotObject, ItemSO item, int quantity)
+
+    private void UpdateMachineData(MachineSO machine)
     {
-        ItemSlotInfo itemSlotInfo = itemSlotObject.GetComponent<ItemSlotInfo>();
-        if (itemSlotInfo != null)
+        curMachine = machine;
+        if(playerInventory.machines.TryGetValue(curMachine, out int quantity))
         {
-            itemSlotInfo.Setup(item, quantity);
+            machineQuantityInInventory = quantity;
         }
+        UpdateMachineInfoWindow();
     }
+    // 아이템 슬롯 설정 메서드
+    //private void SetupItemSlot(GameObject itemSlotObject, ItemSO item, int quantity)
+    //{
+    //    ItemSlotInfo itemSlotInfo = itemSlotObject.GetComponent<ItemSlotInfo>();
+    //    if (itemSlotInfo != null)
+    //    {
+    //        itemSlotInfo.Setup(item, quantity);
+    //    }
+    //}
 
     public override void Initialize()
     {
@@ -151,15 +174,54 @@ public class PlayerInventoryUI : UIBase
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
+        if (whatToShow == 1)
+            UpdateProductInventory();
+        else if (whatToShow == 2)
+            UpdateItemInventory();
+        else if (whatToShow == 3)
+            UpdateMachineInventory();
+    }
+
+    private void UpdateItemInventory()
+    {
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;
-            var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 표시수량 99로 제한
+            if (item.type == 1)
+            {
+                var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 표시수량 99로 제한
+                CreateItemSlot(item, quantity);
+            }
+        }
+    }
+    private void UpdateProductInventory()
+    {
+        foreach (var itemEntry in playerInventory.Items)
+        {
+            var item = itemEntry.Key;
+            if (item.type != 1)
+            {
+                var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 표시수량 99로 제한
+                CreateItemSlot(item, quantity);
+            }
+        }
+    }
+    private void UpdateMachineInventory()
+    {
+        foreach (var itemEntry in playerInventory.machines)
+        {
+            var item = itemEntry.Key;
+            var quantity = Mathf.Min(itemEntry.Value, 99);
 
-            CreateItemSlot(item, quantity);
+            CreateMachineSlot(item, quantity);
         }
     }
 
+    public void SetInventoryInfo(int number)
+    {
+        whatToShow = number;
+        UpdateUI();
+    }
     public void CloseWindow()
     {
         GameManager.instance.uiManager.CloseAll();
@@ -170,5 +232,12 @@ public class PlayerInventoryUI : UIBase
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
+    }
+
+    private void UpdateMachineInfoWindow()
+    {
+        nameText.text = curMachine.installasionName;
+        descriptionText.text = curMachine.description;
+        priceText.text = curMachine.price.ToString();
     }
 }

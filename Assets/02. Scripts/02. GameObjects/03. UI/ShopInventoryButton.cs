@@ -36,20 +36,17 @@ public class ShopInventoryButton : MonoBehaviour
 
         button.onClick.RemoveListener(ShowQuantityController);
         button.onClick.RemoveListener(SpawnInstallation);
-
-        Debug.Log("[ShopInventoryButton] OnDisable - Event subscription removed");
     }
     private void SpawnInstallation()
     {
-        Debug.Log("[ShopInventoryButton] SpawnInstallation called");
-        if (shopUI.machineSO.price > GameManager.instance.dataManager.playerData.money)
+        if (shopUI.curMachine.price > GameManager.instance.dataManager.playerData.money)
         {
             //TODO 경고창
             return;
         }
-        GameManager.instance.statManager.SpendGold(shopUI.machineSO.price);
+        GameManager.instance.statManager.SpendGold(shopUI.curMachine.price);
 
-        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(shopUI.machineSO);
+        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(shopUI.curMachine);
         GameManager.instance.uiManager.CloseAll();
     }
 
@@ -70,7 +67,7 @@ public class ShopInventoryButton : MonoBehaviour
         else
         {
             GameManager.instance.statManager.SpendGold(shopUI.curItem.price * quantity);
-            GameManager.instance.inventoryManager.AddItemToInventory(shopUI.shopInventoryID, shopUI.curItem, quantity);
+            GameManager.instance.inventoryManager.AddItemToInventory(1000, shopUI.curItem, quantity);
         }
         quantityController.DeliverQuantity -= HandlePurchaseItem;
     }

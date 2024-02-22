@@ -36,6 +36,8 @@ public class AbstractInventory : MonoBehaviour
     public InstallationController controller;
 
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
+    public Dictionary<MachineSO, int> machines { get; set; } = new Dictionary<MachineSO, int>();
+
     public Queue<ItemSO> itemQueue = new Queue<ItemSO>();
 
     [SerializeField]
@@ -73,13 +75,6 @@ public class AbstractInventory : MonoBehaviour
             GameManager.instance.inventoryManager.RemoveItemFromInventory(inventoryID, item, 1);
         }
     }
-
-    private GameObject FindOrCreateDoughGameObject(ItemSO item)
-    {
-        GameObject doughObject = new GameObject(item.name);
-        return doughObject;
-    }
-
 
     private void OnEnable()
     {
@@ -140,6 +135,7 @@ public class AbstractInventory : MonoBehaviour
         {
             data.items.Add(new ItemData() { itemID = entry.Key.id, quantity = entry.Value });
         }
+
         GameManager.instance.dataManager.SaveInventoryData(data);
     }
 

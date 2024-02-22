@@ -8,7 +8,7 @@ public class CameraMovementController : MonoBehaviour
 {
     public Camera main;
 
-    private bool isMain = true;
+    public bool isMain = true;
 
     public void CameraMoveToggle()
     {

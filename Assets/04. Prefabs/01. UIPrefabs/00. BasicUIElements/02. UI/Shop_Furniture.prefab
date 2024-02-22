@@ -725,11 +725,10 @@ MonoBehaviour:
   nameText: {fileID: 6676213533268660215}
   descriptionText: {fileID: 5722913285773141645}
   priceText: {fileID: 3929160238309517036}
-  datas: []
   machineSO: {fileID: 0}
   quantityCheck: {fileID: 8182728829091945414}
-  shopInventoryID: 0
   curItem: {fileID: 0}
+  curMachine: {fileID: 0}
   machinePurchase: {fileID: 0}
   itemPurchase: {fileID: 0}
 --- !u!114 &6841312381766733085
