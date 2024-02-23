@@ -123,6 +123,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
         }
+        
+        SaveData();
     }
 
     private void DiscoverRecipe(int index)
@@ -164,6 +166,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.installationSubInt.Add(controller._installationData.id);
         playerData.installationsPos.Add(obj.transform.position);
         curInstallations.Add(obj);
+        
+        SaveData();
     }
 
     public void RemoveInstallationData(GameObject obj)
@@ -177,6 +181,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
                 playerData.installationSubInt.RemoveAt(i);
                 playerData.installationsPos.RemoveAt(i);
                 curInstallations.RemoveAt(i);
+                SaveData();
                 return;
             }
         }
@@ -191,7 +196,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
                 playerData.installationsPos[i] = curObj.transform.position;
             }
         }
-        //배치위치받아오는시점
+        SaveData();
         PosUpdateEvent?.Invoke(curObj.transform.position);
     }
 
