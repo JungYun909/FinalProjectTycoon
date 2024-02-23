@@ -4005,7 +4005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 679a8885df17c45f4921d7052e009829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dailyResultWindow: {fileID: 5866281504846087371, guid: 2b508d2f7d8754cc686da3fa81cd7d9c, type: 3}
+  dailyResultWindow: {fileID: 2805017932131367098, guid: 2b508d2f7d8754cc686da3fa81cd7d9c, type: 3}
   uiAlwaysOn:
   - {fileID: 8308437243358786327, guid: 8916f53d72a3b436d93af644dadb7be2, type: 3}
   - {fileID: 3465089061949424958, guid: 80db358ba2d794b30b3bb562ff1db938, type: 3}
