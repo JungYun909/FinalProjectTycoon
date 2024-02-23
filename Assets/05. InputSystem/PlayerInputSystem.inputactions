@@ -38,7 +38,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6f615a2c-95b3-4477-b1d7-527a9d0e391a",
+                    "id": "5b738310-f5ba-4789-ab96-2827c2e611b4",
                     "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
@@ -60,7 +60,7 @@
                 },
                 {
                     "name": "",
-                    "id": "a56d343a-dcbf-4ba1-9f7d-1cbfdd42f077",
+                    "id": "d5f3d7c7-cbc6-4947-96cd-e5ddb256409a",
                     "path": "<Touchscreen>/position",
                     "interactions": "",
                     "processors": "",

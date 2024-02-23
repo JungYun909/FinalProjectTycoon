@@ -12,7 +12,7 @@ public class PlayerData
     public int money = 0;
     public int warningCount = 0;
     public int day = 1;
-    public int debt = 10000;
+    public int debt = 5000;
     public int fame = 0;
 
     public int questNum = -1;
@@ -97,7 +97,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.money = 1000;
         playerData.warningCount = 0;
         playerData.day = 1;
-        playerData.debt = 10000;
+        playerData.debt = 5000;
         playerData.fame = 0;
         playerData.questNum = -1;
         playerData.questCount = 0;
