@@ -12,7 +12,7 @@ public class PlayerData
     public int money = 0;
     public int warningCount = 0;
     public int day = 1;
-    public int debt = 5000;
+    public int debt = 10000;
     public int fame = 0;
 
     public int questNum = -1;
@@ -26,7 +26,7 @@ public class PlayerData
 
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
-    
+
     public List<int> recipeIndex = new List<int>();
 }
 
@@ -41,15 +41,15 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 {
     public PlayerData playerData = new PlayerData();
     public PlayerTimeData playerTimeData = new PlayerTimeData();
-    
+
     private string path;
     private string jsonName = "PlayerJson";
     private string timeJsonName = "PlayerTimeJson";
-    
+
     public MachineDatabaseSO installationData;
     public ItemSO[] ingredientSub;
     public ItemSO[] foodSub;
-    
+
     public GameObject[] curObject;
 
     [Header("EssentialInstallation")]
@@ -58,33 +58,46 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject entrance;
     public GameObject kitchenDoor;
     public GameObject tutoPrefab;
-    
+
     public event Action OnSaveEvent;
-    public event Action OnLoadEvent; 
+    public event Action OnLoadEvent;
     public event Action<Vector3> PosUpdateEvent;
 
     public bool isClearTuto = false;
-    
+
     public void InitSet()
     {
         path = Application.persistentDataPath + "/";
-        
-        if (!File.Exists(path + jsonName))
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            ResetData();
-            SaveData();
-            SaveTimeData();
+            if (!PlayerPrefs.HasKey("Data"))
+            {
+                ResetData();
+                SaveData();
+                SaveTimeData();
+            }
         }
-        
+        else
+        {
+            if (!File.Exists(path + jsonName))
+            {
+                ResetData();
+                SaveData();
+                SaveTimeData();
+            }
+        }
+
+
         LoadData();
     }
-    
+
     public void LoadInstallationData()
     {
         counter = GameObject.Find("CounterObj");
         entrance = GameObject.Find("Entrance");
         kitchenDoor = GameObject.Find("KitchenDoor");
-        
+
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
 
         LoadInstallation();
@@ -97,7 +110,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.money = 1000;
         playerData.warningCount = 0;
         playerData.day = 1;
-        playerData.debt = 5000;
+        playerData.debt = 10000;
         playerData.fame = 0;
         playerData.questNum = -1;
         playerData.questCount = 0;
@@ -123,8 +136,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
         }
-        
-        SaveData();
+
+        //SaveData();
     }
 
     private void DiscoverRecipe(int index)
@@ -139,34 +152,66 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public void SaveData()
     {
         string jsonData = JsonUtility.ToJson(playerData);
-        File.WriteAllText(path + jsonName, jsonData);
-        
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            PlayerPrefs.SetString("Data", jsonData);
+        }
+        else
+        {
+            File.WriteAllText(path + jsonName, jsonData);
+        }
+
         OnSaveEvent?.Invoke();
     }
 
     public void SaveTimeData()
     {
         string timeJsonData = JsonUtility.ToJson(playerTimeData);
-        File.WriteAllText(path + timeJsonName, timeJsonData);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            PlayerPrefs.SetString("Time", timeJsonData);
+        }
+        else
+        {
+            File.WriteAllText(path + timeJsonName, timeJsonData);
+        }
     }
 
     public void LoadData()
     {
-        string jsonData = File.ReadAllText(path + jsonName);
+        string jsonData = "";
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            jsonData = PlayerPrefs.GetString("Data");
+        }
+        else
+        {
+            jsonData = File.ReadAllText(path + jsonName);
+        }
         playerData = JsonUtility.FromJson<PlayerData>(jsonData);
-        
-        string timeJsonData = File.ReadAllText(path + timeJsonName);
+
+        string timeJsonData = "";
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            timeJsonData = PlayerPrefs.GetString("Time");
+        }
+        else
+        {
+            timeJsonData = File.ReadAllText(path + timeJsonName);
+        }
+
         playerTimeData = JsonUtility.FromJson<PlayerTimeData>(timeJsonData);
         OnLoadEvent?.Invoke();
     }
-    
+
     public void SaveInstallation(GameObject obj)
     {
         InstallationController controller = obj.GetComponent<InstallationController>();
         playerData.installationSubInt.Add(controller._installationData.id);
         playerData.installationsPos.Add(obj.transform.position);
         curInstallations.Add(obj);
-        
+
         SaveData();
     }
 
@@ -202,16 +247,16 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
     public void SaveInventoryData(List<InventoryData> allInventories)
     {
-        InventoryWrapper wrapper= new InventoryWrapper { allInventories = allInventories };
+        InventoryWrapper wrapper = new InventoryWrapper { allInventories = allInventories };
         string json = JsonUtility.ToJson(wrapper, true);
         File.WriteAllText(Application.persistentDataPath + "/AllInventories.json", json);
     }
-    
+
 
     public List<InventoryData> LoadAllInventories()
     {
         string path = Application.persistentDataPath + "/AllInventories.json";
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
             var inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
