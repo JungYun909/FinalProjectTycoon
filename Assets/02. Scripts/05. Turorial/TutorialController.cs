@@ -53,6 +53,7 @@ public class TutorialController : MonoBehaviour
         // 튜토리얼이 모두 끝난 후 넣을 코드 추가 작성
         Debug.Log("튜토리얼 끗!");
         GameManager.instance.audioManager.PlaySFX(tutoClearSound);
+        transform.parent.gameObject.SetActive(false);
 
         //if(!nextSceneName.Equals(""))
         //{
