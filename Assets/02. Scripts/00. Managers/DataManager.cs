@@ -147,6 +147,16 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         File.WriteAllText(path + timeJsonName, timeJsonData);
     }
 
+    public void LoadData()
+    {
+        string jsonData = File.ReadAllText(path + jsonName);
+        playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+        
+        string timeJsonData = File.ReadAllText(path + timeJsonName);
+        playerTimeData = JsonUtility.FromJson<PlayerTimeData>(timeJsonData);
+        OnLoadEvent?.Invoke();
+    }
+    
     public void SaveInstallation(GameObject obj)
     {
         InstallationController controller = obj.GetComponent<InstallationController>();
@@ -191,13 +201,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             SaveTimeData();
             yield return new WaitForSeconds(3f);
         }
-    }
-
-    public void LoadData()
-    {
-        string jsonData = File.ReadAllText(path + jsonName);
-        playerData = JsonUtility.FromJson<PlayerData>(jsonData);
-        OnLoadEvent?.Invoke();
     }
 
     public void SaveInventoryData(InventoryData data)
