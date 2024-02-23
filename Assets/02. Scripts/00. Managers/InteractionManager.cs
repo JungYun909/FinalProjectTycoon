@@ -53,7 +53,7 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
-        if(interactionObject != null)
+        
         //클릭 중일떄 발생
         if (value.isPressed && interactionObject == null)
         {
