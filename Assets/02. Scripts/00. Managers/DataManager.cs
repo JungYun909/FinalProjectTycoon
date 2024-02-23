@@ -249,16 +249,31 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         InventoryWrapper wrapper = new InventoryWrapper { allInventories = allInventories };
         string json = JsonUtility.ToJson(wrapper, true);
-        File.WriteAllText(Application.persistentDataPath + "/AllInventories.json", json);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            PlayerPrefs.SetString("Inventory", json);
+        }
+        else
+        {
+            File.WriteAllText(Application.persistentDataPath + "/AllInventories.json", json);
+        }
     }
 
 
     public List<InventoryData> LoadAllInventories()
     {
         string path = Application.persistentDataPath + "/AllInventories.json";
+        string json = "";
         if (File.Exists(path))
         {
-            string json = File.ReadAllText(path);
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                json = PlayerPrefs.GetString("Inventory");
+            }
+            else
+            {
+                json = File.ReadAllText(path);
+            }
             var inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
             return inventoryWrapper.allInventories;
         }
@@ -270,15 +285,30 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         DestinationWrapper wrapper = new DestinationWrapper { destinations = allDestinations };
         string json = JsonUtility.ToJson(wrapper, true);
-        File.WriteAllText(Application.persistentDataPath + "/Destinations.json", json);
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            PlayerPrefs.SetString("Destination", json);
+        }
+        else
+        {
+            File.WriteAllText(Application.persistentDataPath + "/Destinations.json", json);
+        }
     }
 
     public List<DestinationData> LoadAllDestinationData()
     {
         string path = Application.persistentDataPath + "/Destinations.json";
+        string json = "";
         if (File.Exists(path))
         {
-            string json = File.ReadAllText(path);
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            {
+                json = PlayerPrefs.GetString("Destination");
+            }
+            else
+            {
+                json = File.ReadAllText(path);
+            }
             var destinationWrapper = JsonUtility.FromJson<DestinationWrapper>(json);
             return destinationWrapper.destinations;
         }
