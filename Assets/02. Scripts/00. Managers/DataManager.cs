@@ -194,15 +194,6 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         PosUpdateEvent?.Invoke(curObj.transform.position);
     }
 
-    public IEnumerator SaveTimeRoutine()
-    {
-        while (true)
-        {
-            SaveTimeData();
-            yield return new WaitForSeconds(3f);
-        }
-    }
-
     public void SaveInventoryData(InventoryData data)
     {
         string json = JsonUtility.ToJson(data);
