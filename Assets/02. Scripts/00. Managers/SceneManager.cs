@@ -20,7 +20,6 @@ public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 �
         if (sceneNameToType.TryGetValue(curScene, out SceneType type))
         {
             sceneInfo?.Invoke(type);
-            Debug.Log($"Scene info handled: {curScene}");
         }
     }
     private Dictionary<string, SceneType> sceneNameToType = new Dictionary<string, SceneType>()
@@ -42,7 +41,6 @@ public class SceneManager : MonoBehaviour    // TODO 씬 변경. 씬 로드시 �
             }
             catch (Exception e)
             {
-                Debug.Log("SceneError");
                 throw;
             }
         }

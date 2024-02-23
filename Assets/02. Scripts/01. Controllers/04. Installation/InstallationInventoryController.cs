@@ -63,6 +63,8 @@ public class InstallationInventoryController : MonoBehaviour
         curObj.SetActive(true);
         
         IngredientController curController = curObj.GetComponent<IngredientController>();
+        GameManager.instance.inventoryManager.UpdateInventoryAfterDequeue(inventory.inventoryID, curController.itemData);
+
         curController.destination = destinationController.destination[1];
         curController.InitSet();
         

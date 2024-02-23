@@ -101,7 +101,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
         uiStack.Push(uiInstance);  //ui프리팹을 열어줌
         uiInstance.UpdateUI();
-        Debug.Log(uiInstance.gameObject.name);
         lastUIName = uiInstance.name;
     }
 

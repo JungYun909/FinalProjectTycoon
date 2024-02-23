@@ -27,9 +27,6 @@ public class RandomReward : MonoBehaviour
                 rewardItems.Add(item);
             }
         }
-        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
-        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliveryMin);
-        Debug.Log(GameManager.instance.dataManager.playerData.deliveryClear);
 
         if(GameManager.instance.dataManager.playerData.deliveryStart == true)
         {
@@ -66,7 +63,6 @@ public class RandomReward : MonoBehaviour
 
     public void BuyReward()// 배달시스템이용시 드는 돈 마이너스
     {
-        Debug.Log(GameManager.instance.dataManager.playerData.money);
         if (GameManager.instance.dataManager.playerData.money < GameManager.instance.dataManager.playerData.level * deliveryPrice)
         {
             errorImage.gameObject.SetActive(true);

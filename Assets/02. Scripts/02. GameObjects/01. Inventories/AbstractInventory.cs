@@ -34,6 +34,7 @@ public class AbstractInventory : MonoBehaviour
     public static event Action<MachineSO> DeliverMachineSO;
 
     public InstallationController controller;
+    public GameObject ingredientPrefab;
 
     public Dictionary<ItemSO, int> Items { get;  set; } = new Dictionary<ItemSO, int>();
     public Dictionary<MachineSO, int> machines { get; set; } = new Dictionary<MachineSO, int>();
@@ -47,12 +48,14 @@ public class AbstractInventory : MonoBehaviour
     protected virtual void Start()
     {
         inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
-        controller = GetComponentInParent<InstallationController>();
-        InventoryData data = GameManager.instance.dataManager.LoadInventoryData(inventoryID);
-        if (data != null)
+        InventoryData myData = GameManager.instance.inventoryManager.GetInventoryDataById(inventoryID);
+        if (myData != null)
         {
-            LoadInventory(data);
-            CopyItemsToDoughContainer();
+            LoadInventory(myData);
+        }
+        else
+        {   
+            Debug.Log("No InventoryData");
         }
     }
 
@@ -61,7 +64,6 @@ public class AbstractInventory : MonoBehaviour
         List<ItemSO> itemToDelete = new List<ItemSO>();
         if (inventoryID != 1000 && (controller == null || controller.doughContainer == null))
         {
-            Debug.Log("InstallationController or its doughContainer is not set.");
             return;
         }
         GameObject destObj = controller.gameObject;
@@ -126,29 +128,57 @@ public class AbstractInventory : MonoBehaviour
         DeliverMachineSO?.Invoke(controller._installationData);
     }
 
-    public void SaveInventory()
-    {
-        InventoryData data = new InventoryData();
-        data.inventoryID = this.inventoryID;
-        data.items = new List<ItemData>();
-        foreach (var entry in Items)
-        {
-            data.items.Add(new ItemData() { itemID = entry.Key.id, quantity = entry.Value });
-        }
-
-        GameManager.instance.dataManager.SaveInventoryData(data);
-    }
-
     public void LoadInventory(InventoryData data)
     {
         this.inventoryID = data.inventoryID;
         this.Items.Clear();
+
+        if(this.inventoryID != 1000)
+        {
+            itemQueue.Clear();
+        }
+
         foreach (var itemData in data.items)
         {
             ItemSO item = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(itemData.itemID);
-            GameManager.instance.inventoryManager.AddItemToInventory(this.inventoryID, item, itemData.quantity);
-            //this.Items.Add(item, itemData.quantity);
+            if(item!=null)
+            {
+                this.Items[item] = itemData.quantity;
+                if(this.inventoryID != 1000 && (item.id == 1 || item.type ==2))
+                {
+                    for(int i = 0;i < itemData.quantity; i++)
+                    {
+                        itemQueue.Enqueue(item);
+                    }
+                }
+                if(this.inventoryID != 1000 && item.id!=1 && item.type ==1)
+                {
+                    controller.ingredients.Enqueue(item);
+                }
+            }
         }
-        UpdateInspectorList(); // Inspector 리스트 업데이트
+
+        foreach (var machineData in data.machines)
+        {
+            MachineSO machine = GameManager.instance.inventoryManager.machineDatabase.GetItemByID(machineData.machineID);
+            if(machine!=null)
+            {
+                this.machines[machine] = machineData.machineQuantity;
+            }
+        }
+
+        foreach(var queueData in data.queueData) // poolManager spawnfromPool 이용?
+        {
+            ItemSO itemData = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(queueData.itemSOID);
+            if (itemData != null)
+            {
+                GameObject spawnedObj = GameManager.instance.poolManager.SpawnFromPool(ingredientPrefab);
+                IngredientController ingredientController = spawnedObj.GetComponent<IngredientController>();
+                ingredientController.itemData = itemData;
+                ingredientController.interactInstallation = new Queue<float>(queueData.interactInstallationData);
+                controller.doughContainer.Enqueue(spawnedObj);
+                spawnedObj.SetActive(false);
+            }
+        }
     }
 }

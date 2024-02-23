@@ -9,18 +9,64 @@ public class InventoryData
 {
     public int inventoryID;
     public List<ItemData> items; // 아이템 데이터 리스트
-}
+    public List<MachineData> machines;
+    public List<QueueData> queueData;
 
+    public InventoryData(int inventoryID)
+    {
+        this.inventoryID = inventoryID;
+        this.items = new List<ItemData>();
+        this.machines = new List<MachineData>();
+        this.queueData = new List<QueueData>();
+    }
+}
 [System.Serializable]
 public class ItemData
 {
     public int itemID; // ItemSO의 id와 매칭
     public int quantity; // 해당 아이템의 수량
+
+    public ItemData(int itemID, int quantity)
+    {
+        this.itemID = itemID;
+        this.quantity = quantity;
+    }
+}
+[System.Serializable]
+public class MachineData
+{
+    public int machineID;
+    public int machineQuantity;
+    public MachineData(int machineID, int quantity)
+    {
+        this.machineID= machineID;
+        this.machineQuantity = quantity;
+    }
+}
+
+[System.Serializable]
+public class QueueData
+{
+    public int itemSOID;
+    public List<float> interactInstallationData;
+
+    public QueueData(int itemSOID, List<float>interactInstallationData)
+    {
+        this.itemSOID = itemSOID;
+        this.interactInstallationData = new List<float>(interactInstallationData);
+    }
+}
+
+[System.Serializable]
+public class InventoryWrapper
+{
+    public List<InventoryData> allInventories;
 }
 
 
 public class InventoryManager : MonoBehaviour
 {
+    public List<InventoryData> allInventories = new List<InventoryData>();
     public event Action<int> OnInventoryUpdated; // 인벤토리 ID를 인자로 사용
 
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
@@ -28,6 +74,24 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
     private int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
     private int playerInventoryID = 1000;
+
+
+    private void Start()
+    {
+        LoadInventoryData();
+        StartCoroutine(SaveAllInventoriesRoutine());
+    }
+
+    private void LoadInventoryData()
+    {   
+        List<InventoryData> loadedInventories = GameManager.instance.dataManager.LoadAllInventories();
+        if (loadedInventories != null && loadedInventories.Count > 0)
+        {
+            allInventories = loadedInventories;
+        }
+        else
+            return;
+    }
 
     public int RegisterInventory(AbstractInventory inventory)    // 새로 생기는 인벤토리를 딕셔너리에 등재하기 위한 메서드. 모든 인벤토리 생성시
     {
@@ -40,8 +104,19 @@ public class InventoryManager : MonoBehaviour
         {
             inventoryID = nextInventoryID++;
         }
+        InventoryData existingInventoryData = GetInventoryDataById(inventoryID);
+        if(existingInventoryData == null)
+        {
+            InventoryData newInventoryData = new InventoryData(inventoryID);
+            allInventories.Add(newInventoryData);
+        }
         inventories[inventoryID] = inventory;
         return inventoryID;
+    }
+
+    public InventoryData GetInventoryDataById(int inventoryID)
+    {
+        return allInventories.Find(inventory => inventory.inventoryID == inventoryID);
     }
 
     public void AddItemToInventory(int inventoryID, ItemSO item, int quantity)
@@ -70,9 +145,78 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
             }
+            if (item.id != 1 && item.type == 1)
+            {
+                if(inventoryID == 1000)
+                {
+                    return;
+                }
+                else
+                {
+                    for(int i = 0; i<quantity; i++)
+                    {
+                        inventory.GetComponentInParent<InstallationController>().ingredients.Enqueue(item);
+                    }
+                }
+            }
+            ReviseAllInventoriesListForItem(inventoryID, item, quantity);
             OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
             inventory.UpdateInspectorList();
-            inventory.SaveInventory();
+        }
+    }
+    public void ReviseAllInventoriesListForItem(int inventoryID, ItemSO item, int quantity)
+    {
+        InventoryData inventoryData = CheckInventoryIDInAllInventoriesList(inventoryID);
+        if(inventoryData != null)
+        {
+            if(inventoryData.items != null)
+            {
+                for (int i = 0; i < inventoryData.items.Count; i++)
+                {
+                    if (inventoryData.items[i].itemID == item.id)
+                    {
+                        inventoryData.items[i].quantity += quantity;
+
+                        if (inventoryData.items[i].quantity <= 0)
+                        {
+                            inventoryData.items.RemoveAt(i);
+                        }
+                        return;
+                    }
+                }
+                if (quantity > 0)
+                {
+                    inventoryData.items.Add(new ItemData(item.id, quantity));
+                }
+            }
+        }
+    }
+
+    public void ReviseAllInventoriesListForMachine(int inventoryID, MachineSO machine, int quantity)
+    {
+        InventoryData inventoryData = CheckInventoryIDInAllInventoriesList(inventoryID);
+        if (inventoryData != null)
+        {
+            if(inventoryData.machines!=null)
+            {
+                for (int i = 0; i < inventoryData.machines.Count; i++)
+                {
+                    if (inventoryData.machines[i].machineID == machine.id)
+                    {
+                        inventoryData.machines[i].machineQuantity += quantity;
+
+                        if (inventoryData.machines[i].machineQuantity <= 0)
+                        {
+                            inventoryData.items.RemoveAt(i);
+                        }
+                        return;
+                    }
+                }
+                if (quantity > 0)
+                {
+                    inventoryData.machines.Add(new MachineData(machine.id, quantity));
+                }
+            }
         }
     }
 
@@ -87,10 +231,29 @@ public class InventoryManager : MonoBehaviour
             }
             inventory.machines[machine] += quantity;
 
+            ReviseAllInventoriesListForMachine(1000, machine, quantity);
             OnInventoryUpdated?.Invoke(1000);
             inventory.UpdateInspectorList();
-            inventory.SaveInventory();
         }
+    }
+
+    private InventoryData CheckInventoryIDInAllInventoriesList(int inventoryID)
+    {
+        InventoryData inventoryData = null;
+        foreach (var inventory in allInventories)
+        {
+            if (inventory.inventoryID == inventoryID)
+            {
+                inventoryData = inventory;
+                break;
+            }
+        }
+        if (inventoryData == null)
+        {
+            inventoryData = new InventoryData(inventoryID);
+            allInventories.Add(inventoryData);
+        }
+        return inventoryData;
     }
 
     public bool RemoveMachineFromPlayerInventory(MachineSO machine, int quantity)
@@ -105,9 +268,9 @@ public class InventoryManager : MonoBehaviour
                 {
                     inventory.machines.Remove(machine);
                 }
+                ReviseAllInventoriesListForMachine(1000, machine, -quantity);
                 OnInventoryUpdated?.Invoke(1000); // 이벤트 발생
                 inventory.UpdateInspectorList();
-                inventory.SaveInventory();
 
                 return true;
             }
@@ -139,14 +302,47 @@ public class InventoryManager : MonoBehaviour
                         }
                     }
                 }
+                ReviseAllInventoriesListForItem(inventoryID, item, -quantity);
                 OnInventoryUpdated?.Invoke(inventoryID); // 이벤트 발생
                 inventory.UpdateInspectorList();
-                inventory.SaveInventory();
 
                 return true;
             }
         }
         return false;
+    }
+
+    public void UpdateInventoryAfterDequeue(int inventoryID, ItemSO itemSO)
+    {
+        InventoryData inventoryData = GetInventoryDataById(inventoryID);
+        if(inventoryData == null)
+        {
+            return;
+        }
+
+        QueueData queueDataToRemove = null;
+        foreach (var queueData in inventoryData.queueData)
+        {
+            if(queueData.itemSOID == itemSO.id)
+            {
+                queueDataToRemove = queueData;
+                break;
+            }
+        }
+        if(queueDataToRemove != null)
+        {
+            inventoryData.queueData.Remove(queueDataToRemove);
+        }
+
+        ItemData itemDataToUpdate = inventoryData.items.Find(itemData => itemData.itemID == itemSO.id);
+        if(itemDataToUpdate != null)
+        {
+            itemDataToUpdate.quantity -= 1;
+            if(itemDataToUpdate.quantity<=0)
+            {
+                inventoryData.items.Remove(itemDataToUpdate);
+            }
+        }
     }
 
     public void TransferItem(int fromInventoryID, int toInventoryID, ItemSO item, int quantity)
@@ -157,29 +353,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void TransformItem (int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
+    IEnumerator SaveAllInventoriesRoutine()
     {
-        StartCoroutine(TransformAfterSomeSceonds(inventoryID, fromItem, toItem, duration));
-    }
-
-    // 지정된 시간 후에 아이템을 변환하는 코루틴
-    private IEnumerator TransformAfterSomeSceonds(int inventoryID, ItemSO fromItem, ItemSO toItem, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-
-        if (inventories.ContainsKey(inventoryID) && inventories[inventoryID].Items.ContainsKey(fromItem))
+        while (true)
         {
-            var inventory = inventories[inventoryID];
-            int fromItemQuantity = inventory.Items[fromItem];
-            inventory.Items.Remove(fromItem);
-
-            if (!inventory.Items.ContainsKey(toItem))
-            {
-                inventory.Items[toItem] = 0;
-            }
-            inventory.Items[toItem] += fromItemQuantity;
-
-            inventory.UpdateInspectorList();
+            yield return new WaitForSeconds(15f);
+            GameManager.instance.dataManager.SaveInventoryData(allInventories);
         }
     }
 }

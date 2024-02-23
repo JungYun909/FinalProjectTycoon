@@ -80,7 +80,6 @@ public class InventoryShow : UIBase
 
     private void ClearInventoryDisplay()
     {
-        Debug.Log("Clear!");
         // 기존 일반 및 특별 아이템 UI를 모두 제거
         if (inventoryItemsParent != null && doughItemsParent != null)
         {

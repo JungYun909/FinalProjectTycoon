@@ -140,7 +140,6 @@ public class ItemSlotInfo : MonoBehaviour      // 여기서 itemIcon, quantityTe
             DeliverItem?.Invoke(curItem);
         if (curMachine != null)
         {
-            Debug.Log("MachineInfoDelivered");
             DeliverMachine?.Invoke(curMachine);
         }
 

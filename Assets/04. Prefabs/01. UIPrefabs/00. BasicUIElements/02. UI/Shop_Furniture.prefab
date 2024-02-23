@@ -2611,6 +2611,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuantityCheck
       objectReference: {fileID: 0}
+    - target: {fileID: 4856962409535285941, guid: d7f47a0020e046247a0ce6fa699169bb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6723292957320695258, guid: d7f47a0020e046247a0ce6fa699169bb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
