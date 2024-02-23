@@ -22,12 +22,14 @@ public class InventoryShow : UIBase
     public event Action<int> DeliverInventoryID;
     public event Action<MachineSO> DeliverMachineInfo;
 
+    public Button closeButton;
+
     private void Awake()
     {
         AbstractInventory.DeliverMachineSO += HandleMachineInfo;
         AbstractInventory.OnInventoryClicked += HandleInventoryOpened;
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
-        
+        closeButton.onClick.AddListener(GameManager.instance.uiManager.CloseAll);
     }
 
     private void OnDisable()
