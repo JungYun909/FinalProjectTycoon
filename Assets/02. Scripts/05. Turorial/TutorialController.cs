@@ -34,9 +34,15 @@ public class TutorialController : MonoBehaviour
             //GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         }
 
-        if (GameManager.instance.dataManager.playerData.tutoNum >= tutorials.Count - 1)
+        if (GameManager.instance.dataManager.playerData.tutoNum == tutorials.Count - 1)
         {
             CompletedAllTutorials();
+            return;
+        }
+        else if(GameManager.instance.dataManager.playerData.tutoNum > tutorials.Count - 1)
+        {
+            transform.parent.gameObject.SetActive(false);
+            curTutorial = null;
             return;
         }
 
@@ -54,7 +60,7 @@ public class TutorialController : MonoBehaviour
         Debug.Log("튜토리얼 끗!");
         GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         transform.parent.gameObject.SetActive(false);
-
+        GameManager.instance.dataManager.playerData.tutoNum++;
         //if(!nextSceneName.Equals(""))
         //{
         //    GameManager.instance.sceneManager.ChangeScene("SAScene2");
