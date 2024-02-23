@@ -186,6 +186,7 @@ MonoBehaviour:
   inventoryController: {fileID: 7344404901063357745}
   maxDoughQuantity: 5
   controller: {fileID: 1421688546873149454}
+  ingredientPrefab: {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
   itemsListForInspector: []
   inventoryID: 0
 --- !u!114 &7344404901063357745

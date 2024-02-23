@@ -73,6 +73,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         {
             ResetData();
             SaveData();
+            SaveTimeData();
         }
         
         LoadData();
@@ -147,6 +148,16 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         File.WriteAllText(path + timeJsonName, timeJsonData);
     }
 
+    public void LoadData()
+    {
+        string jsonData = File.ReadAllText(path + jsonName);
+        playerData = JsonUtility.FromJson<PlayerData>(jsonData);
+        
+        string timeJsonData = File.ReadAllText(path + timeJsonName);
+        playerTimeData = JsonUtility.FromJson<PlayerTimeData>(timeJsonData);
+        OnLoadEvent?.Invoke();
+    }
+    
     public void SaveInstallation(GameObject obj)
     {
         InstallationController controller = obj.GetComponent<InstallationController>();
@@ -184,66 +195,43 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         PosUpdateEvent?.Invoke(curObj.transform.position);
     }
 
-    public IEnumerator SaveTimeRoutine()
+    public void SaveInventoryData(List<InventoryData> allInventories)
     {
-        while (true)
-        {
-            SaveTimeData();
-            yield return new WaitForSeconds(3f);
-        }
+        InventoryWrapper wrapper= new InventoryWrapper { allInventories = allInventories };
+        string json = JsonUtility.ToJson(wrapper, true);
+        File.WriteAllText(Application.persistentDataPath + "/AllInventories.json", json);
     }
+    
 
-    public void LoadData()
+    public List<InventoryData> LoadAllInventories()
     {
-        string jsonData = File.ReadAllText(path + jsonName);
-        playerData = JsonUtility.FromJson<PlayerData>(jsonData);
-        OnLoadEvent?.Invoke();
-    }
-
-    public void SaveInventoryData(InventoryData data)
-    {
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/inventory" + data.inventoryID + ".json", json);
-    }
-
-    public InventoryData LoadInventoryData(int inventoryID)
-    {
-        string path = Application.persistentDataPath + "/inventory" + inventoryID + ".json";
-        if (File.Exists(path))
-        {
-            string json = File.ReadAllText(path);
-            InventoryData data = JsonUtility.FromJson<InventoryData>(json);
-            // 여기서 data.items 리스트를 순회하면서 각 ItemData의 itemID를 사용해 ItemSO 객체를 검색 및 복원
-            return data;
-        }
-        return null;
-    }
-
-    public void SaveDestinationData(DestinationData data)
-    {
-        string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "/DestinationInfo" + data.controllerID + ".json", json);
-    }
-
-
-    public DestinationData LoadDestinationData(int controllerID)
-    {
-        string path = Application.persistentDataPath + "/DestinationInfo" + controllerID + ".json";
+        string path = Application.persistentDataPath + "/AllInventories.json";
         if(File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            DestinationData data = JsonUtility.FromJson<DestinationData>(json);
-            return data;
+            var inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
+            return inventoryWrapper.allInventories;
         }
-        else
-        {
-            return null;
-        }
+        return new List<InventoryData>();
     }
 
-    public bool IsFileExist(int inventoryID)
+
+    public void SaveAllDestinationData(List<DestinationData> allDestinations)
     {
-        string path = Application.persistentDataPath + "/inventory" + inventoryID + ".json";
-        return File.Exists(path);
+        DestinationWrapper wrapper = new DestinationWrapper { destinations = allDestinations };
+        string json = JsonUtility.ToJson(wrapper, true);
+        File.WriteAllText(Application.persistentDataPath + "/Destinations.json", json);
+    }
+
+    public List<DestinationData> LoadAllDestinationData()
+    {
+        string path = Application.persistentDataPath + "/Destinations.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            var destinationWrapper = JsonUtility.FromJson<DestinationWrapper>(json);
+            return destinationWrapper.destinations;
+        }
+        return new List<DestinationData>();
     }
 }

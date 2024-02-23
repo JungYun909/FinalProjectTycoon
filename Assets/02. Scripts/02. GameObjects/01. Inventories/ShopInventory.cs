@@ -15,16 +15,12 @@ public class ShopInventory : AbstractInventory
     protected override void Start()
     {
         base.Start();
-        if (GameManager.instance.dataManager.IsFileExist(1000))
-        {
-            LoadInventory(GameManager.instance.dataManager.LoadInventoryData(1000));
-        }
-        AddTestItem1();
-        AddTestItem2();
-        AddTestItem3();
-        AddTestItem4();
-        AddTestItem5();
-        AddTestItem6();
+        //AddTestItem1();
+        //AddTestItem2();
+        //AddTestItem3();
+        //AddTestItem4();
+        //AddTestItem5();
+        //AddTestItem6();
     }
     //private Dictionary<ItemSO, int> items = new Dictionary<ItemSO, int>();
 

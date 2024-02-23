@@ -193,7 +193,6 @@ public class ShopUI : UIBase
 
     public void OpenMachinShopUI()
     {
-        Debug.Log(GameManager.instance.dataManager.playerData.tutoNum);
         if (GameManager.instance.dataManager.playerData.tutoNum == 4)
         {
             UpdateTutoMachineInfoToShopUI(1);
@@ -220,18 +219,18 @@ public class ShopUI : UIBase
         }
     }
 
-    public void SpawnInstallation()
-    {
-        if (curMachine.price > GameManager.instance.dataManager.playerData.money)
-        {
-            Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
-            return;
-        }
-        GameManager.instance.statManager.SpendGold(curMachine.price);
+    //public void SpawnInstallation()
+    //{
+    //    if (curMachine.price > GameManager.instance.dataManager.playerData.money)
+    //    {
+    //        Debug.Log("돈이 부족해요"); //TODO 유아이 경고 창 띄우기
+    //        return;
+    //    }
+    //    GameManager.instance.statManager.SpendGold(curMachine.price);
 
-        GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
-        GameManager.instance.uiManager.CloseAll();
-    }
+    //    GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
+    //    GameManager.instance.uiManager.CloseAll();
+    //}
 
     private void UpdateItemInfoInItemInfoWindow()
     {

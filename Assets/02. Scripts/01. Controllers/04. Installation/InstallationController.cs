@@ -46,7 +46,8 @@ public class InstallationController : MonoBehaviour, IInteractable
     private void LoadDestinationDataAndSetDestination()
     {
         destinationController.gameObject.SetActive(true);
-        DestinationData loadedData = GameManager.instance.dataManager.LoadDestinationData(this.destinationID) ;
+        List<DestinationData> allDestinationInfo = GameManager.instance.destinationManager.destinationInfo;
+        DestinationData loadedData = allDestinationInfo.Find(data => data.controllerID == this.destinationID);
         if (loadedData != null)
         {
             if (loadedData.controllerID == this.destinationID)
@@ -60,22 +61,15 @@ public class InstallationController : MonoBehaviour, IInteractable
                     destinationController.desPos1 = connectedController.gameObject.transform.position;
                 }
             }
+            else
+            {
+                Debug.Log("No data to call");
+            }
         }
     }
 
 
-    public void SaveDestination()
-    {
-        if (destinationController.destination[1] == null)
-            Debug.Log("No Destination Info");
-        if (destinationController.destination[1] != null)
-        {
-            int fromID = this.destinationID;
-            int toID = destinationController.destination[1].GetComponent<InstallationController>().destinationID;
-            DestinationData data = new DestinationData(fromID, toID);
-            GameManager.instance.dataManager.SaveDestinationData(data);
-        }
-    }
+
     public void InitSetting()
     {
         if(_installationData == null)

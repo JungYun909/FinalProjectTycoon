@@ -71,7 +71,7 @@ public class MenuButton : MonoBehaviour
     public void ButtonEffect(RectTransform curBtnPos)
     {
         OnBtn = true;
-        SetBtns();
+        OffBtns();
         
         usingBtn = curBtnPos.gameObject;
         usingBtn.GetComponent<Image>().color = Color.red;
@@ -104,15 +104,23 @@ public class MenuButton : MonoBehaviour
         }
         else
         {
-            SetBtns();
+            OnBtns();
         }
     }
     
-    private void SetBtns()
+    private void OffBtns()
     {
         foreach (var btn in btns)
         {
-            btn.interactable = !btn.interactable;
+            btn.interactable = false;
+        }
+    }
+    
+    private void OnBtns()
+    {
+        foreach (var btn in btns)
+        {
+            btn.interactable = true;
         }
     }
 }

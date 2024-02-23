@@ -16,6 +16,12 @@ public class DestinationData
     }
 }
 
+[System.Serializable]
+public class DestinationWrapper
+{
+    public List<DestinationData> destinations;
+}
+
 public class DestinationManager : MonoBehaviour
 {
     private int destinationControllerID = 1;
@@ -29,13 +35,17 @@ public class DestinationManager : MonoBehaviour
         return destinationID;
     }
 
+    private void Start()
+    {
+        LoadDestinationsData();
+        StartCoroutine(SaveAllDestinationsRoutine());
+    }
+
     public void RegisterDestinationInfo(int fromID, int toID)
     {
-        Debug.Log("RegisterDestinationInfo Called");
         DeleteDestinationInfo(fromID);
         DestinationData data = new DestinationData(fromID, toID);
         destinationInfo.Add(data);
-        
     }
 
     public void DeleteDestinationInfo(int fromID)
@@ -46,14 +56,13 @@ public class DestinationManager : MonoBehaviour
             if(item.controllerID == fromID)
             {
                 toDelete.Add(item);
-                return;
+                break;
             }
         }
         foreach (var destinationToDelete in toDelete)
         {
             destinationInfo.Remove(destinationToDelete);
         }
-        Debug.Log("Info deleted");
     }
 
     public InstallationController GetDestinationGameObject(int id)
@@ -64,8 +73,28 @@ public class DestinationManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Destination GameObject not found.");
             return null;
         }
     }
+
+    IEnumerator SaveAllDestinationsRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(15f);
+            GameManager.instance.dataManager.SaveAllDestinationData(destinationInfo);
+        }
+    }
+
+    private void LoadDestinationsData()
+    {
+        List<DestinationData> loadedDestinations = GameManager.instance.dataManager.LoadAllDestinationData();
+        if (loadedDestinations != null && loadedDestinations.Count > 0)
+        {
+            destinationInfo = loadedDestinations;
+        }
+        else
+            return;
+    }
+
 }

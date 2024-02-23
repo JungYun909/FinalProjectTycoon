@@ -15,8 +15,6 @@ public class ShopInventoryButton : MonoBehaviour
         shopUI = GetComponentInParent<ShopUI>();
         shopUI.onIngredientEnabled += SetButtonToShowQuantityController;
         shopUI.onMachineEnabled += SetButtonToSpawnInstallation;
-
-        Debug.Log("[ShopInventoryButton] OnEnable - Event subscription added");
     }
 
 
@@ -52,14 +50,12 @@ public class ShopInventoryButton : MonoBehaviour
 
     private void ShowQuantityController()
     {
-        Debug.Log("[ShopInventoryButton] ShowQuantityController called");
         shopUI.quantityCheck.SetActive(true);
         quantityController.DeliverQuantity += HandlePurchaseItem;
     }
 
     private void HandlePurchaseItem(int quantity)
     {
-        Debug.Log("Purchase Occured");
         if(GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * quantity)
         {
             return;
