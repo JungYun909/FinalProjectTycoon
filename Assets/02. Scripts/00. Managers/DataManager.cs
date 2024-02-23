@@ -73,6 +73,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         {
             ResetData();
             SaveData();
+            SaveTimeData();
         }
         
         LoadData();
