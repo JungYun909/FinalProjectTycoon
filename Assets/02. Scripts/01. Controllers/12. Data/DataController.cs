@@ -35,22 +35,22 @@ public class DataController : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
-    {
-        Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
-        GameManager.instance.dataManager.SaveData();
-
-    }
-
-    private void OnApplicationPause(bool pauseStatus)
-    {
-        if(pauseStatus)
-            GameManager.instance.dataManager.SaveData();
-    }
-
-    private void OnApplicationFocus(bool hasFocus)
-    {
-        if(hasFocus)
-            GameManager.instance.dataManager.SaveData();
-    }
+    // private void OnApplicationQuit()
+    // {
+    //     Debug.Log(GameManager.instance.dataManager.playerTimeData.deliverySec);
+    //     GameManager.instance.dataManager.SaveData();
+    //
+    // }
+    //
+    // private void OnApplicationPause(bool pauseStatus)
+    // {
+    //     if(pauseStatus)
+    //         GameManager.instance.dataManager.SaveData();
+    // }
+    //
+    // private void OnApplicationFocus(bool hasFocus)
+    // {
+    //     if(hasFocus)
+    //         GameManager.instance.dataManager.SaveData();
+    // }
 }

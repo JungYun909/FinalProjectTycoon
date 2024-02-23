@@ -155,6 +155,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         
         string timeJsonData = File.ReadAllText(path + timeJsonName);
         playerTimeData = JsonUtility.FromJson<PlayerTimeData>(timeJsonData);
+        
+        
         OnLoadEvent?.Invoke();
     }
     
