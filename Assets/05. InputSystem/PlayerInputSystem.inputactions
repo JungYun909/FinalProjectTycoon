@@ -38,6 +38,17 @@
                 },
                 {
                     "name": "",
+                    "id": "6f615a2c-95b3-4477-b1d7-527a9d0e391a",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a6e65e6e-de20-4f6c-868c-48c41115e01c",
                     "path": "<Mouse>/position",
                     "interactions": "",
