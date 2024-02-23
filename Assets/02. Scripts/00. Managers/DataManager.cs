@@ -264,16 +264,15 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string path = Application.persistentDataPath + "/AllInventories.json";
         string json = "";
-        if (File.Exists(path))
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-            {
-                json = PlayerPrefs.GetString("Inventory");
-            }
-            else
-            {
-                json = File.ReadAllText(path);
-            }
+            json = PlayerPrefs.GetString("Inventory");
+            var inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
+            return inventoryWrapper.allInventories;
+        }
+        else if (File.Exists(path))
+        {
+            json = File.ReadAllText(path);
             var inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
             return inventoryWrapper.allInventories;
         }
@@ -299,16 +298,16 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         string path = Application.persistentDataPath + "/Destinations.json";
         string json = "";
-        if (File.Exists(path))
+        
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            if (Application.platform == RuntimePlatform.WebGLPlayer)
-            {
-                json = PlayerPrefs.GetString("Destination");
-            }
-            else
-            {
-                json = File.ReadAllText(path);
-            }
+            json = PlayerPrefs.GetString("Destination");
+            var destinationWrapper = JsonUtility.FromJson<DestinationWrapper>(json);
+            return destinationWrapper.destinations;
+        }
+        else if (File.Exists(path))
+        {
+            json = File.ReadAllText(path);
             var destinationWrapper = JsonUtility.FromJson<DestinationWrapper>(json);
             return destinationWrapper.destinations;
         }
