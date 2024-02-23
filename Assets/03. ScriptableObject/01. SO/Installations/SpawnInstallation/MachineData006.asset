@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 6
   installasionName: "\uC6B0\uC720 \uC0DD\uC0B0\uAE30"
   description: "\uC6B0\uC720\uAC00 \uC5B4\uB514\uC11C \uB098\uC624\uB294\uAC70\uC57C?"
-  price: 1000
+  price: 800
   sprite: {fileID: 757394633, guid: 92738a7e59f6f8842bca817058c6ff9c, type: 3}
   animation:
   - {fileID: 7400000, guid: 3a03669d109f7407a84676b5217ff4cf, type: 2}

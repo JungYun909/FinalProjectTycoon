@@ -94,7 +94,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         playerData.shopName = "";
         playerData.level = 1;
-        playerData.money = 20000;
+        playerData.money = 1000;
         playerData.warningCount = 0;
         playerData.day = 1;
         playerData.debt = 10000;

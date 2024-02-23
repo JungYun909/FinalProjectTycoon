@@ -4101,7 +4101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  payBackGold: 0
+  payBackGold: 1000
   happyEnd: 0
   questPrefab: {fileID: 0}
 --- !u!114 &1830320779

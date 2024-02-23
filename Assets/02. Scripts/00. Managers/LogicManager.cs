@@ -40,7 +40,6 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
                 GameManager.instance.dataManager.playerData.debt -= GameManager.instance.dataManager.playerData.money;
                 GameManager.instance.dataManager.playerData.warningCount--;
             }
-            
         }
         
         if (GameManager.instance.dataManager.playerData.warningCount < -2)
