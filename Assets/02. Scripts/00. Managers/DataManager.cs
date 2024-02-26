@@ -110,7 +110,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.money = 1000;
         playerData.warningCount = 0;
         playerData.day = 1;
-        playerData.debt = 10000;
+        playerData.debt = 5000;
         playerData.fame = 0;
         playerData.questNum = -1;
         playerData.questCount = 0;
