@@ -19122,6 +19122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2d99340e2bb41088794ca62fb3d6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allInventories: []
   itemDatabase: {fileID: 11400000, guid: ef8a304b897d041be9d5acd3853d3db2, type: 2}
   machineDatabase: {fileID: 11400000, guid: 715423fb9358c3d46acce361f181fff3, type: 2}
 --- !u!114 &1590563960
@@ -19535,7 +19536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -21437,6 +21438,7 @@ MonoBehaviour:
   inventoryController: {fileID: 0}
   maxDoughQuantity: 5
   controller: {fileID: 0}
+  ingredientPrefab: {fileID: 0}
   itemsListForInspector: []
   inventoryID: 0
   inventoryUI: {fileID: 0}
