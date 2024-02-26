@@ -15,12 +15,7 @@ public class ShopInventory : AbstractInventory
     protected override void Start()
     {
         base.Start();
-        //AddTestItem1();
-        //AddTestItem2();
-        //AddTestItem3();
-        //AddTestItem4();
-        //AddTestItem5();
-        //AddTestItem6();
+        AddTestItem4();
     }
     //private Dictionary<ItemSO, int> items = new Dictionary<ItemSO, int>();
 
