@@ -142,9 +142,12 @@ public class InventoryManager : MonoBehaviour
                 }
                 else if (item.id != 1 && item.type == 1)
                 {
-                    for (int i = 0; i < quantity; i++)
+                    if (inventory.controller != null)
                     {
-                        inventory.controller.ingredients.Enqueue(item);
+                        for (int i = 0; i < quantity; i++)
+                        {
+                            inventory.controller.ingredients.Enqueue(item);
+                        }
                     }
                 }
             }
@@ -155,7 +158,6 @@ public class InventoryManager : MonoBehaviour
     }
     public void ReviseAllInventoriesListForItem(int inventoryID, ItemSO item, int quantity)
     {
-        Debug.Log($"[ReviseAllInventoriesListForItem] Start - InventoryID: {inventoryID}, ItemID: {item.id}, Quantity Change: {quantity}");
         InventoryData inventoryData = CheckInventoryIDInAllInventoriesList(inventoryID);
         if(inventoryData != null)
         {
@@ -180,7 +182,6 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log($"[ReviseAllInventoriesListForItem] End - InventoryID: {inventoryID}, ItemID: {item.id}, New Quantity: {quantity} (Assumed)");
     }
 
     public void ReviseAllInventoriesListForMachine(int inventoryID, MachineSO machine, int quantity)
@@ -198,7 +199,7 @@ public class InventoryManager : MonoBehaviour
 
                         if (inventoryData.machines[i].machineQuantity <= 0)
                         {
-                            inventoryData.items.RemoveAt(i);
+                            inventoryData.machines.RemoveAt(i);
                         }
                         return;
                     }
@@ -249,22 +250,20 @@ public class InventoryManager : MonoBehaviour
 
     public bool RemoveMachineFromPlayerInventory(MachineSO machine, int quantity)
     {
-        if(inventories.ContainsKey(1000))
+        var inventory = inventories[1000];
+        if(inventory.machines.ContainsKey(machine) && inventory.machines[machine] >= quantity)
         {
-            var inventory = inventories[1000];
-            if(inventory.machines.ContainsKey(machine) && inventory.machines[machine] >= quantity)
+            inventory.machines[machine] -= quantity;
+            if(inventory.machines[machine] == 0)
             {
-                inventory.machines[machine] -= quantity;
-                if(inventory.machines[machine] == 0)
-                {
-                    inventory.machines.Remove(machine);
-                }
-                ReviseAllInventoriesListForMachine(1000, machine, -quantity);
-                OnInventoryUpdated?.Invoke(1000); // 이벤트 발생
-                inventory.UpdateInspectorList();
-
-                return true;
+                inventory.machines.Remove(machine);
             }
+            ReviseAllInventoriesListForMachine(1000, machine, -quantity);
+            Debug.Log($"Revision Occured. Now Machines of PlayerInventory has {inventory.machines.Count} items");
+
+            OnInventoryUpdated?.Invoke(1000); // 이벤트 발생
+            inventory.UpdateInspectorList();
+            return true;
         }
         return false;
     }    
