@@ -20,6 +20,7 @@ public class PlayerData
     public int makeQuestItemID = 0;
 
     public int tutoNum = -1;
+    public bool tutoClear = false;
 
     public bool deliveryClear = false;
     public bool deliveryStart = false;

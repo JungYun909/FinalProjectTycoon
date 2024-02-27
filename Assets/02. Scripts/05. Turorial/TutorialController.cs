@@ -15,15 +15,11 @@ public class TutorialController : MonoBehaviour
 
     private void Start()
     {
-        //GameManager.instance.dataManager.playerTimeData.time = 
-        //Time.timeScale = 0;
-
         SetNextTutorial();
     }
 
     private void Update()
     {
-        Debug.Log(GameManager.instance.dataManager.playerTimeData.time);
         if (curTutorial != null)
         {
             curTutorial.Execute(this);
@@ -35,7 +31,6 @@ public class TutorialController : MonoBehaviour
         if(curTutorial != null)
         {
             curTutorial.Exit();
-            //GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         }
 
         if (GameManager.instance.dataManager.playerData.tutoNum == tutorials.Count - 1)
@@ -65,7 +60,7 @@ public class TutorialController : MonoBehaviour
         GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         transform.parent.gameObject.SetActive(false);
         GameManager.instance.dataManager.playerData.tutoNum++;
-        //GameManager.instance.dataManager.playerTimeData.time = Time.timeScale = 1;
+        GameManager.instance.dataManager.playerData.tutoClear = true;
 
         //if(!nextSceneName.Equals(""))
         //{
