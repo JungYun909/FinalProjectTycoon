@@ -26,20 +26,20 @@ public class DailyResultWindow : UIBase
     public override void Initialize()
     {
         uiManager = FindObjectOfType<UIManager>();
-	     shopStat = FindObjectOfType<TemporaryStat>(); 
-	    shopFameResultText.text = shopStat.fame.ToString();
-        financeScoreResultText.text = shopStat.financialScore.ToString();
-        goldOwned.text = shopStat.gold.ToString();
-        goldUsed.text = shopStat.goldUsed.ToString();
+        var shopStat = GameManager.instance.dataManager.playerData;
+        shopFameResultText.text = shopStat.fame.ToString();
+        financeScoreResultText.text = shopStat.warningCount.ToString();
+        goldOwned.text = shopStat.money.ToString();
+        goldUsed.text = shopStat.debt.ToString();
     }
 
     public override void UpdateUI()
     {
-        shopStat = FindObjectOfType<TemporaryStat>();
+        var shopStat = GameManager.instance.dataManager.playerData;
         shopFameResultText.text = shopStat.fame.ToString();
-        financeScoreResultText.text = shopStat.financialScore.ToString();
-        goldOwned.text = shopStat.gold.ToString();
-        goldUsed.text = shopStat.goldUsed.ToString();
+        financeScoreResultText.text = shopStat.warningCount.ToString();
+        goldOwned.text = shopStat.money.ToString();
+        goldUsed.text = shopStat.debt.ToString();
     }
     
     public void CloseWindow()

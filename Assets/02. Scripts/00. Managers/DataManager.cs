@@ -12,7 +12,7 @@ public class PlayerData
     public int money = 0;
     public int warningCount = 0;
     public int day = 1;
-    public int debt = 10000;
+    public int debt = 5000;
     public int fame = 0;
 
     public int questNum = -1;
@@ -94,10 +94,10 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     {
         playerData.shopName = "";
         playerData.level = 1;
-        playerData.money = 20000;
+        playerData.money = 1000;
         playerData.warningCount = 0;
         playerData.day = 1;
-        playerData.debt = 10000;
+        playerData.debt = 5000;
         playerData.fame = 0;
         playerData.questNum = -1;
         playerData.questCount = 0;
@@ -123,6 +123,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
         }
+        
+        SaveData();
     }
 
     private void DiscoverRecipe(int index)
@@ -164,6 +166,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.installationSubInt.Add(controller._installationData.id);
         playerData.installationsPos.Add(obj.transform.position);
         curInstallations.Add(obj);
+        
+        SaveData();
     }
 
     public void RemoveInstallationData(GameObject obj)
@@ -177,6 +181,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
                 playerData.installationSubInt.RemoveAt(i);
                 playerData.installationsPos.RemoveAt(i);
                 curInstallations.RemoveAt(i);
+                SaveData();
                 return;
             }
         }
@@ -191,7 +196,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
                 playerData.installationsPos[i] = curObj.transform.position;
             }
         }
-        //배치위치받아오는시점
+        SaveData();
         PosUpdateEvent?.Invoke(curObj.transform.position);
     }
 

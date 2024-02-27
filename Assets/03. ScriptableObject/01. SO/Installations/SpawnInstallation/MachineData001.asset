@@ -15,12 +15,12 @@ MonoBehaviour:
   id: 1
   installasionName: "\uBC18\uC8FD\uAE30"
   description: "\uAC1C\uCA4C\uB294 \uBC18\uC8FD\uAE30"
-  price: 300
+  price: 200
   sprite: {fileID: -990214313, guid: 08b6f9f34022111499309b06f96e65df, type: 3}
   animation:
   - {fileID: 7400000, guid: 48a4224cb36524440b4ac512401ee4e7, type: 2}
   canSpawn: 1
-  spawnDelay: 15
+  spawnDelay: 20
   spawnData: {fileID: 11400000, guid: 68ae17f6ccd0f462b9072368b1341dcd, type: 2}
   haveDoughInventory: 0
   haveIngredientInventory: 0

@@ -29,7 +29,7 @@ public class InventoryShow : UIBase
         AbstractInventory.DeliverMachineSO += HandleMachineInfo;
         AbstractInventory.OnInventoryClicked += HandleInventoryOpened;
         GameManager.instance.inventoryManager.OnInventoryUpdated += HandleInventoryUpdate;
-        closeButton.onClick.AddListener(GameManager.instance.uiManager.CloseAll);
+        closeButton.onClick.AddListener(CloseUI);
     }
 
     private void OnDisable()
@@ -98,6 +98,7 @@ public class InventoryShow : UIBase
 
     private void CreateItemSlots(AbstractInventory inventory)
     {
+        ClearInventoryDisplay();
         bool isFirstDoughItem = true;
         List<ItemSO> itemsToMove = new List<ItemSO>();
         // 인벤토리의 각 아이템에 대한 UI 생성
@@ -209,12 +210,21 @@ public class InventoryShow : UIBase
     public override void UpdateUI()
     {
         if (curInventory != null)
+        {
+            ClearInventoryDisplay();
             UpdateInventoryDisplay(curInventory);
+        }
     }
 
     public void OpenPlayerInventory()
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
         DeliverInventoryID?.Invoke(curInventory.inventoryID);
+    }
+
+    private void CloseUI()
+    {
+        ClearInventoryDisplay();
+        GameManager.instance.uiManager.CloseAll();
     }
 }

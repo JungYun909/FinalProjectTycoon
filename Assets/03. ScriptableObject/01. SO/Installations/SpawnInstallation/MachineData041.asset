@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 41
   installasionName: "\uB2EC\uAC40 \uC0DD\uC0B0\uAE30"
   description: "\uB3D9\uAE00\uB3D9\uAE00 \uB2EC\uAC40\uC774 \uC288\uC289"
-  price: 50
+  price: 600
   sprite: {fileID: 1336288914, guid: 7ebd5e71e378e8a4c8c0eb913430e66b, type: 3}
   animation:
   - {fileID: 7400000, guid: f38f077b757264a91b941fec201839b5, type: 2}

@@ -52,6 +52,6 @@ public class TopShopStatusWindow : UIBase
     {
 	    curGold.text = GameManager.instance.dataManager.playerData.money.ToString();
         curRepute.text = GameManager.instance.dataManager.playerData.fame.ToString();
-        curDateText.text = (GameManager.instance.dataManager.playerData.day - 1).ToString();
+        curDateText.text = (GameManager.instance.dataManager.playerData.day).ToString();
     }
 }

@@ -20,7 +20,10 @@ public class EncyclopediaSlotController : MonoBehaviour
         InitSetting();
         GameManager.instance.recipeManager.OnCompareRecipe += EncyclopediaUpdate;
     }
-
+    private void OnDisable()
+    {
+        GameManager.instance.recipeManager.OnCompareRecipe -= EncyclopediaUpdate;
+    }
     public void OnBtnClick()
     {
         OnRecipeBtn?.Invoke(nameTxt, recipe, price);

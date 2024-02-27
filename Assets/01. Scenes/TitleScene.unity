@@ -4101,7 +4101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb088faa54d42c408b6fd5e71269aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  payBackGold: 0
+  payBackGold: 1000
   happyEnd: 0
   questPrefab: {fileID: 0}
 --- !u!114 &1830320779
@@ -4500,6 +4500,7 @@ GameObject:
   - component: {fileID: 1955780405}
   - component: {fileID: 1955780404}
   - component: {fileID: 1955780403}
+  - component: {fileID: 1955780406}
   m_Layer: 5
   m_Name: InputField_ShopName
   m_TagString: Untagged
@@ -4664,6 +4665,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955780401}
   m_CullTransparentMesh: 1
+--- !u!114 &1955780406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955780401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc33a39070010f94fb1c2dd721c1286d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showHtmlElement: 0
 --- !u!1 &1967258786
 GameObject:
   m_ObjectHideFlags: 0

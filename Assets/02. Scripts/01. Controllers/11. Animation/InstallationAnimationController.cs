@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 
 public enum InstallationAnimType
@@ -15,7 +15,7 @@ public class InstallationAnimationController : AnimationBase
 
     private InstallationController _controller;
     private AnimatorOverrideController _animatorController;
-    private List<AnimatorState> _animatorStates;
+    //private List<AnimatorState> _animatorStates;
     
     protected override void Awake()
     {

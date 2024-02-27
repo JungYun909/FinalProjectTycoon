@@ -236,7 +236,7 @@ public class ShopUI : UIBase
     {
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
-        priceText.text = curItem.price.ToString();
+        priceText.text = (curItem.price*2).ToString();
     }
 
     private void UpdateMachinInfoWindow()

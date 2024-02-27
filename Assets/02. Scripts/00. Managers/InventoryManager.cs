@@ -123,7 +123,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventories.ContainsKey(inventoryID))
         {
-            var inventory = inventories[inventoryID];
+            AbstractInventory inventory = inventories[inventoryID];
             
             if(!inventory.Items.ContainsKey(item))
             {
@@ -131,31 +131,20 @@ public class InventoryManager : MonoBehaviour
             }
             inventory.Items[item] += quantity;
 
-            if(item.id == 1 || item.type ==2)
+            if(!(inventoryID == 1000 && (item.id == 1 || item.type ==2)))
             {
-                if (inventoryID == 1000)
-                {
-                    return;
-                }
-                else
+                if (item.id == 1 || item.type == 2)
                 {
                     for (int i = 0; i < quantity; i++)
                     {
                         inventory.itemQueue.Enqueue(item);
                     }
                 }
-            }
-            if (item.id != 1 && item.type == 1)
-            {
-                if(inventoryID == 1000)
+                else if (item.id != 1 && item.type == 1)
                 {
-                    return;
-                }
-                else
-                {
-                    for(int i = 0; i<quantity; i++)
+                    for (int i = 0; i < quantity; i++)
                     {
-                        inventory.GetComponentInParent<InstallationController>().ingredients.Enqueue(item);
+                        inventory.controller.ingredients.Enqueue(item);
                     }
                 }
             }
@@ -166,6 +155,7 @@ public class InventoryManager : MonoBehaviour
     }
     public void ReviseAllInventoriesListForItem(int inventoryID, ItemSO item, int quantity)
     {
+        Debug.Log($"[ReviseAllInventoriesListForItem] Start - InventoryID: {inventoryID}, ItemID: {item.id}, Quantity Change: {quantity}");
         InventoryData inventoryData = CheckInventoryIDInAllInventoriesList(inventoryID);
         if(inventoryData != null)
         {
@@ -190,6 +180,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
+        Debug.Log($"[ReviseAllInventoriesListForItem] End - InventoryID: {inventoryID}, ItemID: {item.id}, New Quantity: {quantity} (Assumed)");
     }
 
     public void ReviseAllInventoriesListForMachine(int inventoryID, MachineSO machine, int quantity)
@@ -350,6 +341,11 @@ public class InventoryManager : MonoBehaviour
         if(RemoveItemFromInventory(fromInventoryID, item, quantity))
         {
             AddItemToInventory(toInventoryID, item, quantity);
+            AbstractInventory fromInventory = inventories[fromInventoryID];
+            if (fromInventory.controller != null)
+                fromInventory.controller.ingredients.Clear();
+            else
+                return;
         }
     }
 
@@ -357,7 +353,7 @@ public class InventoryManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(15f);
+            yield return new WaitForSeconds(10f);
             GameManager.instance.dataManager.SaveInventoryData(allInventories);
         }
     }

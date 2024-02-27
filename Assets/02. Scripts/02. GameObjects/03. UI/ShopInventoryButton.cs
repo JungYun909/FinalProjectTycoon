@@ -20,11 +20,13 @@ public class ShopInventoryButton : MonoBehaviour
 
     private void SetButtonToSpawnInstallation()
     {
+        button.onClick.RemoveAllListeners(); // 이전 리스너 제거
         button.onClick.AddListener(SpawnInstallation);
     }
 
     private void SetButtonToShowQuantityController()
     {
+        button.onClick.RemoveAllListeners(); // 이전 리스너 제거
         button.onClick.AddListener(ShowQuantityController);
     }
     private void OnDisable()
@@ -39,7 +41,6 @@ public class ShopInventoryButton : MonoBehaviour
     {
         if (shopUI.curMachine.price > GameManager.instance.dataManager.playerData.money)
         {
-            //TODO 경고창
             return;
         }
         GameManager.instance.statManager.SpendGold(shopUI.curMachine.price);
@@ -56,13 +57,13 @@ public class ShopInventoryButton : MonoBehaviour
 
     private void HandlePurchaseItem(int quantity)
     {
-        if(GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * quantity)
+        if(GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * 2 * quantity)
         {
             return;
         }
         else
         {
-            GameManager.instance.statManager.SpendGold(shopUI.curItem.price * quantity);
+            GameManager.instance.statManager.SpendGold(shopUI.curItem.price *2 * quantity);
             GameManager.instance.inventoryManager.AddItemToInventory(1000, shopUI.curItem, quantity);
         }
         quantityController.DeliverQuantity -= HandlePurchaseItem;

@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uC6B0\uC720"
   description: "\uD0A4\uAC00\uC465\uC465"
   recipe: "\uC6B0\uC720\uAE30\uACC4\uC5D0\uC11C \uC0DD\uC0B0"
-  price: 40
+  price: 20
   sprite: {fileID: 21300000, guid: 2bd411293e446e540aa79805debdc5c4, type: 3}
   tag: Ingredient
   level: 0
