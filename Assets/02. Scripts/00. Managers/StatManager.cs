@@ -133,6 +133,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
 
     private void Update()  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
+        
         if (GameManager.instance.dataManager.playerTimeData.time < dayTime)
         {
             GameManager.instance.dataManager.playerTimeData.time += Time.deltaTime;
