@@ -5,14 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// public abstract class Manager : MonoBehaviour
-// {
-//     public void Start()
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -35,6 +27,7 @@ public class GameManager : MonoBehaviour
     public RecipeManager recipeManager;
     public QuestManager questManager;
     public DestinationManager destinationManager;
+    public FirebaseAuthManager firebaseAuthManager;
 
     private void Awake()
     {
