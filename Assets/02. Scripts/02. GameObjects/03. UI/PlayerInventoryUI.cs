@@ -254,9 +254,13 @@ public class PlayerInventoryUI : UIBase
 
     private void SpawnInstallation()
     {
+        Debug.Log("Spawn occured");
         if (curMachine != null)
         {
             GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
+            Debug.Log("spawnInstallationCalled");
+            GameManager.instance.inventoryManager.RemoveMachineFromPlayerInventory(curMachine, 1);
+            Debug.Log($"{curMachine} info deleted");
             GameManager.instance.uiManager.CloseAll();
         }
     }
