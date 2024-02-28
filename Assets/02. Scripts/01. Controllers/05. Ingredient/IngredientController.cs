@@ -105,17 +105,20 @@ public class IngredientController : MonoBehaviour, IInteractable
                 if (itemData.id == 1 || itemData.type == 2)
                 {
                     targetInventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-                    if (controller._installationData.haveDoughInventory)
+                    if (controller._installationData != null)
                     {
-                        controller.doughContainer.Enqueue(gameObject);
-                        EnqueueItems(itemData, new List<float>(interactInstallation));
+                        if (controller._installationData.haveDoughInventory)
+                        {
+                            controller.doughContainer.Enqueue(gameObject);
+                            EnqueueItems(itemData, new List<float>(interactInstallation));
+                        }
                     }
                 }
 
                 else if (controller.destinationID == 1)
                     return;
-                else
-                    controller.ingredients.Enqueue(itemData);
+                //else
+                //    controller.ingredients.Enqueue(itemData);
             }
         }
 
@@ -157,7 +160,7 @@ public class IngredientController : MonoBehaviour, IInteractable
         var inventoryData = GameManager.instance.inventoryManager.GetInventoryDataById(targetInventory.inventoryID);
         if (inventoryData == null)
         {
-            Debug.LogError($"Inventory data not found for ID: {targetInventory.inventoryID}");
+            Debug.Log($"Inventory data not found for ID: {targetInventory.inventoryID}");
             return;
         }
         if (inventoryData != null)

@@ -19948,6 +19948,7 @@ MonoBehaviour:
   entrance: {fileID: 0}
   kitchenDoor: {fileID: 0}
   tutoPrefab: {fileID: 0}
+  isLoadingInstallationDone: 0
   isClearTuto: 0
 --- !u!82 &1590563969
 AudioSource:
@@ -22085,14 +22086,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd58b2a503964f40904a0c062e8abf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _installationData: {fileID: 0}
+  _installationData: {fileID: 11400000, guid: ff8378f7698b94356b8c514e4f3de21a, type: 2}
   inventory: {fileID: 0}
   inventoryController: {fileID: 0}
   installController: {fileID: 0}
   destinationController: {fileID: 748217694}
   spawnController: {fileID: 0}
   animController: {fileID: 0}
-  destinationID: 0
+  destinationID: 1
 --- !u!1 &1790397445
 GameObject:
   m_ObjectHideFlags: 0

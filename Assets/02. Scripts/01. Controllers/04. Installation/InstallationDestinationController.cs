@@ -53,7 +53,6 @@ public class InstallationDestinationController : MonoBehaviour
                 GameManager.instance.destinationManager.DeleteDestinationInfo(destination[0].GetComponentInParent<InstallationController>().destinationID);
             }
         }
-
     }
 
     private void InitLineSet()

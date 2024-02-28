@@ -45,19 +45,6 @@ public class AbstractInventory : MonoBehaviour
     private List<InventoryItemEntry> itemsListForInspector = new List<InventoryItemEntry>();
     public int inventoryID;
 
-    protected virtual void Start()
-    {
-        inventoryID = GameManager.instance.inventoryManager.RegisterInventory(this);
-        InventoryData myData = GameManager.instance.inventoryManager.GetInventoryDataById(inventoryID);
-        if (myData != null)
-        {
-            LoadInventory(myData);
-        }
-        else
-        {   
-            Debug.Log("No InventoryData");
-        }
-    }
 
     public void CopyItemsToDoughContainer()
     {
@@ -78,11 +65,21 @@ public class AbstractInventory : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void InitializeInventory(int loadedInventoryID)
     {
-        if (controller != null)
+        if (loadedInventoryID != -1)
         {
-            controller.installationFuctionSet += OpenUI;
+            this.inventoryID = loadedInventoryID;
+            GameManager.instance.inventoryManager.RegisterInventory(this);
+            InventoryData myData = GameManager.instance.inventoryManager.GetInventoryDataById(loadedInventoryID);
+            if(myData!= null)
+            {
+                LoadInventory(myData);
+            }
+            if(controller != null)
+            {
+                controller.installationFuctionSet += OpenUI;
+            }
         }
     }
 
@@ -176,6 +173,8 @@ public class AbstractInventory : MonoBehaviour
                 IngredientController ingredientController = spawnedObj.GetComponent<IngredientController>();
                 ingredientController.itemData = itemData;
                 ingredientController.interactInstallation = new Queue<float>(queueData.interactInstallationData);
+                if (controller.doughContainer == null)
+                    Debug.Log("No Dough Container");
                 controller.doughContainer.Enqueue(spawnedObj);
                 spawnedObj.SetActive(false);
             }

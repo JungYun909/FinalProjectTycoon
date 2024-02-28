@@ -24,7 +24,14 @@ public class InstallationSetController : UIBase
 
     public void InstallationDestroy()
     {
-        GameManager.instance.inventoryManager.AddMachineToPlayerInventory(curGameObject.GetComponent<InstallationController>()._installationData, 1);
+        InstallationController curController = curGameObject.GetComponent<InstallationController>();
+        if (curGameObject.GetComponentInChildren<AbstractInventory>() != null)
+        {
+            int curInventoryID = curGameObject.GetComponentInChildren<AbstractInventory>().inventoryID;
+            GameManager.instance.inventoryManager.DeleteInventoryData(curInventoryID);
+        }
+        GameManager.instance.inventoryManager.AddMachineToPlayerInventory(curController._installationData, 1);
+        GameManager.instance.destinationManager.DeleteDestinationInfo(curController.destinationID);
         GameManager.instance.poolManager.DeSpawnFromPool(curGameObject);
         GameManager.instance.installationManager.installationManageController.SetActive(false);
         GameManager.instance.dataManager.RemoveInstallationData(curGameObject);

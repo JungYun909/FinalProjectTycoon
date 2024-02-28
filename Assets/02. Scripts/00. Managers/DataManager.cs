@@ -29,6 +29,9 @@ public class PlayerData
     public List<Vector2> installationsPos = new List<Vector2>();
     
     public List<int> recipeIndex = new List<int>();
+
+    public List<int> inventoryIDs = new List<int>();
+    public List<int> destinationIDs = new List<int>();
 }
 
 public class PlayerTimeData
@@ -62,15 +65,18 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public GameObject tutoPrefab;
     
     public event Action OnSaveEvent;
-    public event Action OnLoadEvent; 
+    public event Action OnLoadEvent;
+    public event Action LoadInventoryID;
     public event Action<Vector3> PosUpdateEvent;
+
+    public bool isLoadingInstallationDone = false;
 
     public bool isClearTuto = false;
     
     public void InitSet()
     {
         path = Application.persistentDataPath + "/";
-        
+         
         if (!File.Exists(path + jsonName))
         {
             ResetData();
@@ -86,6 +92,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         counter = GameObject.Find("CounterObj");
         entrance = GameObject.Find("Entrance");
         kitchenDoor = GameObject.Find("KitchenDoor");
+        GameManager.instance.destinationManager.RegisterDestinationID(kitchenDoor.GetComponent<InstallationController>());
         
         GameManager.instance.recipeManager.OnCompareRecipe += DiscoverRecipe;
 
@@ -124,10 +131,15 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);
             InstallationController controller = curObj.GetComponent<InstallationController>();
             controller._installationData = installationDatas.GetItemByID(playerData.installationSubInt[i]);
+            controller.InitializeDestinationSetting(playerData.destinationIDs[i]);
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
+            if(playerData.inventoryIDs[i] != -1)
+            {
+                controller.inventory.InitializeInventory(playerData.inventoryIDs[i]);
+            }
         }
-        
+        isLoadingInstallationDone = true;
         SaveData();
     }
 
@@ -169,6 +181,20 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         InstallationController controller = obj.GetComponent<InstallationController>();
         playerData.installationSubInt.Add(controller._installationData.id);
         playerData.installationsPos.Add(obj.transform.position);
+        int controllerID = GameManager.instance.destinationManager.RegisterDestinationID(controller);
+        controller.destinationID = controllerID;
+        playerData.destinationIDs.Add(controllerID);
+
+        if (controller.inventory.gameObject.activeSelf)
+        {
+            int inventoryID = GameManager.instance.inventoryManager.RegisterInventory(controller.inventory);
+            controller.inventory.inventoryID = inventoryID;
+            playerData.inventoryIDs.Add(inventoryID);
+        }
+        else
+        {
+            playerData.inventoryIDs.Add(-1);
+        }
         curInstallations.Add(obj);
         
         SaveData();
@@ -184,6 +210,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             {
                 playerData.installationSubInt.RemoveAt(i);
                 playerData.installationsPos.RemoveAt(i);
+                playerData.inventoryIDs.RemoveAt(i);
+                playerData.destinationIDs.RemoveAt(i);
                 curInstallations.RemoveAt(i);
                 SaveData();
                 return;
@@ -204,43 +232,51 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         PosUpdateEvent?.Invoke(curObj.transform.position);
     }
 
-    public void SaveInventoryData(List<InventoryData> allInventories)
+    public void SaveInventoryData(int nextInventoryID, List<InventoryData> allInventories)
     {
-        InventoryWrapper wrapper= new InventoryWrapper { allInventories = allInventories };
+        InventoryWrapper wrapper = new InventoryWrapper
+        {
+            nextInventoryID = nextInventoryID,
+            allInventories = allInventories 
+        };
         string json = JsonUtility.ToJson(wrapper, true);
         File.WriteAllText(Application.persistentDataPath + "/AllInventories.json", json);
     }
-    
 
-    public List<InventoryData> LoadAllInventories()
+
+    public InventoryWrapper LoadAllInventories()
     {
         string path = Application.persistentDataPath + "/AllInventories.json";
         if(File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            var inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
-            return inventoryWrapper.allInventories;
+            InventoryWrapper inventoryWrapper = JsonUtility.FromJson<InventoryWrapper>(json);
+            return inventoryWrapper;
         }
-        return new List<InventoryData>();
+        return new InventoryWrapper { nextInventoryID = 1001, allInventories = new List<InventoryData>() } ;
     }
 
 
-    public void SaveAllDestinationData(List<DestinationData> allDestinations)
+    public void SaveAllDestinationData(int nextDestinationID, List<DestinationData> allDestinations)
     {
-        DestinationWrapper wrapper = new DestinationWrapper { destinations = allDestinations };
+        DestinationWrapper wrapper = new DestinationWrapper
+        {
+            nextDestinationID = nextDestinationID,
+            destinations = allDestinations 
+        };
         string json = JsonUtility.ToJson(wrapper, true);
         File.WriteAllText(Application.persistentDataPath + "/Destinations.json", json);
     }
 
-    public List<DestinationData> LoadAllDestinationData()
+    public DestinationWrapper LoadAllDestinationData()
     {
         string path = Application.persistentDataPath + "/Destinations.json";
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
             var destinationWrapper = JsonUtility.FromJson<DestinationWrapper>(json);
-            return destinationWrapper.destinations;
+            return destinationWrapper;
         }
-        return new List<DestinationData>();
+        return new DestinationWrapper { nextDestinationID = 2, destinations = new List<DestinationData>() };
     }
 }
