@@ -73,7 +73,7 @@ public class InventoryManager : MonoBehaviour
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     public MachineDatabaseSO machineDatabase;
     public Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
-    private int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
+    public int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
     private int playerInventoryID = 1000;
     private int inventoryID;
 

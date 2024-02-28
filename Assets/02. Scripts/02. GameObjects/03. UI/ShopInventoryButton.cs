@@ -57,13 +57,13 @@ public class ShopInventoryButton : MonoBehaviour
 
     private void HandlePurchaseItem(int quantity)
     {
-        if(GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * 2 * quantity)
-        {
+        if (GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * 2 * quantity)
             return;
-        }
+        else if (quantity == 0)
+            return;
         else
         {
-            GameManager.instance.statManager.SpendGold(shopUI.curItem.price *2 * quantity);
+            GameManager.instance.statManager.SpendGold(shopUI.curItem.price * 2 * quantity);
             GameManager.instance.inventoryManager.AddItemToInventory(1000, shopUI.curItem, quantity);
         }
         quantityController.DeliverQuantity -= HandlePurchaseItem;

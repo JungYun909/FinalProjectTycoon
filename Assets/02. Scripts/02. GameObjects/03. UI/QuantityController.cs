@@ -27,8 +27,6 @@ public class QuantityController : MonoBehaviour
 
     private void IncreaseQuantity()
     {
-        Debug.Log("Increase");
-
         if (quantity<maxQuantity)
         {
             quantity++;
@@ -37,7 +35,6 @@ public class QuantityController : MonoBehaviour
     }
     private void DecreaseQuantity()
     {
-        Debug.Log("Decrease");
         if (quantity > 0)
         {
             quantity--;

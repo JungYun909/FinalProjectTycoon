@@ -58,11 +58,13 @@ public class PlayerInventoryUI : UIBase
         }
     }
 
-    private void HandleTransfer(int obj)
+    private void HandleTransfer(int quantity)
     {
-        if (obj <= itemQuantityInInventory)
+        if (quantity == 0)
+            return;
+        if (quantity <= itemQuantityInInventory)
         {
-            GameManager.instance.inventoryManager.TransferItem(1000, curInventoryID, curItem, obj);
+            GameManager.instance.inventoryManager.TransferItem(1000, curInventoryID, curItem, quantity);
             if (quantityController != null)
             {
                 QuantityController controller = quantityController.GetComponent<QuantityController>();

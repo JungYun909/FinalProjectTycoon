@@ -25,7 +25,7 @@ public class DestinationWrapper
 
 public class DestinationManager : MonoBehaviour
 {
-    private int destinationControllerID;
+    public int destinationControllerID = 2;
     public Dictionary<int, InstallationController> destinationDictionary = new Dictionary<int, InstallationController>();
     public List<DestinationData> destinationInfo = new List<DestinationData>();
     

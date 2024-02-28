@@ -33,6 +33,12 @@ public class PlayerData
 
     public List<int> inventoryIDs = new List<int>();
     public List<int> destinationIDs = new List<int>();
+
+
+    public int totalGoldEarned = 0;
+    public int goldEarnedToday = 0;
+    public int goldSpentToday = 0;
+    public int exp = 0;
 }
 
 public class PlayerTimeData
@@ -114,6 +120,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.makeQuestItemID = 0;
         playerData.installationSubInt.Clear();
         playerData.installationsPos.Clear();
+        playerData.inventoryIDs.Clear();
+        playerData.destinationIDs.Clear();
         playerData.deliveryClear = false;
         playerData.deliveryStart = false;
         
@@ -123,6 +131,11 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
 
         playerTimeData.deliveryMin = 10;
         playerTimeData.deliverySec = 0;
+
+        playerData.totalGoldEarned = 0;
+        playerData.goldEarnedToday = 0;
+        playerData.goldSpentToday = 0;
+        playerData.exp = 0;
     }
 
     private void LoadInstallation()
@@ -279,5 +292,17 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             return destinationWrapper;
         }
         return new DestinationWrapper { nextDestinationID = 2, destinations = new List<DestinationData>() };
+    }
+
+    public void ResetInventoryAndDestinationData()
+    {
+        GameManager.instance.inventoryManager.allInventories.Clear();
+        GameManager.instance.inventoryManager.inventories.Clear();
+        GameManager.instance.inventoryManager.nextInventoryID = 1001;
+        SaveInventoryData(1001, GameManager.instance.inventoryManager.allInventories);
+        GameManager.instance.destinationManager.destinationDictionary.Clear();
+        GameManager.instance.destinationManager.destinationInfo.Clear();
+        GameManager.instance.destinationManager.destinationControllerID = 2;
+        SaveAllDestinationData(2, GameManager.instance.destinationManager.destinationInfo);
     }
 }
