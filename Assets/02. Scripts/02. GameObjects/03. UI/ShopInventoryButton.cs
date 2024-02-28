@@ -15,6 +15,7 @@ public class ShopInventoryButton : MonoBehaviour
         shopUI = GetComponentInParent<ShopUI>();
         shopUI.onIngredientEnabled += SetButtonToShowQuantityController;
         shopUI.onMachineEnabled += SetButtonToSpawnInstallation;
+        SetButtonToSpawnInstallation();
     }
 
 

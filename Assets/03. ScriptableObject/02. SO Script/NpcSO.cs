@@ -9,6 +9,7 @@ public class NpcSO : ScriptableObject
     [Header("Info")]
     public int id; //NPC ID (호출 넘버)
     public string npcName; //출력할 NPC 이름
+    public int npcLevel;
     public string description; //출력할 아이템 설명
     public Sprite sprite;
 

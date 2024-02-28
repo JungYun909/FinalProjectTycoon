@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13f33477d04a4a4bb806e58e0484c95, type: 3}
-  m_Name: NpcData005
+  m_Name: NPCData005
   m_EditorClassIdentifier: 
   id: 5
   npcName: "\uB9AC\uD2B8\uB9AC\uBA4D\uB2D8"
+  npcLevel: 1
   description: "\uC21C\uB529\uD574\uBCF4\uC778\uB2E4"
   sprite: {fileID: 1193442921, guid: 7788d2ecee6bc6f4886ef77500f76030, type: 3}
   speed: 1

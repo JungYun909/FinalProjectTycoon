@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   npcName: "\uAC80\uACE0\uB0E5\uB2D8"
+  npcLevel: 2
   description: "\uC628\uD654\uD574\uBCF4\uC778\uB2E4"
   sprite: {fileID: 1118279850, guid: fa1a4ebecce19f042ad2b245494c9832, type: 3}
   speed: 1

@@ -8,8 +8,15 @@ using UnityEngine.SceneManagement;
 public class NPCSpawner : MonoBehaviour
 {
     private float spawnTimer;
-    private float spawnTime = 2f;
+    private float spawnTime = 1f;
     private int spawnPercentage = 100;
+
+    private NPCSeparation _separation;
+
+    private void Start()
+    {
+        _separation = GetComponent<NPCSeparation>();
+    }
 
     private void Update()
     {
@@ -26,7 +33,8 @@ public class NPCSpawner : MonoBehaviour
 
             if (random < spawnPercentage * (GameManager.instance.dataManager.playerData.level * 0.2f))
             {
-                GameManager.instance.spawnManager.SpawnNPC();
+                NpcSO curNPC = _separation.NPCChoice(GameManager.instance.dataManager.playerData.level);
+                GameManager.instance.spawnManager.SpawnNPC(curNPC);
             }
         }
     }

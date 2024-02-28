@@ -56,7 +56,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
         // curTime = shopStat.playerTime;
         // curDay = shopStat.dayTime;
         // curDebt = shopStat.debt;
-        maxNpc = 2;
+        maxNpc = 10;
     }
 
     // private void OnEnable()

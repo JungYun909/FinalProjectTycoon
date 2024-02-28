@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class PlayerData
@@ -46,14 +47,15 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     private string jsonName = "PlayerJson";
     private string timeJsonName = "PlayerTimeJson";
     
-    public MachineDatabaseSO installationData;
+    public MachineDatabaseSO installationDatas;
+    public NpcDatabaseSO npcDatas;
     public ItemSO[] ingredientSub;
     public ItemSO[] foodSub;
     
     public GameObject[] curObject;
 
     [Header("EssentialInstallation")]
-    public List<GameObject> curInstallations; //판매씬에 배치된 진열대
+    public List<GameObject> curInstallations;
     public GameObject counter; // 카운터 등록
     public GameObject entrance;
     public GameObject kitchenDoor;
@@ -106,6 +108,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.installationsPos.Clear();
         playerData.deliveryClear = false;
         playerData.deliveryStart = false;
+        
+        curInstallations.Clear();
 
         playerTimeData.time = 0;
 
@@ -119,7 +123,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         {
             GameObject curObj = GameManager.instance.poolManager.SpawnFromPool(curObject[0]);
             InstallationController controller = curObj.GetComponent<InstallationController>();
-            controller._installationData = installationData.GetItemByID(playerData.installationSubInt[i]);
+            controller._installationData = installationDatas.GetItemByID(playerData.installationSubInt[i]);
             curObj.transform.position = playerData.installationsPos[i];
             curInstallations.Add(curObj);
         }

@@ -30,6 +30,7 @@ public class EndingSceneController : MonoBehaviour
     public void ResetEndChangeScene()
     {
         GameManager.instance.dataManager.ResetData();
+        GameManager.instance.dataManager.SaveData();
         GameManager.instance.sceneManager.ChangeScene(SceneType.TitleScene.ToString());
     }
 

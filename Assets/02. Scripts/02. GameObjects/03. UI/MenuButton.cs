@@ -18,6 +18,7 @@ public class MenuButton : MonoBehaviour
     private List<RectTransform> btnsPos = new List<RectTransform>();
 
     private bool OnBtn;
+    private bool Move;
     
     private Vector2 backBtnDestination;
     private Vector2 backBtnPosition;
@@ -49,6 +50,7 @@ public class MenuButton : MonoBehaviour
     public void BackBtn()
     {
         OnBtn = false;
+        OffBtns();
         backBtn.interactable = false;
         
         GameManager.instance.uiManager.CloseAll();
@@ -90,21 +92,30 @@ public class MenuButton : MonoBehaviour
 
     private IEnumerator moveBtn(RectTransform movePos, Vector2 desPos)
     {
-        while (Vector2.Distance(movePos.anchoredPosition,desPos) > 20f)
+        while (Vector2.Distance(movePos.anchoredPosition,desPos) > 10f)
         {
+            Move = true;
             movePos.anchoredPosition =
                 Vector2.Lerp(movePos.anchoredPosition, desPos, speed);
 
             yield return null;
         }
 
-        if (OnBtn)
+        if (Move)
         {
-            backBtn.interactable = true;
-        }
-        else
-        {
-            OnBtns();
+            Move = false;
+            Debug.Log("10");
+            yield return new WaitForSeconds(1f);
+            
+            if (OnBtn)
+            {
+                Debug.Log("1010");
+                backBtn.interactable = true;
+            }
+            else
+            {
+                OnBtns();
+            }
         }
     }
     
@@ -122,5 +133,10 @@ public class MenuButton : MonoBehaviour
         {
             btn.interactable = true;
         }
+    }
+
+    public void LoadScene(string sceneType)
+    {
+        GameManager.instance.sceneManager.ChangeScene(sceneType);
     }
 }

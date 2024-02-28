@@ -13,7 +13,6 @@ public class SpawnManager : MonoBehaviour
 
     [Header("NPCSpawn")]
     public int curNpcCount;
-    public List<NpcSO> npcDataList = new List<NpcSO>();
 
     public event Action<ItemSO> SpawnIngredientEvnet;
     public event Action<MachineSO> installMachineEvent;
@@ -58,13 +57,13 @@ public class SpawnManager : MonoBehaviour
                                       spawnObj.transform.position).normalized);
     }
 
-    public void SpawnNPC()
+    public void SpawnNPC(NpcSO npcSo)
     {
         GameObject curNPC = GameManager.instance.poolManager.SpawnFromPool(npcObj);
         curNpcCount++;
         curNPC.transform.position = new Vector2(0, -15.5f);
         NPCController npcData = curNPC.GetComponent<NPCController>();
-        npcData.curNPCData = npcDataList[Random.Range(0, npcDataList.Count)];
+        npcData.curNPCData = npcSo;
         
         npcData.InitSetting();
     }
