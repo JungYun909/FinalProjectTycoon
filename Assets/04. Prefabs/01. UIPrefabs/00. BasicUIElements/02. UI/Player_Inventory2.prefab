@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2564587067826295241}
   - component: {fileID: 398943353797874778}
   - component: {fileID: 3078129363941870715}
-  - component: {fileID: 8785818541186683761}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -135,20 +134,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8785818541186683761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317442939134306064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77eaaf99dd3e36b4a9d710b0f04db991, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 3078129363941870715}
-  quantityController: {fileID: 1885442452568028749}
+      - m_Target: {fileID: 6915397593681434995}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &754138548134968077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1495,7 @@ GameObject:
   - component: {fileID: 4246372559036376576}
   - component: {fileID: 5619570002741992606}
   - component: {fileID: 7766814605521186387}
+  - component: {fileID: 3200422141910127496}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -1631,6 +1629,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3200422141910127496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714318876300104527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d196796645b51494ea06f145c02de0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionID: 01-H
 --- !u!1 &4329492416573658935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,7 +1885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2875887489470385800
 RectTransform:
   m_ObjectHideFlags: 0

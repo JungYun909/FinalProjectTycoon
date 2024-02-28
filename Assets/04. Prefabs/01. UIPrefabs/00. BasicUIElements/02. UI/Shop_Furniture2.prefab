@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 3078129363941870715}
   quantityController: {fileID: 1885442452568028749}
+  shopUI: {fileID: 7185392507292551514}
 --- !u!1 &754138548134968077
 GameObject:
   m_ObjectHideFlags: 0

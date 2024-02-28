@@ -180,6 +180,13 @@ public class ShopUI : UIBase
     }
     public void OpenIngredientShopUI()
     {
+        if (GameManager.instance.dataManager.playerData.tutoClear == false)
+        {
+            ClearUI();
+            ClearInfo();
+            return;
+
+        }
         UpdateItemInfoToShopUI();
         foreach (Transform child in slotParent)
         {
