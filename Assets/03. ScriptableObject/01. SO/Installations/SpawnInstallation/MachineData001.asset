@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   installasionName: "\uBC18\uC8FD\uAE30"
-  description: "\uAC1C\uCA4C\uB294 \uBC18\uC8FD\uAE30"
+  description: "\uBC18\uC8FD\uC744 \uC8FC\uAE30\uC801\uC73C\uB85C \uC0DD\uC0B0\uD574\uC694"
   price: 200
   sprite: {fileID: -990214313, guid: 08b6f9f34022111499309b06f96e65df, type: 3}
   animation:

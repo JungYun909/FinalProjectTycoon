@@ -17,9 +17,9 @@ public class DataController : MonoBehaviour
     {
         if(type != SceneType.MainScene)
             return;
-        
+        GameManager.instance.inventoryManager.LoadInventoryData();
+        Debug.Log("InventoryData Loaded");
         GameManager.instance.dataManager.LoadInstallationData();
-        
         if (playerTimeCoroutine == null)
             playerTimeCoroutine = StartCoroutine(SaveTimeRoutine());
     }

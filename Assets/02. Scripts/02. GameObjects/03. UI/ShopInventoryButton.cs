@@ -15,6 +15,7 @@ public class ShopInventoryButton : MonoBehaviour
         shopUI = GetComponentInParent<ShopUI>();
         shopUI.onIngredientEnabled += SetButtonToShowQuantityController;
         shopUI.onMachineEnabled += SetButtonToSpawnInstallation;
+        SetButtonToSpawnInstallation();
     }
 
 
@@ -44,7 +45,6 @@ public class ShopInventoryButton : MonoBehaviour
             return;
         }
         GameManager.instance.statManager.SpendGold(shopUI.curMachine.price);
-
         GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(shopUI.curMachine);
         GameManager.instance.uiManager.CloseAll();
     }

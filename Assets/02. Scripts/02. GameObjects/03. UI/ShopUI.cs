@@ -35,6 +35,7 @@ public class ShopUI : UIBase
     {
         quantityCheck.SetActive(false);
         camController = FindObjectOfType<CameraMovementController>();
+        OpenMachinShopUI();
     }
     public override void Initialize()
     {

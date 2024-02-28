@@ -257,6 +257,7 @@ public class PlayerInventoryUI : UIBase
         if (curMachine != null)
         {
             GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(curMachine);
+            GameManager.instance.inventoryManager.RemoveMachineFromPlayerInventory(curMachine, 1);
             GameManager.instance.uiManager.CloseAll();
         }
     }
