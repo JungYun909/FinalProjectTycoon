@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class StartSceneController : MonoBehaviour
 {
     public TMP_InputField nameInputField;
-    
     public GameObject namingWarning;
     
     public Button startBtn;

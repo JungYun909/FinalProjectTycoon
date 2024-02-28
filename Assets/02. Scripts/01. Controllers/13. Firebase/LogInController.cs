@@ -23,7 +23,7 @@ public class LogInController : MonoBehaviour
         GameManager.instance.firebaseAuthManager.CreatIDEvent += OnCreate;
     }
 
-    private void OnCreate()
+    private void OnCreate(string userID)
     {
         if(!messageObj.activeSelf)
             messageObj.SetActive(true);

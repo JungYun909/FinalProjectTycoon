@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     public ItemManager itemManager;
     public LogicManager logicManager;
     public TimeManager timeManager;
-    
     public SpawnManager spawnManager;
     public InstallationManager installationManager;
     public InventoryManager inventoryManager;
@@ -23,11 +22,12 @@ public class GameManager : MonoBehaviour
     public InteractionManager interactionManager;
     public StatManager statManager;
     public DataManager dataManager;
-    
     public RecipeManager recipeManager;
     public QuestManager questManager;
     public DestinationManager destinationManager;
+    
     public FirebaseAuthManager firebaseAuthManager;
+    public FirebaseDatabaseManager firebaseDatabaseManager;
 
     private void Awake()
     {

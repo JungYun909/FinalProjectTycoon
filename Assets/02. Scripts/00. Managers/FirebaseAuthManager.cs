@@ -11,12 +11,10 @@ public class FirebaseAuthManager : MonoBehaviour
     private FirebaseAuth auth;
     private FirebaseUser user;
 
-    private StartSceneController _controller;
-
     public string UserID => user.UserId;
 
     public Action<bool> LogChangeEvent;
-    public Action CreatIDEvent;
+    public Action<string> CreatIDEvent;
     public Action<Exception> LogErrorEvent;
     public void InitSet()
     {
@@ -55,7 +53,7 @@ public class FirebaseAuthManager : MonoBehaviour
             }
 
             FirebaseUser newUser = task.Result.User;
-            CreatIDEvent?.Invoke();
+            CreatIDEvent?.Invoke(newUser.UserId);
         });
     }
 
