@@ -73,6 +73,7 @@ public class PlayerInventoryUI : UIBase
                     controller.DeliverQuantity -= HandleTransfer;
                 }
             }
+            GameManager.instance.uiManager.GoBack();
         }
         else
             return;
