@@ -22571,6 +22571,7 @@ MonoBehaviour:
   allInventories: []
   itemDatabase: {fileID: 11400000, guid: ef8a304b897d041be9d5acd3853d3db2, type: 2}
   machineDatabase: {fileID: 11400000, guid: 715423fb9358c3d46acce361f181fff3, type: 2}
+  nextInventoryID: 1001
 --- !u!114 &1590563960
 MonoBehaviour:
   m_ObjectHideFlags: 0

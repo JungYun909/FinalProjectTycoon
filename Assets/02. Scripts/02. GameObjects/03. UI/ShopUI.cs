@@ -201,12 +201,13 @@ public class ShopUI : UIBase
 
     public void OpenMachinShopUI()
     {
-        if (GameManager.instance.dataManager.playerData.tutoNum == 4)
+        Debug.Log(GameManager.instance.dataManager.playerData.tutoNum);
+        if (GameManager.instance.dataManager.playerData.tutoNum == 3)
         {
             UpdateTutoMachineInfoToShopUI(1);
             return;
         }
-        else if(GameManager.instance.dataManager.playerData.tutoNum == 14)
+        else if(GameManager.instance.dataManager.playerData.tutoNum == 13)
         {
             UpdateTutoMachineInfoToShopUI(3);
             return;
