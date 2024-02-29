@@ -13,23 +13,14 @@ public class MenuButton : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Button backBtn;
 
-    private GameObject usingBtn;
+    private Button usingBtn;
     private RectTransform backBtnPos;
     private List<RectTransform> btnsPos = new List<RectTransform>();
-
-    private bool OnBtn;
-    private bool Move;
-    
-    private Vector2 backBtnDestination;
-    private Vector2 backBtnPosition;
 
     private void Start()
     {
         backBtnPos = backBtn.GetComponent<RectTransform>();
         backBtn.interactable = false;
-        
-        backBtnDestination = new Vector2(backBtnPos.anchoredPosition.x - 150, backBtnPos.anchoredPosition.y);
-        backBtnPosition = new Vector2(backBtnPos.anchoredPosition.x, backBtnPos.anchoredPosition.y);
         
         foreach (var btn in btns)
         {
@@ -47,93 +38,65 @@ public class MenuButton : MonoBehaviour
         GameManager.instance.interactionManager.installationFunctionIndex = index;
     }
 
+    public void OnButton(Button curBtn)
+    {
+        usingBtn = curBtn;
+        usingBtn.interactable = false;
+        usingBtn.GetComponent<Image>().color = Color.red;
+
+        BtnPositionSet(backBtn, backBtnPos, -150, 0, true);
+
+        for (int i = 0; i < btnsPos.Count; i++)
+        {
+            if (usingBtn == btns[i])
+                continue;
+            
+            BtnPositionSet(btns[i], btnsPos[i], 0, -150, false);
+        }
+    }
+    
     public void BackBtn()
     {
-        OnBtn = false;
-        OffBtns();
-        backBtn.interactable = false;
-        
         GameManager.instance.uiManager.CloseAll();
+
+        BtnPositionSet(backBtn, backBtnPos, 150, 0, false);
         
-        foreach (var pos in btnsPos)
+        for (int i = 0; i < btnsPos.Count; i++)
         {
-            if (usingBtn != pos.gameObject)
-            {
-                Vector2 btnDestination = new Vector2(pos.anchoredPosition.x, pos.anchoredPosition.y + 150);
-                StartCoroutine(moveBtn(pos, btnDestination));
-            }
+            if(usingBtn == btns[i])
+                continue;
+            
+            BtnPositionSet(btns[i], btnsPos[i], 0, 150, true);
         }
         
-        StartCoroutine(moveBtn(backBtnPos, backBtnPosition));
-        
         usingBtn.GetComponent<Image>().color = Color.white;
+        usingBtn.interactable = true;
         usingBtn = null;
     }
     
-    public void ButtonEffect(RectTransform curBtnPos)
+
+
+    private void BtnPositionSet(Button btn ,RectTransform pos, int movePosX, int movePosY, bool btnSet)
     {
-        OnBtn = true;
-        OffBtns();
-        
-        usingBtn = curBtnPos.gameObject;
-        usingBtn.GetComponent<Image>().color = Color.red;
-        
-        StartCoroutine(moveBtn(backBtnPos, backBtnDestination));
-        
-        foreach (var pos in btnsPos)
-        {
-            if (usingBtn != pos.gameObject)
-            {
-                Vector2 btnDestination = new Vector2(pos.anchoredPosition.x, pos.anchoredPosition.y - 150);
-                StartCoroutine(moveBtn(pos, btnDestination));
-            }
-        }
+        Vector2 btnDestination = new Vector2(pos.anchoredPosition.x + movePosX, pos.anchoredPosition.y + movePosY);
+        StartCoroutine(MoveBtn(btn, pos, btnDestination, btnSet));
     }
 
-    private IEnumerator moveBtn(RectTransform movePos, Vector2 desPos)
+    private IEnumerator MoveBtn(Button btn, RectTransform movePos, Vector2 desPos, bool btnSet)
     {
+        btn.interactable = false;
+        
         while (Vector2.Distance(movePos.anchoredPosition,desPos) > 10f)
         {
-            Move = true;
             movePos.anchoredPosition =
                 Vector2.Lerp(movePos.anchoredPosition, desPos, speed);
 
             yield return null;
         }
 
-        if (Move)
-        {
-            Move = false;
-            Debug.Log("10");
-            yield return new WaitForSeconds(1f);
-            
-            if (OnBtn)
-            {
-                Debug.Log("1010");
-                backBtn.interactable = true;
-            }
-            else
-            {
-                OnBtns();
-            }
-        }
+        btn.interactable = btnSet;
     }
     
-    private void OffBtns()
-    {
-        foreach (var btn in btns)
-        {
-            btn.interactable = false;
-        }
-    }
-    
-    private void OnBtns()
-    {
-        foreach (var btn in btns)
-        {
-            btn.interactable = true;
-        }
-    }
 
     public void LoadScene(string sceneType)
     {
