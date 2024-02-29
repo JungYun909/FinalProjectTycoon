@@ -174,7 +174,7 @@ MonoBehaviour:
       \uBCFC \uC218 \uC788\uC9C0!\n"
   - dialogue: "\uB2EB\uACE0, \uB9C8\uC9C0\uB9C9\uC73C\uB85C \uC5EC\uAE38 \uD55C\uBC88
       \uBD10\uC904\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogue: "\uC124\uC815 \uBC84\uD2BC\uC774\uC57C!"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -1802,7 +1802,7 @@ MonoBehaviour:
   - dialogue: "\uC544\uBB34\uAC83\uB3C4 \uC5C6\uC73C\uB2C8 \uC2EC\uC2EC\uD558\uB124...\n\uC5B4\uC11C
       \uBE75\uC744 \uC62C\uB824\uC57C\uACA0\uC5B4."
   - dialogue: "\uC704\uC5D0 \uBCF4\uC774\uB294 + \uBC84\uD2BC\uC744 \uB20C\uB7EC\uBCFC\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -1945,7 +1945,7 @@ MonoBehaviour:
   - dialogue: "\uC798\uD588\uC5B4!"
   - dialogue: "\uC774\uC81C \uD654\uBA74 \uC624\uB978\uCABD\uC5D0 \uC0DD\uAE34\n\uB4A4\uB85C\uAC00\uAE30
       \uBC84\uD2BC\uC744 \uB20C\uB7EC\uC918."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogue: "\uC9C4\uC5F4\uB300\uC758 \uC704\uCE58\uB294 \uC5B4\uB5A1\uD558\uC9C0...,"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -2449,7 +2449,7 @@ MonoBehaviour:
       \uD544\uC694\uD558\uACA0\uC9C0?\n"
   - dialogue: "\uC624\uBE10\uC758 \uBAA9\uD45C\uB294 \uD56D\uC0C1 \n\uC800 \uC544\uB798
       \uBCF4\uC774\uB294 \uBB38\uC774\uC5B4\uC57C\uD574!"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -3085,7 +3085,7 @@ MonoBehaviour:
       \uD314 \uAC8C \uC5C6\uC5B4\uC9C0\uACA0\uC9C0...?"
   - dialogue: "\uBC14\uAC8C\uD2B8\uB97C \uD130\uCE58\uD558\uACE0\n\uC6D0\uD558\uB294
       \uC218\uB7C9\uB9CC\uD07C \uC804\uC2DC\uD574 \uBD10!"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -3257,7 +3257,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1672967147}
+  - {fileID: 602655067}
   m_Father: {fileID: 1825876214}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7999,7 +7999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -9088,7 +9088,7 @@ MonoBehaviour:
   dialogs:
   - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB20C\uB7EC\n\uBC30\uCE58\uBAA8\uB4DC\uB97C
       \uC885\uB8CC\uD558\uC790."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -9721,7 +9721,7 @@ MonoBehaviour:
   - dialogue: "\uAC00\uC7A5 \uBA3C\uC800, \uBC18\uC8FD\uAE30\uB97C \uAD6C\uB9E4\uD574\uBCF4\uC790\uAD6C."
   - dialogue: "\uD654\uBA74\uC5D0 \uBCF4\uC774\uB294 \uBC18\uC8FD\uAE30\uB97C \uB204\uB974\uACE0\n\uD655\uC778
       \uBC84\uD2BC\uC744 \uB20C\uB7EC\uBCF4\uC790."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -9873,6 +9873,83 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595504094}
+  m_CullTransparentMesh: 1
+--- !u!1 &602655066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 602655067}
+  - component: {fileID: 602655069}
+  - component: {fileID: 602655068}
+  m_Layer: 0
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &602655067
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602655066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1672967147}
+  m_Father: {fileID: 341905409}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &602655068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602655066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &602655069
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602655066}
   m_CullTransparentMesh: 1
 --- !u!1 &606590349
 GameObject:
@@ -11096,7 +11173,7 @@ MonoBehaviour:
       \uC624\uBE10\uC73C\uB85C \uACE0\uC815\uD574 \uBCF4\uC790."
   - dialogue: "\uD639\uC2DC \uBAA9\uD45C\uB97C \uD574\uC81C\uD574\uC57C \uD558\uB294
       \uACBD\uC6B0\n\uBE48 \uACF3\uC5D0\uC11C \uC190\uC744 \uB5BC\uBA74 \uB41C\uB2E8\uB2E4."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -13343,7 +13420,7 @@ MonoBehaviour:
       \uC798 \uACE0\uBBFC\uD574\uC11C \uB9CC\uB4E4\uC5B4 \uBCF4\uB77C\uAD6C."
   - dialogue: "\uC5B4\uB5BB\uAC8C \uD574\uC57C \uB9CC\uB4E4 \uC218 \uC788\uB294\uC9C0\uB294...\n\uAE00\uC384?"
   - dialogue: "\uC790, \uADF8\uB7FC \uB2EB\uACE0 \uB2E4\uC74C\uC73C\uB85C \uB118\uC5B4\uAC08\uAE4C?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -13593,7 +13670,6 @@ RectTransform:
   m_Children:
   - {fileID: 1055242991}
   - {fileID: 920374330}
-  - {fileID: 1675039792}
   - {fileID: 151097559}
   - {fileID: 2122964247}
   - {fileID: 340748712}
@@ -13803,7 +13879,7 @@ MonoBehaviour:
       \n\uC74C\uB7C9 \uC124\uC815\uC744 \uB3C4\uC640\uC904\uAC70\uC57C."
   - dialogue: "\uC6D0\uD558\uB294 \uB300\uB85C \uC870\uC808\uD574 \uBCF4\uAE30 \uBC14\uB77C."
   - dialogue: "\uB2EB\uAE30\uBC84\uD2BC\uC744 \uD074\uB9AD\uD574\uC11C \uB098\uAC00\uC790!! "
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -14436,7 +14512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogue: "\uC774\uC81C \uC624\uBE10\uB3C4 \uC790\uB9AC\uB97C \uC7A1\uC544\uC8FC\uC790."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -15547,7 +15623,7 @@ MonoBehaviour:
   - dialogue: "\uBC29\uAE08 \uC0B0 \uBC18\uC8FD\uAE30\uB97C \uB20C\uB7EC\uBD10."
   - dialogue: "\uAC00\uC6B4\uB370 \uD30C\uB780 \uBC84\uD2BC\uC744 \uB204\uB974\uACE0\n\uC800
       \uC704\uCE58\uAE4C\uC9C0 \uBC18\uC8FD\uAE30\uB97C \uCB49 \uB04C\uC5B4\uBCF4\uC790\uAD6C!"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -16120,7 +16196,7 @@ MonoBehaviour:
   dialogs:
   - dialogue: "\uC800 \uC790\uB9AC\uC5D0 \uB450\uB294\uAC74 \uC5B4\uB584?"
   - dialogue: "\uBC30\uCE58\uD558\uB294 \uBC29\uBC95\uC740 \uAE30\uC5B5\uD558\uC9C0?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -16344,7 +16420,7 @@ MonoBehaviour:
       \uD574 \uBCFC\uAE4C?"
   - dialogue: "\uC544\uB798 \uD45C\uC2DC\uB41C \uC774\uB3D9 \uBC84\uD2BC\uC744 \uB20C\uB7EC\n\uD640\uB85C
       \uB098\uAC00\uBCF4\uC790\uAD6C."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -16696,7 +16772,7 @@ MonoBehaviour:
   dialogs:
   - dialogue: "\uB9C8\uCC2C\uAC00\uC9C0\uB85C, '\uC124\uBE44'\uCC3D\uC744 \uC5F4\uACE0\n\uC9C4\uC5F4\uB300
       \uC544\uC774\uD15C\uC744 \uAD6C\uB9E4\uD574\uBD10!"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -16766,7 +16842,7 @@ MonoBehaviour:
   - dialogue: "\uBE75\uC744 \uC804\uC2DC\uB300\uC5D0 \uC62C\uB824\uC11C\n\uC190\uB2D8\uB4E4\uAED8
       \uC120\uBCF4\uC774\uC790\uAD6C."
   - dialogue: "\uC0C1\uC810 \uCE74\uD0C8\uB85C\uADF8\uB97C \uD3B4 \uBCFC\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -17049,7 +17125,7 @@ MonoBehaviour:
   - dialogue: "\uC774\uC820 \uC774 \uBC18\uC8FD\uAE30\uB97C \uC88B\uC740 \uC7A5\uC18C\uC5D0
       \uC704\uCE58\uC2DC\uCF1C\uBCF4\uC790."
   - dialogue: "\uC544\uB798\uC5D0\uC11C '\uBC30\uCE58' \uC544\uC774\uCF58\uC744 \uD130\uCE58\uD574\uC904\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -17418,7 +17494,7 @@ MonoBehaviour:
   - dialogue: "\uC774\uBC88\uC5D4 \uC624\uBE10\uC744 \uAD6C\uB9E4\uD574\uBCF4\uC790\uAD6C."
   - dialogue: "\uC870\uAE08 \uC804 \uBC18\uC8FD\uAE30\uB97C \uC0C0\uC744 \uB54C\uC640
       \uAC19\uC73C\uB2C8\n\uB108\uBB34 \uAE34\uC7A5\uD558\uC9C0\uB294 \uB9D0\uB77C\uAD6C?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -17560,7 +17636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogue: "\uC774\uBC88\uC5D4 \uCC3D\uACE0\uB97C \uC5F4\uC5B4\uBCFC\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -17885,7 +17961,7 @@ MonoBehaviour:
       \uAC83\uCC98\uB7FC"
   - dialogue: "\uB611\uAC19\uC774 \uC624\uBE10\uC744 \uD654\uBA74\uC5D0 \uD45C\uC2DC\uB41C
       \uC704\uCE58\uB85C \uC62E\uACA8\uBD10."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -18659,7 +18735,7 @@ MonoBehaviour:
   - dialogue: "\uC6B0\uB9AC \uD568\uAED8 \uD798\uB0B4\uBCF4\uC790\uACE0!"
   - dialogue: "\uB108\uC758 \uBE5B\uB098\uB294 \uCC3D\uC758\uB825\uACFC \uC0C1\uC0C1\uB825\uC73C\uB85C
       \n\uB2E4\uC591\uD55C \uBE75\uB4E4\uC744 \uB9CC\uB4E4\uC5B4\uBD10~!  "
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -19063,7 +19139,6 @@ MonoBehaviour:
   - {fileID: 124479144}
   - {fileID: 1378500740}
   tutoClearSound: {fileID: 8300000, guid: 4bdd9e502ed253c4ba9aa1226ecac83b, type: 3}
-  pannel: {fileID: 1675039791}
 --- !u!1 &1456166130
 GameObject:
   m_ObjectHideFlags: 0
@@ -19465,7 +19540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - dialogue: "\uB4A4\uB85C\uAC00\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uC790!! "
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -23647,7 +23722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1672967147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23655,7 +23730,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672967146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23664,7 +23739,7 @@ RectTransform:
   - {fileID: 1139187681}
   - {fileID: 1670973782}
   - {fileID: 1051970967}
-  m_Father: {fileID: 341905409}
+  m_Father: {fileID: 602655067}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -23845,82 +23920,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673517370}
   m_CullTransparentMesh: 1
---- !u!1 &1675039791
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1675039792}
-  - component: {fileID: 1675039794}
-  - component: {fileID: 1675039793}
-  m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1675039792
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675039791}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 737512722}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1675039793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675039791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1675039794
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675039791}
-  m_CullTransparentMesh: 1
 --- !u!1 &1679059702
 GameObject:
   m_ObjectHideFlags: 0
@@ -23981,7 +23980,7 @@ MonoBehaviour:
       \uBA3C\uC800 \uC124\uCE58\uD574\uBCF4\uC790!"
   - dialogue: "\uC6B0\uC120 \uBC18\uC8FD\uAE30\uB97C \uC8FC\uBB38\uD558\uB7EC \uC0C1\uC810\uC73C\uB85C
       \uAC00 \uBCFC\uAE4C?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -24655,7 +24654,7 @@ MonoBehaviour:
   - dialogue: "\uC774\uC81C \uB3C4\uAC10\uACFC \uCC3D\uACE0,\n\uC124\uC815\uCC3D\uC744
       \uD55C\uBC88 \uD6D1\uC5B4\uBCFC\uAE4C?"
   - dialogue: "\uC5EC\uAE30 \uB3C4\uAC10\uBC84\uD2BC\uC774 \uBCF4\uC5EC?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -24800,7 +24799,7 @@ MonoBehaviour:
   - dialogue: "\uADF8\uB807\uC9C0! \uBE75\uC744 \uAD6C\uC6B0\uB824\uBA74\n\uC5ED\uC2DC
       \uC624\uBE10\uC774 \uD544\uC694\uD560\uAC70\uC57C."
   - dialogue: "\uB2E4\uC2DC \uC0C1\uC810 \uCE74\uD0C8\uB85C\uADF8\uB97C \uD3B4 \uBCFC\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -24868,7 +24867,7 @@ MonoBehaviour:
   - dialogue: "\uADF8\uB7FC \uC5EC\uAE30\uC5D0 \uBC29\uAE08 \uB9CC\uB4E0\n\uB530\uB048\uD55C
       \uBC14\uAC8C\uD2B8\uB97C \uC62C\uB824 \uBCFC\uAE4C?"
   - dialogue: "\uBC29\uAE08 \uC124\uCE58\uD55C \uC9C4\uC5F4\uB300\uB97C \uD130\uCE58\uD574\uBD10."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -28464,7 +28463,7 @@ MonoBehaviour:
       \uC0DD\uAC01\uB9CC \uD574\uB3C4 \uBBFC\uB9DD\uD558\uAD70."
   - dialogue: "\uADF8\uB7FC, \uC774\uC81C \uB2EB\uAE30 \uBC84\uD2BC\uC744 \uB204\uB974\uACE0\n\uC774\uCABD\uC744
       \uBD10 \uC904\uB798?"
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1
@@ -29032,7 +29031,7 @@ MonoBehaviour:
   - dialogue: "\uADF8\uB7FC \uC124\uBE44\uC758 \uBAA9\uC801\uC9C0\uB97C \uC124\uC815\uD574\uBCF4\uC790."
   - dialogue: "\uC544\uB798 \uD45C\uC2DC\uB41C '\uBAA9\uD45C' \uBC84\uD2BC\uC744
       \uB20C\uB7EC\uC918."
-  imageDialog: {fileID: 1672967149}
+  imageDialog: {fileID: 602655068}
   textDialogue: {fileID: 1139187683}
   objectArrow: {fileID: 1051970963}
   typingSpeed: 0.1

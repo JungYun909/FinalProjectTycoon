@@ -10,25 +10,11 @@ public class TutorialController : MonoBehaviour
 
     private TutorialBase curTutorial = null;
     public AudioClip tutoClearSound;
-    [SerializeField] private GameObject pannel;
-    private bool onBtn;
-    public bool OnBtn
-    {
-        get { return onBtn; } 
-        set
-        {
-            if(value)
-            {
-                onBtn = value;
-                pannel.SetActive(false);
-            }
-        }
-    }
+    
     //private int curIndex = -1;
 
     private void Start()
     {
-        //StartCoroutine(NotInteractable());
         SetNextTutorial();
     }
 
@@ -37,10 +23,6 @@ public class TutorialController : MonoBehaviour
         if (curTutorial != null)
         {
             curTutorial.Execute(this);
-        }
-        if(onBtn)
-        {
-
         }
     }
 
@@ -85,20 +67,4 @@ public class TutorialController : MonoBehaviour
         //    GameManager.instance.sceneManager.ChangeScene("SAScene2");
         //}
     }
-
-    //private IEnumerator NotInteractable()
-    //{
-    //    while (GameManager.instance.dataManager.playerData.tutoClear == false)
-    //    {
-    //        if (GameManager.instance.dataManager.playerData.tutoNum % 2 == 1)
-    //        {
-    //            pannel.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            pannel.SetActive(false);
-    //        }
-    //        yield return null;
-    //    }
-    //}
 }
