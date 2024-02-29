@@ -21,12 +21,7 @@ public class TopShopStatusWindow : UIBase
 
     public override void Initialize()
     {
-        //shopStat = FindObjectOfType<TemporaryStat>();
-        //shopName = shopStat.shopName;
         shopTitle.text = GameManager.instance.dataManager.playerData.shopName;
-        //goldOwned = shopStat.gold;
-        // curTime = shopStat.playerTime;
-
         curGold.text = GameManager.instance.dataManager.playerData.money.ToString();
         curRepute.text = GameManager.instance.dataManager.playerData.fame.ToString();
         curDateText.text = GameManager.instance.dataManager.playerData.day.ToString();

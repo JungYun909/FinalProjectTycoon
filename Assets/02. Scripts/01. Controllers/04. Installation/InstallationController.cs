@@ -21,7 +21,7 @@ public class InstallationController : MonoBehaviour, IInteractable
     public InstallationAnimationController animController;
 
     public Queue<GameObject> doughContainer = new Queue<GameObject>();
-    public Queue<ItemSO> ingredients;
+    public Queue<ItemSO> ingredients = new Queue<ItemSO>();
 
     private int index = 0;
 
@@ -50,14 +50,10 @@ public class InstallationController : MonoBehaviour, IInteractable
         destinationController.gameObject.SetActive(true);
         List<DestinationData> allDestinationInfo = GameManager.instance.destinationManager.destinationInfo;
         DestinationData loadedData = allDestinationInfo.Find(data => data.controllerID == this.destinationID);
-        Debug.Log($"Destination Info for {this.destinationID} Destination Setter");
-        if (loadedData == null)
-            Debug.Log("No data loaded");
         if (loadedData != null)
         {
             if (loadedData.controllerID == this.destinationID)
             {
-                Debug.Log($"Loaded Info: {loadedData.controllerID} to {loadedData.connectedControllerID}");
                 InstallationController connectedController = GameManager.instance.destinationManager.GetDestinationGameObject(loadedData.connectedControllerID);
                 if (connectedController != null)
                 {
@@ -82,7 +78,6 @@ public class InstallationController : MonoBehaviour, IInteractable
 
         if (_installationData.haveDoughInventory)
         {
-            ingredients = new Queue<ItemSO>();
             inventoryController.gameObject.SetActive(true);
             inventoryController.InitSet();
         }

@@ -136,6 +136,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.goldEarnedToday = 0;
         playerData.goldSpentToday = 0;
         playerData.exp = 0;
+
+
     }
 
     private void LoadInstallation()

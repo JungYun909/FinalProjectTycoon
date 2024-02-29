@@ -176,12 +176,22 @@ public class PlayerInventoryUI : UIBase
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
         ClearInfoWindow();
-        if (whatToShow == 1)
-            UpdateProductInventory();
-        else if (whatToShow == 2)
-            UpdateItemInventory();
-        else if (whatToShow == 3)
-            UpdateMachineInventory();
+        switch (whatToShow)
+        {
+            case 1:
+                UpdateProductInventory();
+                break;
+
+            case 2:
+                UpdateItemInventory();
+                break;
+            case 3:
+                UpdateMachineInventory();
+                break;
+            case 4:
+                UpdateToolInventory();
+                break;
+        }
     }
 
     private void UpdateItemInventory()
@@ -203,7 +213,7 @@ public class PlayerInventoryUI : UIBase
         foreach (var itemEntry in playerInventory.Items)
         {
             var item = itemEntry.Key;
-            if (item.type != 1)
+            if (item.type != 1 && item.type != 4)
             {
                 var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 표시수량 99로 제한
                 CreateItemSlot(item, quantity);
@@ -218,6 +228,19 @@ public class PlayerInventoryUI : UIBase
             var quantity = Mathf.Min(itemEntry.Value, 99);
 
             CreateMachineSlot(item, quantity);
+        }
+    }
+    private void UpdateToolInventory()
+    {
+        installConfirm.gameObject.SetActive(false);
+        foreach (var itemEntry in playerInventory.Items)
+        {
+            var item = itemEntry.Key;
+            if (item.type == 4)
+            {
+                var quantity = Mathf.Min(itemEntry.Value, 99); // 최대 표시수량 99로 제한
+                CreateItemSlot(item, quantity);
+            }
         }
     }
 

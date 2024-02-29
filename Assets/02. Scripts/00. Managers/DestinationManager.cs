@@ -97,7 +97,6 @@ public class DestinationManager : MonoBehaviour
 
     private void LoadDestinationsData()
     {
-        Debug.Log("Destination Loaded");
         DestinationWrapper destinationWrapper = GameManager.instance.dataManager.LoadAllDestinationData();
         if (destinationWrapper != null)
         {

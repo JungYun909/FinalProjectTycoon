@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f959416d5feb9eb409028e3a9c68f417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 1193657198914110676, guid: fcc16b2546ab2ad40a5998e01fb1fb96, type: 3}
+  playerInventory: {fileID: 7098703827403014823, guid: d0b0152272162de4e804d74d30b48ede, type: 3}
   inventoryPanel: {fileID: 4354386346950874515}
   inventoryItemPrefab: {fileID: 1435018983836451694, guid: dbc719a248611bc47b815a12e0a1020f, type: 3}
   inventoryItemsParent: {fileID: 6478528791979398174}

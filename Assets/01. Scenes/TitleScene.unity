@@ -4085,14 +4085,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4aa0efb343865441f83ea614ab22ee3b, type: 2}
   - {fileID: 11400000, guid: e5a94efa6e5d0af43bcc323f9d19fdba, type: 2}
   curObject:
-  - {fileID: 4658642214538745355, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
+  - {fileID: 7038756453447134684, guid: 89957834802334d2c92c3bafac419c8e, type: 3}
   - {fileID: 1512502519064443247, guid: 900475d076f334d08bf3643e2a52ac98, type: 3}
-  - {fileID: 8138419921899543555, guid: 4dade5c94bc5e4f9fb62157e92d9bfd9, type: 3}
+  - {fileID: 4232645537948954176, guid: d7160d54949484381894ae076fe1f1f4, type: 3}
   curInstallations: []
   counter: {fileID: 0}
   entrance: {fileID: 0}
   kitchenDoor: {fileID: 0}
   tutoPrefab: {fileID: 0}
+  isLoadingInstallationDone: 0
   isClearTuto: 0
 --- !u!114 &1830320769
 MonoBehaviour:
@@ -4188,6 +4189,7 @@ MonoBehaviour:
   allInventories: []
   itemDatabase: {fileID: 11400000, guid: ef8a304b897d041be9d5acd3853d3db2, type: 2}
   machineDatabase: {fileID: 11400000, guid: 715423fb9358c3d46acce361f181fff3, type: 2}
+  nextInventoryID: 1001
 --- !u!114 &1830320775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4244,6 +4246,7 @@ MonoBehaviour:
   payBackGold: 1000
   happyEnd: 0
   questPrefab: {fileID: 0}
+  paidAmount: 0
 --- !u!114 &1830320779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4324,6 +4327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d47be555c7c3f94389b7c0cbc121c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destinationControllerID: 2
   destinationInfo: []
 --- !u!1 &1844532890
 GameObject:

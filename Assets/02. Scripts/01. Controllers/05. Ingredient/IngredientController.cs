@@ -133,7 +133,6 @@ public class IngredientController : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("AbstractInventory component found.");
             targetInventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
         }
         GameManager.instance.inventoryManager.AddItemToInventory(targetInventory.inventoryID, itemData, 1);
@@ -151,7 +150,7 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void VisitInstallationSet(InstallationController controller)
     {
-        if(!controller._installationData.haveIngredientInventory)
+        if(!controller._installationData.haveIngredientInventory || controller._installationData.id ==45)
             interactInstallation.Enqueue(controller._installationData.id);
     }
 

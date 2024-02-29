@@ -105,12 +105,10 @@ public class MenuButton : MonoBehaviour
         if (Move)
         {
             Move = false;
-            Debug.Log("10");
             yield return new WaitForSeconds(1f);
             
             if (OnBtn)
             {
-                Debug.Log("1010");
                 backBtn.interactable = true;
             }
             else

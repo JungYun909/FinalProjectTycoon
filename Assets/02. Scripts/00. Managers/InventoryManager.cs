@@ -138,13 +138,11 @@ public class InventoryManager : MonoBehaviour
         if (inventories.ContainsKey(inventoryID))
         {
             AbstractInventory inventory = inventories[inventoryID];
-            
             if(!inventory.Items.ContainsKey(item))
             {
                 inventory.Items[item] = 0;
             }
             inventory.Items[item] += quantity;
-
             if(!(inventoryID == 1000 && (item.id == 1 || item.type ==2)))
             {
                 if (item.id == 1 || item.type == 2)
@@ -154,7 +152,7 @@ public class InventoryManager : MonoBehaviour
                         inventory.itemQueue.Enqueue(item);
                     }
                 }
-                else if (item.id != 1 && item.type == 1)
+                else if (item.id != 1 && (item.type == 1 || item.type ==4))
                 {
                     if (inventory.controller != null)
                     {
@@ -361,6 +359,12 @@ public class InventoryManager : MonoBehaviour
                 return;
         }
     }
+
+    //public void ExchangeItems(int fromInventoryID, int toInventoryID, ItemSO itemFromFromInventory, ItemSO itemFromToInventory, int quantityOfFromInventoryItem, int quantityOfToInventoryItem)
+    //{
+    //    TransferItem(fromInventoryID, toInventoryID, itemFromFromInventory, quantityOfFromInventoryItem);
+    //    TransferItem(toInventoryID, fromInventoryID, itemFromToInventory, quantityOfToInventoryItem)
+    //}
 
     IEnumerator SaveAllInventoriesRoutine()
     {
