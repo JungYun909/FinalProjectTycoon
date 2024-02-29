@@ -34,7 +34,7 @@ public class DailyResultWindow : UIBase
         goldCurrentlyInHand.text = stat.money.ToString();
         shopLevel.text = stat.level.ToString();
         earnedToday.text = stat.goldEarnedToday.ToString();
-        if(GameManager.instance.logicManager.paidAmount !=0)
+        if (GameManager.instance.logicManager.paidAmount != 0)
             spentToday.text = stat.goldSpentToday.ToString() + $"(+{GameManager.instance.logicManager.paidAmount.ToString()})";
         else
             spentToday.text = stat.goldSpentToday.ToString();

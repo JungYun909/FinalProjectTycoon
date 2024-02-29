@@ -74,6 +74,7 @@ public class PlayerInventoryUI : UIBase
                 }
             }
             ClearInventoryDisplay();
+            ClearInfoWindow();
             GameManager.instance.uiManager.GoBack();
         }
         else
@@ -179,24 +180,20 @@ public class PlayerInventoryUI : UIBase
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
-        ClearInfoWindow();
+        
         switch (whatToShow)
         {
             case 1:
-                Debug.Log("Case 1 called");
                 UpdateProductInventory();
                 break;
 
             case 2:
-                Debug.Log("Case 2 called");
                 UpdateItemInventory();
                 break;
             case 3:
-                Debug.Log("Case 3 called");
                 UpdateMachineInventory();
                 break;
             case 4:
-                Debug.Log("Case 4 called");
                 UpdateToolInventory();
                 break;
         }
@@ -230,7 +227,6 @@ public class PlayerInventoryUI : UIBase
     }
     private void UpdateMachineInventory()
     {
-        Debug.Log("machine");
         foreach (var itemEntry in playerInventory.machines)
         {
             var item = itemEntry.Key;
@@ -241,7 +237,6 @@ public class PlayerInventoryUI : UIBase
     }
     private void UpdateToolInventory()
     {
-        Debug.Log("tool");
         installConfirm.gameObject.SetActive(false);
         foreach (var itemEntry in playerInventory.Items)
         {
@@ -256,9 +251,8 @@ public class PlayerInventoryUI : UIBase
 
     public void SetInventoryInfo(int number)
     {
-        Debug.Log("SetIonventoryInfo called");
         whatToShow = number;
-        Debug.Log(whatToShow);
+        ClearInfoWindow();
         UpdateUI();
     }
     public void CloseWindow()
@@ -269,7 +263,7 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateItemInfoInItemInfoWindow()
     {
-        Debug.Log("Item");
+        ClearInfoWindow();
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
@@ -277,7 +271,7 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateMachineInfoWindow()
     {
-        Debug.Log("Machine");
+        ClearInfoWindow();
         installConfirm.gameObject.SetActive(true);
         installConfirm.onClick.AddListener(SpawnInstallation);
         nameText.text = curMachine.installasionName;
@@ -290,6 +284,7 @@ public class PlayerInventoryUI : UIBase
         nameText.text = "";
         descriptionText.text = "";
         priceText.text = "";
+        quantityController.SetActive(false);
     }
 
     private void SpawnInstallation()

@@ -28,7 +28,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     
     public int maxShopLevel = 100;
     public int maxNpc;
-    public float dayTime = 300;
+    public float dayTime = 20;
 
 
     public int goldUsed;
@@ -119,6 +119,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
             if (GameManager.instance.dataManager.playerData.level <5)
             {
                 LevelUP(1);
+                GameManager.instance.dataManager.playerData.exp = 0;
             }
         }
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
