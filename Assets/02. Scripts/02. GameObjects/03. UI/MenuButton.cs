@@ -35,6 +35,7 @@ public class MenuButton : MonoBehaviour
         {
             btnsPos.Add(btn.GetComponent<RectTransform>());
         }
+        //StartCoroutine(NotInteractable());
     }
 
     public void OpenUI(UIBase openUI)
@@ -119,7 +120,7 @@ public class MenuButton : MonoBehaviour
         }
     }
     
-    private void OffBtns()
+    public void OffBtns()
     {
         foreach (var btn in btns)
         {
@@ -127,7 +128,7 @@ public class MenuButton : MonoBehaviour
         }
     }
     
-    private void OnBtns()
+    public void OnBtns()
     {
         foreach (var btn in btns)
         {
@@ -139,4 +140,6 @@ public class MenuButton : MonoBehaviour
     {
         GameManager.instance.sceneManager.ChangeScene(sceneType);
     }
+
+    
 }
