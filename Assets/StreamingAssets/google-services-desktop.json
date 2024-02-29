@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "341257485094",
+    "firebase_url": "https://bakerytycoon-afbad-default-rtdb.firebaseio.com",
+    "project_id": "bakerytycoon-afbad",
+    "storage_bucket": "bakerytycoon-afbad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341257485094:android:f4fa21fbd2cfff74f89fe7",
+        "android_client_info": {
+          "package_name": "com.aimsky.CozyBakery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2PtJm9TvkHWcLpWs8VE0WGwzNd12UOmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

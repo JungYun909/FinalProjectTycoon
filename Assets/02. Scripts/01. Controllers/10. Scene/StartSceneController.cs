@@ -3,21 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class StartSceneController : MonoBehaviour
 {
     public TMP_InputField nameInputField;
-    public GameObject warning;
+    public GameObject namingWarning;
+    
     public Button startBtn;
     public Button nameSetBtn;
 
-    private void Start()
-    {
-        InitSet();
-    }
-
-    private void InitSet()
+    private void CheckNameless()
     {
         if (GameManager.instance.dataManager.playerData.shopName != "")
         {
@@ -33,14 +30,14 @@ public class StartSceneController : MonoBehaviour
             startBtn.gameObject.SetActive(false);
         }
         
-        warning.SetActive(false);
+        namingWarning.SetActive(false);
     }
 
     public void OnNameSetBtn()
     {
         if (!CanName(nameInputField.text) || nameInputField.text == "")
         {
-            warning.SetActive(true);
+            namingWarning.SetActive(true);
             return;
         }
 
