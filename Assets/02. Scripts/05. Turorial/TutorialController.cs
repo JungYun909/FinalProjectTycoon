@@ -10,7 +10,7 @@ public class TutorialController : MonoBehaviour
 
     private TutorialBase curTutorial = null;
     public AudioClip tutoClearSound;
-
+    
     //private int curIndex = -1;
 
     private void Start()
@@ -31,7 +31,6 @@ public class TutorialController : MonoBehaviour
         if(curTutorial != null)
         {
             curTutorial.Exit();
-            //GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         }
 
         if (GameManager.instance.dataManager.playerData.tutoNum == tutorials.Count - 1)
@@ -61,6 +60,8 @@ public class TutorialController : MonoBehaviour
         GameManager.instance.audioManager.PlaySFX(tutoClearSound);
         transform.parent.gameObject.SetActive(false);
         GameManager.instance.dataManager.playerData.tutoNum++;
+        GameManager.instance.dataManager.playerData.tutoClear = true;
+
         //if(!nextSceneName.Equals(""))
         //{
         //    GameManager.instance.sceneManager.ChangeScene("SAScene2");

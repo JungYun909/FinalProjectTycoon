@@ -20,8 +20,8 @@ public class InstallationController : MonoBehaviour, IInteractable
     public InstallationSpawnController spawnController;
     public InstallationAnimationController animController;
 
-    public Queue<GameObject> doughContainer;
-    public Queue<ItemSO> ingredients;
+    public Queue<GameObject> doughContainer = new Queue<GameObject>();
+    public Queue<ItemSO> ingredients = new Queue<ItemSO>();
 
     private int index = 0;
 
@@ -34,10 +34,12 @@ public class InstallationController : MonoBehaviour, IInteractable
     private void Start()
     {
         InitSetting();
-        destinationID = GameManager.instance.destinationManager.RegisterInstallationDestinationController(this);
-        StartCoroutine(DelayLoadingDestinationInfo());
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(DelayLoadingDestinationInfo());
+    }
     private IEnumerator DelayLoadingDestinationInfo()
     {
         yield return new WaitForSeconds(1f);
@@ -63,24 +65,19 @@ public class InstallationController : MonoBehaviour, IInteractable
             }
             else
             {
-                Debug.Log("No data to call");
+                return;
             }
         }
     }
-
-
 
     public void InitSetting()
     {
         if(_installationData == null)
             return;
-        
         gameObject.GetComponentInChildren<SpriteRenderer>().sprite = _installationData.sprite;
 
         if (_installationData.haveDoughInventory)
         {
-            doughContainer = new Queue<GameObject>();
-            ingredients = new Queue<ItemSO>();
             inventoryController.gameObject.SetActive(true);
             inventoryController.InitSet();
         }
@@ -95,6 +92,12 @@ public class InstallationController : MonoBehaviour, IInteractable
         {
             animController.AddAnimation(_installationData.animation[(int)InstallationAnimType.Spawn], InstallationAnimType.Spawn);
         }
+    }
+
+    public void InitializeDestinationSetting(int destinationID)
+    {
+        this.destinationID = destinationID;
+        GameManager.instance.destinationManager.RegisterDestinationID(this);
     }
 
     public bool Continuous()

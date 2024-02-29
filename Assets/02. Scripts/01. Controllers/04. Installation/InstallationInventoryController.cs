@@ -31,8 +31,9 @@ public class InstallationInventoryController : MonoBehaviour
     {
         if(_controller.doughContainer.Count == 0 || !destinationController.destination[1])
             return;
-        
-        if(_controller._installationData.haveIngredientInventory && _controller.ingredients.Count <= 0)
+        if(_controller._installationData.id != 45 && _controller._installationData.haveIngredientInventory &&  _controller.ingredients.Count <= 0)
+            return;
+        if (_controller._installationData.id == 45 && (_controller.doughContainer.Count == 0 || !destinationController.destination[1]))
             return;
 
         spawnTimer += Time.deltaTime;
@@ -73,16 +74,32 @@ public class InstallationInventoryController : MonoBehaviour
 
         if (_controller._installationData.haveIngredientInventory)
         {
-            ItemSO ingredientData = _controller.ingredients.Dequeue();
-            Debug.Log(ingredientData.id);
-            GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, ingredientData, 1);
-            curController.VisitIngredientDataSet(_controller, ingredientData);
+            if (_controller._installationData.id != 45)
+            {
+                ItemSO ingredientData = _controller.ingredients.Dequeue();
+                GameManager.instance.inventoryManager.RemoveItemFromInventory(inventory.inventoryID, ingredientData, 1);
+                curController.VisitIngredientDataSet(_controller, ingredientData);
+            }
+            else
+            {
+                if (_controller.ingredients.Count > 0)
+                {
+                    ItemSO ingredientData = _controller.ingredients.Peek();
+                    if (ingredientData != null)
+                    {
+                        curController.VisitIngredientDataSet(_controller, ingredientData);
+                    }
+                }
+                else
+                {
+                    curController.VisitInstallationSet(_controller);
+                }
+            }
         }
         else if(!_controller._installationData.haveIngredientInventory)
         {
             curController.VisitInstallationSet(_controller);
         }
-        
         
         if (_controller._installationData.completeMake)
         {
@@ -96,7 +113,6 @@ public class InstallationInventoryController : MonoBehaviour
             
             recipeIndex = "";
             GameManager.instance.spawnManager.SpawnIngredient(gameObject, destinationController.destination[1], GameManager.instance.dataManager.foodSub[spawnFoodID]);
-
         }
     }
 }

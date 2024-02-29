@@ -9,12 +9,14 @@ public class ShopInventoryButton : MonoBehaviour
     public Button button;
     public QuantityController quantityController;
     ShopUI shopUI;
+    public GameObject errorMessage;
 
     private void OnEnable()
     {
         shopUI = GetComponentInParent<ShopUI>();
         shopUI.onIngredientEnabled += SetButtonToShowQuantityController;
         shopUI.onMachineEnabled += SetButtonToSpawnInstallation;
+        shopUI.onToolEnabled += SetButtonToShowQuantityController;
         SetButtonToSpawnInstallation();
     }
 
@@ -30,6 +32,8 @@ public class ShopInventoryButton : MonoBehaviour
         button.onClick.RemoveAllListeners(); // 이전 리스너 제거
         button.onClick.AddListener(ShowQuantityController);
     }
+
+
     private void OnDisable()
     {
         shopUI.onIngredientEnabled -= ShowQuantityController;
@@ -42,10 +46,10 @@ public class ShopInventoryButton : MonoBehaviour
     {
         if (shopUI.curMachine.price > GameManager.instance.dataManager.playerData.money)
         {
+            errorMessage.SetActive(true);
             return;
         }
         GameManager.instance.statManager.SpendGold(shopUI.curMachine.price);
-
         GameObject obj = GameManager.instance.spawnManager.SpawnInstallaion(shopUI.curMachine);
         GameManager.instance.uiManager.CloseAll();
     }
@@ -58,13 +62,16 @@ public class ShopInventoryButton : MonoBehaviour
 
     private void HandlePurchaseItem(int quantity)
     {
-        if(GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * 2 * quantity)
+        if (GameManager.instance.dataManager.playerData.money < shopUI.curItem.price * 2 * quantity)
         {
+            errorMessage.SetActive(true);
             return;
         }
+        else if (quantity == 0)
+            return;
         else
         {
-            GameManager.instance.statManager.SpendGold(shopUI.curItem.price *2 * quantity);
+            GameManager.instance.statManager.SpendGold(shopUI.curItem.price * 2 * quantity);
             GameManager.instance.inventoryManager.AddItemToInventory(1000, shopUI.curItem, quantity);
         }
         quantityController.DeliverQuantity -= HandlePurchaseItem;

@@ -25,11 +25,13 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     public event DailyResultWindowOn OnDailyWindowOpen;
 
     public string lastUIName;
+
+    private int paidDebtAmountToDelever;
     
     public void Initialize()
     {
 
-        GameManager.instance.statManager.onDateChanged += CheckSceneAndOpenDailyResultWindow;
+        GameManager.instance.logicManager.DebtCompensated += CheckSceneAndOpenDailyResultWindow;
         GameManager.instance.sceneManager.sceneInfo += HandleScene;
     }
 
@@ -41,7 +43,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     private void OnDisable()
     {
         GameManager.instance.sceneManager.sceneInfo -= HandleScene;
-        GameManager.instance.statManager.onDateChanged -= CheckSceneAndOpenDailyResultWindow;
+        GameManager.instance.logicManager.DebtCompensated -= CheckSceneAndOpenDailyResultWindow;
     }
 
     private void HandleScene(SceneType scene)

@@ -105,17 +105,20 @@ public class IngredientController : MonoBehaviour, IInteractable
                 if (itemData.id == 1 || itemData.type == 2)
                 {
                     targetInventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-                    if (controller._installationData.haveDoughInventory)
+                    if (controller._installationData != null)
                     {
-                        controller.doughContainer.Enqueue(gameObject);
-                        EnqueueItems(itemData, new List<float>(interactInstallation));
+                        if (controller._installationData.haveDoughInventory)
+                        {
+                            controller.doughContainer.Enqueue(gameObject);
+                            EnqueueItems(itemData, new List<float>(interactInstallation));
+                        }
                     }
                 }
 
                 else if (controller.destinationID == 1)
                     return;
-                else
-                    controller.ingredients.Enqueue(itemData);
+                //else
+                //    controller.ingredients.Enqueue(itemData);
             }
         }
 
@@ -130,7 +133,6 @@ public class IngredientController : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("AbstractInventory component found.");
             targetInventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
         }
         GameManager.instance.inventoryManager.AddItemToInventory(targetInventory.inventoryID, itemData, 1);
@@ -148,7 +150,7 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void VisitInstallationSet(InstallationController controller)
     {
-        if(!controller._installationData.haveIngredientInventory)
+        if(!controller._installationData.haveIngredientInventory || controller._installationData.id ==45)
             interactInstallation.Enqueue(controller._installationData.id);
     }
 
@@ -157,7 +159,7 @@ public class IngredientController : MonoBehaviour, IInteractable
         var inventoryData = GameManager.instance.inventoryManager.GetInventoryDataById(targetInventory.inventoryID);
         if (inventoryData == null)
         {
-            Debug.LogError($"Inventory data not found for ID: {targetInventory.inventoryID}");
+            Debug.Log($"Inventory data not found for ID: {targetInventory.inventoryID}");
             return;
         }
         if (inventoryData != null)

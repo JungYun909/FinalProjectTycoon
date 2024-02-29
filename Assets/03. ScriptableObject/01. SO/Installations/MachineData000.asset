@@ -17,10 +17,11 @@ MonoBehaviour:
   description: "\uD310\uB9E4\uC52C\uACFC \uC0DD\uC0B0\uC52C\uC758 \uC5F0\uACB0\uCCB4"
   price: 0
   sprite: {fileID: 21300000, guid: abac28f2b3c06164590047d03df50730, type: 3}
+  animation: []
   canSpawn: 0
   spawnDelay: 0
   spawnData: {fileID: 0}
-  haveDoughInventory: 1
+  haveDoughInventory: 0
   haveIngredientInventory: 0
   makeDelay: 1
   maxSlot: 100

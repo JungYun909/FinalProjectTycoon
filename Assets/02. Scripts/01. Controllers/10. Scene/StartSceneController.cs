@@ -60,6 +60,7 @@ public class StartSceneController : MonoBehaviour
     {
         GameManager.instance.dataManager.ResetData();
         GameManager.instance.dataManager.SaveData();
+        GameManager.instance.dataManager.ResetInventoryAndDestinationData();
         InitSet();
     }
 

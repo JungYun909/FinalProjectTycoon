@@ -1,7 +1,7 @@
 public struct ResourcePath
 {
     public const string bread = "01. Sprites/Products/bread/";
-    public const string goldImage = "01. Sprites/Products/cake/";
+    public const string goldImage = "01. Sprites/Temp/";
     public const string ItemSo = "ItemSA/ItemData000";
 }
 

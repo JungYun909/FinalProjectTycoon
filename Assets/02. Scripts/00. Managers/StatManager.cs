@@ -111,7 +111,16 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int EarnGold(int modGold)  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
         GameManager.instance.dataManager.playerData.money += modGold;
-        goldEarned += modGold;
+        GameManager.instance.dataManager.playerData.totalGoldEarned += modGold;
+        GameManager.instance.dataManager.playerData.goldEarnedToday += modGold;
+        GameManager.instance.dataManager.playerData.exp += modGold;
+        if(GameManager.instance.dataManager.playerData.exp >=10000)
+        {
+            if (GameManager.instance.dataManager.playerData.level <5)
+            {
+                LevelUP(1);
+            }
+        }
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return GameManager.instance.dataManager.playerData.money;
     }
@@ -119,6 +128,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public int SpendGold(int modGold)  // 돈을 쓸 때 호출한 메서드. 매개변수는 구매하는 아이템의 가격, 일 영업비용, 파견을 위한 종업원의 일급, 등. 
     {
         GameManager.instance.dataManager.playerData.money -= modGold;
+        GameManager.instance.dataManager.playerData.goldSpentToday += modGold;
         goldUsed += modGold;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
         return GameManager.instance.dataManager.playerData.money;
@@ -128,22 +138,26 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     {
         GameManager.instance.dataManager.playerData.level += modLevel;
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        GameManager.instance.dataManager.playerData.exp = 0;
         return GameManager.instance.dataManager.playerData.level;
     }
 
     private void Update()  // 돈을 벌었을 때 호출할 메서드. 매개변수는 판매가.    itemSO나 json 스크립트 내의 가격 정보를 받아오도록 함. 
     {
-        if (GameManager.instance.dataManager.playerTimeData.time < dayTime)
+        if(GameManager.instance.dataManager.playerData.tutoClear == true)
         {
-            GameManager.instance.dataManager.playerTimeData.time += Time.deltaTime;
-        }
-        else
-        {
-            GameManager.instance.dataManager.playerTimeData.time = 0f;
-            GameManager.instance.dataManager.playerData.day += 1;
-            onDateChanged?.Invoke();
-            //GameManager.instance.uiManager.OpenDailyResultWindow();
-            onStatChanged?.Invoke();
+            if (GameManager.instance.dataManager.playerTimeData.time < dayTime)
+            {
+                GameManager.instance.dataManager.playerTimeData.time += Time.deltaTime;
+            }
+            else
+            {
+                GameManager.instance.dataManager.playerTimeData.time = 0f;
+                GameManager.instance.dataManager.playerData.day += 1;
+                onDateChanged?.Invoke();
+                //GameManager.instance.uiManager.OpenDailyResultWindow();
+                onStatChanged?.Invoke();
+            }
         }
     }
 

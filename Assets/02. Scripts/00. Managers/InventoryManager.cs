@@ -60,6 +60,7 @@ public class QueueData
 [System.Serializable]
 public class InventoryWrapper
 {
+    public int nextInventoryID;
     public List<InventoryData> allInventories;
 }
 
@@ -72,45 +73,45 @@ public class InventoryManager : MonoBehaviour
     public ItemDatabaseSO itemDatabase;  // 아이템 데이터베이스 참조
     public MachineDatabaseSO machineDatabase;
     public Dictionary<int, AbstractInventory> inventories = new Dictionary<int, AbstractInventory>();   // 인벤토리를 딕셔너리로 정리
-    private int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
+    public int nextInventoryID = 1001;   // 인덱스용 아이디를 부여하기 위한 필드
     private int playerInventoryID = 1000;
+    private int inventoryID;
+
+    public event Action InventoryLoadDone;
 
 
     private void Start()
     {
-        LoadInventoryData();
         StartCoroutine(SaveAllInventoriesRoutine());
     }
 
-    private void LoadInventoryData()
-    {   
-        List<InventoryData> loadedInventories = GameManager.instance.dataManager.LoadAllInventories();
-        if (loadedInventories != null && loadedInventories.Count > 0)
-        {
-            allInventories = loadedInventories;
-        }
-        else
-            return;
+    public void LoadInventoryData()
+    {
+        InventoryWrapper loadedData = GameManager.instance.dataManager.LoadAllInventories();
+        nextInventoryID = loadedData.nextInventoryID;
+        allInventories = loadedData.allInventories;
+        InventoryLoadDone?.Invoke();
     }
 
     public int RegisterInventory(AbstractInventory inventory)    // 새로 생기는 인벤토리를 딕셔너리에 등재하기 위한 메서드. 모든 인벤토리 생성시
     {
-        int inventoryID;
+
         if(inventory is ShopInventory)
         {
-            inventoryID = playerInventoryID;
+            inventoryID = 1000;
         }
-        else
+        else if (inventory.inventoryID != 0)
         {
-            inventoryID = nextInventoryID++;
+            inventoryID = inventory.inventoryID;
         }
-        InventoryData existingInventoryData = GetInventoryDataById(inventoryID);
-        if(existingInventoryData == null)
-        {
-            InventoryData newInventoryData = new InventoryData(inventoryID);
-            allInventories.Add(newInventoryData);
-        }
+        else { inventoryID = nextInventoryID++; }
         inventories[inventoryID] = inventory;
+        InventoryData existingData = GetInventoryDataById(inventoryID);
+        if(existingData == null)
+        {
+            InventoryData newData = new InventoryData(inventoryID);
+            allInventories.Add(newData);
+        }
         return inventoryID;
     }
 
@@ -119,18 +120,29 @@ public class InventoryManager : MonoBehaviour
         return allInventories.Find(inventory => inventory.inventoryID == inventoryID);
     }
 
+    public void DeleteInventoryData(int inventoryID)
+    {
+        InventoryData inventoryToDelete = GetInventoryDataById(inventoryID);
+        if (inventoryToDelete != null)
+        {
+            allInventories.Remove(inventoryToDelete);
+            if (inventories.ContainsKey(inventoryID))
+            {
+                inventories.Remove(inventoryID);
+            }
+        }
+    }
+
     public void AddItemToInventory(int inventoryID, ItemSO item, int quantity)
     {
         if (inventories.ContainsKey(inventoryID))
         {
             AbstractInventory inventory = inventories[inventoryID];
-            
             if(!inventory.Items.ContainsKey(item))
             {
                 inventory.Items[item] = 0;
             }
             inventory.Items[item] += quantity;
-
             if(!(inventoryID == 1000 && (item.id == 1 || item.type ==2)))
             {
                 if (item.id == 1 || item.type == 2)
@@ -140,7 +152,7 @@ public class InventoryManager : MonoBehaviour
                         inventory.itemQueue.Enqueue(item);
                     }
                 }
-                else if (item.id != 1 && item.type == 1)
+                else if (item.id != 1 && (item.type == 1 || item.type ==4))
                 {
                     if (inventory.controller != null)
                     {
@@ -348,12 +360,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //public void ExchangeItems(int fromInventoryID, int toInventoryID, ItemSO itemFromFromInventory, ItemSO itemFromToInventory, int quantityOfFromInventoryItem, int quantityOfToInventoryItem)
+    //{
+    //    TransferItem(fromInventoryID, toInventoryID, itemFromFromInventory, quantityOfFromInventoryItem);
+    //    TransferItem(toInventoryID, fromInventoryID, itemFromToInventory, quantityOfToInventoryItem)
+    //}
+
     IEnumerator SaveAllInventoriesRoutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(10f);
-            GameManager.instance.dataManager.SaveInventoryData(allInventories);
+            GameManager.instance.dataManager.SaveInventoryData(nextInventoryID, allInventories);
         }
     }
 }

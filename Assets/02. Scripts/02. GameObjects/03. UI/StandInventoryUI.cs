@@ -134,6 +134,7 @@ public class StandInventoryUI : UIBase
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
         OpenInventoryEvent?.Invoke();
+        playerInventory.GetComponent<PlayerInventoryUI>().SetInventoryInfo(1);
     }
 
     public void ClosePanel()

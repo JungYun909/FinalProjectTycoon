@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public interface IInteractable
@@ -48,6 +49,7 @@ public class InteractionManager : MonoBehaviour
                     continue;
                 if (r.gameObject.GetComponent<TutorialMissionID>().missionID == targetID)
                 {
+                    r.gameObject.GetComponent<Button>().onClick.Invoke();
                     onTuto?.Invoke();
                 }
             }
