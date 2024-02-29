@@ -25,7 +25,7 @@ public class InstallationSetController : UIBase
     public void InstallationDestroy()
     {
         InstallationController curController = curGameObject.GetComponent<InstallationController>();
-        if (curGameObject.GetComponentInChildren<AbstractInventory>() != null)
+        if (!curController._installationData.canSpawn)
         {
             int curInventoryID = curGameObject.GetComponentInChildren<AbstractInventory>().inventoryID;
             GameManager.instance.inventoryManager.DeleteInventoryData(curInventoryID);

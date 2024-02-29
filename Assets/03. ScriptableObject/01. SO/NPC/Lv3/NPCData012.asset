@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13f33477d04a4a4bb806e58e0484c95, type: 3}
+  m_Name: NPCData012
+  m_EditorClassIdentifier: 
+  id: 12
+  npcName: "\uC0F4\uACE0\uB0E5\uB2D8"
+  npcLevel: 3
+  description: "\uAE4C\uCE60\uD574\uBCF4\uC778\uB2E4"
+  sprite: {fileID: -222640850, guid: 54de11047b28ae1419fb9aaedd12af2b, type: 3}
+  speed: 0.7
+  favoriteFood:
+  - {fileID: 11400000, guid: 800d3fa7f6038495ea317fee0851e5ec, type: 2}
+  - {fileID: 11400000, guid: 4c14cf8e2ad373f4296997d353794267, type: 2}
+  - {fileID: 11400000, guid: b17c47104e7d541a3b92c400db8f52d3, type: 2}
+  - {fileID: 11400000, guid: e1aba187a3c484dba9134508705a420f, type: 2}
+  - {fileID: 11400000, guid: c9e5b7c2de067468599938344ca64c0a, type: 2}
+  - {fileID: 11400000, guid: a14b68f0a3352401fba4fd5c039f76ec, type: 2}
+  - {fileID: 11400000, guid: d3af81ec0b61a4df4a917996e97c0060, type: 2}

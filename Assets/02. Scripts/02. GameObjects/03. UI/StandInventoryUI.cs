@@ -38,7 +38,6 @@ public class StandInventoryUI : UIBase
 
     private void HandleInventoryUpdate(int inventoryID)
     {
-        Debug.Log("Update OCcured");
         if (this.inventory != null && this.inventory.inventoryID == inventoryID)
         {
             UpdateUI();
