@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class TutorialClickMission : TutorialBase
 {
     [SerializeField] private GameObject fingerIcon;
-    [SerializeField] private Button[] missionBtn;
-    [SerializeField] private Button targetBtn;
+    //[SerializeField] private Button[] missionBtn;
+    //[SerializeField] private Button targetBtn;
 
     public bool isClick = false;
 
@@ -19,11 +19,11 @@ public class TutorialClickMission : TutorialBase
         // 지시하는 손가락 오브젝트 활성화
         fingerIcon.SetActive(true);
 
-        for (int i = 0; i < missionBtn.Length; i++)
-        {
-            missionBtn[i].gameObject.SetActive(false);
-        }
-        targetBtn.gameObject.SetActive(true);
+        //for (int i = 0; i < missionBtn.Length; i++)
+        //{
+        //    missionBtn[i].gameObject.SetActive(false);
+        //}
+        //targetBtn.gameObject.SetActive(true);
     }
 
     public override void Execute(TutorialController tutorialController)
@@ -39,9 +39,9 @@ public class TutorialClickMission : TutorialBase
         // 지시하는 손가락 오브젝트 비활성화
         fingerIcon.SetActive(false);
 
-        for (int i = 0; i < missionBtn.Length; i++)
-        {
-            missionBtn[i].gameObject.SetActive(true);
-        }
+        //for (int i = 0; i < missionBtn.Length; i++)
+        //{
+        //    missionBtn[i].gameObject.SetActive(true);
+        //}
     }
 }

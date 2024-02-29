@@ -41,7 +41,7 @@ public class InteractionManager : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(data, results);
 
-        if(results.Count > 0)
+        if(value.isPressed && results.Count > 0)
         {
             foreach (RaycastResult r in results)
             {
@@ -51,6 +51,7 @@ public class InteractionManager : MonoBehaviour
                 {
                     r.gameObject.GetComponent<Button>().onClick.Invoke();
                     onTuto?.Invoke();
+                    return;
                 }
             }
         }
