@@ -13,6 +13,7 @@ public abstract class TutorialBase : MonoBehaviour
     {
         GameManager.instance.interactionManager.targetID = tutoID;
         GameManager.instance.interactionManager.onTuto += Complete;
+        Debug.Log("2");
     }
 
     //튜토리얼을 진행하는동안 매 프레임 호출
@@ -22,6 +23,7 @@ public abstract class TutorialBase : MonoBehaviour
     public virtual void Exit()
     {
         GameManager.instance.interactionManager.onTuto -= Complete;
+        Debug.Log("3");
     }
 
     public void Complete()

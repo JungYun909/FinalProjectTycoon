@@ -98,7 +98,7 @@ public class InteractionManager : MonoBehaviour
         // 튜토리얼이 종료되었을 경우 UI 오브젝트에 의한 상호작용 방지
         bool tutorialCompleted = GameManager.instance.dataManager.playerData.tutoClear;
 
-        if (results.Count > 0 && tutorialCompleted)
+        if (value.isPressed && results.Count > 0 && tutorialCompleted)
         {
             foreach (RaycastResult r in results)
             {
@@ -111,7 +111,7 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
-        if (!tutorialCompleted)
+        if (value.isPressed && !tutorialCompleted)
         {
             // 튜토리얼 중일 때의 로직, 모든 상호작용 허용
             foreach (RaycastResult r in results)
@@ -120,6 +120,7 @@ public class InteractionManager : MonoBehaviour
                 if (missionIDComponent != null && missionIDComponent.missionID == targetID)
                 {
                     r.gameObject.GetComponent<Button>().onClick.Invoke();
+                    Debug.Log("1");
                     onTuto?.Invoke();
                     return; // 튜토리얼 미션 처리 후 바로 반환
                 }
