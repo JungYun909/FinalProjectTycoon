@@ -73,6 +73,7 @@ public class PlayerInventoryUI : UIBase
                     controller.DeliverQuantity -= HandleTransfer;
                 }
             }
+            ClearInventoryDisplay();
             GameManager.instance.uiManager.GoBack();
         }
         else
@@ -111,14 +112,17 @@ public class PlayerInventoryUI : UIBase
     // 아이템 슬롯 생성 메서드
     private void CreateItemSlot(ItemSO item, int quantity)
     {
-        GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
-        ItemSlotInfo itemSlotInfo = itemUI.GetComponent<ItemSlotInfo>();
-        if (itemSlotInfo != null)
+        if (this.gameObject != null || this.gameObject.activeSelf)
         {
-            itemSlotInfo.Setup(item, quantity);
-            itemSlotInfo.DeliverItem += UpdateItemData; // 이벤트 구독 추가
-            itemSlotInfo.DeliverInventoryInfo += OpenQuantityController;
-            itemSlotInfo.DeliverInventoryID += SetCurInventoryID;
+            GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
+            ItemSlotInfo itemSlotInfo = itemUI.GetComponent<ItemSlotInfo>();
+            if (itemSlotInfo != null)
+            {
+                itemSlotInfo.Setup(item, quantity);
+                itemSlotInfo.DeliverItem += UpdateItemData; // 이벤트 구독 추가
+                itemSlotInfo.DeliverInventoryInfo += OpenQuantityController;
+                itemSlotInfo.DeliverInventoryID += SetCurInventoryID;
+            }
         }
     }
 
@@ -179,16 +183,20 @@ public class PlayerInventoryUI : UIBase
         switch (whatToShow)
         {
             case 1:
+                Debug.Log("Case 1 called");
                 UpdateProductInventory();
                 break;
 
             case 2:
+                Debug.Log("Case 2 called");
                 UpdateItemInventory();
                 break;
             case 3:
+                Debug.Log("Case 3 called");
                 UpdateMachineInventory();
                 break;
             case 4:
+                Debug.Log("Case 4 called");
                 UpdateToolInventory();
                 break;
         }
@@ -222,6 +230,7 @@ public class PlayerInventoryUI : UIBase
     }
     private void UpdateMachineInventory()
     {
+        Debug.Log("machine");
         foreach (var itemEntry in playerInventory.machines)
         {
             var item = itemEntry.Key;
@@ -232,6 +241,7 @@ public class PlayerInventoryUI : UIBase
     }
     private void UpdateToolInventory()
     {
+        Debug.Log("tool");
         installConfirm.gameObject.SetActive(false);
         foreach (var itemEntry in playerInventory.Items)
         {
@@ -246,17 +256,20 @@ public class PlayerInventoryUI : UIBase
 
     public void SetInventoryInfo(int number)
     {
+        Debug.Log("SetIonventoryInfo called");
         whatToShow = number;
+        Debug.Log(whatToShow);
         UpdateUI();
     }
     public void CloseWindow()
     {
+        ClearInventoryDisplay();
         GameManager.instance.uiManager.CloseAll();
     }
 
     private void UpdateItemInfoInItemInfoWindow()
     {
-
+        Debug.Log("Item");
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
@@ -264,6 +277,7 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateMachineInfoWindow()
     {
+        Debug.Log("Machine");
         installConfirm.gameObject.SetActive(true);
         installConfirm.onClick.AddListener(SpawnInstallation);
         nameText.text = curMachine.installasionName;

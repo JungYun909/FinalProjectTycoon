@@ -57,7 +57,7 @@ public class DailyResultWindow : UIBase
                 comment.text = "혹시 어떤 문제가 있나요...?";
                 break;
             default:
-                warning.text = $"<color=green>양호<color>";
+                warning.text = $"<color=green>양호</color>";
                 comment.text = "잘 하고 있어요! GOOD!";
                 break;
         }

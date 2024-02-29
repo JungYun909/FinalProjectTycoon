@@ -177,6 +177,11 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
             }
         }
     }
+    public void OpenErrorWindow()
+    {
+        if(uiList[1] != null)
+            OpenWindow(uiList[1], true);
+    }
 }
 
 

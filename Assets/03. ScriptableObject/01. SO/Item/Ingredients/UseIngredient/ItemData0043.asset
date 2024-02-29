@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90243e85872e548c1bd25d0dbe43b94f, type: 3}
-  m_Name: ItemData0040
+  m_Name: ItemData0043
   m_EditorClassIdentifier: 
-  id: 40
+  id: 43
   type: 1
   itemName: "\uACC4\uD53C"
   description: "\uACC4\uD53C\uD5A5\uC740 \uBABB\uCC38\uC9C0"
@@ -20,6 +20,7 @@ MonoBehaviour:
   price: 40
   sprite: {fileID: 21300000, guid: 7f72f99c7e831d2429a77f75e76af23b, type: 3}
   tag: Ingredient
+  level: 0
   canMove: 1
   moveSpeed: 1
   canStack: 1

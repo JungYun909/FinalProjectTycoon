@@ -45,7 +45,10 @@ public class AbstractInventory : MonoBehaviour
     private List<InventoryItemEntry> itemsListForInspector = new List<InventoryItemEntry>();
     public int inventoryID;
 
-
+    private void OnDisable()
+    {
+        inventoryID = 0;
+    }
     public void CopyItemsToDoughContainer()
     {
         List<ItemSO> itemToDelete = new List<ItemSO>();

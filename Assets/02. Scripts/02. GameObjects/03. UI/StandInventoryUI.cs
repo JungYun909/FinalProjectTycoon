@@ -38,7 +38,6 @@ public class StandInventoryUI : UIBase
 
     private void HandleInventoryUpdate(int inventoryID)
     {
-        Debug.Log("Update OCcured");
         if (this.inventory != null && this.inventory.inventoryID == inventoryID)
         {
             UpdateUI();
@@ -134,8 +133,9 @@ public class StandInventoryUI : UIBase
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
         OpenInventoryEvent?.Invoke();
-        playerInventory.GetComponent<PlayerInventoryUI>().SetInventoryInfo(1);
+        FindObjectOfType<PlayerInventoryUI>().SetInventoryInfo(1);
     }
+
 
     public void ClosePanel()
     {

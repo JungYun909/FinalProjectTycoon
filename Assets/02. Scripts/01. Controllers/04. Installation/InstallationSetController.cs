@@ -25,9 +25,17 @@ public class InstallationSetController : UIBase
     public void InstallationDestroy()
     {
         InstallationController curController = curGameObject.GetComponent<InstallationController>();
-        if (curGameObject.GetComponentInChildren<AbstractInventory>() != null)
+        if (!curController._installationData.canSpawn)
         {
-            int curInventoryID = curGameObject.GetComponentInChildren<AbstractInventory>().inventoryID;
+            AbstractInventory curInventory = curGameObject.GetComponentInChildren<AbstractInventory>();
+            Debug.Log($"inventory has {curInventory.Items.Count} items");
+            if(curInventory.Items.Count>0)
+            {
+                Debug.Log("Opening Error Window");
+                GameManager.instance.uiManager.OpenErrorWindow();
+                return;
+            }
+            int curInventoryID = curInventory.inventoryID;
             GameManager.instance.inventoryManager.DeleteInventoryData(curInventoryID);
         }
         GameManager.instance.inventoryManager.AddMachineToPlayerInventory(curController._installationData, 1);

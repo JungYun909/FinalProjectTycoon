@@ -19,7 +19,7 @@ MonoBehaviour:
   recipe: "\uBC18\uC8FD - \uC870\uD569\uAE30(\uBC84\uD130) - \uC131\uD615\uAE30(\uB9C8\uB4E4\uB9B0\uD2C0)
     - \uC870\uD569\uAE30(\uBE14\uB8E8\uBCA0\uB9AC) - \uC624\uBE10"
   price: 460
-  sprite: {fileID: 21300000, guid: 5c32c691c65947b46a641a4452c10b40, type: 3}
+  sprite: {fileID: 21300000, guid: 85cb8a925687c33458a667da147fc919, type: 3}
   tag: Food
   level: 0
   canMove: 1

@@ -226,7 +226,6 @@ public class ShopUI : UIBase
 
     public void OpenMachinShopUI()
     {
-        Debug.Log(GameManager.instance.dataManager.playerData.tutoNum);
         if (GameManager.instance.dataManager.playerData.tutoNum == 3 || GameManager.instance.dataManager.playerData.tutoNum == 4)
         {
             UpdateTutoMachineInfoToShopUI(1);
