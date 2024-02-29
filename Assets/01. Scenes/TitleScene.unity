@@ -4158,6 +4158,7 @@ MonoBehaviour:
   uiList:
   - {fileID: 5185125149203713690, guid: 9efe868c157e2324a8b2635613f368bf, type: 3}
   - {fileID: 6834499772423413404, guid: 2db5435114778ba45b5b24db32cdc4ae, type: 3}
+  - {fileID: 3897767354705550475, guid: 2f923cc60ffec7845ae798e594826259, type: 3}
   dailyResultOpenInterval: 60
   itemSlotPrefab: {fileID: 0}
   itemLinePrefab: {fileID: 0}
