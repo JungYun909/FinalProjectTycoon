@@ -12,10 +12,11 @@ public class MenuButton : MonoBehaviour
     [SerializeField] private List<Button> btns = new List<Button>();
     [SerializeField] private float speed;
     [SerializeField] private Button backBtn;
-
+    private bool onBtn;
     private Button usingBtn;
     private RectTransform backBtnPos;
     private List<RectTransform> btnsPos = new List<RectTransform>();
+    
 
     private void Start()
     {
@@ -40,6 +41,10 @@ public class MenuButton : MonoBehaviour
 
     public void OnButton(Button curBtn)
     {
+        if(onBtn == true)
+        {
+            return;
+        }
         usingBtn = curBtn;
         usingBtn.interactable = false;
         usingBtn.GetComponent<Image>().color = Color.red;
@@ -53,10 +58,15 @@ public class MenuButton : MonoBehaviour
             
             BtnPositionSet(btns[i], btnsPos[i], 0, -150, false);
         }
+        onBtn = true;
     }
     
     public void BackBtn()
     {
+        if (onBtn == false)
+        {
+            return;
+        }
         GameManager.instance.uiManager.CloseAll();
 
         BtnPositionSet(backBtn, backBtnPos, 150, 0, false);
@@ -72,6 +82,7 @@ public class MenuButton : MonoBehaviour
         usingBtn.GetComponent<Image>().color = Color.white;
         usingBtn.interactable = true;
         usingBtn = null;
+        onBtn = false;
     }
     
 
