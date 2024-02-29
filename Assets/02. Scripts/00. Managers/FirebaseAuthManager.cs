@@ -52,6 +52,7 @@ public class FirebaseAuthManager : MonoBehaviour
                 return;
             }
 
+            Debug.Log("create");
             FirebaseUser newUser = task.Result.User;
             CreatIDEvent?.Invoke(newUser.UserId);
         });

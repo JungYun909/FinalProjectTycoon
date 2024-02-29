@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum FirebaseDataType
 {
@@ -12,7 +14,7 @@ public enum FirebaseDataType
 }
 public class RankData
 {
-    public string userId;
+    public string userID;
     public int money;
 }
 
@@ -20,6 +22,8 @@ public class FirebaseDatabaseManager : MonoBehaviour
 {
     private DatabaseReference _reference;
     public RankData _rankData;
+
+    public Action<Queue<(string, int)>> OnRoadRankData;
 
     public void InitSet()
     {
@@ -29,12 +33,28 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
     public void SaveData(string userID)
     {
-        _rankData.userId = userID;
+        _rankData.userID = userID;
         _rankData.money = GameManager.instance.dataManager.playerData.money;
 
-        RankData rankData = _rankData;
+        RankData rankData = new RankData();
+        rankData = _rankData;
         string jsonData = JsonUtility.ToJson(rankData);
-        _reference.Child(FirebaseDataType.RankData.ToString()).SetRawJsonValueAsync(jsonData);
+        _reference.Child(FirebaseDataType.RankData.ToString()).Child(userID).SetRawJsonValueAsync(jsonData);
+        Debug.Log("save");
+    }
+    
+    public void AASaveData()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            _rankData.userID = i.ToString();
+            _rankData.money = 1000 * Random.Range(1000, 20000);
+            RankData rankData = new RankData();
+            rankData = _rankData;
+            string jsonData = JsonUtility.ToJson(rankData);
+            _reference.Child(FirebaseDataType.RankData.ToString()).Child(_rankData.userID).SetRawJsonValueAsync(jsonData);
+            Debug.Log("save");
+        }
     }
 
     // public RankData LoadData(string userID)
@@ -63,16 +83,15 @@ public class FirebaseDatabaseManager : MonoBehaviour
     //     return null;
     // }
 
-    public Queue<(string, int)> LoadRankData(FirebaseDataType title, string type, int maxValue)
+    public void LoadRankData(FirebaseDataType title, string type, int maxValue)
     {
-        _reference.Child(title.ToString()).OrderByChild(type).LimitToFirst(maxValue).GetValueAsync()
+        _reference.Child(title.ToString()).OrderByChild(type).LimitToLast(maxValue).GetValueAsync()
             .ContinueWithOnMainThread(
                 task =>
                 {
                     if (task.IsCanceled || task.IsFaulted)
                     {
                         Debug.Log("랭킹 탑10 불러오기 실패");
-                        return null;
                     }
 
                     DataSnapshot snapshot = task.Result;
@@ -81,13 +100,14 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     foreach (var childSnapshot in snapshot.Children)
                     {
                         if (title == FirebaseDataType.RankData)
+                        {
                             rankList.Enqueue((childSnapshot.Child("userID").Value.ToString(),
                                 int.Parse(childSnapshot.Child("money").Value.ToString())));
+                        }
                     }
-
-                    return rankList;
+                    Debug.Log(rankList.Count);
+                    OnRoadRankData?.Invoke(rankList);
                 });
-        return null;
     }
     
     public int LoadPlayerRankData(FirebaseDataType title, string type, string id)
@@ -96,7 +116,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
             .ContinueWithOnMainThread(
                 task =>
                 {
-                    int count = 0;
+                    int count = 1;
 
                     if (task.IsCanceled || task.IsFaulted)
                     {

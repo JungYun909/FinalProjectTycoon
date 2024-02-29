@@ -54,17 +54,17 @@ public class LogInController : MonoBehaviour
         logInBtn.gameObject.SetActive(sign);
     }
 
-    private void Create()
+    public void Create()
     {
         GameManager.instance.firebaseAuthManager.Create(email.text, password.text);
     }
     
-    private void LogIn()
+    public void LogIn()
     {
         GameManager.instance.firebaseAuthManager.LogIn(email.text, password.text);
     }
     
-    private void LogOut()
+    public void LogOut()
     {
         GameManager.instance.firebaseAuthManager.LogOut();
     }
