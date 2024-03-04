@@ -832,17 +832,6 @@ MonoBehaviour:
   tutoID: 01-B
   completed: 0
   fingerIcon: {fileID: 818943112}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 1456166132}
   isClick: 0
 --- !u!1 &93540740
 GameObject:
@@ -2885,17 +2874,6 @@ MonoBehaviour:
   tutoID: 01-A
   completed: 0
   fingerIcon: {fileID: 1884851164}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 863333133}
   isClick: 0
 --- !u!1 &321697921
 GameObject:
@@ -9423,17 +9401,6 @@ MonoBehaviour:
   tutoID: 01-A
   completed: 0
   fingerIcon: {fileID: 1884851164}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 863333133}
   isClick: 0
 --- !u!1 &584146925
 GameObject:
@@ -14109,17 +14076,6 @@ MonoBehaviour:
   tutoID: 01-C
   completed: 0
   fingerIcon: {fileID: 787373049}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 1879512776}
   isClick: 0
 --- !u!1 &818943112
 GameObject:
@@ -16906,17 +16862,6 @@ MonoBehaviour:
   tutoID: 01-B
   completed: 0
   fingerIcon: {fileID: 818943112}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 1456166132}
   isClick: 0
 --- !u!1 &1206026061
 GameObject:
@@ -16965,17 +16910,6 @@ MonoBehaviour:
   tutoID: 01-A
   completed: 0
   fingerIcon: {fileID: 1884851164}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 863333133}
   isClick: 0
 --- !u!1 &1215066135
 GameObject:
@@ -18095,7 +18029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25, y: -79}
+  m_AnchoredPosition: {x: 2, y: -33}
   m_SizeDelta: {x: -50, y: -147.0399}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1373873467
@@ -18164,15 +18098,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33
-  m_fontSizeBase: 33
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 10
@@ -18793,11 +18727,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 920374332}
         m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-        m_MethodName: ButtonEffect
+        m_MethodName: OnButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1456166131}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+          m_ObjectArgument: {fileID: 1456166132}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -21390,17 +21324,6 @@ MonoBehaviour:
   tutoID: 01-K
   completed: 0
   fingerIcon: {fileID: 1599518119}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 1519001509}
   isClick: 0
 --- !u!1 &1544164879
 GameObject:
@@ -21520,8 +21443,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 920, y: 860}
+  m_AnchoredPosition: {x: 0, y: -49}
+  m_SizeDelta: {x: 939.5544, y: 742.6725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548068439
 MonoBehaviour:
@@ -21948,17 +21871,6 @@ MonoBehaviour:
   tutoID: 01-D
   completed: 0
   fingerIcon: {fileID: 151730955}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 138804209}
   isClick: 0
 --- !u!1 &1578064006
 GameObject:
@@ -22747,17 +22659,6 @@ MonoBehaviour:
   tutoID: 01-B
   completed: 0
   fingerIcon: {fileID: 818943112}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 1456166132}
   isClick: 0
 --- !u!1 &1599518119
 GameObject:
@@ -23779,17 +23680,6 @@ MonoBehaviour:
   tutoID: 01-I
   completed: 0
   fingerIcon: {fileID: 448293662}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 2093157658}
   isClick: 0
 --- !u!1 &1727402219
 GameObject:
@@ -24452,17 +24342,6 @@ MonoBehaviour:
   tutoID: 01-J
   completed: 0
   fingerIcon: {fileID: 1290829472}
-  missionBtn:
-  - {fileID: 863333133}
-  - {fileID: 2093157658}
-  - {fileID: 685471854}
-  - {fileID: 1456166132}
-  - {fileID: 138804209}
-  - {fileID: 1879512776}
-  - {fileID: 1519001509}
-  - {fileID: 1055242992}
-  - {fileID: 834115678}
-  targetBtn: {fileID: 685471854}
   isClick: 0
 --- !u!1 &1795819412
 GameObject:
@@ -25395,11 +25274,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 920374332}
         m_TargetAssemblyTypeName: MenuButton, Assembly-CSharp
-        m_MethodName: ButtonEffect
+        m_MethodName: OnButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1879512775}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+          m_ObjectArgument: {fileID: 1879512776}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

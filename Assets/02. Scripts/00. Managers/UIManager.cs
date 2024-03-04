@@ -162,8 +162,8 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         {
             Destroy(currentDailyResultWindow.gameObject);    //혹시나 이미 열려있는 상태일때 중첩되지 않도록 이전에 열린 창은 파기
         }
-        currentDailyResultWindow = Instantiate(dailyResultWindow, transform);    //currentDailyResultWindow 생성
-        currentDailyResultWindow.Initialize();  // 
+        currentDailyResultWindow = Instantiate(dailyResultWindow, transform); 
+        currentDailyResultWindow.Initialize(); 
         OnDailyWindowOpen?.Invoke();
     }
 
@@ -176,6 +176,11 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
                 OpenDailyResultWindow();
             }
         }
+    }
+    public void OpenErrorWindow()
+    {
+        if(uiList[1] != null)
+            OpenWindow(uiList[1], true);
     }
 }
 

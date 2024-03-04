@@ -9,7 +9,7 @@
                     "name": "Click",
                     "type": "Value",
                     "id": "5641e2f7-4855-44b9-9a19-dc76002616b7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,8 +27,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "4d2f8cbb-cc4f-4b2a-a1b6-090d55f9dd30",
-                    "path": "<Mouse>/leftButton",
+                    "id": "5b738310-f5ba-4789-ab96-2827c2e611b4",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -38,8 +38,8 @@
                 },
                 {
                     "name": "",
-                    "id": "5b738310-f5ba-4789-ab96-2827c2e611b4",
-                    "path": "<Touchscreen>/Press",
+                    "id": "ba394b3c-d627-4fa9-9d68-55f4bcd0b7ed",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

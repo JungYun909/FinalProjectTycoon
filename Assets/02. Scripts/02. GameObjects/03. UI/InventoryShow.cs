@@ -247,8 +247,9 @@ public class InventoryShow : UIBase
     {
         GameManager.instance.uiManager.OpenWindow(playerInventory, true);
         DeliverInventoryID?.Invoke(curInventory.inventoryID);
-        playerInventory.GetComponent<PlayerInventoryUI>().SetInventoryInfo(2);
+        FindObjectOfType<PlayerInventoryUI>().SetInventoryInfo(2);
     }
+
 
     private void CloseUI()
     {

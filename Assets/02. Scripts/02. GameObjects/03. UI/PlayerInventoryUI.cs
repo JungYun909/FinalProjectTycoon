@@ -73,6 +73,8 @@ public class PlayerInventoryUI : UIBase
                     controller.DeliverQuantity -= HandleTransfer;
                 }
             }
+            ClearInventoryDisplay();
+            ClearInfoWindow();
             GameManager.instance.uiManager.GoBack();
         }
         else
@@ -111,14 +113,17 @@ public class PlayerInventoryUI : UIBase
     // 아이템 슬롯 생성 메서드
     private void CreateItemSlot(ItemSO item, int quantity)
     {
-        GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
-        ItemSlotInfo itemSlotInfo = itemUI.GetComponent<ItemSlotInfo>();
-        if (itemSlotInfo != null)
+        if (this.gameObject != null || this.gameObject.activeSelf)
         {
-            itemSlotInfo.Setup(item, quantity);
-            itemSlotInfo.DeliverItem += UpdateItemData; // 이벤트 구독 추가
-            itemSlotInfo.DeliverInventoryInfo += OpenQuantityController;
-            itemSlotInfo.DeliverInventoryID += SetCurInventoryID;
+            GameObject itemUI = Instantiate(inventoryItemPrefab, inventoryItemsParent);
+            ItemSlotInfo itemSlotInfo = itemUI.GetComponent<ItemSlotInfo>();
+            if (itemSlotInfo != null)
+            {
+                itemSlotInfo.Setup(item, quantity);
+                itemSlotInfo.DeliverItem += UpdateItemData; // 이벤트 구독 추가
+                itemSlotInfo.DeliverInventoryInfo += OpenQuantityController;
+                itemSlotInfo.DeliverInventoryID += SetCurInventoryID;
+            }
         }
     }
 
@@ -175,7 +180,7 @@ public class PlayerInventoryUI : UIBase
     {
         playerInventory = FindObjectOfType<ShopInventory>();
         ClearInventoryDisplay(); // 기존 UI 요소 제거
-        ClearInfoWindow();
+        
         switch (whatToShow)
         {
             case 1:
@@ -247,16 +252,18 @@ public class PlayerInventoryUI : UIBase
     public void SetInventoryInfo(int number)
     {
         whatToShow = number;
+        ClearInfoWindow();
         UpdateUI();
     }
     public void CloseWindow()
     {
+        ClearInventoryDisplay();
         GameManager.instance.uiManager.CloseAll();
     }
 
     private void UpdateItemInfoInItemInfoWindow()
     {
-
+        ClearInfoWindow();
         nameText.text = curItem.itemName;
         descriptionText.text = curItem.description;
         priceText.text = curItem.price.ToString();
@@ -264,6 +271,7 @@ public class PlayerInventoryUI : UIBase
 
     private void UpdateMachineInfoWindow()
     {
+        ClearInfoWindow();
         installConfirm.gameObject.SetActive(true);
         installConfirm.onClick.AddListener(SpawnInstallation);
         nameText.text = curMachine.installasionName;
@@ -276,6 +284,7 @@ public class PlayerInventoryUI : UIBase
         nameText.text = "";
         descriptionText.text = "";
         priceText.text = "";
+        quantityController.SetActive(false);
     }
 
     private void SpawnInstallation()

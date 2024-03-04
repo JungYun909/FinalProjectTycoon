@@ -271,7 +271,6 @@ public class InventoryManager : MonoBehaviour
                 inventory.machines.Remove(machine);
             }
             ReviseAllInventoriesListForMachine(1000, machine, -quantity);
-            Debug.Log($"Revision Occured. Now Machines of PlayerInventory has {inventory.machines.Count} items");
 
             OnInventoryUpdated?.Invoke(1000); // 이벤트 발생
             inventory.UpdateInspectorList();
@@ -370,7 +369,7 @@ public class InventoryManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
             GameManager.instance.dataManager.SaveInventoryData(nextInventoryID, allInventories);
         }
     }
