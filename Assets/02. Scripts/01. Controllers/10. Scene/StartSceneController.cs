@@ -24,6 +24,7 @@ public class StartSceneController : MonoBehaviour
         }
 
         GameManager.instance.dataManager.playerData.shopName = nameInputField.text;
+        GameManager.instance.firebaseDatabaseManager.SaveData();
         nameInputField.gameObject.SetActive(false);
         nameSetBtn.gameObject.SetActive(false);
         startBtn.gameObject.SetActive(true);

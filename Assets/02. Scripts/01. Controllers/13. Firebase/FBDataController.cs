@@ -46,9 +46,7 @@ public class FBDataController : MonoBehaviour
     public void OnRankBoard()
     {
         GameManager.instance.firebaseDatabaseManager.OnRoadRankData += LoadMoneyRanking;
-        GameManager.instance.firebaseDatabaseManager.LoadRankData(FirebaseDataType.RankData, "money", rankValue);
-
-        //LoadPlayerMoneyRanking();
+        GameManager.instance.firebaseDatabaseManager.LoadRankData(FirebaseDataType.RankData, "earnedPerDay", rankValue);
     }
 
     private void LoadMoneyRanking(Queue<(string, int)> curRank)
@@ -79,8 +77,10 @@ public class FBDataController : MonoBehaviour
     private void LoadPlayerMoneyRanking()
     {
         FBRankSlotController playerSlot = Instantiate(rankSlotPrefab, slots);
+        Debug.Log(GameManager.instance.firebaseDatabaseManager._rankData.userName);
+        Debug.Log(GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay.ToString());
         playerSlot.playerRank.text =
-            GameManager.instance.firebaseDatabaseManager.LoadPlayerRankData(FirebaseDataType.RankData, "money").ToString();
+            GameManager.instance.firebaseDatabaseManager.LoadPlayerRankData(FirebaseDataType.RankData, "earnedPerDay").ToString();
         playerSlot.playerID.text = GameManager.instance.firebaseDatabaseManager._rankData.userName;
         playerSlot.playerMoney.text = GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay.ToString();
     }

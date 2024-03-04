@@ -77,6 +77,7 @@ public class LogInController : MonoBehaviour
             text += GameManager.instance.dataManager.playerData.shopName;
             ConsoleSet(text);   
             logInBtn.gameObject.SetActive(sign);
+            GameManager.instance.firebaseDatabaseManager.SaveData();
         }
         else
         {
@@ -86,6 +87,7 @@ public class LogInController : MonoBehaviour
             shopNameBtn.SetActive(true);
             string text = "가게 이름이 뭐야?";
             ConsoleSet(text);
+            GameManager.instance.firebaseDatabaseManager.SaveData();
         }
     }
 

@@ -143,7 +143,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
                         if (title == FirebaseDataType.RankData)
                         {
                             rankList.Enqueue((childSnapshot.Child("userName").Value.ToString(),
-                                int.Parse(childSnapshot.Child("money").Value.ToString())));
+                                int.Parse(childSnapshot.Child("earnedPerDay").Value.ToString())));
                         }
                     }
                     Debug.Log(rankList.Count);
@@ -154,7 +154,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
     
     public int LoadPlayerRankData(FirebaseDataType title, string type)
     {
-        _reference.Child(title.ToString()).OrderByChild(type).GetValueAsync()
+        _reference.Child(title.ToString()).OrderByChild(type).LimitToLast(100).GetValueAsync()
             .ContinueWithOnMainThread(
                 task =>
                 {
@@ -167,16 +167,16 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     }
 
                     DataSnapshot snapshot = task.Result;
-                    
-                    var orderedSnapshot = snapshot.Children.OrderByDescending(childSnapshot => childSnapshot.Child(type).Value);
 
                     foreach (var childSnapshot in snapshot.Children)
                     {
                         if (title == FirebaseDataType.RankData)
                         {
+                            Debug.Log("INININININasadasd");
                             if (childSnapshot.Child("userId").Value.ToString() != _rankData.userID)
                             {
                                 count++;
+                                Debug.Log("INININININ");
                                 continue;
                             }
                             
