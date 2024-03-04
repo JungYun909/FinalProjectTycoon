@@ -9,11 +9,11 @@ public class LogInController : MonoBehaviour
 {
     public TMP_InputField email;
     public TMP_InputField password;
-
-    public TextMeshProUGUI outPutTitleText;
+    
     public TextMeshProUGUI outPutText;
-    public GameObject messageObj;
     public Button logInBtn;
+    public GameObject ShopNameIF;
+    public GameObject console;
 
     private void Start()
     {
@@ -25,31 +25,22 @@ public class LogInController : MonoBehaviour
 
     private void OnCreate(string userID)
     {
-        if(!messageObj.activeSelf)
-            messageObj.SetActive(true);
-        
-        outPutTitleText.text = "계정이 생성되었습니다";
-        outPutText.text = "환영합니다, 로그인하여 플레이해주세요";
+        ConsoleSet("가게 이름이 뭐야?");
+        ShopNameIF.SetActive(true);
     }
+    
 
     private void OnError(Exception e)
     {
-        if (!messageObj.activeSelf)
-            messageObj.SetActive(true);
-
-        outPutTitleText.text = "에러";
-        outPutText.text = e.ToString();
-        Debug.Log(e);
+        ConsoleSet(e.ToString());
     }
 
     private void OnChangeState(bool sign)
     {
-        if (!messageObj.activeSelf)
-            messageObj.SetActive(true);
+        string text = sign ? "안녕 " : "잘가 ";
+        text += GameManager.instance.dataManager.playerData.shopName;
         
-        outPutText.text = sign ? "환영합니다 " : "안녕히가세요 ";
-        outPutText.text += GameManager.instance.firebaseAuthManager.UserID;
-        outPutText.text += "님";
+        ConsoleSet(text);   
 
         logInBtn.gameObject.SetActive(sign);
     }
@@ -68,5 +59,26 @@ public class LogInController : MonoBehaviour
     {
         GameManager.instance.firebaseAuthManager.LogOut();
     }
-    
+
+    public void ConsoleSet(string text)
+    {
+        if (!console.activeSelf)
+            console.SetActive(true);
+
+        outPutText.text = text;
+    }
+
+    private void AddConsoleText(string text)
+    {
+        outPutText.text += text;
+    }
+
+    private void ResetConsole()
+    {
+        if (!console.activeSelf)
+            console.SetActive(false);
+
+        outPutText.text = "";
+    }
+
 }

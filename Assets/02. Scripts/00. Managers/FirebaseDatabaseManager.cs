@@ -15,6 +15,7 @@ public enum FirebaseDataType
 public class RankData
 {
     public string userID;
+    public string userName;
     public int money;
 }
 
@@ -34,6 +35,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
     public void SaveData(string userID)
     {
         _rankData.userID = userID;
+        _rankData.userName = GameManager.instance.dataManager.playerData.shopName;
         _rankData.money = GameManager.instance.dataManager.playerData.money;
 
         RankData rankData = new RankData();
@@ -41,6 +43,11 @@ public class FirebaseDatabaseManager : MonoBehaviour
         string jsonData = JsonUtility.ToJson(rankData);
         _reference.Child(FirebaseDataType.RankData.ToString()).Child(userID).SetRawJsonValueAsync(jsonData);
         Debug.Log("save");
+    }
+
+    public void FindData(string data)
+    {
+        
     }
     
     public void AASaveData()
@@ -83,6 +90,38 @@ public class FirebaseDatabaseManager : MonoBehaviour
     //     return null;
     // }
 
+    public string FindRankData(FirebaseDataType title, string method, string find, string findType)
+    {
+        _reference.Child(title.ToString()).GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCanceled || task.IsFaulted)
+            {
+                Debug.Log("랭킹 탑10 불러오기 실패");
+                return null;
+            }
+            
+            DataSnapshot snapshot = task.Result;
+
+            foreach (var childSnapshot in snapshot.Children)
+            {
+                if (childSnapshot.Child(method) == null || childSnapshot.Child(findType) == null)
+                {
+                    Debug.Log("찾는 항목이 없습니다");
+                    return null;
+                }
+                
+                if( childSnapshot.Child(method).Value.ToString() != find)
+                    continue;
+                
+                return childSnapshot.Child(findType).Value.ToString();
+            }
+
+            return null;
+        });
+        
+        return null;
+    }
+
     public void LoadRankData(FirebaseDataType title, string type, int maxValue)
     {
         _reference.Child(title.ToString()).OrderByChild(type).LimitToLast(maxValue).GetValueAsync()
@@ -92,6 +131,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     if (task.IsCanceled || task.IsFaulted)
                     {
                         Debug.Log("랭킹 탑10 불러오기 실패");
+                        return;
                     }
 
                     DataSnapshot snapshot = task.Result;

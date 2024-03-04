@@ -77,7 +77,7 @@ public class FirebaseAuthManager : MonoBehaviour
         auth.SignOut();
     }
 
-    public void OnLogError(AggregateException e)
+    private void OnLogError(AggregateException e)
     {
         if (e != null)
         {
