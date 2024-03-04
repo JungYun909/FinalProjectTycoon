@@ -10,12 +10,32 @@ public class FBDataController : MonoBehaviour
     [SerializeField] private Transform slots;
     [SerializeField] private FBRankSlotController rankSlotPrefab;
 
+    private int chargePerDay;
+
     private Queue<(string, int)> rankList;
     
     private void Start()
     {
         GameManager.instance.firebaseDatabaseManager.InitSet();
         GameManager.instance.firebaseAuthManager.CreatIDEvent += SaveData;
+        GameManager.instance.statManager.OnMoneyChange += EarnedPerDay;
+        GameManager.instance.statManager.onDateChanged += ResetEarnedPerDay;
+    }
+
+    private void ResetEarnedPerDay()
+    {
+        if (GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay < chargePerDay)
+        {
+            GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay = chargePerDay;
+        }
+
+        chargePerDay = 0;
+        SaveData();
+    }
+
+    private void EarnedPerDay(int money)
+    {
+        chargePerDay += money;
     }
 
     private void SaveData()
@@ -33,6 +53,11 @@ public class FBDataController : MonoBehaviour
 
     private void LoadMoneyRanking(Queue<(string, int)> curRank)
     {
+        foreach (GameObject child in slots)
+        {
+            Destroy(child);
+        }
+        
         rankList = new Queue<(string, int)>(curRank);
 
         int count = rankList.Count;
@@ -46,20 +71,18 @@ public class FBDataController : MonoBehaviour
             curSlot.playerID.text = id;
             curSlot.playerMoney.text = money.ToString();
         }
+        
+        LoadPlayerMoneyRanking();
         GameManager.instance.firebaseDatabaseManager.OnRoadRankData -= LoadMoneyRanking;
     }
     
     private void LoadPlayerMoneyRanking()
     {
-        FirebaseDataType title = FirebaseDataType.RankData;
-        string playerID = GameManager.instance.firebaseDatabaseManager._rankData.userID;
-        int playerMoney = GameManager.instance.firebaseDatabaseManager._rankData.money;
-        string type = "money";
-        FBRankSlotController curSlot = Instantiate(rankSlotPrefab, slots);
-        curSlot.playerRank.text =
-            GameManager.instance.firebaseDatabaseManager.LoadPlayerRankData(FirebaseDataType.RankData, type, playerID).ToString();
-        curSlot.playerID.text = playerID;
-        curSlot.playerMoney.text = playerMoney.ToString();
+        FBRankSlotController playerSlot = Instantiate(rankSlotPrefab, slots);
+        playerSlot.playerRank.text =
+            GameManager.instance.firebaseDatabaseManager.LoadPlayerRankData(FirebaseDataType.RankData, "money").ToString();
+        playerSlot.playerID.text = GameManager.instance.firebaseDatabaseManager._rankData.userName;
+        playerSlot.playerMoney.text = GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay.ToString();
     }
 
     public void AAA()

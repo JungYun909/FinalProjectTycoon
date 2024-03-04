@@ -37,6 +37,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
     public delegate void OnStatChanged();       //스탯 변경시 관련 UI들이 업데이트 로직을 불러오기 위한 대리자 생성
     public event OnStatChanged onStatChanged;   //이벤트 선언
     public event Action onDateChanged;
+    public event Action<int> OnMoneyChange;
     
     private void Awake()	    //TODO
     {
@@ -122,6 +123,7 @@ public class StatManager : MonoBehaviour            // 플레이어 (가게) 정
             }
         }
         onStatChanged?.Invoke(); // 스탯이 변경될 때 이벤트 발생
+        OnMoneyChange?.Invoke(modGold);
         return GameManager.instance.dataManager.playerData.money;
     }
 

@@ -16,7 +16,7 @@ public class RankData
 {
     public string userID;
     public string userName;
-    public int money;
+    public int earnedPerDay;
 }
 
 public class FirebaseDatabaseManager : MonoBehaviour
@@ -35,8 +35,8 @@ public class FirebaseDatabaseManager : MonoBehaviour
     public void SaveData()
     {
         _rankData.userID = GameManager.instance.firebaseAuthManager.userID;
-        _rankData.userName = GameManager.instance.dataManager.playerData.shopName;
-        _rankData.money = GameManager.instance.dataManager.playerData.money;
+        _rankData.userName = GameManager.instance.dataManager.playerData.shopName + "#" +
+                             _rankData.userID.Substring(0, 2);
 
         RankData rankData = new RankData();
         rankData = _rankData;
@@ -55,7 +55,8 @@ public class FirebaseDatabaseManager : MonoBehaviour
         for (int i = 0; i < 20; i++)
         {
             _rankData.userID = i.ToString();
-            _rankData.money = 1000 * Random.Range(1000, 20000);
+            _rankData.userName = i.ToString();
+            _rankData.earnedPerDay = 1000 * Random.Range(1, 20);
             RankData rankData = new RankData();
             rankData = _rankData;
             string jsonData = JsonUtility.ToJson(rankData);
@@ -90,37 +91,37 @@ public class FirebaseDatabaseManager : MonoBehaviour
     //     return null;
     // }
 
-    public string FindRankData(FirebaseDataType title, string method, string find, string findType)
-    {
-        _reference.Child(title.ToString()).GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.IsCanceled || task.IsFaulted)
-            {
-                Debug.Log("랭킹 탑10 불러오기 실패");
-                return null;
-            }
-            
-            DataSnapshot snapshot = task.Result;
-
-            foreach (var childSnapshot in snapshot.Children)
-            {
-                if (childSnapshot.Child(method) == null || childSnapshot.Child(findType) == null)
-                {
-                    Debug.Log("찾는 항목이 없습니다");
-                    return null;
-                }
-                
-                if( childSnapshot.Child(method).Value.ToString() != find)
-                    continue;
-                
-                return childSnapshot.Child(findType).Value.ToString();
-            }
-
-            return null;
-        });
-        
-        return null;
-    }
+    // public string FindRankData(FirebaseDataType title, string method, string find, string findType)
+    // {
+    //     _reference.Child(title.ToString()).GetValueAsync().ContinueWithOnMainThread(task =>
+    //     {
+    //         if (task.IsCanceled || task.IsFaulted)
+    //         {
+    //             Debug.Log("랭킹 탑10 불러오기 실패");
+    //             return null;
+    //         }
+    //         
+    //         DataSnapshot snapshot = task.Result;
+    //
+    //         foreach (var childSnapshot in snapshot.Children)
+    //         {
+    //             if (childSnapshot.Child(method) == null || childSnapshot.Child(findType) == null)
+    //             {
+    //                 Debug.Log("찾는 항목이 없습니다");
+    //                 return null;
+    //             }
+    //             
+    //             if( childSnapshot.Child(method).Value.ToString() != find)
+    //                 continue;
+    //             
+    //             return childSnapshot.Child(findType).Value.ToString();
+    //         }
+    //
+    //         return null;
+    //     });
+    //     
+    //     return null;
+    // }
 
     public void LoadRankData(FirebaseDataType title, string type, int maxValue)
     {
@@ -146,11 +147,12 @@ public class FirebaseDatabaseManager : MonoBehaviour
                         }
                     }
                     Debug.Log(rankList.Count);
+                    
                     OnRoadRankData?.Invoke(rankList);
                 });
     }
     
-    public int LoadPlayerRankData(FirebaseDataType title, string type, string id)
+    public int LoadPlayerRankData(FirebaseDataType title, string type)
     {
         _reference.Child(title.ToString()).OrderByChild(type).GetValueAsync()
             .ContinueWithOnMainThread(
@@ -165,12 +167,14 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     }
 
                     DataSnapshot snapshot = task.Result;
+                    
+                    var orderedSnapshot = snapshot.Children.OrderByDescending(childSnapshot => childSnapshot.Child(type).Value);
 
                     foreach (var childSnapshot in snapshot.Children)
                     {
                         if (title == FirebaseDataType.RankData)
                         {
-                            if (childSnapshot.Child("userId").Value.ToString() != id)
+                            if (childSnapshot.Child("userId").Value.ToString() != _rankData.userID)
                             {
                                 count++;
                                 continue;
