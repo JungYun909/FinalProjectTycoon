@@ -70,8 +70,8 @@ public class LogInController : MonoBehaviour
         {
             if (!console.gameObject.activeSelf || logInBtn.gameObject.activeSelf)
             {
-                console.gameObject.SetActive(true);
-                logInBtn.gameObject.SetActive(false);
+                logIn.SetActive(false);
+                startBtn.gameObject.SetActive(true);
             }
             string text = sign ? "안녕 " : "잘가 ";
             text += GameManager.instance.dataManager.playerData.shopName;
