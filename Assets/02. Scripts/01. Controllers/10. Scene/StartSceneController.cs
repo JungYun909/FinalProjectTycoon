@@ -17,7 +17,7 @@ public class StartSceneController : MonoBehaviour
 
     public void OnNameSetBtn()
     {
-        if (!CanName(nameInputField.text))
+        if (!CanName(nameInputField.text) || nameInputField.text == "")
         {
             namingWarning.SetActive(true);
             return;
@@ -33,6 +33,14 @@ public class StartSceneController : MonoBehaviour
     {
         GameManager.instance.dataManager.SaveData();
         GameManager.instance.sceneManager.ChangeScene(SceneType.MainScene.ToString());
+    }
+    
+    public void OnResetBtn()
+    {
+        GameManager.instance.dataManager.ResetData();
+        GameManager.instance.dataManager.SaveData();
+        GameManager.instance.dataManager.ResetInventoryAndDestinationData();
+        InitSet();
     }
 
     private bool CanName(string text)

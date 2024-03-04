@@ -20,9 +20,8 @@ public class InstallationSpawnController : MonoBehaviour
 
     private void Update()
     {
-        if(!_destiantionController.destination[1] || !_controller._installationData.canSpawn || GameManager.instance.dataManager.playerData.money < _controller._installationData.spawnData.price)
+        if (!_destiantionController.destination[1] || !_destiantionController.destination[1].activeSelf || !_controller._installationData.canSpawn || GameManager.instance.dataManager.playerData.money < _controller._installationData.spawnData.price)
             return;
-
         spawnTimer += Time.deltaTime;
 
         if (spawnTimer > _controller._installationData.spawnDelay - (animTime * 0.8f) && startAnim == false)

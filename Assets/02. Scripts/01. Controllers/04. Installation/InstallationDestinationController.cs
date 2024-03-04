@@ -44,15 +44,14 @@ public class InstallationDestinationController : MonoBehaviour
             StopCoroutine(destinationCoroutine);
             destinationCoroutine = null;
             lineObj.SetActive(false);
-        }
-        if (destination[0] != null && destination[1] != null)
-        {
-            GameManager.instance.destinationManager.RegisterDestinationInfo(destination[0].GetComponent<InstallationController>().destinationID, destination[1].GetComponent<InstallationController>().destinationID);
-            this.gameObject.GetComponentInParent<InstallationController>().SaveDestination();
-        }
-        else if (destination[0] != null)
-        {
-            GameManager.instance.destinationManager.DeleteDestinationInfo(destination[0].GetComponentInParent<InstallationController>().destinationID);
+            if (destination[0] != null && destination[1] != null)
+            {
+                GameManager.instance.destinationManager.RegisterDestinationInfo(destination[0].GetComponent<InstallationController>().destinationID, destination[1].GetComponent<InstallationController>().destinationID);
+            }
+            else if (destination[0] != null)
+            {
+                GameManager.instance.destinationManager.DeleteDestinationInfo(destination[0].GetComponentInParent<InstallationController>().destinationID);
+            }
         }
     }
 

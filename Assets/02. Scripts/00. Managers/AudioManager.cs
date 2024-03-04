@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
     private bool onSfx;
 
 
-    [SerializeField] private Sprite[] soundImage;
+    public Sprite[] soundImage;
 
     private void Awake()
     {

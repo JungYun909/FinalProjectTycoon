@@ -9,6 +9,8 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
 
     public bool happyEnd;
     public UIBase questPrefab;
+    public event Action DebtCompensated;
+    public int paidAmount;
     private void Start()
     {
         GameManager.instance.statManager.onDateChanged += PayBack;
@@ -30,26 +32,34 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
         {
             if (GameManager.instance.dataManager.playerData.money >= payBackGold)
             {
+                paidAmount = payBackGold;
                 GameManager.instance.statManager.SpendGold(payBackGold);
                 GameManager.instance.dataManager.playerData.debt -= payBackGold;
                 GameManager.instance.dataManager.playerData.warningCount++;
+                DebtCompensated?.Invoke();
             }
-            else
+            else if(GameManager.instance.dataManager.playerData.money >=500)
             {
-                GameManager.instance.statManager.SpendGold(GameManager.instance.dataManager.playerData.money);
-                GameManager.instance.dataManager.playerData.debt -= GameManager.instance.dataManager.playerData.money;
+                paidAmount = 500;
+                GameManager.instance.statManager.SpendGold(500);
+                GameManager.instance.dataManager.playerData.debt -= 500;
+                GameManager.instance.dataManager.playerData.warningCount--;
+                
+            }
+            else if (GameManager.instance.dataManager.playerData.money >= 500)
+            {
+                paidAmount = 0;
                 GameManager.instance.dataManager.playerData.warningCount--;
             }
-            
         }
-        
         if (GameManager.instance.dataManager.playerData.warningCount < -2)
         {
             GameManager.instance.sceneManager.ChangeScene(SceneType.EndScene.ToString());
             GameManager.instance.dataManager.ResetData();
             Debug.Log("YouLose");
         }
-        
+        DebtCompensated?.Invoke();
+        paidAmount = 0;
     }
 
     private void HappyEnding()

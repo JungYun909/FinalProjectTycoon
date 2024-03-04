@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public interface IInteractable
@@ -46,30 +47,23 @@ public class InteractionManager : MonoBehaviour
             {
                 if (r.gameObject.GetComponent<TutorialMissionID>() == null)
                     continue;
-                Debug.Log(r.gameObject.GetComponent<TutorialMissionID>().missionID);
-                Debug.Log(targetID);
                 if (r.gameObject.GetComponent<TutorialMissionID>().missionID == targetID)
                 {
+                    r.gameObject.GetComponent<Button>().onClick.Invoke();
                     onTuto?.Invoke();
                 }
-                Debug.Log("UI 검출 : " + r.gameObject.name);
-                Debug.Log(r.gameObject.GetComponent<TutorialMissionID>().missionID);
-                Debug.Log(targetID);
             }
         }
 
-        if(interactionObject != null)
-            Debug.Log("iiiasdiasidaisdi");
+        
         //클릭 중일떄 발생
         if (value.isPressed && interactionObject == null)
         {
             RaycastHit2D ray = Physics2D.Raycast(curMouseDirection, Vector2.zero, 0f, LayerMask.GetMask("Installation"));
-            //Debug.Log(ray.collider.gameObject.name);
             if( !ray.collider || ray.collider.gameObject.GetComponent<IInteractable>() == null)
                 return;
         
             interactionObject = ray.collider.gameObject.GetComponent<IInteractable>();
-            Debug.Log("INRAY");
             if (interactionObject.Continuous()) //오브젝트의 상호작용이 누르는 동안 반복돠야한다면
             {
                 interactionCoroutine = StartCoroutine(InteractionCoroutine());

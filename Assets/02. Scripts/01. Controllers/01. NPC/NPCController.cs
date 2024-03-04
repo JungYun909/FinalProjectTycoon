@@ -65,7 +65,10 @@ public class NPCController : MonoBehaviour
             }
         }
 
-        favoriteFood = curNPCData.favoriteFood[Random.Range(0, curNPCData.favoriteFood.Count)];
+        if (GameManager.instance.dataManager.playerData.day > 2)
+            favoriteFood = curNPCData.favoriteFood[Random.Range(0, curNPCData.favoriteFood.Count)];
+        else
+            favoriteFood = GameManager.instance.inventoryManager.itemDatabase.GetItemByID(1001);
         favoriteFoodIcon.sprite = favoriteFood.sprite;
         destinationController.MachinePosInform();
     }

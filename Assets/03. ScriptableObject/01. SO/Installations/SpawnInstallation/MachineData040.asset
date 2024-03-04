@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 40
   installasionName: "\uB9C8\uB298 \uC0DD\uC0B0\uAE30"
-  description: "\uB108\uB9CC\uC758 \uB9C8\uB298"
-  price: 800
+  description: "\uB9C8\uB298\uC744 \uC8FC\uAE30\uC801\uC73C\uB85C \uC0DD\uC0B0\uD574\uC694"
+  price: 2000
   sprite: {fileID: -1595847247, guid: 7481e69166526ff4d8c1e9a28d83822a, type: 3}
   animation:
   - {fileID: 7400000, guid: 57fc5a678e8d2412694f277b7afea1aa, type: 2}
   canSpawn: 1
-  spawnDelay: 30
+  spawnDelay: 60
   spawnData: {fileID: 11400000, guid: 3620b9dfad96f0646a8512d1e4c00a78, type: 2}
   haveDoughInventory: 0
   haveIngredientInventory: 0

@@ -24,5 +24,6 @@ public class CameraMovementController : MonoBehaviour
             isMain = true;
             Debug.Log(isMain);
         }
+        GameManager.instance.uiManager.CloseAll();
     }
 }

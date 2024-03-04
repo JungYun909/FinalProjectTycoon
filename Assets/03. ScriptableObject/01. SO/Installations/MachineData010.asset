@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   installasionName: "\uBC14\uB098\uB098 \uC0DD\uC0B0\uAE30"
-  description: "\uBC14\uB098\uB098\uBA39\uC73C\uBA74 \uB108\uD55C\uD14C\uC548\uBC18\uD574"
+  description: "\uBC14\uB098\uB098\uB97C \uC8FC\uAE30\uC801\uC73C\uB85C \uC0DD\uC0B0\uD574\uC694"
   price: 2000
   sprite: {fileID: -2065713567, guid: 05d80d5b53a40fb4798c68035292a3ab, type: 3}
-  level: 0
+  animation: []
   canSpawn: 1
   spawnDelay: 60
   spawnData: {fileID: 11400000, guid: 3d45168a953f9614188993afcabfb9ec, type: 2}

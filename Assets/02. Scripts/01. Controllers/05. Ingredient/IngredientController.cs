@@ -17,7 +17,8 @@ public class IngredientController : MonoBehaviour, IInteractable
     public TestSA addImageController;
     public SpriteRenderer spriteController;
 
-    public event Action OnInteractEvent; 
+    public event Action OnInteractEvent;
+    private AbstractInventory targetInventory;
     
     private void Start()
     {
@@ -101,12 +102,23 @@ public class IngredientController : MonoBehaviour, IInteractable
                 controller = other.gameObject.GetComponent<InstallationController>();
                 controller.OnColliderInteract();
 
-                if (itemData.tag == "Dough")
-                    controller.doughContainer.Enqueue(gameObject);
+                if (itemData.id == 1 || itemData.type == 2)
+                {
+                    targetInventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
+                    if (controller._installationData != null)
+                    {
+                        if (controller._installationData.haveDoughInventory)
+                        {
+                            controller.doughContainer.Enqueue(gameObject);
+                            EnqueueItems(itemData, new List<float>(interactInstallation));
+                        }
+                    }
+                }
+
                 else if (controller.destinationID == 1)
                     return;
-                else
-                    controller.ingredients.Enqueue(itemData);
+                //else
+                //    controller.ingredients.Enqueue(itemData);
             }
         }
 
@@ -116,10 +128,14 @@ public class IngredientController : MonoBehaviour, IInteractable
             return;
         }
         if (other.gameObject.GetComponentInChildren<AbstractInventory>() == null)
+        {
             return;
-
-        AbstractInventory inventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
-        GameManager.instance.inventoryManager.AddItemToInventory(inventory.inventoryID, itemData, 1);
+        }
+        else
+        {
+            targetInventory = other.gameObject.GetComponentInChildren<AbstractInventory>();
+        }
+        GameManager.instance.inventoryManager.AddItemToInventory(targetInventory.inventoryID, itemData, 1);
     }
 
     public void VisitIngredientDataSet(InstallationController controller, ItemSO ingredientData)
@@ -134,7 +150,22 @@ public class IngredientController : MonoBehaviour, IInteractable
 
     public void VisitInstallationSet(InstallationController controller)
     {
-        if(!controller._installationData.haveIngredientInventory)
+        if(!controller._installationData.haveIngredientInventory || controller._installationData.id ==45)
             interactInstallation.Enqueue(controller._installationData.id);
+    }
+
+    public void EnqueueItems(ItemSO itemSO, List<float> interactInstallation)
+    {
+        var inventoryData = GameManager.instance.inventoryManager.GetInventoryDataById(targetInventory.inventoryID);
+        if (inventoryData == null)
+        {
+            Debug.Log($"Inventory data not found for ID: {targetInventory.inventoryID}");
+            return;
+        }
+        if (inventoryData != null)
+        {
+            QueueData info = new QueueData(itemSO.id, interactInstallation);
+            inventoryData.queueData.Add(info);
+        }
     }
 }

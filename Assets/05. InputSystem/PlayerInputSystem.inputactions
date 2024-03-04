@@ -38,6 +38,17 @@
                 },
                 {
                     "name": "",
+                    "id": "5b738310-f5ba-4789-ab96-2827c2e611b4",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a6e65e6e-de20-4f6c-868c-48c41115e01c",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -49,7 +60,7 @@
                 },
                 {
                     "name": "",
-                    "id": "a56d343a-dcbf-4ba1-9f7d-1cbfdd42f077",
+                    "id": "d5f3d7c7-cbc6-4947-96cd-e5ddb256409a",
                     "path": "<Touchscreen>/position",
                     "interactions": "",
                     "processors": "",

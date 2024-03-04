@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.Rendering;
+//using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -18,6 +18,7 @@ public class MenuButton : MonoBehaviour
     private List<RectTransform> btnsPos = new List<RectTransform>();
 
     private bool OnBtn;
+    private bool Move;
     
     private Vector2 backBtnDestination;
     private Vector2 backBtnPosition;
@@ -34,6 +35,7 @@ public class MenuButton : MonoBehaviour
         {
             btnsPos.Add(btn.GetComponent<RectTransform>());
         }
+        //StartCoroutine(NotInteractable());
     }
 
     public void OpenUI(UIBase openUI)
@@ -49,6 +51,7 @@ public class MenuButton : MonoBehaviour
     public void BackBtn()
     {
         OnBtn = false;
+        OffBtns();
         backBtn.interactable = false;
         
         GameManager.instance.uiManager.CloseAll();
@@ -90,25 +93,32 @@ public class MenuButton : MonoBehaviour
 
     private IEnumerator moveBtn(RectTransform movePos, Vector2 desPos)
     {
-        while (Vector2.Distance(movePos.anchoredPosition,desPos) > 20f)
+        while (Vector2.Distance(movePos.anchoredPosition,desPos) > 10f)
         {
+            Move = true;
             movePos.anchoredPosition =
                 Vector2.Lerp(movePos.anchoredPosition, desPos, speed);
 
             yield return null;
         }
 
-        if (OnBtn)
+        if (Move)
         {
-            backBtn.interactable = true;
-        }
-        else
-        {
-            OnBtns();
+            Move = false;
+            yield return new WaitForSeconds(1f);
+            
+            if (OnBtn)
+            {
+                backBtn.interactable = true;
+            }
+            else
+            {
+                OnBtns();
+            }
         }
     }
     
-    private void OffBtns()
+    public void OffBtns()
     {
         foreach (var btn in btns)
         {
@@ -116,11 +126,18 @@ public class MenuButton : MonoBehaviour
         }
     }
     
-    private void OnBtns()
+    public void OnBtns()
     {
         foreach (var btn in btns)
         {
             btn.interactable = true;
         }
     }
+
+    public void LoadScene(string sceneType)
+    {
+        GameManager.instance.sceneManager.ChangeScene(sceneType);
+    }
+
+    
 }

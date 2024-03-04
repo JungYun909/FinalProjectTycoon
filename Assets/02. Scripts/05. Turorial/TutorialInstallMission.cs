@@ -16,7 +16,6 @@ public class TutorialInstallMission : TutorialBase
     {
         if (curMachineSO.installasionName.Contains(targetName))
             completed = true;
-        Debug.Log(completed);
     }
 
     public override void Execute(TutorialController tutorialController)

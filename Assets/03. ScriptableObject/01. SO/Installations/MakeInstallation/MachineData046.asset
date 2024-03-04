@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 46
   installasionName: "\uB0C9\uC7A5\uACE0"
-  description: "\uC2DC\uAC04\uC774 \uD544\uC694\uD55C\uAC00\uC694?"
-  price: 3000
+  description: "\uB2E4\uC591\uD55C \uC7AC\uB8CC\uB97C \uAE30\uB2E4\uB838\uB2E4\uAC00
+    \uAEBC\uB0B4\uC918\uC694"
+  price: 6000
   sprite: {fileID: -845289240, guid: 7500a3971cfe69c42a1e1b902b60f5c5, type: 3}
   animation:
   - {fileID: 7400000, guid: 1550133dc144543f79409bdcbbee53c0, type: 2}
@@ -24,6 +25,6 @@ MonoBehaviour:
   spawnData: {fileID: 0}
   haveDoughInventory: 1
   haveIngredientInventory: 0
-  makeDelay: 10
+  makeDelay: 120
   maxSlot: 10
   completeMake: 0

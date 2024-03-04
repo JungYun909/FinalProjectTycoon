@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: ItemData2001
   m_EditorClassIdentifier: 
   id: 2001
-  type: 2001
+  type: 4
   itemName: "\uC6D0\uD615\uCEE4\uD130"
   description: "\uC6D0\uD615\uC73C\uB85C \uC798\uB77C\uC900\uB2E4"
   recipe: "\uB3C4\uAD6C\uC0C1\uC810\uC5D0\uC11C \uAD6C\uB9E4"
   price: 2500
   sprite: {fileID: 21300000, guid: 388e6a2f1349ded47b9ec81e9fd8e2bf, type: 3}
   tag: Ingredient
+  level: 0
   canMove: 1
   moveSpeed: 1
   canStack: 1

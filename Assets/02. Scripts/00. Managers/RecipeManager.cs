@@ -21,13 +21,11 @@ public class RecipeManager : MonoBehaviour
     
     public int CompareWithResipe(string resipe)
     {
-        Debug.Log(resipe);
         for (int i = 0; i < data_Resipe.Count; i++)
         {
             if (data_Resipe[i][ResipeType.Recipe.ToString()].ToString() == resipe)
             {
                 OnCompareRecipe?.Invoke((int)data_Resipe[i][ResipeType.ID.ToString()]);
-                Debug.Log((int)data_Resipe[i][ResipeType.ID.ToString()]);
                 return (int)data_Resipe[i][ResipeType.ID.ToString()];
             }
         }

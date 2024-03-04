@@ -25,11 +25,13 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     public event DailyResultWindowOn OnDailyWindowOpen;
 
     public string lastUIName;
+
+    private int paidDebtAmountToDelever;
     
     public void Initialize()
     {
 
-        GameManager.instance.statManager.onDateChanged += CheckSceneAndOpenDailyResultWindow;
+        GameManager.instance.logicManager.DebtCompensated += CheckSceneAndOpenDailyResultWindow;
         GameManager.instance.sceneManager.sceneInfo += HandleScene;
     }
 
@@ -41,7 +43,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     private void OnDisable()
     {
         GameManager.instance.sceneManager.sceneInfo -= HandleScene;
-        GameManager.instance.statManager.onDateChanged -= CheckSceneAndOpenDailyResultWindow;
+        GameManager.instance.logicManager.DebtCompensated -= CheckSceneAndOpenDailyResultWindow;
     }
 
     private void HandleScene(SceneType scene)
@@ -101,7 +103,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
         }
         uiStack.Push(uiInstance);  //ui프리팹을 열어줌
         uiInstance.UpdateUI();
-        Debug.Log(uiInstance.gameObject.name);
         lastUIName = uiInstance.name;
     }
 
@@ -170,7 +171,7 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "TitleScene")
         {
-            if(GameManager.instance.dataManager.playerData.day != 2)
+            if(GameManager.instance.dataManager.playerData.day != 1)
             {
                 OpenDailyResultWindow();
             }
