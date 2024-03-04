@@ -11,20 +11,23 @@ public class FirebaseAuthManager : MonoBehaviour
     private FirebaseAuth auth;
     private FirebaseUser user;
 
-    public string UserID => user.UserId;
+    public string userID => user.UserId;
 
-    public Action<bool> LogChangeEvent;
-    public Action<string> CreatIDEvent;
-    public Action<Exception> LogErrorEvent;
+    public event Action<bool> LogChangeEvent;
+    public event Action CreatIDEvent;
+    public event Action<Exception> LogErrorEvent;
     public void InitSet()
     {
         auth = FirebaseAuth.DefaultInstance;
         auth.StateChanged += OnChanged;
+        
+        if(auth.CurrentUser != null)
+            LogOut();
     }
 
     private void OnChanged(object sender, EventArgs e)
     {
-        if (auth.CurrentUser != user)
+        if (auth.CurrentUser != user && GameManager.instance.dataManager.playerData.shopName != "")
         {
             bool signed = (auth.CurrentUser != user && auth.CurrentUser != null);
             if(!signed && user == null)
@@ -54,7 +57,10 @@ public class FirebaseAuthManager : MonoBehaviour
 
             Debug.Log("create");
             FirebaseUser newUser = task.Result.User;
-            CreatIDEvent?.Invoke(newUser.UserId);
+            UnityMainThreadDispatcher.Instance().Enqueue(() =>
+            {
+                CreatIDEvent?.Invoke();
+            });
         });
     }
 

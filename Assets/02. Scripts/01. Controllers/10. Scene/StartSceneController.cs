@@ -13,25 +13,7 @@ public class StartSceneController : MonoBehaviour
     
     public Button startBtn;
     public Button nameSetBtn;
-
-    private void CheckNameless()
-    {
-        if (GameManager.instance.dataManager.playerData.shopName != "")
-        {
-            nameInputField.gameObject.SetActive(false);
-            nameSetBtn.gameObject.SetActive(false);
-            startBtn.gameObject.SetActive(true);
-            
-        }
-        else
-        {
-            nameInputField.gameObject.SetActive(true);
-            nameSetBtn.gameObject.SetActive(true);
-            startBtn.gameObject.SetActive(false);
-        }
-        
-        namingWarning.SetActive(false);
-    }
+    
 
     public void OnNameSetBtn()
     {

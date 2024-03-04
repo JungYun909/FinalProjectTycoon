@@ -3,17 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LogInController : MonoBehaviour
 {
     public TMP_InputField email;
     public TMP_InputField password;
+    public TMP_InputField shopName;
     
     public TextMeshProUGUI outPutText;
     public Button logInBtn;
-    public GameObject ShopNameIF;
+
+    public GameObject shopNameSetUI;
+    public GameObject logInInput;
+    public GameObject logIn;
+    public GameObject createBtn;
+    public GameObject shopNameBtn;
     public GameObject console;
+    
+    public Button startBtn;
+
+    public event Action OnNamingEvent;
 
     private void Start()
     {
@@ -23,10 +34,28 @@ public class LogInController : MonoBehaviour
         GameManager.instance.firebaseAuthManager.CreatIDEvent += OnCreate;
     }
 
-    private void OnCreate(string userID)
+    private void OnCreate()
     {
-        ConsoleSet("가게 이름이 뭐야?");
-        ShopNameIF.SetActive(true);
+        logInInput.SetActive(false);
+        shopNameSetUI.SetActive(true);
+        createBtn.SetActive(false);
+        shopNameBtn.SetActive(true);
+        string text = "가게 이름이 뭐야?";
+        ConsoleSet(text);
+    }
+
+    public void OnNaming()
+    {
+        if (!CanName(shopName.text) || shopName.text == "")
+        {
+            ConsoleSet("불가능한 이름이에요");
+            return;
+        }
+
+        GameManager.instance.dataManager.playerData.shopName = shopName.text;
+        logIn.SetActive(false);
+        startBtn.gameObject.SetActive(true);
+        GameManager.instance.firebaseDatabaseManager.SaveData();
     }
     
 
@@ -37,12 +66,27 @@ public class LogInController : MonoBehaviour
 
     private void OnChangeState(bool sign)
     {
-        string text = sign ? "안녕 " : "잘가 ";
-        text += GameManager.instance.dataManager.playerData.shopName;
-        
-        ConsoleSet(text);   
-
-        logInBtn.gameObject.SetActive(sign);
+        if (GameManager.instance.dataManager.playerData.shopName != "")
+        {
+            if (!console.gameObject.activeSelf || logInBtn.gameObject.activeSelf)
+            {
+                console.gameObject.SetActive(true);
+                logInBtn.gameObject.SetActive(false);
+            }
+            string text = sign ? "안녕 " : "잘가 ";
+            text += GameManager.instance.dataManager.playerData.shopName;
+            ConsoleSet(text);   
+            logInBtn.gameObject.SetActive(sign);
+        }
+        else
+        {
+            logInInput.SetActive(false);
+            shopNameSetUI.SetActive(true);
+            createBtn.SetActive(false);
+            shopNameBtn.SetActive(true);
+            string text = "가게 이름이 뭐야?";
+            ConsoleSet(text);
+        }
     }
 
     public void Create()
@@ -62,23 +106,12 @@ public class LogInController : MonoBehaviour
 
     public void ConsoleSet(string text)
     {
-        if (!console.activeSelf)
-            console.SetActive(true);
-
         outPutText.text = text;
     }
 
-    private void AddConsoleText(string text)
+    private bool CanName(string text)
     {
-        outPutText.text += text;
-    }
-
-    private void ResetConsole()
-    {
-        if (!console.activeSelf)
-            console.SetActive(false);
-
-        outPutText.text = "";
+        return System.Text.RegularExpressions.Regex.IsMatch(text, "^[가-힣]*$");
     }
 
 }

@@ -32,16 +32,16 @@ public class FirebaseDatabaseManager : MonoBehaviour
         _rankData = new RankData();
     }
 
-    public void SaveData(string userID)
+    public void SaveData()
     {
-        _rankData.userID = userID;
+        _rankData.userID = GameManager.instance.firebaseAuthManager.userID;
         _rankData.userName = GameManager.instance.dataManager.playerData.shopName;
         _rankData.money = GameManager.instance.dataManager.playerData.money;
 
         RankData rankData = new RankData();
         rankData = _rankData;
         string jsonData = JsonUtility.ToJson(rankData);
-        _reference.Child(FirebaseDataType.RankData.ToString()).Child(userID).SetRawJsonValueAsync(jsonData);
+        _reference.Child(FirebaseDataType.RankData.ToString()).Child(GameManager.instance.firebaseAuthManager.userID).SetRawJsonValueAsync(jsonData);
         Debug.Log("save");
     }
 
@@ -141,7 +141,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     {
                         if (title == FirebaseDataType.RankData)
                         {
-                            rankList.Enqueue((childSnapshot.Child("userID").Value.ToString(),
+                            rankList.Enqueue((childSnapshot.Child("userName").Value.ToString(),
                                 int.Parse(childSnapshot.Child("money").Value.ToString())));
                         }
                     }

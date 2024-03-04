@@ -18,9 +18,9 @@ public class FBDataController : MonoBehaviour
         GameManager.instance.firebaseAuthManager.CreatIDEvent += SaveData;
     }
 
-    private void SaveData(string userID)
+    private void SaveData()
     {
-        GameManager.instance.firebaseDatabaseManager.SaveData(userID);
+        GameManager.instance.firebaseDatabaseManager.SaveData();
     }
 
     public void OnRankBoard()
