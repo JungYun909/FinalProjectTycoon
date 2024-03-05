@@ -17182,7 +17182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1249741362
 Transform:
   m_ObjectHideFlags: 0
@@ -22200,6 +22200,9 @@ MonoBehaviour:
   recipeManager: {fileID: 1590563971}
   questManager: {fileID: 0}
   destinationManager: {fileID: 0}
+  firebaseAuthManager: {fileID: 0}
+  firebaseDatabaseManager: {fileID: 0}
+  fbManager: {fileID: 0}
 --- !u!4 &1590563966
 Transform:
   m_ObjectHideFlags: 0

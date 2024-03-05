@@ -11,7 +11,7 @@ public class FirebaseAuthManager : MonoBehaviour
     private FirebaseAuth auth;
     private FirebaseUser user;
 
-    public string userID => user.UserId;
+    public string userID => user?.UserId;
 
     public event Action<bool> LogChangeEvent;
     public event Action CreatIDEvent;

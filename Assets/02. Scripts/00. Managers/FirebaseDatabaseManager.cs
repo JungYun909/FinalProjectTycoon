@@ -72,6 +72,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
     {
         _rankData.earnedPerDay = money;
         Debug.Log(money);
+        Debug.Log(GameManager.instance.firebaseAuthManager.userID);
         
         RankData rankData = new RankData();
         rankData = _rankData;

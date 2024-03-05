@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Firebase;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     
     public FirebaseAuthManager firebaseAuthManager;
     public FirebaseDatabaseManager firebaseDatabaseManager;
+    public FBManager fbManager;
 
     private void Awake()
     {

@@ -82,7 +82,6 @@ public class FBDataController : MonoBehaviour
 
     public void BBB(int money)
     {
-        GameManager.instance.dataManager.playerData.earnedPerDay = money;
-        GameManager.instance.firebaseDatabaseManager.SaveMoneyDate(money);
+        GameManager.instance.statManager.EarnGold(money);
     }
 }
