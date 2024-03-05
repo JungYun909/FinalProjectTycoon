@@ -10,7 +10,6 @@ public class FBDataController : MonoBehaviour
     [SerializeField] private Transform slots;
     [SerializeField] private FBRankSlotController rankSlotPrefab;
 
-    private int chargePerDay;
 
     private Queue<(string, int)> rankList;
     
@@ -18,24 +17,12 @@ public class FBDataController : MonoBehaviour
     {
         GameManager.instance.firebaseDatabaseManager.InitSet();
         GameManager.instance.firebaseAuthManager.CreatIDEvent += SaveData;
-        GameManager.instance.statManager.OnMoneyChange += EarnedPerDay;
-        GameManager.instance.statManager.onDateChanged += ResetEarnedPerDay;
+        GameManager.instance.dataManager.OnMoneyRankUpdate += SaveMoneyData;
     }
 
-    private void ResetEarnedPerDay()
+    private void SaveMoneyData(int money)
     {
-        if (GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay < chargePerDay)
-        {
-            GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay = chargePerDay;
-        }
-
-        chargePerDay = 0;
-        SaveData();
-    }
-
-    private void EarnedPerDay(int money)
-    {
-        chargePerDay += money;
+        GameManager.instance.firebaseDatabaseManager.SaveMoneyDate(money);
     }
 
     private void SaveData()
@@ -46,14 +33,15 @@ public class FBDataController : MonoBehaviour
     public void OnRankBoard()
     {
         GameManager.instance.firebaseDatabaseManager.OnRoadRankData += LoadMoneyRanking;
+        GameManager.instance.firebaseDatabaseManager.OnRoadPlayerRankData += LoadPlayerMoneyRanking;
         GameManager.instance.firebaseDatabaseManager.LoadRankData(FirebaseDataType.RankData, "earnedPerDay", rankValue);
     }
 
     private void LoadMoneyRanking(Queue<(string, int)> curRank)
     {
-        foreach (GameObject child in slots)
+        foreach (Transform child in slots)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
         
         rankList = new Queue<(string, int)>(curRank);
@@ -61,32 +49,40 @@ public class FBDataController : MonoBehaviour
         int count = rankList.Count;
         for (int i = 0; i < count; i++)
         {
-            Debug.Log(rankList.Count);
-
             var (id, money) = rankList.Dequeue(); 
             FBRankSlotController curSlot = Instantiate(rankSlotPrefab, slots);
             curSlot.playerRank.text = (i + 1).ToString();
             curSlot.playerID.text = id;
             curSlot.playerMoney.text = money.ToString();
+            
+            if (i > 0)
+            {
+                curSlot.convertedColor = new Color(0.2941f, 0.1922f, 0.1765f, 1f);
+            }
         }
         
-        LoadPlayerMoneyRanking();
+        GameManager.instance.firebaseDatabaseManager.LoadPlayerRankData(FirebaseDataType.RankData, "earnedPerDay");
         GameManager.instance.firebaseDatabaseManager.OnRoadRankData -= LoadMoneyRanking;
     }
     
-    private void LoadPlayerMoneyRanking()
+    private void LoadPlayerMoneyRanking(int rank)
     {
         FBRankSlotController playerSlot = Instantiate(rankSlotPrefab, slots);
-        Debug.Log(GameManager.instance.firebaseDatabaseManager._rankData.userName);
-        Debug.Log(GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay.ToString());
-        playerSlot.playerRank.text =
-            GameManager.instance.firebaseDatabaseManager.LoadPlayerRankData(FirebaseDataType.RankData, "earnedPerDay").ToString();
+        playerSlot.playerRank.text = rank.ToString();
         playerSlot.playerID.text = GameManager.instance.firebaseDatabaseManager._rankData.userName;
         playerSlot.playerMoney.text = GameManager.instance.firebaseDatabaseManager._rankData.earnedPerDay.ToString();
+        playerSlot.convertedColor = Color.red;
+        GameManager.instance.firebaseDatabaseManager.OnRoadPlayerRankData -= LoadPlayerMoneyRanking;
     }
 
     public void AAA()
     {
         GameManager.instance.firebaseDatabaseManager.AASaveData();
+    }
+
+    public void BBB(int money)
+    {
+        GameManager.instance.dataManager.playerData.earnedPerDay = money;
+        GameManager.instance.firebaseDatabaseManager.SaveMoneyDate(money);
     }
 }

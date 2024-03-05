@@ -26,6 +26,8 @@ public class PlayerData
     public bool deliveryClear = false;
     public bool deliveryStart = false;
 
+    public int earnedPerDay = 0;
+
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
     
@@ -75,6 +77,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public event Action OnLoadEvent;
     public event Action LoadInventoryID;
     public event Action<Vector3> PosUpdateEvent;
+    public Action<int> OnMoneyRankUpdate;
+
 
     public bool isLoadingInstallationDone = false;
 

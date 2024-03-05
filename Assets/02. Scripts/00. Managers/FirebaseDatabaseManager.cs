@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class FirebaseDatabaseManager : MonoBehaviour
     public RankData _rankData;
 
     public Action<Queue<(string, int)>> OnRoadRankData;
+    public Action<int> OnRoadPlayerRankData;
 
     public void InitSet()
     {
@@ -34,9 +36,30 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
     public void SaveData()
     {
-        _rankData.userID = GameManager.instance.firebaseAuthManager.userID;
-        _rankData.userName = GameManager.instance.dataManager.playerData.shopName + "#" +
-                             _rankData.userID.Substring(0, 2);
+        if (GameManager.instance.firebaseAuthManager.userID != null)
+        {
+            _rankData.userID = GameManager.instance.firebaseAuthManager.userID;
+        }
+        else
+        {
+            Debug.Log("notExist");
+            return;
+        }
+
+        if (GameManager.instance.dataManager.playerData.shopName != "" || _rankData.userID != null)
+        {
+            _rankData.userName = GameManager.instance.dataManager.playerData.shopName + "#" + _rankData.userID.Substring(0, 2);
+        }
+        else
+        {
+            Debug.Log("notExist2");
+            return;
+        }
+
+        _rankData.earnedPerDay = GameManager.instance.dataManager.playerData.earnedPerDay;
+        
+        Debug.Log(_rankData.userID);
+        Debug.Log(_rankData.userName);
 
         RankData rankData = new RankData();
         rankData = _rankData;
@@ -45,9 +68,15 @@ public class FirebaseDatabaseManager : MonoBehaviour
         Debug.Log("save");
     }
 
-    public void FindData(string data)
+    public void SaveMoneyDate(int money)
     {
+        _rankData.earnedPerDay = money;
+        Debug.Log(money);
         
+        RankData rankData = new RankData();
+        rankData = _rankData;
+        string jsonData = JsonUtility.ToJson(rankData);
+        _reference.Child(FirebaseDataType.RankData.ToString()).Child(GameManager.instance.firebaseAuthManager.userID).SetRawJsonValueAsync(jsonData);
     }
     
     public void AASaveData()
@@ -65,64 +94,6 @@ public class FirebaseDatabaseManager : MonoBehaviour
         }
     }
 
-    // public RankData LoadData(string userID)
-    // {
-    //     DatabaseReference curDatabaseReference = _reference.Child(userID);
-    //
-    //     curDatabaseReference.GetValueAsync().ContinueWithOnMainThread(task =>
-    //     {
-    //         if (task.IsCanceled || task.IsFaulted)
-    //         {
-    //             Debug.Log("저장 데이터를 불러오는데 실패하였습니다");
-    //             return null;
-    //         }
-    //
-    //         DataSnapshot snapshot = task.Result;
-    //
-    //         if (!snapshot.Exists)
-    //             return null;
-    //
-    //         string jsonData = snapshot.GetRawJsonValue();
-    //         RankData rankData = JsonUtility.FromJson<RankData>(jsonData);
-    //
-    //         return rankData;
-    //     });
-    //     
-    //     return null;
-    // }
-
-    // public string FindRankData(FirebaseDataType title, string method, string find, string findType)
-    // {
-    //     _reference.Child(title.ToString()).GetValueAsync().ContinueWithOnMainThread(task =>
-    //     {
-    //         if (task.IsCanceled || task.IsFaulted)
-    //         {
-    //             Debug.Log("랭킹 탑10 불러오기 실패");
-    //             return null;
-    //         }
-    //         
-    //         DataSnapshot snapshot = task.Result;
-    //
-    //         foreach (var childSnapshot in snapshot.Children)
-    //         {
-    //             if (childSnapshot.Child(method) == null || childSnapshot.Child(findType) == null)
-    //             {
-    //                 Debug.Log("찾는 항목이 없습니다");
-    //                 return null;
-    //             }
-    //             
-    //             if( childSnapshot.Child(method).Value.ToString() != find)
-    //                 continue;
-    //             
-    //             return childSnapshot.Child(findType).Value.ToString();
-    //         }
-    //
-    //         return null;
-    //     });
-    //     
-    //     return null;
-    // }
-
     public void LoadRankData(FirebaseDataType title, string type, int maxValue)
     {
         _reference.Child(title.ToString()).OrderByChild(type).LimitToLast(maxValue).GetValueAsync()
@@ -138,55 +109,59 @@ public class FirebaseDatabaseManager : MonoBehaviour
                     DataSnapshot snapshot = task.Result;
                     Queue<(string, int)> rankList = new Queue<(string, int)>();
 
-                    foreach (var childSnapshot in snapshot.Children)
+                    for (int i = (int)snapshot.ChildrenCount; i > 0; i--)
                     {
+                        DataSnapshot childSnapshot = snapshot.Children.ElementAt(i - 1);
+                        
                         if (title == FirebaseDataType.RankData)
                         {
                             rankList.Enqueue((childSnapshot.Child("userName").Value.ToString(),
                                 int.Parse(childSnapshot.Child("earnedPerDay").Value.ToString())));
                         }
                     }
-                    Debug.Log(rankList.Count);
                     
                     OnRoadRankData?.Invoke(rankList);
                 });
     }
     
-    public int LoadPlayerRankData(FirebaseDataType title, string type)
+    public void LoadPlayerRankData(FirebaseDataType title, string type)
     {
-        _reference.Child(title.ToString()).OrderByChild(type).LimitToLast(100).GetValueAsync()
+        _reference.Child(title.ToString()).OrderByChild(type).GetValueAsync()
             .ContinueWithOnMainThread(
                 task =>
                 {
-                    int count = 1;
-
                     if (task.IsCanceled || task.IsFaulted)
                     {
                         Debug.Log("랭킹 불러오기 실패");
-                        return count;
+                        return;
                     }
 
                     DataSnapshot snapshot = task.Result;
+                    int count = 1;
 
-                    foreach (var childSnapshot in snapshot.Children)
+                    for (int i = (int)snapshot.ChildrenCount; i > 0; i--)
                     {
+                        DataSnapshot childSnapshot = snapshot.Children.ElementAt(i - 1);
+                        
                         if (title == FirebaseDataType.RankData)
                         {
-                            Debug.Log("INININININasadasd");
-                            if (childSnapshot.Child("userId").Value.ToString() != _rankData.userID)
+                            string userName = childSnapshot.Child("userName").Value?.ToString();
+
+                            Debug.Log(userName);
+                            Debug.Log(_rankData.userName);
+
+                            if (userName != _rankData.userName)
                             {
+                                Debug.Log(_rankData.userID + "와 일치하지 않는 횟수");
                                 count++;
-                                Debug.Log("INININININ");
                                 continue;
                             }
-                            
-                            return count;
-                        }
-                            
-                    }
 
-                    return 0;
+                            Debug.Log(_rankData.userID + "와 일치하는 횟수");
+                            break;
+                        }
+                    }
+                    OnRoadPlayerRankData?.Invoke(count);
                 });
-        return 0;
     }
 }

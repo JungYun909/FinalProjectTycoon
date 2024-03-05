@@ -18,12 +18,14 @@ public class FirebaseAuthManager : MonoBehaviour
     public event Action<Exception> LogErrorEvent;
     public void InitSet()
     {
+        
         auth = FirebaseAuth.DefaultInstance;
         auth.StateChanged += OnChanged;
         
         if(auth.CurrentUser != null)
             LogOut();
     }
+    
 
     private void OnChanged(object sender, EventArgs e)
     {
@@ -37,6 +39,7 @@ public class FirebaseAuthManager : MonoBehaviour
             }
 
             user = auth.CurrentUser;
+            Debug.Log(user.UserId);
             if (signed)
             {
                 Debug.Log("로그인");
@@ -73,7 +76,7 @@ public class FirebaseAuthManager : MonoBehaviour
                 OnLogError(task.Exception);
                 return;
             }
-
+            
             FirebaseUser newUser = task.Result.User;
         });
     }
