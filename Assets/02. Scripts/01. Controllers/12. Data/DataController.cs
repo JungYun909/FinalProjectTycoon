@@ -8,7 +8,7 @@ public class DataController : MonoBehaviour
     private Coroutine playerTimeCoroutine;
     private int chargePerDay;
     
-    private void Start()
+    private void OnEnable()
     {
         GameManager.instance.dataManager.InitSet();
         GameManager.instance.sceneManager.sceneInfo += MainSceneDataSet;
@@ -39,6 +39,7 @@ public class DataController : MonoBehaviour
             return;
         GameManager.instance.inventoryManager.LoadInventoryData();
         GameManager.instance.dataManager.LoadInstallationData();
+        GameManager.instance.inventoryManager.InitSet();
         if (playerTimeCoroutine == null)
             playerTimeCoroutine = StartCoroutine(SaveTimeRoutine());
     }

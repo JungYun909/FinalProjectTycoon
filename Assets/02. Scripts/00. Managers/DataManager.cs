@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -94,7 +95,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             SaveData();
             SaveTimeData();
         }
-        
+        Debug.Log("222222222");
         LoadData();
     }
     

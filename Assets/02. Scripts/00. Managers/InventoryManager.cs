@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -80,7 +81,7 @@ public class InventoryManager : MonoBehaviour
     public event Action InventoryLoadDone;
 
 
-    private void Start()
+    public void InitSet()
     {
         StartCoroutine(SaveAllInventoriesRoutine());
     }
@@ -369,8 +370,8 @@ public class InventoryManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
             GameManager.instance.dataManager.SaveInventoryData(nextInventoryID, allInventories);
+            yield return new WaitForSeconds(5f);
         }
     }
 }

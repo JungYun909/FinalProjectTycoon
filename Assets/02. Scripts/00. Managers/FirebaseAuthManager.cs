@@ -8,7 +8,7 @@ using TMPro;
 
 public class FirebaseAuthManager : MonoBehaviour
 {
-    private FirebaseAuth auth;
+    public FirebaseAuth auth;
     private FirebaseUser user;
 
     public string userID => user?.UserId;
@@ -16,11 +16,13 @@ public class FirebaseAuthManager : MonoBehaviour
     public event Action<bool> LogChangeEvent;
     public event Action CreatIDEvent;
     public event Action<Exception> LogErrorEvent;
+    
     public void InitSet()
     {
         
         auth = FirebaseAuth.DefaultInstance;
         auth.StateChanged += OnChanged;
+        
         
         if(auth.CurrentUser != null)
             LogOut();
@@ -29,17 +31,18 @@ public class FirebaseAuthManager : MonoBehaviour
 
     private void OnChanged(object sender, EventArgs e)
     {
-        if (auth.CurrentUser != user && GameManager.instance.dataManager.playerData.shopName != "")
+        if (auth.CurrentUser != user)
         {
             bool signed = (auth.CurrentUser != user && auth.CurrentUser != null);
-            if(!signed && user == null)
+            Debug.Log(signed);
+            if(!signed)
             {
                 Debug.Log("로그아웃");
                 LogChangeEvent?.Invoke(false);
             }
 
             user = auth.CurrentUser;
-            Debug.Log(user.UserId);
+            
             if (signed)
             {
                 Debug.Log("로그인");

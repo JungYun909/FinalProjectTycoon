@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7000247635967227814}
   m_Layer: 6
   m_Name: IngredientObject
-  m_TagString: Dough
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

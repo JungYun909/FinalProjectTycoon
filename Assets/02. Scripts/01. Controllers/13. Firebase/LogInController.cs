@@ -13,11 +13,11 @@ public class LogInController : MonoBehaviour
     public TMP_InputField shopName;
     
     public TextMeshProUGUI outPutText;
+    public TextMeshProUGUI logInText;
     public Button logInBtn;
 
     public GameObject shopNameSetUI;
     public GameObject logInInput;
-    public GameObject logIn;
     public GameObject createBtn;
     public GameObject shopNameBtn;
     public GameObject console;
@@ -28,14 +28,46 @@ public class LogInController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.firebaseAuthManager.InitSet();
+        GameManager.instance.firebaseDatabaseManager.OnInitSet += InitSet;
+        if(GameManager.instance.firebaseDatabaseManager._rankData != null)
+            InitSet();
+    }
+
+    private void InitSet()
+    {
+        if(GameManager.instance.firebaseAuthManager.auth == null)
+            GameManager.instance.firebaseAuthManager.InitSet();
+
+        if (GameManager.instance.firebaseDatabaseManager._rankData.userID != null)
+        {
+            logInInput.SetActive(false);
+            startBtn.gameObject.SetActive(true);
+        }
+        
         GameManager.instance.firebaseAuthManager.LogChangeEvent += OnChangeState;
         GameManager.instance.firebaseAuthManager.LogErrorEvent += OnError;
         GameManager.instance.firebaseAuthManager.CreatIDEvent += OnCreate;
     }
 
+    private void OnDisable()
+    {
+        GameManager.instance.firebaseAuthManager.LogChangeEvent -= OnChangeState;
+        GameManager.instance.firebaseAuthManager.LogErrorEvent -= OnError;
+        GameManager.instance.firebaseAuthManager.CreatIDEvent -= OnCreate;
+    }
+
     private void OnCreate()
     {
+        CreateShopName();
+    }
+
+    public void CreateShopName()
+    {
+        if (startBtn.gameObject.activeSelf)
+        {
+            startBtn.gameObject.SetActive(false);
+        }
+
         logInInput.SetActive(false);
         shopNameSetUI.SetActive(true);
         createBtn.SetActive(false);
@@ -53,7 +85,8 @@ public class LogInController : MonoBehaviour
         }
 
         GameManager.instance.dataManager.playerData.shopName = shopName.text;
-        logIn.SetActive(false);
+        shopNameSetUI.SetActive(false);
+        shopNameBtn.SetActive(false);
         startBtn.gameObject.SetActive(true);
         GameManager.instance.firebaseDatabaseManager.SaveData();
     }
@@ -68,25 +101,13 @@ public class LogInController : MonoBehaviour
     {
         if (GameManager.instance.dataManager.playerData.shopName != "")
         {
-            if (!console.gameObject.activeSelf || logInBtn.gameObject.activeSelf)
-            {
-                logIn.SetActive(false);
-                startBtn.gameObject.SetActive(true);
-            }
-            string text = sign ? "안녕 " : "잘가 ";
-            text += GameManager.instance.dataManager.playerData.shopName;
-            ConsoleSet(text);   
-            logInBtn.gameObject.SetActive(sign);
+            startBtn.gameObject.SetActive(sign);
+            logInInput.gameObject.SetActive(!sign);
             GameManager.instance.firebaseDatabaseManager.SaveData();
         }
         else
         {
-            logInInput.SetActive(false);
-            shopNameSetUI.SetActive(true);
-            createBtn.SetActive(false);
-            shopNameBtn.SetActive(true);
-            string text = "가게 이름이 뭐야?";
-            ConsoleSet(text);
+            CreateShopName();
             GameManager.instance.firebaseDatabaseManager.SaveData();
         }
     }

@@ -22,16 +22,19 @@ public class RankData
 
 public class FirebaseDatabaseManager : MonoBehaviour
 {
-    private DatabaseReference _reference;
+    public DatabaseReference _reference;
     public RankData _rankData;
 
     public Action<Queue<(string, int)>> OnRoadRankData;
     public Action<int> OnRoadPlayerRankData;
 
+    public Action OnInitSet;
+
     public void InitSet()
     {
         _reference = FirebaseDatabase.DefaultInstance.RootReference;
         _rankData = new RankData();
+        OnInitSet?.Invoke();
     }
 
     public void SaveData()
@@ -58,8 +61,6 @@ public class FirebaseDatabaseManager : MonoBehaviour
 
         _rankData.earnedPerDay = GameManager.instance.dataManager.playerData.earnedPerDay;
         
-        Debug.Log(_rankData.userID);
-        Debug.Log(_rankData.userName);
 
         RankData rankData = new RankData();
         rankData = _rankData;

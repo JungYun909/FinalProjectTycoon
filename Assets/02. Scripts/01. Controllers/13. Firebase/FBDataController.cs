@@ -15,9 +15,17 @@ public class FBDataController : MonoBehaviour
     
     private void Start()
     {
-        GameManager.instance.firebaseDatabaseManager.InitSet();
+        if(GameManager.instance.firebaseDatabaseManager._reference == null)
+            GameManager.instance.firebaseDatabaseManager.InitSet();
+        
         GameManager.instance.firebaseAuthManager.CreatIDEvent += SaveData;
         GameManager.instance.dataManager.OnMoneyRankUpdate += SaveMoneyData;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.firebaseAuthManager.CreatIDEvent -= SaveData;
+        GameManager.instance.dataManager.OnMoneyRankUpdate -= SaveMoneyData;
     }
 
     private void SaveMoneyData(int money)
