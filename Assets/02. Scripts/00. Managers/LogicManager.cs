@@ -23,8 +23,11 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
 
     private void PayBack()
     {
-        if(happyEnd)
+        if (happyEnd)
+        {
+            DebtCompensated?.Invoke();
             return;
+        }
         
         HappyEnding();
 
