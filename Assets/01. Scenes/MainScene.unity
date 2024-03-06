@@ -24257,7 +24257,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   ingredientPrefab: {fileID: 0}
   itemsListForInspector: []
-  inventoryID: 0
+  inventoryID: 1000
   inventoryUI: {fileID: 0}
 --- !u!4 &1765728720
 Transform:

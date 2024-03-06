@@ -44,10 +44,6 @@ public class DestinationManager : MonoBehaviour
         return destinationID;
     }
 
-    private void Start()
-    {
-        LoadDestinationsData();
-    }
 
     public void RegisterDestinationInfo(int fromID, int toID)
     {
@@ -94,7 +90,7 @@ public class DestinationManager : MonoBehaviour
         }
     }
 
-    private void LoadDestinationsData()
+    public void LoadDestinationsData()
     {
         DestinationWrapper destinationWrapper = GameManager.instance.dataManager.LoadAllDestinationData();
         if (destinationWrapper != null)

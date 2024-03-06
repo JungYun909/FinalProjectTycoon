@@ -36,7 +36,6 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
                 GameManager.instance.statManager.SpendGold(payBackGold);
                 GameManager.instance.dataManager.playerData.debt -= payBackGold;
                 GameManager.instance.dataManager.playerData.warningCount++;
-                DebtCompensated?.Invoke();
             }
             else if(GameManager.instance.dataManager.playerData.money >=500)
             {
@@ -44,9 +43,8 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
                 GameManager.instance.statManager.SpendGold(500);
                 GameManager.instance.dataManager.playerData.debt -= 500;
                 GameManager.instance.dataManager.playerData.warningCount--;
-                
             }
-            else if (GameManager.instance.dataManager.playerData.money >= 500)
+            else
             {
                 paidAmount = 0;
                 GameManager.instance.dataManager.playerData.warningCount--;
@@ -56,7 +54,6 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
         {
             GameManager.instance.sceneManager.ChangeScene(SceneType.EndScene.ToString());
             GameManager.instance.dataManager.ResetData();
-            Debug.Log("YouLose");
         }
         DebtCompensated?.Invoke();
         paidAmount = 0;

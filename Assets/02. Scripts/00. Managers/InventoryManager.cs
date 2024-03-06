@@ -78,11 +78,8 @@ public class InventoryManager : MonoBehaviour
     private int inventoryID;
 
     public event Action InventoryLoadDone;
-    private void Start()
-    {
-        LoadInventoryData();
-    }
-    private void LoadInventoryData()
+
+    public  void LoadInventoryData()
     {
         InventoryWrapper loadedData = GameManager.instance.dataManager.LoadAllInventories();
         nextInventoryID = loadedData.nextInventoryID;

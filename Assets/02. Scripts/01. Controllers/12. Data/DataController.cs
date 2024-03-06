@@ -20,7 +20,9 @@ public class DataController : MonoBehaviour
         GameManager.instance.dataManager.LoadInstallationData();
         if (playerTimeCoroutine == null)
             playerTimeCoroutine = StartCoroutine(SaveTimeRoutine());
+        GameManager.instance.inventoryManager.LoadInventoryData();
         StartCoroutine(GameManager.instance.inventoryManager.SaveAllInventoriesRoutine());
+        GameManager.instance.destinationManager.LoadDestinationsData();
         StartCoroutine(GameManager.instance.destinationManager.SaveAllDestinationsRoutine());
     }
     

@@ -20,17 +20,17 @@ public class DailyResultWindow : UIBase
     
     private void OnEnable()
     {
-        Initialize();
         UpdateUI();
     }
 	
     public override void Initialize()
     {
-        stat = GameManager.instance.dataManager.playerData;
+        
     }
 
     public override void UpdateUI()
     {
+        stat = GameManager.instance.dataManager.playerData;
         goldCurrentlyInHand.text = stat.money.ToString();
         shopLevel.text = stat.level.ToString();
         earnedToday.text = stat.goldEarnedToday.ToString();
@@ -38,7 +38,7 @@ public class DailyResultWindow : UIBase
             spentToday.text = stat.goldSpentToday.ToString() + $"(+{GameManager.instance.logicManager.paidAmount.ToString()})";
         else
             spentToday.text = stat.goldSpentToday.ToString();
-        int netProfit = stat.goldEarnedToday - stat.goldSpentToday - GameManager.instance.logicManager.paidAmount;
+        int netProfit = stat.goldEarnedToday - stat.goldSpentToday;
         if (stat.goldEarnedToday - stat.goldSpentToday < 0)
             profit.text = $"<color=red>{netProfit}</color>";
         else
@@ -46,6 +46,9 @@ public class DailyResultWindow : UIBase
         totalDebt.text = (stat.debt + GameManager.instance.logicManager.paidAmount).ToString();
         repayment.text = GameManager.instance.logicManager.paidAmount.ToString();
         debtLeft.text = stat.debt.ToString();
+        Debug.Log(stat.goldEarnedToday);
+        Debug.Log(stat.goldSpentToday);
+        Debug.Log(stat.warningCount);
         switch (stat.warningCount)
         {
             case -1:

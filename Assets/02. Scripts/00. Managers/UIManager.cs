@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour                      //TODO Update까지?
     
     public void Initialize()
     {
-
         GameManager.instance.logicManager.DebtCompensated += CheckSceneAndOpenDailyResultWindow;
         GameManager.instance.sceneManager.sceneInfo += HandleScene;
     }
