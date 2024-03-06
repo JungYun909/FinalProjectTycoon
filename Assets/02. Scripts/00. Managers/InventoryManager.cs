@@ -78,14 +78,11 @@ public class InventoryManager : MonoBehaviour
     private int inventoryID;
 
     public event Action InventoryLoadDone;
-
-
     private void Start()
     {
-        StartCoroutine(SaveAllInventoriesRoutine());
+        LoadInventoryData();
     }
-
-    public void LoadInventoryData()
+    private void LoadInventoryData()
     {
         InventoryWrapper loadedData = GameManager.instance.dataManager.LoadAllInventories();
         nextInventoryID = loadedData.nextInventoryID;
@@ -365,7 +362,7 @@ public class InventoryManager : MonoBehaviour
     //    TransferItem(toInventoryID, fromInventoryID, itemFromToInventory, quantityOfToInventoryItem)
     //}
 
-    IEnumerator SaveAllInventoriesRoutine()
+    public IEnumerator SaveAllInventoriesRoutine()
     {
         while (true)
         {

@@ -47,7 +47,6 @@ public class DestinationManager : MonoBehaviour
     private void Start()
     {
         LoadDestinationsData();
-        StartCoroutine(SaveAllDestinationsRoutine());
     }
 
     public void RegisterDestinationInfo(int fromID, int toID)
@@ -86,7 +85,7 @@ public class DestinationManager : MonoBehaviour
         }
     }
 
-    IEnumerator SaveAllDestinationsRoutine()
+    public IEnumerator SaveAllDestinationsRoutine()
     {
         while (true)
         {

@@ -17,10 +17,11 @@ public class DataController : MonoBehaviour
     {
         if(type != SceneType.MainScene)
             return;
-        GameManager.instance.inventoryManager.LoadInventoryData();
         GameManager.instance.dataManager.LoadInstallationData();
         if (playerTimeCoroutine == null)
             playerTimeCoroutine = StartCoroutine(SaveTimeRoutine());
+        StartCoroutine(GameManager.instance.inventoryManager.SaveAllInventoriesRoutine());
+        StartCoroutine(GameManager.instance.destinationManager.SaveAllDestinationsRoutine());
     }
     
     public IEnumerator SaveTimeRoutine()
