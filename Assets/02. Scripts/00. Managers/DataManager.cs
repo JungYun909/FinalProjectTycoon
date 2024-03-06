@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -25,6 +26,8 @@ public class PlayerData
 
     public bool deliveryClear = false;
     public bool deliveryStart = false;
+
+    public int earnedPerDay = 0;
 
     public List<int> installationSubInt = new List<int>();
     public List<Vector2> installationsPos = new List<Vector2>();
@@ -75,6 +78,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
     public event Action OnLoadEvent;
     public event Action LoadInventoryID;
     public event Action<Vector3> PosUpdateEvent;
+    public Action<int> OnMoneyRankUpdate;
+
 
     public bool isLoadingInstallationDone = false;
 
@@ -90,7 +95,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
             SaveData();
             SaveTimeData();
         }
-        
+        Debug.Log("222222222");
         LoadData();
     }
     
@@ -189,6 +194,8 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         
         string timeJsonData = File.ReadAllText(path + timeJsonName);
         playerTimeData = JsonUtility.FromJson<PlayerTimeData>(timeJsonData);
+        
+        
         OnLoadEvent?.Invoke();
     }
     

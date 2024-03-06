@@ -1,17 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Firebase;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-// public abstract class Manager : MonoBehaviour
-// {
-//     public void Start()
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
 
 public class GameManager : MonoBehaviour
 {
@@ -22,7 +15,6 @@ public class GameManager : MonoBehaviour
     public ItemManager itemManager;
     public LogicManager logicManager;
     public TimeManager timeManager;
-    
     public SpawnManager spawnManager;
     public InstallationManager installationManager;
     public InventoryManager inventoryManager;
@@ -31,10 +23,13 @@ public class GameManager : MonoBehaviour
     public InteractionManager interactionManager;
     public StatManager statManager;
     public DataManager dataManager;
-    
     public RecipeManager recipeManager;
     public QuestManager questManager;
     public DestinationManager destinationManager;
+    
+    public FirebaseAuthManager firebaseAuthManager;
+    public FirebaseDatabaseManager firebaseDatabaseManager;
+    public FBManager fbManager;
 
     private void Awake()
     {
