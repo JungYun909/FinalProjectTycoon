@@ -5,12 +5,26 @@ using UnityEngine;
 
 public class DataController : MonoBehaviour
 {
+    public static DataController instance;
     private Coroutine playerTimeCoroutine;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this; 
+            DontDestroyOnLoad(gameObject); 
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private void Start()
     {
         GameManager.instance.dataManager.InitSet();
         GameManager.instance.sceneManager.sceneInfo += MainSceneDataSet;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void MainSceneDataSet(SceneType type)

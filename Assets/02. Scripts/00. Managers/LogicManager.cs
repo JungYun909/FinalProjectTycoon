@@ -56,7 +56,7 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
         if (GameManager.instance.dataManager.playerData.warningCount < -2)
         {
             GameManager.instance.sceneManager.ChangeScene(SceneType.EndScene.ToString());
-            GameManager.instance.dataManager.ResetData();
+            //GameManager.instance.dataManager.ResetData();
         }
         DebtCompensated?.Invoke();
         paidAmount = 0;

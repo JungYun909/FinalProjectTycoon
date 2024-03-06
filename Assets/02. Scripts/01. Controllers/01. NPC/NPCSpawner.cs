@@ -13,10 +13,11 @@ public class NPCSpawner : MonoBehaviour
 
     private NPCSeparation _separation;
 
-    private void Start()
+    private void OnEnable()
     {
         _separation = GetComponent<NPCSeparation>();
     }
+
 
     private void Update()
     {
