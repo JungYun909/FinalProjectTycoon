@@ -115,6 +115,10 @@ public class MenuButton : MonoBehaviour
 
     public void LoadScene(string sceneType)
     {
+        GameManager.instance.dataManager.SaveInventoryData
+            (GameManager.instance.inventoryManager.nextInventoryID, GameManager.instance.inventoryManager.allInventories);
+        GameManager.instance.dataManager.SaveAllDestinationData
+            (GameManager.instance.destinationManager.destinationControllerID, GameManager.instance.destinationManager.destinationInfo);
         GameManager.instance.poolManager.ResetPool();
         GameManager.instance.sceneManager.ChangeScene(sceneType);
     }

@@ -72,6 +72,8 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
         if (GameManager.instance.dataManager.playerData.debt > 0)
             return;
 
+        GameManager.instance.dataManager.SaveAllDestinationData(GameManager.instance.destinationManager.destinationControllerID, GameManager.instance.destinationManager.destinationInfo);
+        GameManager.instance.dataManager.SaveInventoryData(GameManager.instance.inventoryManager.nextInventoryID, GameManager.instance.inventoryManager.allInventories);
         GameManager.instance.dataManager.playerData.happilyEnded= true;
         GameManager.instance.sceneManager.ChangeScene(SceneType.HappyEndScene.ToString());
     }

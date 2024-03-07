@@ -65,9 +65,6 @@ public class DailyResultWindow : UIBase
             }
             stat.goldEarnedToday = 0;
             stat.goldSpentToday = 0;
-            Debug.Log("Reset!");
-            Debug.Log(stat.goldEarnedToday);
-            Debug.Log(stat.goldSpentToday);
         }
         else
         {
