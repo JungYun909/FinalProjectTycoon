@@ -16,21 +16,31 @@ public class EndingSceneController : MonoBehaviour
 
     private void Start()
     {
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.HappyEndScene.ToString())
-            return;
-        
-        shopName.text = GameManager.instance.dataManager.playerData.shopName.ToString();
-        money.text = GameManager.instance.dataManager.playerData.money.ToString();
-        day.text = GameManager.instance.dataManager.playerData.day.ToString();
-        level.text = GameManager.instance.dataManager.playerData.level.ToString();
-        debt.text = GameManager.instance.dataManager.playerData.debt.ToString();
-        
+        string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (currentSceneName == SceneType.EndScene.ToString() || currentSceneName == SceneType.HappyEndScene.ToString())
+        {
+            shopName.text = GameManager.instance.dataManager.playerData.shopName.ToString();
+            money.text = GameManager.instance.dataManager.playerData.totalGoldEarned.ToString();
+            day.text = (GameManager.instance.dataManager.playerData.day-1).ToString();
+            level.text = GameManager.instance.dataManager.playerData.level.ToString();
+            debt.text = GameManager.instance.dataManager.playerData.debt.ToString();
+            GameManager.instance.poolManager.ResetPool();
+
+            if (currentSceneName == SceneType.EndScene.ToString())
+            {
+                GameManager.instance.dataManager.ResetData();
+                GameManager.instance.dataManager.SaveData();
+                GameManager.instance.dataManager.ResetInventoryAndDestinationData();
+            }
+        }
     }
 
     public void ResetEndChangeScene()
     {
         GameManager.instance.dataManager.ResetData();
         GameManager.instance.dataManager.SaveData();
+        GameManager.instance.dataManager.ResetInventoryAndDestinationData();
         GameManager.instance.sceneManager.ChangeScene(SceneType.TitleScene.ToString());
     }
 

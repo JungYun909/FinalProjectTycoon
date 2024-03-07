@@ -5,34 +5,28 @@ using UnityEngine;
 
 public class DataController : MonoBehaviour
 {
+    public static DataController instance;
     private Coroutine playerTimeCoroutine;
-    private int chargePerDay;
-    
-    private void OnEnable()
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this; 
+            DontDestroyOnLoad(gameObject); 
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    private void Start()
     {
         GameManager.instance.dataManager.InitSet();
         GameManager.instance.sceneManager.sceneInfo += MainSceneDataSet;
-        GameManager.instance.statManager.OnMoneyChange += EarnedPerDay;
-        GameManager.instance.statManager.onDateChanged += ResetEarnedPerDay;
-        DontDestroyOnLoad(gameObject);
     }
 
-    private void ResetEarnedPerDay()
-    {
-        if (GameManager.instance.dataManager.playerData.earnedPerDay < chargePerDay)
-        {
-            GameManager.instance.dataManager.playerData.earnedPerDay = chargePerDay;
-            GameManager.instance.dataManager.OnMoneyRankUpdate?.Invoke(GameManager.instance.dataManager.playerData.earnedPerDay);
-        }
-    
-        chargePerDay = 0;
-    }
-    
-    private void EarnedPerDay(int money)
-    {
-        chargePerDay += money;
-    }
-    
     private void MainSceneDataSet(SceneType type)
     {
         if(type != SceneType.MainScene)

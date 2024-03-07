@@ -28,10 +28,8 @@ public class InstallationSetController : UIBase
         if (!curController._installationData.canSpawn)
         {
             AbstractInventory curInventory = curGameObject.GetComponentInChildren<AbstractInventory>();
-            Debug.Log($"inventory has {curInventory.Items.Count} items");
             if(curInventory.Items.Count>0)
             {
-                Debug.Log("Opening Error Window");
                 GameManager.instance.uiManager.OpenErrorWindow();
                 return;
             }

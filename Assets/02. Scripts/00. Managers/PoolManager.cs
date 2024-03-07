@@ -48,4 +48,9 @@ public class PoolManager : MonoBehaviour            // spawn/despawn 생성, 해
 
         return false;
     }
+
+    public void ResetPool()
+    {
+        poolDictionary.Clear(); 
+    }
 }
