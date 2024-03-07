@@ -78,14 +78,18 @@ public class MenuButton : MonoBehaviour
             
             BtnPositionSet(btns[i], btnsPos[i], 0, 150, true);
         }
-        
-        usingBtn.GetComponent<Image>().color = Color.white;
-        usingBtn.interactable = true;
+
+        StartCoroutine(EnableButtonAfterDelay(usingBtn, 1f));
         usingBtn = null;
         onBtn = false;
     }
-    
 
+    private IEnumerator EnableButtonAfterDelay(Button button, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        button.interactable = true;
+        button.GetComponent<Image>().color = Color.white;
+    }
 
     private void BtnPositionSet(Button btn ,RectTransform pos, int movePosX, int movePosY, bool btnSet)
     {
@@ -100,7 +104,7 @@ public class MenuButton : MonoBehaviour
         while (Vector2.Distance(movePos.anchoredPosition,desPos) > 10f)
         {
             movePos.anchoredPosition =
-                Vector2.Lerp(movePos.anchoredPosition, desPos, speed);
+                Vector2.Lerp(movePos.anchoredPosition, desPos, 3.0f*Time.deltaTime);
 
             yield return null;
         }
