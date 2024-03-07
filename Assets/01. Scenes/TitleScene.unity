@@ -2566,7 +2566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxShopLevel: 0
   maxNpc: 0
-  dayTime: 30
+  dayTime: 300
   goldUsed: 0
   goldEarned: 0
 --- !u!114 &656262279
