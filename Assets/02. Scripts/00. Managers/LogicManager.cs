@@ -23,14 +23,12 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
 
     private void PayBack()
     {
-        if (happyEnd)
+        if (GameManager.instance.dataManager.playerData.happilyEnded)
         {
             DebtCompensated?.Invoke();
             return;
         }
         
-        HappyEnding();
-
         if (GameManager.instance.dataManager.playerData.debt > 0)
         {
             if (GameManager.instance.dataManager.playerData.money >= payBackGold)
@@ -39,6 +37,8 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
                 GameManager.instance.statManager.SpendGold(payBackGold);
                 GameManager.instance.dataManager.playerData.debt -= payBackGold;
                 GameManager.instance.dataManager.playerData.warningCount++;
+                if (GameManager.instance.dataManager.playerData.warningCount >= 0)
+                    GameManager.instance.dataManager.playerData.warningCount = 0;
             }
             else if(GameManager.instance.dataManager.playerData.money >=500)
             {
@@ -53,10 +53,15 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
                 GameManager.instance.dataManager.playerData.warningCount--;
             }
         }
+
+        else
+        {
+            HappyEnding();
+        }
+
         if (GameManager.instance.dataManager.playerData.warningCount < -2)
         {
             GameManager.instance.sceneManager.ChangeScene(SceneType.EndScene.ToString());
-            //GameManager.instance.dataManager.ResetData();
         }
         DebtCompensated?.Invoke();
         paidAmount = 0;
@@ -67,7 +72,7 @@ public class LogicManager : MonoBehaviour       //게임매니저 담당? > 게�
         if (GameManager.instance.dataManager.playerData.debt > 0)
             return;
 
-        happyEnd = true;
+        GameManager.instance.dataManager.playerData.happilyEnded= true;
         GameManager.instance.sceneManager.ChangeScene(SceneType.HappyEndScene.ToString());
     }
 }

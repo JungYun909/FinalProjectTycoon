@@ -39,6 +39,8 @@ public class PlayerData
     public int goldEarnedToday = 0;
     public int goldSpentToday = 0;
     public int exp = 0;
+
+    public bool happilyEnded = false;
 }
 
 public class PlayerTimeData
@@ -137,7 +139,7 @@ public class DataManager : MonoBehaviour  // TODO 추후 데이터 저장 / 로�
         playerData.goldSpentToday = 0;
         playerData.exp = 0;
 
-
+        playerData.happilyEnded = false;
     }
 
     private void LoadInstallation()

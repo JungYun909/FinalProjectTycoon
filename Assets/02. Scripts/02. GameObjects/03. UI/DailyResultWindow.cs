@@ -46,28 +46,36 @@ public class DailyResultWindow : UIBase
         totalDebt.text = (stat.debt + GameManager.instance.logicManager.paidAmount).ToString();
         repayment.text = GameManager.instance.logicManager.paidAmount.ToString();
         debtLeft.text = stat.debt.ToString();
-        Debug.Log(stat.goldEarnedToday);
-        Debug.Log(stat.goldSpentToday);
-        Debug.Log(stat.warningCount);
-        switch (stat.warningCount)
+        if (!GameManager.instance.dataManager.playerData.happilyEnded)
         {
-            case -1:
-                warning.text = $"<color=yellow>경고!</color>";
-                comment.text = "이번엔 좀더 아끼는게 좋겠어요.";
-                break;
-            case -2:
-                warning.text = $"<color=red>위험!</color>";
-                comment.text = "혹시 어떤 문제가 있나요...?";
-                break;
-            default:
-                warning.text = $"<color=green>양호</color>";
-                comment.text = "잘 하고 있어요! GOOD!";
-                break;
+            switch (stat.warningCount)
+            {
+                case -1:
+                    warning.text = $"<color=yellow>경고!</color>";
+                    comment.text = "이번엔 좀더 아끼는게 좋겠어요.";
+                    break;
+                case -2:
+                    warning.text = $"<color=red>위험!</color>";
+                    comment.text = "혹시 어떤 문제가 있나요...?";
+                    break;
+                default:
+                    warning.text = $"<color=green>양호</color>";
+                    comment.text = "잘 하고 있어요! GOOD!";
+                    break;
+            }
+            stat.goldEarnedToday = 0;
+            stat.goldSpentToday = 0;
+            Debug.Log("Reset!");
+            Debug.Log(stat.goldEarnedToday);
+            Debug.Log(stat.goldSpentToday);
         }
-
-        stat.goldEarnedToday = 0;
-        stat.goldSpentToday = 0;
+        else
+        {
+            warning.text = $"<color=green>최고!</color>";
+            comment.text = "이제 이 가게는 제겁니다.";
+        }
     }
+    
     
     public void CloseWindow()
     {

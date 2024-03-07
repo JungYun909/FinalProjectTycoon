@@ -25,6 +25,7 @@ public class EndingSceneController : MonoBehaviour
             day.text = (GameManager.instance.dataManager.playerData.day-1).ToString();
             level.text = GameManager.instance.dataManager.playerData.level.ToString();
             debt.text = GameManager.instance.dataManager.playerData.debt.ToString();
+            GameManager.instance.poolManager.ResetPool();
 
             if (currentSceneName == SceneType.EndScene.ToString())
             {

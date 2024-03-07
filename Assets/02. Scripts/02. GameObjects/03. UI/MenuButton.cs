@@ -111,6 +111,7 @@ public class MenuButton : MonoBehaviour
 
     public void LoadScene(string sceneType)
     {
+        GameManager.instance.poolManager.ResetPool();
         GameManager.instance.sceneManager.ChangeScene(sceneType);
     }
 }

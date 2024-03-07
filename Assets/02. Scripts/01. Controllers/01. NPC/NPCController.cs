@@ -22,7 +22,7 @@ public class NPCController : MonoBehaviour
     public NPCDestinationSet destinationController;
     public MovementController movementController;
 
-    private void Start()
+    private void OnEnable()
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != SceneType.MainScene.ToString())
         {
